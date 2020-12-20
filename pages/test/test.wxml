@@ -1,0 +1,14 @@
+<Header></Header>
+<text class="" selectable="false" space="false" decode="false">
+    This page is for checking pages only
+</text>
+
+<navigator class="myNav" url="/pages/home/home">Home page</navigator>
+<navigator class="myNav" url="/pages/addClass/addClass">addClass page</navigator>
+<navigator class="myNav" url="/pages/addProfessor/addProfessor">addProfessor page</navigator>
+<navigator class="myNav" url="/pages/addRating/addRating">addRating page</navigator>
+<navigator class="myNav" url="/pages/bindUSC/bindUSC">bindUSC page</navigator>
+<navigator class="myNav" url="/pages/login/login">login page</navigator>
+<navigator class="myNav" url="/pages/profile/profile">profile page</navigator>
+<navigator class="myNav" url="/pages/savedClasses/savedClasses">savedClasses page</navigator>
+<navigator class="myNav" url="/pages/signup/signup">signup page</navigator>

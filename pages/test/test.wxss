@@ -1,0 +1,11 @@
+/* pages/test/test.wxss */
+.myNav{
+    width: 80%;
+    height: 100rpx;
+    border: 1px solid #a87be2;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}

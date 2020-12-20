@@ -1,7 +1,7 @@
 .header_wrapper {
-  position: absolute;
+  /* position: absolute;
   left: 0px;
-  top: 0px;
+  top: 0px; */
   width: 100%;
   display: flex;
   justify-content: center;

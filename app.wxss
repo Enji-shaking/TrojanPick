@@ -10,7 +10,7 @@
 } 
 page{
   box-sizing: border-box;
-  padding-top: 334rpx;
+  /* padding-top: 334rpx; */
 }
 
 .big_input_field{
