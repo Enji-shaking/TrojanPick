@@ -1,0 +1,29 @@
+.header_wrapper {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 334rpx;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.header_wrapper .content_wrapper {
+  margin-top: 112rpx;
+  display: flex;
+  width: 364rpx;
+  align-items: center;
+}
+.header_wrapper .content_wrapper .left_image_wrapper {
+  width: 184rpx;
+}
+.header_wrapper .content_wrapper .left_image_wrapper .left_image {
+  width: 100%;
+}
+.header_wrapper .content_wrapper .right_text_wrapper {
+  margin-left: 22rpx;
+  width: 180rpx;
+}
+.header_wrapper .content_wrapper .right_text_wrapper .right_text {
+  width: 100%;
+}

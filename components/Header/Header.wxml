@@ -1,0 +1,10 @@
+<view class="header_wrapper">
+    <view class="content_wrapper">
+        <view class="left_image_wrapper">
+            <image class="left_image" mode="widthFix" src="/icon/ours/logo.png"></image>
+        </view>
+        <view class="right_text_wrapper">
+            <image class="right_text" mode="widthFix" src="/icon/ours/logoText.png"> </image>
+        </view>
+    </view>
+</view>

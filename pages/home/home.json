@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "Header": "/components/Header/Header",
+    "BottomNav": "/components/BottomNav/BottomNav"
+  }
+}
