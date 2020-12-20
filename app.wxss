@@ -12,3 +12,12 @@ page{
   box-sizing: border-box;
   padding-top: 334rpx;
 }
+
+.big_input_field{
+  width: 408rpx;
+  height: 86rpx;
+  margin-left: auto;
+  margin-right: auto;
+  background: #FFF7DB;
+  border: 1px solid #F8C1B0;
+}

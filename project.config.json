@@ -64,6 +64,36 @@
         {
           "name": "Home",
           "pathName": "pages/home/home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "home",
+          "pathName": "pages/home/home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "addClass",
+          "pathName": "pages/addClass/addClass",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "addProfessor",
+          "pathName": "pages/addProfessor/addProfessor",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "bindUSC",
+          "pathName": "pages/bindUSC/bindUSC",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "signup",
+          "pathName": "pages/signup/signup",
           "scene": null
         }
       ]

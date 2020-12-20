@@ -2,11 +2,22 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/addClass/addClass",
+    "pages/addProfessor/addProfessor",
+    "pages/addRating/addRating",
+    "pages/bindUSC/bindUSC",
+    "pages/signup/signup",
+    "pages/login/login",
+    "pages/profile/profile",
+    "pages/savedClasses/savedClasses"
+
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationStyle": "custom"
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTextStyle": "black"
+    
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

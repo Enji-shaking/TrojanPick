@@ -1,0 +1,8 @@
+<Header></Header>
+<view class="content_wrapper">
+    <input type="text" class="row big_input_field" placeholder="Username"/>
+    <input type="text" class="row big_input_field" placeholder="Email"/>
+    <input type="text" class="row big_input_field" placeholder="Password"/>
+    <input type="text" class="row big_input_field" placeholder="Repeat password"/>
+    <ConfirmButton title="注册"></ConfirmButton>
+</view>

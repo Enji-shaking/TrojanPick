@@ -1,0 +1,3 @@
+<button bind:tap="onConfirmButtonTapped" class="confirmButton">
+    {{title}}
+</button>

@@ -1,0 +1,8 @@
+/* pages/bindUSC/bindUSC.wxss */
+.content_wrapper{
+    margin-top: 100rpx;
+    text-align: center;
+}
+.row{
+    margin-bottom: 50rpx;
+}

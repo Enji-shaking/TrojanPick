@@ -1,0 +1,7 @@
+<Header></Header>
+<view class="content_wrapper">
+    <input type="text" class="row big_input_field" placeholder="USC email"/>
+    <input type="text" class="row big_input_field" placeholder="USC password"/>
+    <input type="text" class="row big_input_field" placeholder="Repeat password"/>
+    <ConfirmButton title="绑定"></ConfirmButton>
+</view>

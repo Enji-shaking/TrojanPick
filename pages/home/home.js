@@ -48,9 +48,12 @@ Page({
     })
   },
   onTabTapped(e){
-    let {activeTab} = this.data
-    activeTab = (activeTab===0?1:0)
-    this.setData({activeTab})
+    // let {activeTab} = this.data
+    // activeTab = (activeTab===0?1:0)
+    console.log(e);
+    const {index} = e.currentTarget.dataset
+    console.log(index);
+    this.setData({activeTab: index})
   },
   /**
    * 生命周期函数--监听页面加载

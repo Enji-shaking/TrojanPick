@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "Header": "/components/Header/Header",
+    "ConfirmButton": "/components/ConfirmButton/ConfirmButton"
+  }
+}

@@ -1,6 +1,6 @@
 <Header></Header>
 <view class="rating_row">
-    <view class="left_rating {{activeTab===0?'active':''}}" bind:tap="onTabTapped">
+    <view class="left_rating {{activeTab===0?'active':''}}" bind:tap="onTabTapped" data-index="{{0}}">
         <image class="left_rating_img" mode="widthFix" src="/icon/ours/classRating.svg"> </image>
         <view class="left_rating_text">
             <view class="left_rating_text_line_1">
@@ -11,7 +11,7 @@
             </view>
         </view>
     </view>
-    <view class="right_rating {{activeTab===1?'active':''}}" bind:tap="onTabTapped" >
+    <view class="right_rating {{activeTab===1?'active':''}}" bind:tap="onTabTapped" data-index="{{1}}">
         <image class="right_rating_img" mode="widthFix" src="/icon/ours/profRating.svg"> </image>
         <view class="right_rating_text">
             <view class="right_rating_text_line_1">
@@ -52,19 +52,7 @@
         </view>
     </view>
     
-    
-    <view class="class_card_displayer_wrapper">
-        <view class="class_card"
-            wx:for="{{course_cards_info}}"
-            wx:key="courseID"
-            wx:for-item="card"
-        >
-            <navigator class="class_card_text" data-courseID="{{card.courseID}}" >
-                <view class="class_card_text_line_1">{{card.courseCode}}</view>
-                <view class="class_card_text_line_2">{{card.courseName}}</view>
-            </navigator>
-        </view>
-    </view>
+    <ClassCards course_cards_info="{{course_cards_info}}" ></ClassCards>
 </view>
 
 <view class="rate_by_prof_big_tab"
@@ -81,18 +69,23 @@
         </view>
     </view>
 
-    <view class="class_card_displayer_wrapper">
-        <view class="class_card"
+    <view class="professor_card_displayer_wrapper">
+        <view class="professor_card"
             wx:for="{{prof_cards_info}}"
             wx:key="professorID"
             wx:for-item="card"
         >
-            <navigator class="class_card_text" data-courseID="{{card.professorID}}" >
-                <view class="class_card_text_line_1">{{card.professorName}}</view>
+            <navigator class="professor_card_text" data-courseID="{{card.professorID}}" >
+                <view class="professor_card_text_line">{{card.professorName}}</view>
             </navigator>
         </view>
     </view>
 
 </view>
+
+<navigator  url="/pages/addClass/addClass" hover-class="navigator-hover" open-type="navigate">
+    xxx
+</navigator>
+  
 
 <BottomNav></BottomNav>

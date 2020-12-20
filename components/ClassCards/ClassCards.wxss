@@ -1,0 +1,31 @@
+.class_card_displayer_wrapper {
+  width: 100%;
+  margin-top: 55rpx;
+  margin-bottom: 230rpx;
+}
+.class_card_displayer_wrapper .class_card {
+  margin-left: 172rpx;
+  margin-right: 172rpx;
+  width: 406rpx;
+  height: 292rpx;
+  border: 1px solid #F8C1B0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 40rpx;
+  background: #FFF7DB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.class_card_displayer_wrapper .class_card .class_card_text {
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+}
+.class_card_displayer_wrapper .class_card .class_card_text .class_card_text_line_1 {
+  font-size: 44rpx;
+  line-height: 46rpx;
+}
+.class_card_displayer_wrapper .class_card .class_card_text .class_card_text_line_2 {
+  font-size: 24rpx;
+  line-height: 23rpx;
+}
