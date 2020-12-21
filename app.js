@@ -1,7 +1,7 @@
 //app.js
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
+  originalOnLoadFunction(){
+ // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -31,6 +31,11 @@ App({
           })
         }
       }
+    })
+  },
+  onLaunch: function () {
+    wx.cloud.init({
+      env: "trojanpick-1-6gmvcoz0a34e3c09"
     })
   },
   globalData: {

@@ -12,7 +12,7 @@
             课号
         </view>
         <view class="textInput">
-            <input type="text" placeholder="e.g. ITP 115" />
+            <input type="text" bind:input="onCourseIdInput" placeholder="e.g. ITP 115" />
         </view>
     </view>
     <view class="row">
@@ -20,7 +20,7 @@
             课程全称
         </view>
         <view class="textInput">
-            <input type="text" placeholder="e.g. Introduction to Python" />
+            <input type="text" bind:input="onCourseNameInput" placeholder="e.g. Introduction to Python" />
         </view>
     </view>
 

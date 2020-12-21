@@ -82,10 +82,5 @@
     </view>
 
 </view>
-
-<navigator  url="/pages/addClass/addClass" hover-class="navigator-hover" open-type="navigate">
-    xxx
-</navigator>
   
-
 <BottomNav></BottomNav>

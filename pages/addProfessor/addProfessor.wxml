@@ -12,7 +12,7 @@
             教授姓名
         </view>
         <view class="textInput">
-            <input type="text" placeholder="e.g. Tommy Trojan" />
+            <input type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
         </view>
     </view>
 

@@ -59,7 +59,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: "getInfo",
+      data:{
+        target: "recommended_classes"
+      },
+      success: res=>{
+        console.log(res);
+      }
+    })
   },
 
   /**

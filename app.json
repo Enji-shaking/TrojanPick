@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/test/test",
+    "pages/testCloud/testCloud",
     "pages/logs/logs",
     "pages/home/home",
     "pages/addClass/addClass",

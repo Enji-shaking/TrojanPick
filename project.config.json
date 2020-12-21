@@ -1,5 +1,6 @@
 {
   "description": "项目配置文件",
+  "cloudfunctionRoot": "cloud/",
   "packOptions": {
     "ignore": []
   },
@@ -49,6 +50,7 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "plugin": {
       "list": []
@@ -101,6 +103,11 @@
           "name": "test",
           "pathName": "pages/test/test",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "cloud",
+          "pathName": "pages/testCloud/testCloud",
           "scene": null
         }
       ]

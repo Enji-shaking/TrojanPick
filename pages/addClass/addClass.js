@@ -7,9 +7,37 @@ Page({
   data: {
 
   },
+  courseId: '',
+  courseName: '',
+
+  onCourseIdInput(e){
+    console.log(e);
+    this.courseId = e.detail.value
+    // console.log(this.courseId);
+  },
+
+  onCourseNameInput(e){
+    console.log(e);
+    this.courseName = e.detail.value
+    // console.log(this.courseName);
+  },
 
   onConfirm(e){
     console.log("Confirm button pressed from adding class");
+    wx.cloud.callFunction({
+      name: 'addInfo',
+      data:{
+        target: 'class',
+        courseId: this.courseId, 
+        courseName: this.courseName
+      },
+      success: res=>{
+        console.log(res);
+      },
+      fail: err=>{
+        console.error(err)
+      }
+    })
   },
 
   /**

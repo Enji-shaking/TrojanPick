@@ -1,0 +1,5 @@
+
+<button bind:tap="addTapped">add</button>
+<button bind:tap="getopenid">Get open id</button>
+<button>add</button>
+<button>add</button>
