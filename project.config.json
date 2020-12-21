@@ -62,8 +62,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "Home",
-          "pathName": "pages/home/home",
+          "name": "index",
+          "pathName": "pages/index/index",
           "query": "",
           "scene": null
         },
@@ -94,6 +94,13 @@
         {
           "name": "signup",
           "pathName": "pages/signup/signup",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "test",
+          "pathName": "pages/test/test",
+          "query": "",
           "scene": null
         }
       ]

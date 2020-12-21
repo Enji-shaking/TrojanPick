@@ -8,9 +8,13 @@ Component({
       type: String,
       value: "title"
     },
-    onButtonTapped:{
-      type: Function,
-      value: ()=>0
+    // onButtonTapped:{
+    //   type: Function,
+    //   value: ()=>0
+    // },
+    loginbutton:{
+      type: Boolean,
+      value: false
     }
   },
 
@@ -27,9 +31,9 @@ Component({
   methods: {
     onConfirmButtonTapped(){
       this.triggerEvent("onConfirm")
-      // wx.navigateBack({
-      //   delta: 1
-      // });
+      wx.navigateBack({
+        delta: 1
+      });
       wx.showToast({
         title: 'Added Successfully',
         icon: 'none',

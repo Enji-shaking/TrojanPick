@@ -5,9 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    favorite_classes_prefix:["ITP", "CSCI"],
+    prefix_index: 0,
+    course_cards_info:[
+      {
+        courseID: 0,
+        courseCode: "ITP 115",
+        courseName: "Introduction to Python"
+      },
+      {
+        courseID: 1,
+        courseCode: "ITP 115",
+        courseName: "Introduction to Python"
+      },
+      {
+        courseID: 2,
+        courseCode: "ITP 115",
+        courseName: "Introduction to Python"
+      }
+    ]
   },
-
+  onPickerChange(e){
+    console.log(e);
+    const {value} = e.detail
+    this.setData({
+      picker_index: value
+    })
+    // wx request, update info accordingly
+  },
   /**
    * 生命周期函数--监听页面加载
    */
