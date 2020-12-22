@@ -38,10 +38,10 @@ Page({
         professorName: "Tommy Trojan"
       }
     ],
-    activeTab: 0
+    activeTab: 0,
+    searchCourseCode: "",
+    searchProfessorName: "",
   },
-  searchCourseCode: "",
-  searchProfessorName: "",
   onPickerChange(e){
     console.log(e);
     const {value} = e.detail
@@ -58,17 +58,17 @@ Page({
     this.setData({activeTab: index})
   },
   onSearchProfessorInput(e){
-    this.searchProfessorName = e.detail.value
+    this.setData({searchProfessorName: e.detail.value})
   },
   onSearchClassInput(e){
-    this.searchCourseCode = e.detail.value
+    this.setData({searchCourseCode: e.detail.value})
   },
   onTapSearchClass(){
     wx.cloud.callFunction({
       name: "getInfo",
       data:{
         target: "search_classes",
-        courseCode: this.searchCourseCode
+        courseCode: this.data.searchCourseCode
       },
       success: res=>{
         console.log(res.result.data);
@@ -83,7 +83,7 @@ Page({
       name: "getInfo",
       data:{
         target: "search_professors",
-        professorName: this.searchProfessorName
+        professorName: this.data.searchProfessorName
       },
       success: res=>{
         console.log(res.result.data);

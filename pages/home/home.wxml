@@ -33,7 +33,7 @@ course detail还没有实现
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input bind:input="onSearchClassInput" type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchCourseCode}}" bind:input="onSearchClassInput" type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
                 <image bind:tap="onTapSearchClass" src="/icon/others/search.svg" mode="widthFix" />
@@ -64,7 +64,7 @@ course detail还没有实现
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchProfessorName}}" bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
                 <image bind:tap="onTapSearchProfessor" src="/icon/others/search.svg" mode="widthFix" />
