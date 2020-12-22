@@ -1,0 +1,12 @@
+<view class='newquestion'>
+  <view class='chinese'>新建问题</view>
+  <view class='english'>New Question</view>
+</view>
+
+<view class="enterbox">
+  <input type="text" placeholder="e.g 老师有口音吗？" />
+</view>
+
+<button>
+  <text class="buttonname">确认</text>
+</button>

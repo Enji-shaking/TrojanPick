@@ -1,0 +1,24 @@
+<view class='question-title'>课程问答</view>
+<view class='line-1'></view>
+<view class='question-box'>
+  <view class='question-block'>
+    <text class="question-icon icon"></text>
+    <text class="q-and-ans">问题1</text>
+  </view>
+  <view class='answer-block'>
+    <text class="answer-icon icon"></text>
+    <text class="q-and-ans">答案1</text>
+  </view>
+  <view class='line-2'></view>
+  </view>
+  <view class='question-box'>
+  <view class='question-block'>
+    <text class="question-icon icon"></text>
+    <text class="q-and-ans">问题2</text>
+  </view>
+  <view class='answer-block'>
+    <text class="answer-icon icon"></text>
+    <text class="q-and-ans">答案2</text>
+  </view>
+  <view class='line-2'></view>
+  </view>

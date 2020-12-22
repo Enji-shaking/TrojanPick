@@ -1,0 +1,142 @@
+.new-review{
+  width: 276rpx;
+  height: 72rpx;
+  margin-top: 158rpx;
+  margin-bottom: 46rpx;
+  margin-left: 104rpx;
+}
+.english{
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24rpx;
+  line-height: 24.72rpx;
+  align-items: center;
+
+color: #953A3A;
+}
+
+.chinese{
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44rpx;
+  line-height: 46rpx;
+  align-items: center;
+
+color: #953A3A;
+}
+
+.dropbox-block{
+  height: 70rpx;
+  margin-left: 102rpx;
+  margin-right: 72rpx;
+  margin-top: 32rpx;
+  display: flex;
+}
+
+.lables{
+  width: 162rpx;
+  height: 70rpx;
+  margin-top: 17rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  color: #953A3A;
+}
+
+.picker-box{
+width: 314rpx;
+height: 70rpx;
+margin-left: 28rpx;
+
+background: #FFF7DB;
+border: 1px solid #F8C1B0;
+box-sizing: border-box;
+}
+
+.add{
+  width: 42rpx;
+  height: 42rpx;
+  margin-left: 30rpx;
+  display: flex
+}
+
+.imageadd{
+  width: 42rpx;
+  height: 42rpx;
+  margin-top: 17rpx;
+}
+
+.rate-block{
+  height: 60rpx;
+  margin-left: 102rpx;
+  margin-right: 144rpx;
+  margin-top: 26rpx;
+  display: flex;
+}
+
+.star-block{
+  margin-left: 26rpx;
+  width: 188rpx;
+  height: 60rpx;
+  display: flex;
+}
+
+.star{
+  display: inline;
+}
+
+.imagestar{
+  width: 64rpx;
+  height: 64rpx;
+}
+
+checkbox{
+  height: 52rpx; 
+  margin-top: 44rpx;
+  margin-left: 274rpx;
+  background: #FFFFFF;
+  
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #953A3A;
+}
+
+.buttonsubmit{
+  width: 204px;
+  height: 43px;
+  margin-top: 52rpx;
+  margin-bottom: 672rpx;
+  margin-left: 170rpx;
+  margin-right: 170rpx;
+
+  background: #F5C2BF;
+  border: 1px solid #F8C1B0;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.buttonname{
+  width: 78rpx;
+  height: 38rpx;
+  margin: auto;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  align-items: center;
+  text-align: center;
+
+  color: #953A3A;
+}
