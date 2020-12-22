@@ -1,5 +1,6 @@
 {
   "description": "项目配置文件",
+  "cloudfunctionRoot": "cloud/",
   "packOptions": {
     "ignore": []
   },
@@ -50,6 +51,7 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "plugin": {
       "list": []
@@ -63,8 +65,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "Home",
-          "pathName": "pages/home/home",
+          "name": "index",
+          "pathName": "pages/index/index",
           "query": "",
           "scene": null
         },
@@ -95,6 +97,18 @@
         {
           "name": "signup",
           "pathName": "pages/signup/signup",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "test",
+          "pathName": "pages/test/test",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "cloud",
+          "pathName": "pages/testCloud/testCloud",
           "scene": null
         }
       ]

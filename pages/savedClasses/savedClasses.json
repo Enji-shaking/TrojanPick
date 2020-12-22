@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "Header": "/components/Header/Header",
+    "BottomNav": "/components/BottomNav/BottomNav",
+    "ClassCards": "/components/ClassCards/ClassCards"
+  }
 }

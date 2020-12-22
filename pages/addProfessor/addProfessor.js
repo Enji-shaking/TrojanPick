@@ -7,8 +7,27 @@ Page({
   data: {
 
   },
+  professorName: '',
+  onProfessorNameInput(e){
+    console.log(e);
+    this.professorName = e.detail.value
+    // console.log(this.courseName);
+  },
   onConfirm(e){
     console.log("Confirm button pressed from adding professors");
+    wx.cloud.callFunction({
+      name: 'addInfo',
+      data:{
+        target: 'professor',
+        professorName: this.professorName,
+      },
+      success: res=>{
+        console.log(res);
+      },
+      fail: err=>{
+        console.error(err)
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

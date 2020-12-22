@@ -1,2 +1,44 @@
-<!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<Header></Header>
+
+<view class="welcome_row">
+    <view class="welcome_image_wrapper">
+        <image class="icon" src="{{avatarUrl}}" mode="widthFix"></image>
+    </view>
+    <view class="welcome_row_text_wrapper">
+        <view class="welcome_text_line_1">Welcome {{nickName}}</view>
+        <view class="welcome_text_line"></view>
+        <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view>
+    </view>
+</view>
+
+<view class="content_wrapper">
+    <navigator class="row">
+        <view class="content_row_left_text">
+            <view class="content_row_left_text_line_1">历史评价</view>
+            <view class="content_row_left_text_line_2">Past Reviews</view>
+        </view>
+        <view class="content_row_right_image_wrapper">
+            <image mode="widthFix" class="content_row_right_image" src="/icon/others/pen.svg"></image>
+        </view>
+    </navigator>
+    <navigator class="row">
+        <view class="content_row_left_text">
+            <view class="content_row_left_text_line_1">收藏课程</view>
+            <view class="content_row_left_text_line_2">Favorite Courses</view>
+        </view>
+        <view class="content_row_right_image_wrapper">
+            <image mode="widthFix" class="content_row_right_image" src="/icon/others/bookmark.svg"></image>
+        </view>
+    </navigator>
+    <navigator class="row">
+        <view class="content_row_left_text">
+            <view class="content_row_left_text_line_1">收藏评价</view>
+            <view class="content_row_left_text_line_2">Favorite Comments</view>
+        </view>
+        <view class="content_row_right_image_wrapper">
+            <image mode="widthFix" class="content_row_right_image" src="/icon/others/comment.svg"></image>
+        </view>
+    </navigator>
+</view>
+
+<BottomNav></BottomNav>

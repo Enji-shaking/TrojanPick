@@ -30,10 +30,10 @@
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchCourseCode}}" bind:input="onSearchClassInput" type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
-                <image src="/icon/others/search.svg" mode="widthFix" />
+                <image bind:tap="onTapSearchClass" src="/icon/others/search.svg" mode="widthFix" />
             </view>
         </view>
     </view>
@@ -61,10 +61,10 @@
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchProfessorName}}" bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
-                <image src="/icon/others/search.svg" mode="widthFix" />
+                <image bind:tap="onTapSearchProfessor" src="/icon/others/search.svg" mode="widthFix" />
             </view>
         </view>
     </view>
@@ -82,10 +82,5 @@
     </view>
 
 </view>
-
-<navigator  url="/pages/addClass/addClass" hover-class="navigator-hover" open-type="navigate">
-    xxx
-</navigator>
   
-
 <BottomNav></BottomNav>

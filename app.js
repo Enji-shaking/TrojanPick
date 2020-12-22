@@ -1,7 +1,7 @@
 //app.js
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
+  originalOnLoadFunction(){
+ // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -31,6 +31,41 @@ App({
           })
         }
       }
+    })
+  },
+  onLaunch: function () {
+    wx.cloud.init({
+      env: "trojanpick-1-6gmvcoz0a34e3c09"
+    })
+    wx.getSetting({
+      success: res=>{
+        // console.log(res);
+        // if(res.authSetting['scope.userInfo']){
+
+          wx.getUserInfo({
+            withCredentials: 'false',
+            lang: 'zh_CN',
+            timeout:10000,
+            success: (result) => {
+              console.log(result);
+              this.globalData.nickName = result.userInfo.nickName
+              this.globalData.avatarUrl = result.userInfo.avatarUrl
+            },
+            fail: () => {},
+            complete: () => {}
+          });
+        }
+        // else{
+        //   wx.openSetting({
+        //     success: (result) => {
+        //       console.log(result);
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        //   });
+            
+        // }
+          
     })
   },
   globalData: {

@@ -1,2 +1,22 @@
-<!--pages/savedClasses/savedClasses.wxml-->
-<text>pages/savedClasses/savedClasses.wxml</text>
+<Header></Header>
+
+<view class="top_header">
+    <view class="title">收藏课程</view>
+    <view class="line"></view>
+</view>
+
+<view class="sort_wrapper">
+    <view class="left_text">按前缀查看</view>
+    <picker class="right_picker" mode="selector" 
+        range="{{favorite_classes_prefix}}" 
+        value="{{prefix_index}}" 
+        bindchange="onPickerChange"
+    >
+        <view class="picker_picked">{{favorite_classes_prefix[prefix_index]}}</view>
+    </picker>
+</view>
+
+<ClassCards course_cards_info="{{course_cards_info}}" ></ClassCards>
+
+
+<BottomNav></BottomNav>

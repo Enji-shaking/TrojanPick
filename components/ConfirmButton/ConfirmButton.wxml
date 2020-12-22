@@ -1,3 +1,4 @@
 <button bind:tap="onConfirmButtonTapped" class="confirmButton">
     {{title}}
+    <image src="/icon/others/wechat-logo.svg" wx:if="{{loginbutton}}" class="wechat-logo"></image>
 </button>

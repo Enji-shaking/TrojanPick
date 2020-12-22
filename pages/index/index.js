@@ -16,6 +16,17 @@ Page({
     })
   },
   onLoad: function () {
+    wx.login({
+      timeout:10000,
+      success: (result) => {
+        console.log(result);
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+      
+    console.log("MEMME");
+    console.log(app);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -41,6 +52,7 @@ Page({
           })
         }
       })
+      console.log("AM I HERE");
     }
   },
   getUserInfo: function(e) {

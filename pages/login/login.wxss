@@ -1,1 +1,64 @@
-/* pages/login/login.wxss */
+.welcome_row {
+    margin-top: 100rpx;
+    margin-left: 96rpx;
+    margin-right: 106rpx;
+    display: flex;
+  }
+  .welcome_row .welcome_image_wrapper .icon {
+    width: 140rpx;
+  }
+  .welcome_row .welcome_row_text_wrapper .welcome_text_line_1 {
+    padding-top: 32rpx;
+    padding-right: 6rpx;
+    padding-left: 11rpx;
+    width: 374rpx;
+    height: 50rpx;
+    font-size: 42rpx;
+    line-height: 43rpx;
+    text-align: center;
+  }
+  .welcome_row .welcome_row_text_wrapper .welcome_text_line {
+    width: 406rpx;
+    border: 1px solid #F8C1B0;
+    margin-bottom: 42rpx;
+    margin-top: 12rpx;
+  }
+  
+.content_wrapper{
+    margin-top: 100rpx;
+    text-align: center;
+}
+.row{
+    margin-bottom: 50rpx;
+}
+.register_row{
+    display: flex;
+    justify-content: space-around;
+    font-size: 22rpx;
+    line-height: 23rpx;
+    width: 300rpx;
+    margin: auto;
+    margin-top: 28rpx;
+}
+.register_text{
+    display: inline-block;
+}
+.register_nav{
+    text-decoration: underline;
+    display: inline-block;
+}
+.line{
+    font-size: 22rpx;
+    line-height: 23rpx;
+    width: 408rpx;
+    margin: auto;
+    margin-top: 36rpx;
+    height: 52rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.wechatlogin{
+    margin-top: 20rpx;
+}
