@@ -1,7 +1,12 @@
 {
-  "pages":[
+  "pages": [
     "pages/test/test",
+    "pages/pastRatings/pastRatings",
+    "pages/favoriteRatings/favoriteRatings",
+    "pages/professorInfo/professorInfo",
+    "pages/courseInfo/courseInfo",
     "pages/index/index",
+    "pages/ratingInfo/ratingInfo",
     "pages/logs/logs",
     "pages/home/home",
     "pages/addClass/addClass",
@@ -12,13 +17,11 @@
     "pages/login/login",
     "pages/profile/profile",
     "pages/savedClasses/savedClasses"
-
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFF",
     "navigationBarTextStyle": "black"
-    
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

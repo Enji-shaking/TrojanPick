@@ -1,0 +1,36 @@
+<!--pages/courseInfo/courseInfo.wxml-->
+<view>
+  <Header></Header>
+  <view class="title">
+    <view class="left">
+      <view class="top">
+        <view class="courseCode">{{courseCode}}</view>
+        <image src="../../icon/others/favorite-before.svg" bindtap="FavoriteCourseTap" hidden="{{isFavorite}}"></image>
+        <image src="../../icon/others/favorite.svg" bindtap="FavoriteCourseTap" hidden="{{!isFavorite}}"></image>
+      </view>
+      <view class="descript">{{courseName}}</view>
+    </view>
+    <view class="middle"></view>
+    <view class="right">{{overallRating}}</view>
+  </view>
+  <view class="courseInfo">
+    <view class="info">
+      <view class="courseTitle">课程简介</view>
+      <view class="content">{{courseDescript}}</view>
+    </view>
+    <view class="unit"> <text>Units</text>: {{courseUnit}} units</view>
+  </view>
+ <NumericRating dropDownType="{{2}}"></NumericRating>
+  <Rating wx:for="{{ratings}}" type="{{1}}" difficultRat="3" interestRat="4" workloadRat="2" teachRat="5"></Rating>
+  <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
+  <BottomNav></BottomNav>
+  <view class="questionTitle">课程问答</view>
+  <view class="line"></view>
+  <view class="questions">
+    <view wx:for="{{questions}}">
+      <image src="../../icon/others/question.svg"></image>
+      <text>问题1</text>
+    </view>
+  </view>
+  <YellowButton text="我要提问"></YellowButton>
+</view>

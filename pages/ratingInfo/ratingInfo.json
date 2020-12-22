@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "Rating":"../../components/Rating/Rating",
+    "BottomNav":"../../components/BottomNav/BottomNav",
+    "Header":"../../components/Header/Header"
+  }
+}

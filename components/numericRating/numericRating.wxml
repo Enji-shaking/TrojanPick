@@ -1,0 +1,15 @@
+<!--components/numericRating/numericRating.wxml-->
+<view class="numericRating">
+  <view class="title">
+    课程评价
+  </view>
+  <view class="line"></view>
+  <DropDown type="{{dropDownType}}"></DropDown>
+  <view class="ratings">
+    <SingleNumericRating class="single" value="4.9" name="课程难度"></SingleNumericRating>
+    <SingleNumericRating class="single" value="4.5" name="内容趣味性"></SingleNumericRating>
+    <SingleNumericRating class="single" value="4.7" name="workload"></SingleNumericRating>
+    <SingleNumericRating class="single" value="4.4" name="teaching"></SingleNumericRating>
+  </view>
+
+</view>

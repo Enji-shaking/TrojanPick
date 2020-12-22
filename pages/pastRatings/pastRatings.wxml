@@ -1,0 +1,9 @@
+<!--pages/pastRatings/pastRatings.wxml-->
+<view class="pastRatings">
+  <Header></Header>
+  <view class="title">历史评价</view>
+  <view class="line"></view>
+  <DropDown type="{{3}}"></DropDown>
+  <Rating wx:for="{{Rating}}" type="3"></Rating>
+  <BottomNav></BottomNav>
+</view>

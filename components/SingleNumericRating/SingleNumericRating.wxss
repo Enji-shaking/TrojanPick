@@ -1,0 +1,16 @@
+.SingleNumericRating .top {
+  color: #953A3A;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+.SingleNumericRating .bot {
+  font-size: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FDB713;
+  text-align: center;
+}

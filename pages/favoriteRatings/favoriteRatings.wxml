@@ -1,0 +1,9 @@
+<!--pages/favoriteRatings/favoriteRatings.wxml-->
+<view class="favoriteRatings">
+  <Header></Header>
+  <view class="title">收藏评价</view>
+  <view class="line"></view>
+  <DropDown type="{{3}}"></DropDown>
+  <BottomNav></BottomNav>
+  <Rating wx:for="{{Rating}}" type="{{3}}"></Rating>
+</view>

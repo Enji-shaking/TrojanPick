@@ -12,3 +12,7 @@
 <navigator class="myNav" url="/pages/profile/profile">profile page</navigator>
 <navigator class="myNav" url="/pages/savedClasses/savedClasses">savedClasses page</navigator>
 <navigator class="myNav" url="/pages/signup/signup">signup page</navigator>
+<navigator class="myNav" url="/pages/courseInfo/courseInfo">course Info</navigator>
+<navigator class="myNav" url="/pages/professorInfo/professorInfo">professor Info</navigator>
+<navigator class="myNav" url="/pages/favoriteRatings/favoriteRatings">favorite ratings</navigator>
+<navigator class="myNav" url="/pages/pastRatings/pastRatings">past ratings</navigator>

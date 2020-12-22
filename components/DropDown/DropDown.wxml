@@ -1,0 +1,7 @@
+<!--components/DropDown/DropDown.wxml-->
+<view class="dropdown">
+  <view class="text" wx:if="{{type==1 || type==3}}">按课程查看</view>
+  <view class="box" wx:if="{{type==1 || type==3}}">courses<image src="../../icon/others/dropdown.svg"></image></view>
+  <view class="text" wx:if="{{type==2 || type==3}}">按教授查看</view>
+  <view class="box" wx:if="{{type==2 || type==3}}">professor<image src="../../icon/others/dropdown.svg"></image></view>
+</view>

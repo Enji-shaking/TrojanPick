@@ -1,0 +1,25 @@
+.title {
+  margin-top: 62rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #953A3A;
+}
+.line {
+  width: 406rpx;
+  border: 1px solid #F8C1B0;
+  margin: auto;
+  margin-top: 18rpx;
+}
+.ratings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 406rpx;
+  margin: auto;
+  margin-top: 42rpx;
+}
+.ratings .single {
+  width: 50%;
+}

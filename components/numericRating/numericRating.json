@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "DropDown":"/components/DropDown/DropDown",
+    "SingleNumericRating":"/components/SingleNumericRating/SingleNumericRating"
+  }
+}

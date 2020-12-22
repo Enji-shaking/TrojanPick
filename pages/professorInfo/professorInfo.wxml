@@ -1,0 +1,21 @@
+<!--pages/professorInfo/professorInfo.wxml-->
+<view>
+  <Header></Header>
+  <view class="title">
+    <view class="left">
+      {{professorName}}
+    </view>
+    <view class="middle"></view>
+    <view class="right">{{overallRating}}</view>
+  </view>
+  <view class="courseInfo">
+    <view class="info">
+      <view class="courseTitle">Courses taught</view>
+    </view>
+    <view class="unit" wx:for="{{courseTaught}}" > <text>{{item.courseCode}}</text>: {{item.courseUnit}} units</view>
+  </view>
+ <NumericRating dropDownType="{{1}}"></NumericRating>
+  <Rating wx:for="{{ratings}}" type="{{2}}" difficultRat="3" interestRat="4" workloadRat="2" teachRat="5"></Rating>
+  <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
+  <BottomNav></BottomNav>
+</view>

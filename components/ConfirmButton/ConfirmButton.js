@@ -35,6 +35,5 @@ Component({
         icon: 'none',
       });      
     }
-    
   }
 })

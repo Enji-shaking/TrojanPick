@@ -1,0 +1,3 @@
+<!--components/yellowButton/yellowButton.wxml-->
+<button class="yellowButton">{{text}}</button>
+

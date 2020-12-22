@@ -1,0 +1,26 @@
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18rpx;
+}
+.dropdown .text {
+  font-size: 22rpx;
+  color: #953A3A;
+  padding: 10rpx;
+}
+.dropdown .box {
+  border: 0.5px solid #F5C2BF;
+  box-sizing: border-box;
+  width: 128rpx;
+  height: 36rpx;
+  font-size: 22rpx;
+  position: relative;
+}
+.dropdown .box image {
+  width: 17.48rpx;
+  height: 15.42rpx;
+  position: absolute;
+  right: 10rpx;
+  top: 10.28rpx;
+}

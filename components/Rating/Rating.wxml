@@ -1,0 +1,66 @@
+<!--components/Rating/Rating.wxml-->
+<!-- 41+72+106+46 526 -->
+<view class="box border">
+  <view class="top">
+    <view class="left" wx:if="{{type==1 || type==2}}">{{userName}}</view>
+    <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
+    <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
+    <view class="right" wx:if="{{type==2 || type==3}}">课程: {{courseCode}}</view>
+  </view>
+  <view class="content borderTop" wx:if="{{!detail}}">
+    <view class="text">
+      {{content}}
+    </view>
+    <navigator url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
+  </view>
+<view class="content borderTop" wx:if="{{detail}}">
+  <view class="text">
+    {{content}}
+  </view>
+</view>
+  <view class="rating borderTop">
+    <view class="singleRating">
+      <view class="text">
+        课程难度
+      </view>
+      <Stars Rating="{{difficultRat}}"></Stars>
+    </view> 
+    <view class="singleRating">
+      <view class="text">
+        内容趣味性
+      </view>
+      <Stars Rating="{{interestRat}}"></Stars>
+    </view> 
+    <view class="singleRating">
+      <view class="text">
+        workload
+      </view>
+      <Stars Rating="{{workloadRat}}"></Stars>
+    </view> 
+    <view class="singleRating">
+      <view class="text">
+        teaching
+      </view>
+      <Stars Rating="{{teachRat}}"></Stars>
+    </view> 
+
+  </view>
+  <view class="bottom borderTop">
+    <view>
+      <image src="../../icon/others/like.svg"></image>
+      <text>{{voteUp}}</text>
+    </view>
+    <view>
+      <image src="../../icon/others/downvote.svg"></image>
+      <text>{{voteDown}}</text>
+    </view>
+    <view>
+      <image src="../../icon/others/comment.svg"></image>
+      <text>{{comment}}</text>
+    </view>
+    <view>
+      <image src="../../icon/others/favorite.svg"></image>
+      <text>{{favorite}}</text>
+    </view>
+  </view>
+</view>
