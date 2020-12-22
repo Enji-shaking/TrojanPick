@@ -40,6 +40,8 @@ Page({
     ],
     activeTab: 0
   },
+  searchCourseCode: "",
+  searchProfessorName: "",
   onPickerChange(e){
     console.log(e);
     const {value} = e.detail
@@ -55,6 +57,43 @@ Page({
     console.log(index);
     this.setData({activeTab: index})
   },
+  onSearchProfessorInput(e){
+    this.searchProfessorName = e.detail.value
+  },
+  onSearchClassInput(e){
+    this.searchCourseCode = e.detail.value
+  },
+  onTapSearchClass(){
+    wx.cloud.callFunction({
+      name: "getInfo",
+      data:{
+        target: "search_classes",
+        courseCode: this.searchCourseCode
+      },
+      success: res=>{
+        console.log(res.result.data);
+        const { data }= res.result
+        const course_cards_info = data.map(v=>{return {courseID: v._id, courseCode: v.courseCode, courseName: v.courseName}})
+        this.setData({course_cards_info})
+      }
+    })
+  },
+  onTapSearchProfessor(){
+    wx.cloud.callFunction({
+      name: "getInfo",
+      data:{
+        target: "search_professors",
+        professorName: this.searchProfessorName
+      },
+      success: res=>{
+        console.log(res.result.data);
+        const { data }= res.result
+        const prof_cards_info = data.map(v=>{return {professorID: v._id, professorName: v.professorName}})
+        this.setData({prof_cards_info})
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -65,7 +104,24 @@ Page({
         target: "recommended_classes"
       },
       success: res=>{
-        console.log(res);
+        // console.log(res);
+        const { data } = res.result
+        const course_cards_info = data.map(v=>{return {courseID: v._id, courseCode: v.courseCode, courseName: v.courseName}})
+        console.log(course_cards_info);
+        this.setData({course_cards_info})
+      }
+    })
+    wx.cloud.callFunction({
+      name: "getInfo",
+      data:{
+        target: "all_professors"
+      },
+      success: res=>{
+        // console.log(res);
+        const { data } = res.result
+        const prof_cards_info = data.map(v=>{return {professorID: v._id, professorName: v.professorName}})
+        console.log(prof_cards_info);
+        this.setData({prof_cards_info})
       }
     })
   },

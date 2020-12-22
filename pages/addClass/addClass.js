@@ -7,12 +7,12 @@ Page({
   data: {
 
   },
-  courseId: '',
+  courseCode: '',
   courseName: '',
 
   onCourseIdInput(e){
     console.log(e);
-    this.courseId = e.detail.value
+    this.courseCode = e.detail.value
     // console.log(this.courseId);
   },
 
@@ -28,7 +28,7 @@ Page({
       name: 'addInfo',
       data:{
         target: 'class',
-        courseId: this.courseId, 
+        courseCode: this.courseCode, 
         courseName: this.courseName
       },
       success: res=>{

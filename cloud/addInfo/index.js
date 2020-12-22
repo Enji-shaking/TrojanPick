@@ -12,10 +12,10 @@ exports.main = async (event, context) => {
 
   if(target === "class"){
     // Should have corresponding checking conditions before actually adding the class
-    const { courseId, courseName } = event
+    const { courseCode, courseName } = event
     return await db.collection('classes').add({
       data:{ 
-        courseId: courseId,
+        courseCode: courseCode,
         courseName: courseName,
         openid: OPENID
       }

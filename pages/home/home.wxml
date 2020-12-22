@@ -27,13 +27,16 @@
 <view class="rate_by_class_big_tab"
     wx:if="{{activeTab===0}}"
 >
+现在这里先sort by name，因为rating的ui部分他们还没有完成，后端逻辑没办法写。你可以试着add class比如说aaa 101，他应该就会出现在最上边
+然后因为后端逻辑没有实现，暂时不能实现模糊搜索，所以暂时只支持精密搜索，请尝试ITP 115
+course detail还没有实现
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
+                <input bind:input="onSearchClassInput" type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
-                <image src="/icon/others/search.svg" mode="widthFix" />
+                <image bind:tap="onTapSearchClass" src="/icon/others/search.svg" mode="widthFix" />
             </view>
         </view>
     </view>
@@ -61,10 +64,10 @@
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
+                <input bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
-                <image src="/icon/others/search.svg" mode="widthFix" />
+                <image bind:tap="onTapSearchProfessor" src="/icon/others/search.svg" mode="widthFix" />
             </view>
         </view>
     </view>
