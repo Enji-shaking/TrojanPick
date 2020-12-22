@@ -9,11 +9,10 @@
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line_1 {
   padding-top: 32rpx;
-  padding-right: 6rpx;
-  padding-left: 11rpx;
-  width: 374rpx;
+  padding-left: 5rpx;
+  width: 406rpx;
   height: 50rpx;
-  font-size: 42rpx;
+  font-size: 36rpx;
   line-height: 43rpx;
   text-align: center;
 }

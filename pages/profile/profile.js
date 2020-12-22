@@ -1,18 +1,25 @@
 // pages/profile/profile.js
+const app =  getApp();
+  
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    username: "用户名"
+    nickName: "",
+    avatarUrl: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(app.globalData);
+    this.setData({
+      nickName: app.globalData.nickName,
+      avatarUrl: app.globalData.avatarUrl
+    })
   },
 
   /**
