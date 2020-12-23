@@ -1,0 +1,121 @@
+<view class='new-review'>
+  <view class='chinese'>新建评价</view>
+  <view class='english'>New Review</view>
+</view>
+
+<view class='dropbox-block'>
+  <text class='lables'>选择课程</text>
+  <view class='picker-box'>
+    <picker></picker>
+  </view>
+  <navigator class="add">
+    <image class='imageadd' src="/ui_icons/others/add.svg"></image>
+  </navigator>
+</view>
+
+<view class='dropbox-block'>
+  <text class='lables'>授课教授</text>
+  <view class='picker-box'>
+    <picker></picker>
+  </view>
+  <navigator class="add">
+    <image class='imageadd' src="/ui_icons/others/add.svg"></image>
+  </navigator>
+</view>
+
+<view class='rate-block'>
+  <text class='lables'>课程难度 </text>
+  <view class='star-block'>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+  </view>
+</view>
+
+<view class='rate-block'>
+  <text class='lables'>内容趣味性</text>
+  <view class='star-block'>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+  </view>
+</view>
+
+<view class='rate-block'>
+  <text class='lables'>workload</text>
+  <view class='star-block'>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+  </view>
+</view>
+
+<view class='rate-block'>
+  <text class='lables'>teaching</text>
+  <view class='star-block'>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+    <navigator class="star">
+      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+    </navigator>
+  </view>
+</view>
+
+<view class='dropbox-block'>
+  <text class='lables'>成绩 (选填) </text>
+  <view class='picker-box'>
+    <picker></picker>
+  </view>
+</view>
+
+<checkbox>匿名发布评价</checkbox>
+
+<button class="buttonsubmit">
+  <text class="buttonname">确认</text>
+</button>
