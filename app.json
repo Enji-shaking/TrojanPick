@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/test/test",
+    "pages/testCloud/testCloud",
     "pages/pastRatings/pastRatings",
     "pages/favoriteRatings/favoriteRatings",
     "pages/professorInfo/professorInfo",
