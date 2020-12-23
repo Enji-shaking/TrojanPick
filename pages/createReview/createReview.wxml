@@ -9,7 +9,7 @@
     <picker></picker>
   </view>
   <navigator class="add">
-    <image class='imageadd' src="/ui_icons/others/add.svg"></image>
+    <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
 
@@ -19,7 +19,7 @@
     <picker></picker>
   </view>
   <navigator class="add">
-    <image class='imageadd' src="/ui_icons/others/add.svg"></image>
+    <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
 
@@ -27,19 +27,19 @@
   <text class='lables'>课程难度 </text>
   <view class='star-block'>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
     </navigator>
   </view>
 </view>
@@ -48,19 +48,19 @@
   <text class='lables'>内容趣味性</text>
   <view class='star-block'>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
     </navigator>
   </view>
 </view>
@@ -69,19 +69,19 @@
   <text class='lables'>workload</text>
   <view class='star-block'>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
     </navigator>
   </view>
 </view>
@@ -90,19 +90,19 @@
   <text class='lables'>teaching</text>
   <view class='star-block'>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar' src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
     </navigator>
     <navigator class="star">
-      <image class='imagestar'src="/ui_icons/others/rate-star.svg"></image>
+      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
     </navigator>
   </view>
 </view>
