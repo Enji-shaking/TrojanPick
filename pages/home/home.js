@@ -5,21 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker_arr:['数字（默认）','难度从低到高'],
+    picker_arr:['alphanumeric','hardness (asc+)','interest (desc-)','workload (asc+)', 'learning (desc-)'],
     picker_index: 0,
-    course_cards_info:[
-      {
-        courseID: 0,
-        courseCode: "placeHolder",
-        courseName: "xxxxxxxxx"
-      }
-    ],
-    prof_cards_info:[
-      {
-        professorID: 0,
-        professorName: "placeHolder"
-      }
-    ],
+    course_cards_info:[],
+    prof_cards_info:[],
     activeTab: 0,
     searchCourseCode: "",
     searchProfessorName: "",
@@ -28,6 +17,8 @@ Page({
     currentPage: 1,
     target: "recommended_classes",
     courseCode: "",
+    sort: 0
+    // corresponding to picker_index
   },
   queryParamsProfessors: { 
     currentPage: 1,
@@ -42,6 +33,8 @@ Page({
     this.setData({
       picker_index: value
     })
+    this.queryParamsClasses.sort = parseInt(value)
+    this.reloadClasses()
   },
   onTabTapped(e){
     console.log(e);
@@ -57,25 +50,37 @@ Page({
     })
   },
   searchClassCloud(){
+    wx.showLoading({
+      title: 'loading',
+    })
     this.performQuery(0).then((res)=>{
         console.log(res);
         const { data, totalPage }= res.result
         this.totalPageClasses = totalPage
         console.log(this.totalPageClasses);
-        const course_cards_info = data.map(v=>{return {courseID: v._id, courseCode: v.courseCode, courseName: v.courseName}})
+        const course_cards_info = data.map(v=>{return {_id: v._id, courseCode: v.courseCode, courseName: v.courseName}})
         this.setData({course_cards_info: [...this.data.course_cards_info, ...course_cards_info]})
+        wx.hideLoading({
+          success: (res) => {},
+        })
       })
       .catch((err)=>console.error(err))
   },
   searchProfessorCloud(){
+    wx.showLoading({
+      title: 'loading',
+    })
     this.performQuery(1).then((res)=>{
-        console.log(res);
-        const { data, totalPage }= res.result
-        this.totalPageProfessors = totalPage
-        const prof_cards_info = data.map(v=>{return {professorID: v._id, professorName: v.professorName}})
-        this.setData({prof_cards_info: [...this.data.prof_cards_info, ...prof_cards_info]})
-      })
-      .catch((err)=>console.error(err))
+      console.log(res);
+      const { data, totalPage }= res.result
+      this.totalPageProfessors = totalPage
+      const prof_cards_info = data.map(v=>{return {_id: v._id, professorName: v.professorName}})
+      this.setData({prof_cards_info: [...this.data.prof_cards_info, ...prof_cards_info]})
+        wx.hideLoading({
+          success: (res) => {},
+        })
+    })
+    .catch((err)=>console.error(err))
 
   },
   SearchClassTimerID: -1,
@@ -89,7 +94,7 @@ Page({
       this.queryParamsProfessors.target="search_professors"
     else 
       this.queryParamsProfessors.target="all_professors"
-    this.TimerID = setTimeout(this.reloadProfessors,1000)
+    this.SearchProfessorTimerID = setTimeout(this.reloadProfessors,1000)
   },
   onSearchClassInput(e){
     clearTimeout(this.SearchClassTimerID)
@@ -100,22 +105,24 @@ Page({
       this.queryParamsClasses.target="search_classes"
     else 
       this.queryParamsClasses.target="recommended_classes"
-    this.TimerID = setTimeout(this.reloadClasses,1000)
+    this.SearchClassTimerID = setTimeout(this.reloadClasses,1000)
   },
   reloadClasses(){
     this.setData({course_cards_info: []})
+    this.queryParamsClasses.currentPage = 1
     this.searchClassCloud()
   },
   reloadProfessors(){
     this.setData({prof_cards_info: []})
+    this.queryParamsProfessors.currentPage = 1
     this.searchProfessorCloud()
   },
 
   onTapSearchClass(){
-    this.searchClassCloud()
+    this.reloadClasses()
   },
   onTapSearchProfessor(){
-    this.searchProfessorCloud()
+    this.reloadProfessors()
   },
 
   /**

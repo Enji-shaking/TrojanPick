@@ -14,24 +14,58 @@ exports.main = async (event, context) => {
 
   
   if(target === "recommended_classes" || (target === "search_classes" && event.courseCode==="")){
+    const { sort } = event
+    let name, type
+    if(sort === 0){
+      name = "courseCode"
+      type = "asc"
+    }else if(sort === 1){
+      name = "difficultyRating"
+      type = "asc"
+    }else if(sort === 2){
+      name = "interestRating"
+      type = "desc"
+    }else if(sort === 3){
+      name = "workloadRating"
+      type = "asc"
+    }else if(sort === 4){
+      name = "teachingRating"
+      type = "desc"
+    }
     const data = await db.collection('classes').limit(MAX_LIMIT)
                                          .skip(MAX_LIMIT * (currentPage-1))
-                                         .orderBy("workload_rating", "asc")
-                                         .orderBy("courseCode", "asc")
-                                        //  .where({
-                                        //    "workload_rating": db.command.exists(true)
-                                        //  })
+                                         .orderBy(name, type)
+                                         .where({
+                                           "workloadRating": db.command.exists(true)
+                                         })
                                          .get()
-                                         //后边会改成sort by rating,现在先sort by name
     const count =  (await db.collection('classes').count()).total
     // const total = count.total
     const totalPage = Math.ceil(count / MAX_LIMIT)
-    return {...data, totalPage}
+    return {...data, totalPage, event}
   }else if(target === "search_classes"){
-    const { courseCode } = event
+    const { courseCode, sort } = event
+    // const {  } = event
+    let name, type
+    if(sort === 0){
+      name = "courseCode"
+      type = "asc"
+    }else if(sort === 1){
+      name = "difficultyRating"
+      type = "asc"
+    }else if(sort === 2){
+      name = "interestRating"
+      type = "desc"
+    }else if(sort === 3){
+      name = "workloadRating"
+      type = "asc"
+    }else if(sort === 4){
+      name = "teachingRating"
+      type = "desc"
+    }
     const data =  await db.collection('classes').limit(3)
                                          .skip(MAX_LIMIT * (currentPage-1))
-                                         .orderBy("courseCode", "asc")
+                                         .orderBy(name, type)
                                          .where({
                                            courseCode: db.RegExp({
                                               regexp: courseCode,
@@ -47,7 +81,7 @@ exports.main = async (event, context) => {
                                                   })
                                                   .count()).total
     const totalPage = Math.ceil(count / MAX_LIMIT)
-    return {...data, totalPage}
+    return {...data, totalPage, event}
   }else if(target === "search_professors"){
     const { professorName } = event
     const data = db.collection('professors').limit(3)
