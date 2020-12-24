@@ -7,6 +7,7 @@
 <navigator class="myNav" url="/pages/addClass/addClass">addClass page</navigator>
 <navigator class="myNav" url="/pages/addProfessor/addProfessor">addProfessor page</navigator>
 <navigator class="myNav" url="/pages/createReview/createReview">addRating page</navigator>
+<navigator class="myNav" url="/pages/ratingInfo/ratingInfo">ratingInfo page</navigator>
 <navigator class="myNav" url="/pages/bindUSC/bindUSC">bindUSC page</navigator>
 <navigator class="myNav" url="/pages/login/login">login page</navigator>
 <navigator class="myNav" url="/pages/profile/profile">profile page</navigator>

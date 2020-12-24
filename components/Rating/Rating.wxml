@@ -14,11 +14,11 @@
     </view>
     <navigator url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
   </view>
-<view class="content borderTop" wx:if="{{detail}}">
-  <view class="text">
-    {{content}}
+  <view class="content borderTop" wx:if="{{detail}}">
+    <view class="text">
+      {{content}}
+    </view>
   </view>
-</view>
   <view class="rating borderTop">
     <view class="singleRating">
       <view class="text">

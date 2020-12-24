@@ -15,11 +15,17 @@ Page({
   },
   onConfirm(e){
     console.log("Confirm button pressed from adding professors");
+    if(this.professorName.trim() === ""){
+      wx.showToast({
+        title: 'Please enter valid text',
+      })
+      return false
+    }
     wx.cloud.callFunction({
       name: 'addInfo',
       data:{
         target: 'professor',
-        professorName: this.professorName,
+        professorName: this.professorName.trim(),
       },
       success: res=>{
         console.log(res);

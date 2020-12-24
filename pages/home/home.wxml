@@ -72,7 +72,7 @@
     <view class="professor_card_displayer_wrapper">
         <view class="professor_card"
             wx:for="{{prof_cards_info}}"
-            wx:key="professorID"
+            wx:key="_id"
             wx:for-item="card"
         >
             <navigator class="professor_card_text" data-courseID="{{card.professorID}}" >

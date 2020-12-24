@@ -24,12 +24,18 @@ Page({
 
   onConfirm(e){
     console.log("Confirm button pressed from adding class");
+    if(this.courseCode.trim() === "" || this.courseName.trim() === "" ){
+      wx.showToast({
+        title: 'Please enter valid text',
+      })
+      return false
+    }
     wx.cloud.callFunction({
       name: 'addInfo',
       data:{
         target: 'class',
-        courseCode: this.courseCode, 
-        courseName: this.courseName
+        courseCode: this.courseCode.trim(), 
+        courseName: this.courseName.trim()
       },
       success: res=>{
         console.log(res);

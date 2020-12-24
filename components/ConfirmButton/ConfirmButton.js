@@ -30,14 +30,17 @@ Component({
    */
   methods: {
     onConfirmButtonTapped(){
-      this.triggerEvent("onConfirm")
-      wx.navigateBack({
-        delta: 1
-      });
-      wx.showToast({
-        title: 'Added Successfully',
-        icon: 'none',
-      });      
+      if(this.triggerEvent("onConfirm")){
+        wx.navigateBack({
+          delta: 1
+        })
+        wx.showToast({
+          title: 'Added Successfully',
+          icon: 'none',
+        })
+      }else{
+        console.log("returned false");
+      }
     }
   }
 })
