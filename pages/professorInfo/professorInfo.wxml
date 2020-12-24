@@ -12,10 +12,10 @@
     <view class="info">
       <view class="courseTitle">Courses taught</view>
     </view>
-    <view class="unit" wx:for="{{courseTaught}}" > <text>{{item.courseCode}}</text>: {{item.courseUnit}} units</view>
+    <view class="unit" wx:for="{{courseTaught}}" wx:key="index" > <text>{{item.courseCode}}</text>: {{item.courseUnit}} units</view>
   </view>
- <NumericRating dropDownType="{{1}}"></NumericRating>
-  <Rating wx:for="{{ratings}}" type="{{2}}" difficultRat="3" interestRat="4" workloadRat="2" teachRat="5"></Rating>
+  <NumericRating dropDownType="{{1}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" infoID="{{professorID}}"></NumericRating>
+ <Rating wx:for="{{ratings}}" wx:key="index" type="2" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" courseID="{{item.courseID}}" comments="{{item.comments}}"></Rating>
   <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
   <BottomNav></BottomNav>
 </view>

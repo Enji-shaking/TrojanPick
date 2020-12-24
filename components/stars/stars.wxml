@@ -1,6 +1,6 @@
 <!--components/stars/stars.wxml-->
 <view class="stars" bindtap="clickStars">
-  <image wx:for="{{ratingArray}}" src="../../icon/others/favorite.svg"></image>
-  <image wx:for="{{restArray}}" src="../../icon/others/rate-star.svg"></image>
+  <image wx:for="{{ratingArray}}" wx:key="index" src="../../icon/others/favorite.svg"></image>
+  <image wx:for="{{restArray}}" wx:key="index" src="../../icon/others/rate-star.svg"></image>
   
 </view>

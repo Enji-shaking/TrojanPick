@@ -4,12 +4,14 @@
     课程评价
   </view>
   <view class="line"></view>
-  <DropDown type="{{dropDownType}}"></DropDown>
+  <picker mode="selector" value="{{index}}" range="{{list}}">
+    <DropDown type="{{dropDownType}}"></DropDown>
+  </picker>
   <view class="ratings">
-    <SingleNumericRating class="single" value="4.9" name="课程难度"></SingleNumericRating>
-    <SingleNumericRating class="single" value="4.5" name="内容趣味性"></SingleNumericRating>
-    <SingleNumericRating class="single" value="4.7" name="workload"></SingleNumericRating>
-    <SingleNumericRating class="single" value="4.4" name="teaching"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{difficultyRating}}" name="课程难度"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{interestRating}}" name="内容趣味性"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{workloadRating}}" name="workload"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{teachRating}}" name="teaching"></SingleNumericRating>
   </view>
 
 </view>

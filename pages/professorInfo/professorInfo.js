@@ -4,18 +4,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isFavorite:false,
+    professorID:"2424fa985fe1e0bf005e75e61823f605",
     professorName:"",
     overallRating:"",
     difficultyRating:0,
     interestRating:0,
     workloadRating:0,
     teachingRating:0,
-    ratings:[1,2],
+    ratings:[],
     pageNumber:1,
     itemNumberPerPage:2,
     courseTaught:[{
-      courseCode:"",
+      courseCode:"ITP 115",
       courseUnit:2,
     }]
   },
@@ -24,22 +24,29 @@ Page({
    */
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    this.setData({
-      isFavorite:false,
-      professorName:"Professor Name",
-      overallRating:4.7,
-      difficultyRating:4.9,
-      interestRating:4.5,
-      workloadRating:4.7,
-      teachingRating:4.4,
-      courseTaught:[{
-        courseCode:"ITP115",
-        courseUnit:2,
-      },{
-        courseCode:"ITP265",
-        courseUnit:4
+    let self = this;
+    wx.cloud.callFunction({
+      name:'getRating',
+      data:{
+        professorID:self.data.professorID,
+        target:'fromProfessor'
+      },
+      success(res){
+        let professor = res.result.data.list[0];
+        let overall = parseFloat(professor.difficultyRating+professor.teachingRating+professor.workloadRating+professor.interestingRating)/4.0;
+        self.setData({
+          professorName:professor.professorName,
+          overallRating:overall,
+          difficultyRating:professor.difficultyRating,
+          interestRating:professor.interestingRating,
+          teachingRating:professor.teachingRating,
+          workloadRating:professor.workloadRating,
+          ratings:professor.ratinglist
+        })
+      },
+      fail(res){
+        console.log(res.result)
       }
-    ]
     })
   },
   moreRating(options){

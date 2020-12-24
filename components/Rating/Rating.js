@@ -8,13 +8,13 @@ Component({
       type:"string",
       value:"User Name"
     },
-    professorName:{
+    professorID:{
       type:"string",
-      value:"professor name"
+      value:"professor id"
     },
-    courseCode:{
+    courseID:{
       type:"string",
-      value:"course code"
+      value:""
     },
     content:{
       type:"string",
@@ -44,9 +44,9 @@ Component({
       type:"int",
       value:0
     },
-    comment:{
-      type:"int",
-      value:0
+    comments:{
+      type:"array",
+      value:[]
     },
     favorite:{
       type:"int",
@@ -61,15 +61,20 @@ Component({
     detail:{
       type:"boolean",
       value:false
-    }
+    },
     //if detail is true, show all content
+    couseID:{
+      type:"string",
+      value:""
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    professorName:"",
+    courseCode:""
   },
 
   /**
@@ -79,6 +84,43 @@ Component({
 
   },
   attached:function(){
-    console.log(this.properties.type);
+    let self = this;
+    if(this.data.type==2){ 
+      console.log(self.properties.courseID);
+      wx.cloud.callFunction({
+        name:'getInfoById',
+        data:{
+          courseID:self.properties.courseID,
+          target:'fromProfessor'
+        },
+        success(res){
+          console.log(res.result);
+          self.setData({
+          
+            courseCode:res.result.data[0].courseCode
+          })
+          console.log(res);
+        },
+        fail(res){
+          console.log("fail");
+        }
+      })
+    }else if(this.data.type==1){
+      wx.cloud.callFunction({
+        name:'getInfoById',
+        data:{
+          professorID:this.properties.professorID,
+          target:'fromCourse'
+        },
+        success(res){
+         self.setData({
+           professorName:res.result.data[0].professorName
+         })
+        },
+        fail(res){
+          console.log("fail");
+        }
+      })
+    }
   }
 })

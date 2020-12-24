@@ -37,7 +37,5 @@ Component({
       ratingArray:rating,
       restArray:rest
     })
-    console.log(this.data.ratingArray);
-    console.log(this.data.restArray);
   }
 })

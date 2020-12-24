@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/professorInfo/professorInfo",
+    "pages/courseInfo/courseInfo",
+    "pages/home/home",
     "pages/test/test",
     "pages/testCloud/testCloud",
     "pages/pastRatings/pastRatings",
     "pages/favoriteRatings/favoriteRatings",
-    "pages/professorInfo/professorInfo",
-    "pages/courseInfo/courseInfo",
     "pages/index/index",
     "pages/ratingInfo/ratingInfo",
     "pages/logs/logs",
-    "pages/home/home",
     "pages/addClass/addClass",
     "pages/addProfessor/addProfessor",
     "pages/addRating/addRating",

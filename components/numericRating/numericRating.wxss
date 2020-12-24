@@ -23,3 +23,7 @@
 .ratings .single {
   width: 50%;
 }
+picker {
+  width: max-content;
+  margin: auto;
+}

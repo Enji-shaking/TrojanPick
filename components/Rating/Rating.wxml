@@ -4,6 +4,7 @@
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">{{userName}}</view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
+    <!-- todo get the professorname by ID -->
     <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
     <view class="right" wx:if="{{type==2 || type==3}}">课程: {{courseCode}}</view>
   </view>
@@ -56,7 +57,7 @@
     </view>
     <view>
       <image src="../../icon/others/comment.svg"></image>
-      <text>{{comment}}</text>
+      <text>{{comments.length}}</text>
     </view>
     <view>
       <image src="../../icon/others/favorite.svg"></image>
