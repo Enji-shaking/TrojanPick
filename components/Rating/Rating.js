@@ -86,7 +86,6 @@ Component({
   attached:function(){
     let self = this;
     if(this.data.type==2){ 
-      console.log(self.properties.courseID);
       wx.cloud.callFunction({
         name:'getInfoById',
         data:{
@@ -94,12 +93,10 @@ Component({
           target:'fromProfessor'
         },
         success(res){
-          console.log(res.result);
           self.setData({
           
             courseCode:res.result.data[0].courseCode
           })
-          console.log(res);
         },
         fail(res){
           console.log("fail");

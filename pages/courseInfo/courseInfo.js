@@ -67,6 +67,33 @@ Page({
     this.setData({
       ratings:this.data.ratings.concat([1])
     })
+  },
+  handlePicker(e){
+    let self = this;
+    wx.cloud.callFunction({
+      name:'getRating',
+      data:{
+        courseID:this.data.courseID,
+        professorID: e.detail,
+        target:'professor_course'
+      },
+      success(res){
+        console.log(res.result);
+        let profess_course = res.result.rating.data[0];
+        let overall = parseFloat(profess_course.difficultyRating+profess_course.teachingRating+profess_course.workloadRating+profess_course.interestingRating)/4.0;
+        self.setData({
+          overallRating:overall,
+          difficultyRating:profess_course.difficultyRating,
+          interestRating:profess_course.interestingRating,
+          teachingRating:profess_course.teachingRating,
+          workloadRating:profess_course.workloadRating,
+          ratings:res.result.data.data
+        })
+        
+      },
+      fail(res){
+        console.log(res.result)
+      }
+    })
   }
-
 })

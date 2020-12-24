@@ -34,18 +34,35 @@ Component({
    * 组件的初始数据
    */
   data: {
-    list:[]
+    list:[{
+      list_id:"",
+      list_value:""
+    }],
+    professorName:"professor",
+    courseName:"course"
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    choosePicker(option){
+      console.log(this.data.list[option.detail.value].list_id + this.data.list[option.detail.value].list_value);
+      if(this.data.dropDownType==1){
+        this.setData({
+          courseName:this.data.list[option.detail.value].list_value,
+        })
+      }else if(this.data.dropDownType==2){
+        this.setData({
+          professorName:this.data.list[option.detail.value].list_value
+        })
+      }
+      this.triggerEvent("itemclick",this.data.list[option.detail.value].list_id);
+      
+    }
   },
   attached:function(){
     let self = this;
-    console.log(this.properties.infoID);
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
         name:'getWithRelation',
@@ -56,13 +73,17 @@ Component({
         success(res){
           let temp = [];
           let result = res.result.data.list;
-          console.log(result);
           for(let i=0;i<result.length;i++){
-            temp.push(result[i].list[0].courseCode);
+            let item = {
+              list_id:result[i].class_id,
+              list_value:result[i].list[0].courseCode
+            };
+            temp.push(item);
           }
           self.setData({
             list:temp
           })
+          console.log(self.data.list);
         },
         fail(res){
           console.log("fail");
@@ -78,14 +99,18 @@ Component({
         success(res){
           let temp = [];
           let result = res.result.data.list;
-          console.log(result);
           for(let i=0;i<result.length;i++){
-            temp.push(result[i].list[0].professorName);
+            let item = {
+              list_id:result[i].professor_id,
+              list_value:result[i].list[0].professorName
+            };
+            temp.push(
+              item
+            );
           }
           self.setData({
             list:temp
           })
-          console.log(temp);
         },
         fail(res){
           console.log("fail");
@@ -93,7 +118,7 @@ Component({
       }
       )
     }else if(this.properties.dropDownType==3){
-
+      
     }
   }
 })

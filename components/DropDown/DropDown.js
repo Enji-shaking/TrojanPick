@@ -7,6 +7,14 @@ Component({
     type:{
       type:"int",
       value:1
+    },
+    professorName:{
+      type:"string",
+      value:""
+    },
+    courseName:{
+      type:"string",
+      value:""
     }
     //1 for showing professor, 2 for showing courses, 3 for showing both
   },

@@ -19,13 +19,8 @@ exports.main = async (event, context) => {
     })
     .lookup({
       from:'ratings',
-      let:{
-        id:'$_id'
-      },
-      pipeline: $.pipeline()
-      // .match(_.expr($.and([
-      //   $.eq(['$courseID','$$id'])])))
-      .done(),
+      localField:'_id',
+      foreignField:'courseID',
       as:'ratinglist'
     })
     .end()
@@ -39,17 +34,26 @@ exports.main = async (event, context) => {
     })
     .lookup({
       from:'ratings',
-      let:{
-        id:'$_id'
-      },
-      pipeline: $.pipeline()
-      // .match(_.expr($.and([
-      //   $.eq(['$courseID','$$id'])])))
-      .done(),
+      localField:'_id',
+      foreignField:'professorID',
       as:'ratinglist'
     })
     .end()
     return {data};
+  }else if(target=="professor_course"){
+    let{professorID,courseID} = event;
+    const data = await db.collection('ratings')
+    .where({
+      professorID:professorID,
+      courseID:courseID
+    })
+    .get()
+    const rating = await db.collection('class_professor')
+    .where({
+      professor_id:professorID,
+      class_id:courseID
+    }).get()
+    return {data,rating};
   }
   return {"":""};
 }

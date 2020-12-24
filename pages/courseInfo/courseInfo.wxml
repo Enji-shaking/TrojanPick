@@ -20,8 +20,11 @@
     </view>
     <view class="unit"> <text>Units</text>: {{courseUnit}} units</view>
   </view>
- <NumericRating dropDownType="{{2}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" infoID="{{courseID}}"></NumericRating>
-  <Rating wx:for="{{ratings}}" wx:key="index" type="{{1}}" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
+  <!-- selection tab and course ratings -->
+ <NumericRating dropDownType="{{2}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" infoID="{{courseID}}" binditemclick="handlePicker"></NumericRating>
+  <!--user ratings  -->
+ <Rating wx:for="{{ratings}}" wx:key="index" type="{{1}}" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
+  <!-- questions and anwers -->
   <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
   <BottomNav></BottomNav>
   <view class="questionTitle">课程问答</view>

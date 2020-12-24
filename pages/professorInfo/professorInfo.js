@@ -28,7 +28,7 @@ Page({
     wx.cloud.callFunction({
       name:'getRating',
       data:{
-        professorID:self.data.professorID,
+        professorID:this.data.professorID,
         target:'fromProfessor'
       },
       success(res){
@@ -52,8 +52,34 @@ Page({
   moreRating(options){
     //in the future, track the page numbers, and concact new ratings into existed ratings
     this.setData({
-      ratings:this.data.ratings.concat([1])
+      // ratings:this.data.ratings.concat([1])
+    })
+  },
+  handlePicker(e){
+    let self = this;
+    wx.cloud.callFunction({
+      name:'getRating',
+      data:{
+        courseID:e.detail,
+        professorID: this.data.professorID,
+        target:'professor_course'
+      },
+      success(res){
+        let profess_course = res.result.rating.data[0];
+        let overall = parseFloat(profess_course.difficultyRating+profess_course.teachingRating+profess_course.workloadRating+profess_course.interestingRating)/4.0;
+        self.setData({
+          overallRating:overall,
+          difficultyRating:profess_course.difficultyRating,
+          interestRating:profess_course.interestingRating,
+          teachingRating:profess_course.teachingRating,
+          workloadRating:profess_course.workloadRating,
+          ratings:res.result.data.data
+        })
+        
+      },
+      fail(res){
+        console.log("fail");
+      }
     })
   }
-
 })

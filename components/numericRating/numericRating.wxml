@@ -1,12 +1,15 @@
 <!--components/numericRating/numericRating.wxml-->
 <view class="numericRating">
+  <!-- title -->
   <view class="title">
     课程评价
   </view>
   <view class="line"></view>
-  <picker mode="selector" value="{{index}}" range="{{list}}">
-    <DropDown type="{{dropDownType}}"></DropDown>
+  <!-- selector holder -->
+  <picker mode="selector" value="{{list_id}}" range="{{list}}" range-key="{{'list_value'}}" bindchange="choosePicker">
+    <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{dropDownType}}"></DropDown>
   </picker>
+  <!-- four ratings values -->
   <view class="ratings">
     <SingleNumericRating class="single" value="{{difficultyRating}}" name="课程难度"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{interestRating}}" name="内容趣味性"></SingleNumericRating>
