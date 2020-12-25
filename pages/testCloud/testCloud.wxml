@@ -1,5 +1,5 @@
 
-<button bind:tap="addTapped">add</button>
-<button bind:tap="getopenid">Get open id</button>
-<button>add</button>
-<button>add</button>
+<view wx:for="{{myarr}}" >
+  {{item.name}}
+  <button data-index="{{index}}" bindtap="delete">delete</button>
+</view>

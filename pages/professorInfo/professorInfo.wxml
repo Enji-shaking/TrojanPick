@@ -17,7 +17,9 @@
   <!-- numeric Rating with selection box and four ratings -->
   <NumericRating dropDownType="{{1}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" infoID="{{professorID}}" binditemclick="handlePicker"></NumericRating>
   <!-- display user ratings  -->
- <Rating wx:for="{{ratings}}" wx:key="index" type="2" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" courseID="{{item.courseID}}" comments="{{item.comments}}"></Rating>
-  <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
+
+ <Rating wx:for="{{reviews}}" wx:key="index" type="2" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" courseID="{{item.courseID}}" comments="{{item.comments}}"></Rating>
+  <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageRatings}}"></Pagination>
   <BottomNav></BottomNav>
 </view>

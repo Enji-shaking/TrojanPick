@@ -58,11 +58,11 @@ Component({
         })
       }
       this.triggerEvent("itemclick",this.data.list[option.detail.value].list_id);
-      
     }
   },
-  attached:function(){
+  ready:function(){
     let self = this;
+    console.log(this.properties.infoID);
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
         name:'getWithRelation',
@@ -71,6 +71,7 @@ Component({
           target:"fromProfessor"
         },
         success(res){
+          console.log(res);
           let temp = [];
           let result = res.result.data.list;
           for(let i=0;i<result.length;i++){

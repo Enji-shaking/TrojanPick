@@ -58,6 +58,7 @@ Page({
     })
   },
   FavoriteCourseTap(options){
+    //Here we need to call a function to change favorite course
     this.setData({
       isFavorite:!this.data.isFavorite
     })

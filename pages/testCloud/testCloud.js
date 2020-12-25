@@ -1,7 +1,13 @@
 // pages/testCloud/testCloud.js
 Page({
-  addData(){
-
+  data:{
+    myarr:[{name: "one"},{name: "two"},{name: "three"},{name: "four"}]
+  },
+  delete(e){
+    console.log(e)
+    const {index} = e.currentTarget.dataset
+    this.data.myarr.splice(index, 1)
+    this.setData({myarr: this.data.myarr})
   },
   addTapped(){
     wx.cloud.callFunction({

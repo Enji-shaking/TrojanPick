@@ -22,9 +22,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -109,6 +108,19 @@
         {
           "name": "cloud",
           "pathName": "pages/testCloud/testCloud",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "courseinfo",
+          "pathName": "pages/courseInfo/courseInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "professorInfo",
+          "pathName": "pages/professorInfo/professorInfo",
+          "query": "professorID=2424fa985fe1e0bf005e75e61823f605",
           "scene": null
         }
       ]
