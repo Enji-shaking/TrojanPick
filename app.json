@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/pastRatings/pastRatings",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
     "pages/home/home",
     "pages/test/test",
     "pages/testCloud/testCloud",
-    "pages/pastRatings/pastRatings",
     "pages/favoriteRatings/favoriteRatings",
     "pages/index/index",
     "pages/ratingInfo/ratingInfo",
