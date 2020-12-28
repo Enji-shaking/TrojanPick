@@ -1,0 +1,3 @@
+<button wx:for="{{pages}}" wx:for-index="index" data-page="{{index+1}}" bindtap="buttonTapped" class="{{(activePage-1)===index?'active':''}}">
+    {{index+1}}
+</button>
