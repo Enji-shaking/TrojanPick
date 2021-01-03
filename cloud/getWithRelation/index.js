@@ -5,40 +5,35 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
+  // const wxContext = cloud.getWXContext()
   const db = cloud.database();
-  let {id,target} = event;
+  let {target} = event;
   // const data = await db.collection('class_professor').where({
   //   class_id:id
   // }).get();
-  if(target=="fromCourse"){
-    const data = await db.collection('class_professor')
+  if(target=="get_information_for_class_professor"){
+    let {courseID, professorID} = event
+    let condition = {}
+    if(courseID) condition["courseID"] = courseID
+    if(professorID) condition["professorID"] = professorID
+    console.log(condition);
+    const data = await db.collection('course_professor')
     .aggregate()
     .lookup({
       from:'professors',
-      localField:'professor_id',
+      localField:'professorID',
       foreignField:'_id',
-      as:'list'
+      as:'professorInfo'
     })
-    .match({
-      class_id:id
-    })
-    .end()
-    return {data};
-  }else if(target=="fromProfessor"){
-    const data = await db.collection('class_professor')
-    .aggregate()
     .lookup({
-      from:'classes',
-      localField:'class_id',
-      foreignField:'_id',
-      as:'list'
+      from: 'courses',
+      localField: 'courseID',
+      foreignField: '_id',
+      as: 'courseInfo'
     })
-    .match({
-      professor_id:id
-    })
+    .match(condition)
     .end()
-    return {data};
+    return data;
   }
   return {"":"error"};
 }

@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    ratingID:{
+      type: "string",
+      value: ""
+    },
     userName:{
       type:"string",
       value:"User Name"
@@ -81,7 +85,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    
   },
   attached:function(){
     let self = this;
