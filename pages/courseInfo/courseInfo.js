@@ -19,7 +19,8 @@ Page({
     questions:[1,2,3],
     totalPage: 0,
     currentPageInReviews: 1,
-    professorID: undefined
+    professorID: undefined,
+    openID: ""
   },
   /**
    * 生命周期函数--监听页面加载
@@ -30,6 +31,7 @@ Page({
       name:'getRating',
       data:{
         courseID:courseID,
+        openID: this.data.openID,
         target:'getCourseInfo'
       },
       success: (res)=>{
@@ -46,7 +48,8 @@ Page({
           teachingRating:course.teachingRating,
           workloadRating:course.workloadRating,
           courseDescript: course.courseDescrpt,
-          courseUnit: course.courseUnit
+          courseUnit: course.courseUnit,
+          isFavorite: course.isFavorite
         })
       },
       fail(res){
@@ -60,6 +63,7 @@ Page({
       data:{
         courseID: courseID,
         target:'get_total_page_of_reviews_for_course_for_professor',
+        openID: this.data.openID,
         professorID: professorID
       },
       success: (res)=>{
@@ -75,6 +79,7 @@ Page({
         courseID: courseID,
         target:'get_reviews_for_course_for_professor_for_page',
         professorID: professorID,
+        openID: this.data.openID,
         currentPageInReviews: page
       },
       success: (res)=>{
@@ -91,15 +96,19 @@ Page({
   onLoad: function (options) {
     const { courseID } = options
     // console.log(courseID);
-    this.setData({courseID})
+    const openID = wx.getStorageSync("openID");
+    console.log(openID);
+    this.setData({
+      courseID: courseID,
+      openID: openID
+    })
     this.getCourseInfo(courseID)
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, courseID, undefined)
+  
 
-    this.setData({
-      isFavorite:false,
-    })
+    
   },
   handlePagination(e){
     console.log(e.detail);
@@ -107,8 +116,27 @@ Page({
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
 
-  FavoriteCourseTap(options){
+  favoriteCourseTap(options){
     //Here we need to call a function to change favorite course
+    if(this.data.isFavorite){
+      wx.cloud.callFunction({
+        name:'vote_save',
+        data:{
+          courseID: this.data.courseID,
+          openID: this.data.openID,
+          target:'unsave_course',
+        },
+      })
+    }else{
+      wx.cloud.callFunction({
+        name:'vote_save',
+        data:{
+          courseID: this.data.courseID,
+          openID: this.data.openID,
+          target:'save_course'
+        },
+      })
+    }
     this.setData({
       isFavorite:!this.data.isFavorite
     })

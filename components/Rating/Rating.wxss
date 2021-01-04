@@ -64,6 +64,17 @@
   justify-content: space-around;
   align-items: center;
 }
+.box .bottom view {
+  position: relative;
+}
+.box .bottom view .commentInput {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
 .box .bottom view image {
   width: 40rpx;
   height: 38rpx;
