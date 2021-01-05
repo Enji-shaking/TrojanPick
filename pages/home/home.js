@@ -22,7 +22,7 @@ Page({
   },
   queryParamsProfessors: { 
     currentPage: 1,
-    target: "all_professors",
+    target: "default_professors",
     professorName: "",
   },
   totalPageClasses: 99,
