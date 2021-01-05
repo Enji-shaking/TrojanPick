@@ -20,6 +20,7 @@ Page({
     professorID: -1,
     totalPage: 0,
     currentPageInReviews: 1,
+    openID: ""
   },
   
   getProfessorInfo(professorID){
@@ -27,6 +28,7 @@ Page({
       name:'getRating',
       data:{
         professorID: professorID,
+        openID: this.data.openID,
         target:'getProfessorInfo',
       },
       success: (res)=>{
@@ -54,6 +56,7 @@ Page({
       data:{
         courseID: courseID,
         target:'get_total_page_of_reviews_for_course_for_professor',
+        openID: this.data.openID,
         professorID: professorID
       },
       success: (res)=>{
@@ -83,6 +86,7 @@ Page({
         courseID: courseID,
         target:'get_reviews_for_course_for_professor_for_page',
         professorID: professorID,
+        openID: this.data.openID,
         currentPageInReviews: page
       },
       success: (res)=>{
@@ -121,7 +125,8 @@ Page({
     //professorID=2424fa985fe1e0bf005e75e61823f605
     //在编译模式里面设置
     const { professorID } = options
-    this.setData({professorID})
+    const openID = wx.getStorageSync("openID");
+    this.setData({professorID, openID: openID})
     this.getProfessorInfo(professorID)
     // this.getTotalPageForReviewsForProfessor(professorID)
     // this.getReviewsForProfessorForPage(1, professorID)
