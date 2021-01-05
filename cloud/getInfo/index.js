@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
   // const { OPENID, APPID } = wxContext
 
   
-  if(target === "recommended_classes" || (target === "search_classes" && event.courseCode==="")){
+  if(target === "recommended_courses" || (target === "search_courses" && event.courseCode==="")){
     const { sort } = event
     let name, type
     if(sort === 0){
@@ -45,7 +45,7 @@ exports.main = async (event, context) => {
 
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return {...data, totalPage, event}
-  }else if(target === "search_classes"){
+  }else if(target === "search_courses"){
     const { courseCode, sort } = event
     // const {  } = event
     let name, type
