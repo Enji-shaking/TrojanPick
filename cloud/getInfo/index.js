@@ -63,7 +63,7 @@ exports.main = async (event, context) => {
       name = "teachingRating"
       type = "desc"
     }
-    const data =  await db.collection('classes').limit(3)
+    const data =  await db.collection('classes').limit(MAX_LIMIT)
                                          .skip(MAX_LIMIT * (currentPage-1))
                                          .orderBy(name, type)
                                          .where({
@@ -84,7 +84,7 @@ exports.main = async (event, context) => {
     return {...data, totalPage, event}
   }else if(target === "search_professors"){
     const { professorName } = event
-    const data = db.collection('professors').limit(3)
+    const data = db.collection('professors').limit(MAX_LIMIT)
                                             .skip(MAX_LIMIT * (currentPage-1))
                                             .orderBy("professorName", "asc")
                                             .where({
