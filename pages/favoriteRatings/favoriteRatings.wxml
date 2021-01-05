@@ -3,7 +3,13 @@
   <Header></Header>
   <view class="title">收藏评价</view>
   <view class="line"></view>
-  <DropDown type="{{3}}"></DropDown>
+  <picker mode="selector" value="{{list_id}}" range="{{course_list}}" range-key="{{'list_value'}}" bindchange="chooseCoursePicker">
+    <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{1}}"></DropDown>
+  </picker>
+  <picker mode="selector" value="{{list_id}}" range="{{professor_list}}" range-key="{{'list_value'}}" bindchange="chooseProPicker">
+    <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
+  </picker>
   <BottomNav></BottomNav>
-  <Rating wx:for="{{Rating}}" type="{{3}}"></Rating>
+
+  <Rating wx:for="{{reviews}}" wx:key="index" type="3" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" courseID="{{item.courseID}}" comments="{{item.comments}}" professorID="{{item.professorID}}"></Rating>
 </view>

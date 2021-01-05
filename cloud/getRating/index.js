@@ -68,6 +68,103 @@ exports.main = async (event, context) => {
       class_id:courseID
     }).get()
     return {data,rating};
+  }else if(target=="get_rating_saved_reviews"){
+    let {professorID,courseID,userID} = event;
+    console.log(professorID);
+    console.log(courseID);
+    console.log(userID);
+    if(professorID == undefined && courseID == undefined){
+      const data = await db.collection('saved_reviews')
+      .aggregate()
+      .match({
+        openID:userID
+      })
+      .lookup({
+        from:'reviews',
+        let:{
+          reviewID:'$reviewID',
+        },
+        pipeline:$.pipeline()
+          .match(_.expr($.and([
+            $.eq(['$$reviewID','$_id']),
+          ])))
+          .done(),
+          as:'review'
+      })
+      .end()
+      return {data}
+    }else if(professorID == undefined){
+      console.log(professorID);
+      const data = await db.collection('saved_reviews')
+      .aggregate()
+      .match({
+        openID:userID
+      })
+      .lookup({
+        from:'reviews',
+        let:{
+          reviewID:'$reviewID',
+        },
+        pipeline:$.pipeline()
+          .match({
+            courseID:courseID
+          })
+          .match(_.expr($.and([
+            $.eq(['$$reviewID','$_id'])
+          ])))
+          .done(),
+          as:'review'
+      })
+      .end()
+      return {data}
+    }else if(courseID == undefined){
+      const data = await db.collection('saved_reviews')
+      .aggregate()
+      .match({
+        openID:userID
+      })
+      .lookup({
+        from:'reviews',
+        let:{
+          reviewID:'$reviewID',
+        },
+        pipeline:$.pipeline()
+          .match({
+            professorID:professorID
+          })
+          .match(_.expr($.and([
+            $.eq(['$$reviewID','$_id']),
+          ])))
+          .done(),
+          as:'review'
+      })
+      .end()
+      return {data}
+    }else{
+      const data = await db.collection('saved_reviews')
+      .aggregate()
+      .match({
+        openID:userID
+      })
+      .lookup({
+        from:'reviews',
+        let:{
+          reviewID:'$reviewID',
+        },
+        pipeline:$.pipeline()
+          .match({
+            courseID:courseID,
+            professorID:professorID
+          })
+          .match(_.expr($.and([
+            $.eq(['$$reviewID','$_id']),
+          ])))
+          .done(),
+          as:'review'
+      })
+      .end()
+      return {data}
+    }
   }
   return {"":""};
 }

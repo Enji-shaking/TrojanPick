@@ -8,7 +8,8 @@ Page({
    */
   data: {
     nickName: "",
-    avatarUrl: ""
+    avatarUrl: "",
+    userID:"9f2a34705feca1d00104fbc03379552c"
   },
 
   /**

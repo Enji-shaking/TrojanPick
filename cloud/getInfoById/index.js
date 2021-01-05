@@ -20,6 +20,29 @@ exports.main = async (event, context) => {
       _id:professorID
     }).get();
     return data;
+  }else if(target=="list"){
+    let {courses,professors} = event;
+    let course_data = [];
+    let professor_data = [];
+    console.log(courses);
+    console.log(professors);
+    for(let i=0;i<courses.length;i++){
+      const info = await db.collection('courses')
+      .where({
+        _id:courses[i]
+      })
+      .get();
+      course_data.push(info.data[0]);
+    }
+    for(let i=0;i<professors.length;i++){
+        const info = await db.collection('professors')
+        .where({
+          _id:professors[i]
+        })
+        .get();
+        professor_data.push(info.data[0]);
+    }
+    return {course_data,professor_data};
   }
   return {"":"error"};
 }

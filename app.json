@@ -1,12 +1,14 @@
 {
   "pages": [
+    "pages/profile/profile",
+    "pages/favoriteRatings/favoriteRatings",
+    "pages/savedClasses/savedClasses",
     "pages/pastRatings/pastRatings",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
     "pages/home/home",
     "pages/test/test",
     "pages/testCloud/testCloud",
-    "pages/favoriteRatings/favoriteRatings",
     "pages/index/index",
     "pages/ratingInfo/ratingInfo",
     "pages/logs/logs",
@@ -15,9 +17,7 @@
     "pages/addRating/addRating",
     "pages/bindUSC/bindUSC",
     "pages/signup/signup",
-    "pages/login/login",
-    "pages/profile/profile",
-    "pages/savedClasses/savedClasses"
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

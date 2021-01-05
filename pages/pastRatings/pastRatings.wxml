@@ -3,10 +3,10 @@
   <Header></Header>
   <view class="title">历史评价</view>
   <view class="line"></view>
-  <picker mode="selector" value="{{list_id}}" range="{{list}}" range-key="{{'list_value'}}" bindchange="choosePicker">
+  <picker mode="selector" value="{{list_id}}" range="{{course_list}}" range-key="{{'list_value'}}" bindchange="chooseCoursePicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{1}}"></DropDown>
   </picker>
-  <picker mode="selector" value="{{list_id}}" range="{{list}}" range-key="{{'list_value'}}" bindchange="choosePicker">
+  <picker mode="selector" value="{{list_id}}" range="{{professor_list}}" range-key="{{'list_value'}}" bindchange="chooseProPicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
   </picker>
   <Rating wx:for="{{ratings}}" wx:key="index" type="3" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
