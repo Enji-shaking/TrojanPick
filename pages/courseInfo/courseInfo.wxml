@@ -5,8 +5,8 @@
     <view class="left">
       <view class="top">
         <view class="courseCode">{{courseCode}}</view>
-        <image src="../../icon/others/favorite-before.svg" bindtap="FavoriteCourseTap" hidden="{{isFavorite}}"></image>
-        <image src="../../icon/others/favorite.svg" bindtap="FavoriteCourseTap" hidden="{{!isFavorite}}"></image>
+        <image src="../../icon/others/favorite-before.svg" bindtap="favoriteCourseTap" hidden="{{isFavorite}}"></image>
+        <image src="../../icon/others/favorite.svg" bindtap="favoriteCourseTap" hidden="{{!isFavorite}}"></image>
       </view>
       <view class="descript">{{courseName}}</view>
     </view>
@@ -18,16 +18,19 @@
       <view class="courseTitle">课程简介</view>
       <view class="content">{{courseDescript}}</view>
     </view>
-    <view class="unit"> <text>Units</text>: {{courseUnit}} units</view>
+    <view class="unit"> <text>Units</text>: {{courseUnit}} </view>
   </view>
   <!-- selection tab and course ratings -->
- <NumericRating dropDownType="{{2}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" infoID="{{courseID}}" binditemclick="handlePicker"></NumericRating>
+ <NumericRating dropDownType="{{2}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker"></NumericRating>
   <!--user ratings  -->
- <Rating wx:for="{{ratings}}" wx:key="index" type="{{1}}" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
+<Rating wx:for="{{reviews}}" wx:key="index" type="2" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{item.workloadRating}}" teachRat="{{item.teachingRating}}" content="{{item.content}}" reviewID="{{item._id}}" courseID="{{item.courseID}}" voteDownProp="{{item.down_vote_count}}" voteUpProp="{{item.up_vote_count}}"  commentCountProp="{{item.commentCount}}" favoriteCountProp="{{item.favoriteCount}}" voted_by_me_prop="{{item.voted_by_me}}" posted_by_me_prop="{{item.posted_by_me}}" saved_by_me_prop="{{item.saved_by_me}}"></Rating>
   <!-- questions and anwers -->
-  <YellowButton text="更多评价" bindtap="moreRating"></YellowButton>
-  <BottomNav></BottomNav>
+  <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
+
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}"></Pagination>
   <view class="questionTitle">课程问答</view>
+
+
   <view class="line"></view>
   <view class="questions">
     <view wx:for="{{questions}}" wx:key="index">
@@ -36,4 +39,5 @@
     </view>
   </view>
   <YellowButton text="我要提问"></YellowButton>
+  <BottomNav></BottomNav>
 </view>

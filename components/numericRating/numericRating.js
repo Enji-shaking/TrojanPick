@@ -24,9 +24,14 @@ Component({
       type:"float",
       value:1
     },
-    infoID:{
+
+    courseID:{
       type:"string",
-      value:""
+      value: undefined
+    },
+    professorID:{
+      type: "string",
+      value: undefined
     }
   },
 
@@ -35,8 +40,8 @@ Component({
    */
   data: {
     list:[{
-      list_id:"",
-      list_value:""
+      item_id:"",
+      item_value:""
     }],
     professorName:"professor",
     courseName:"course"
@@ -47,17 +52,19 @@ Component({
    */
   methods: {
     choosePicker(option){
-      console.log(this.data.list[option.detail.value].list_id + this.data.list[option.detail.value].list_value);
+      console.log(option);
+      console.log(this.data.list[option.detail.value].item_id + this.data.list[option.detail.value].list_value);
+      console.log(this.data.list[option.detail.value].item_id);
       if(this.data.dropDownType==1){
         this.setData({
-          courseName:this.data.list[option.detail.value].list_value,
+          courseName:this.data.list[option.detail.value].item_value,
         })
       }else if(this.data.dropDownType==2){
         this.setData({
-          professorName:this.data.list[option.detail.value].list_value
+          professorName:this.data.list[option.detail.value].item_value
         })
       }
-      this.triggerEvent("itemclick",this.data.list[option.detail.value].list_id);
+      this.triggerEvent("choosePicker",this.data.list[option.detail.value].item_id);
     }
   },
   ready:function(){
@@ -67,24 +74,25 @@ Component({
       wx.cloud.callFunction({
         name:'getWithRelation',
         data:{
-          id:this.properties.infoID,
-          target:"fromProfessor"
+          professorID:this.properties.professorID,
+          target:"get_information_for_class_professor"
         },
-        success(res){
+        success: (res)=>{
           console.log(res);
-          let temp = [];
-          let result = res.result.data.list;
-          for(let i=0;i<result.length;i++){
+          let temp = [{item_id: undefined, item_value: "course"}];
+          let courseList = res.result.list;
+          for(let i=0;i<courseList.length;i++){
             let item = {
-              list_id:result[i].class_id,
-              list_value:result[i].list[0].courseCode
+              item_id:courseList[i].professorID,
+              item_value:courseList[i].courseInfo[0].courseCode
             };
-            temp.push(item);
+            temp.push(
+              item
+            );
           }
-          self.setData({
+          this.setData({
             list:temp
           })
-          console.log(self.data.list);
         },
         fail(res){
           console.log("fail");
@@ -94,30 +102,31 @@ Component({
       wx.cloud.callFunction({
         name:'getWithRelation',
         data:{
-          id:this.properties.infoID,
-          target:"fromCourse"
+          courseID:this.properties.courseID,
+          target:"get_information_for_class_professor"
         },
-        success(res){
-          let temp = [];
-          let result = res.result.data.list;
-          for(let i=0;i<result.length;i++){
+        success: (res)=>{
+          console.log(res);
+          let temp = [{item_id: undefined, item_value: "professor"}];
+          let professorList = res.result.list;
+          for(let i=0;i<professorList.length;i++){
             let item = {
-              list_id:result[i].professor_id,
-              list_value:result[i].list[0].professorName
-            };
+              item_id:professorList[i].professorID,
+              item_value:professorList[i].professorInfo[0].professorName
+            }
             temp.push(
               item
-            );
+            )
           }
-          self.setData({
+          this.setData({
             list:temp
           })
+          console.log(this.data.list);
         },
         fail(res){
           console.log("fail");
         }
-      }
-      )
+      })
     }else if(this.properties.dropDownType==3){
       
     }

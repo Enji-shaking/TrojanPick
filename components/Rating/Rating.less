@@ -62,11 +62,22 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+
         view{
+            position: relative;
+            .commentInput{
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                opacity: 0;
+            }
             image{
                 width: 40rpx;
                 height:38rpx;
             }
+            
             text{
                 color: #6A6868;
                 font-size: 26rpx;

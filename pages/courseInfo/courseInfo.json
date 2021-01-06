@@ -6,6 +6,7 @@
     "YellowButton":"/components/yellowButton/yellowButton",
     "NumericRating":"/components/numericRating/numericRating",
     "Stars":"/components/stars/stars",
-    "DropDown":"/components/DropDown/DropDown"
+    "DropDown":"/components/DropDown/DropDown",
+    "Pagination":"/components/Pagination/Pagination"
   }
 }

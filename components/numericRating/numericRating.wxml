@@ -6,7 +6,7 @@
   </view>
   <view class="line"></view>
   <!-- selector holder -->
-  <picker mode="selector" value="{{list_id}}" range="{{list}}" range-key="{{'list_value'}}" bindchange="choosePicker">
+  <picker mode="selector" value="{{index}}" range="{{list}}" range-key="{{'item_value'}}" bindchange="choosePicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{dropDownType}}"></DropDown>
   </picker>
   <!-- four ratings values -->
