@@ -13,19 +13,19 @@ Page({
     searchCourseCode: "",
     searchProfessorName: "",
   },
-  queryParamsClasses: { 
+  queryParamsCourses: { 
     currentPage: 1,
-    target: "recommended_classes",
+    target: "recommended_courses",
     courseCode: "",
     sort: 0
     // corresponding to picker_index
   },
   queryParamsProfessors: { 
     currentPage: 1,
-    target: "all_professors",
+    target: "default_professors",
     professorName: "",
   },
-  totalPageClasses: 99,
+  totalPageCourses: 99,
   totalPageProfessors: 99,
   onPickerChange(e){
     console.log(e);
@@ -33,8 +33,8 @@ Page({
     this.setData({
       picker_index: value
     })
-    this.queryParamsClasses.sort = parseInt(value)
-    this.reloadClasses()
+    this.queryParamsCourses.sort = parseInt(value)
+    this.reloadCourses()
   },
   onTabTapped(e){
     console.log(e);
@@ -46,18 +46,18 @@ Page({
   performQuery(type){
     return wx.cloud.callFunction({
       name: "getInfo",
-      data: type===0?this.queryParamsClasses:this.queryParamsProfessors
+      data: type===0?this.queryParamsCourses:this.queryParamsProfessors
     })
   },
-  searchClassCloud(){
+  searchCourseCloud(){
     wx.showLoading({
       title: 'loading',
     })
     this.performQuery(0).then((res)=>{
         console.log(res);
         const { data, totalPage }= res.result
-        this.totalPageClasses = totalPage
-        console.log(this.totalPageClasses);
+        this.totalPageCourses = totalPage
+        console.log(this.totalPageCourses);
         const course_cards_info = data.map(v=>{return {_id: v._id, courseCode: v.courseCode, courseName: v.courseName}})
         this.setData({course_cards_info: [...this.data.course_cards_info, ...course_cards_info]})
         wx.hideLoading({
@@ -83,10 +83,10 @@ Page({
     .catch((err)=>console.error(err))
 
   },
-  SearchClassTimerID: -1,
+  SearchCourseTimerID: -1,
   SearchProfessorTimerID: -1,
   onSearchProfessorInput(e){
-    clearTimeout(this.SearchClassTimerID)
+    clearTimeout(this.SearchCourseTimerID)
     const searchProfessorName = e.detail.value
     this.setData({searchProfessorName: searchProfessorName})
     this.queryParamsProfessors.professorName = searchProfessorName
@@ -96,21 +96,21 @@ Page({
       this.queryParamsProfessors.target="all_professors"
     this.SearchProfessorTimerID = setTimeout(this.reloadProfessors,1000)
   },
-  onSearchClassInput(e){
-    clearTimeout(this.SearchClassTimerID)
+  onSearchCourseInput(e){
+    clearTimeout(this.SearchCourseTimerID)
     const searchCourseCode = e.detail.value
     this.setData({searchCourseCode: searchCourseCode})
-    this.queryParamsClasses.courseCode = searchCourseCode
+    this.queryParamsCourses.courseCode = searchCourseCode
     if(searchCourseCode != "") 
-      this.queryParamsClasses.target="search_classes"
+      this.queryParamsCourses.target="search_courses"
     else 
-      this.queryParamsClasses.target="recommended_classes"
-    this.SearchClassTimerID = setTimeout(this.reloadClasses,1000)
+      this.queryParamsCourses.target="recommended_courses"
+    this.SearchCourseTimerID = setTimeout(this.reloadCourses,1000)
   },
-  reloadClasses(){
+  reloadCourses(){
     this.setData({course_cards_info: []})
-    this.queryParamsClasses.currentPage = 1
-    this.searchClassCloud()
+    this.queryParamsCourses.currentPage = 1
+    this.searchCourseCloud()
   },
   reloadProfessors(){
     this.setData({prof_cards_info: []})
@@ -118,8 +118,8 @@ Page({
     this.searchProfessorCloud()
   },
 
-  onTapSearchClass(){
-    this.reloadClasses()
+  onTapSearchCourse(){
+    this.reloadCourses()
   },
   onTapSearchProfessor(){
     this.reloadProfessors()
@@ -132,10 +132,10 @@ Page({
     console.log("reach bottom");
     
     if(this.data.activeTab === 0){
-      if(this.totalPageClasses > this.queryParamsClasses.currentPage){
-        this.queryParamsClasses.currentPage++
-        console.log(this.queryParamsClasses);
-        this.searchClassCloud()
+      if(this.totalPageCourses > this.queryParamsCourses.currentPage){
+        this.queryParamsCourses.currentPage++
+        console.log(this.queryParamsCourses);
+        this.searchCourseCloud()
       }else{
         wx.showToast({
           title: 'No more items',
@@ -161,7 +161,7 @@ Page({
    */
   onLoad: function (options) {
     this.searchProfessorCloud()
-    this.searchClassCloud()
+    this.searchCourseCloud()
   },
 
   /**

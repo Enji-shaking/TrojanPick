@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
   // const { OPENID, APPID } = wxContext
 
   
-  if(target === "recommended_classes" || (target === "search_classes" && event.courseCode==="")){
+  if(target === "recommended_courses" || (target === "search_courses" && event.courseCode==="")){
     const { sort } = event
     let name, type
     if(sort === 0){
@@ -32,18 +32,20 @@ exports.main = async (event, context) => {
       name = "teachingRating"
       type = "desc"
     }
-    const data = await db.collection('classes').limit(MAX_LIMIT)
+    let data = db.collection('courses').limit(MAX_LIMIT)
                                          .skip(MAX_LIMIT * (currentPage-1))
                                          .orderBy(name, type)
                                          .where({
                                            "workloadRating": db.command.exists(true)
                                          })
                                          .get()
-    const count =  (await db.collection('classes').count()).total
-    // const total = count.total
+    let count = db.collection('courses').count();
+    [data, count] = await Promise.all([data, count])
+    count = count.total
+
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return {...data, totalPage, event}
-  }else if(target === "search_classes"){
+  }else if(target === "search_courses"){
     const { courseCode, sort } = event
     // const {  } = event
     let name, type
@@ -63,7 +65,7 @@ exports.main = async (event, context) => {
       name = "teachingRating"
       type = "desc"
     }
-    const data =  await db.collection('classes').limit(3)
+    let data =  db.collection('courses').limit(MAX_LIMIT)
                                          .skip(MAX_LIMIT * (currentPage-1))
                                          .orderBy(name, type)
                                          .where({
@@ -72,19 +74,21 @@ exports.main = async (event, context) => {
                                               options: 'i'
                                             })
                                          })
-                                         .get()
-    const count =  (await db.collection('classes').where({
+                                         .get();
+    let count =  db.collection('courses').where({
                                                     courseCode: db.RegExp({
                                                       regexp: courseCode,
                                                       options: 'i'
                                                     })
                                                   })
-                                                  .count()).total
+                                                  .count();
+    [data, count] = await Promise.all([data, count])
+    count = count.total
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return {...data, totalPage, event}
   }else if(target === "search_professors"){
     const { professorName } = event
-    const data = db.collection('professors').limit(3)
+    let data =  db.collection('professors').limit(MAX_LIMIT)
                                             .skip(MAX_LIMIT * (currentPage-1))
                                             .orderBy("professorName", "asc")
                                             .where({
@@ -94,15 +98,28 @@ exports.main = async (event, context) => {
                                               })
                                             })
                                             .get()
-    const count =  (await db.collection('professors').where({
+    let count =  db.collection('professors').where({
                                               professorName: db.RegExp({
                                                 regexp: professorName,
                                                 options: 'i'
                                               })
-                                            }).count()).total
+                                            }).count();
+    [data, count] = await Promise.all([data, count])
+    count = count.total
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return {...data, totalPage}
                                   
+  }else if(target === "default_professors"){
+    let data = db.collection('professors').limit(MAX_LIMIT)
+                                            .skip(MAX_LIMIT * (currentPage-1))
+                                            .orderBy("professorName", "asc")
+                                            .get();
+    let count = db.collection('professors').count();
+    [data, count] = await Promise.all([data, count])
+    count = count.total
+    const totalPage = Math.ceil(count / MAX_LIMIT)
+    return {...data, totalPage}
+
   }else if(target === "all_professors"){
     const data = await db.collection('professors').limit(10)
                                             .skip(MAX_LIMIT * (currentPage-1))
