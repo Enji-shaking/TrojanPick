@@ -45,7 +45,7 @@ Page({
   
   performQuery(type){
     return wx.cloud.callFunction({
-      name: "getInfo",
+      name: "searchWithName",
       data: type===0?this.queryParamsCourses:this.queryParamsProfessors
     })
   },

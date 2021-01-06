@@ -25,7 +25,7 @@ Page({
   
   getProfessorInfo(professorID){
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getInfoById',
       data:{
         professorID: professorID,
         openID: this.data.openID,
@@ -52,7 +52,7 @@ Page({
   },
   getTotalPageForReviewsForCourseForProfessor: function(courseID, professorID){
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getReviews',
       data:{
         courseID: courseID,
         target:'get_total_page_of_reviews_for_course_for_professor',
@@ -65,23 +65,10 @@ Page({
       }
     })
   },
-  // getTotalPageForReviewsForProfessor(professorID){
-  //   let self = this;
-  //   wx.cloud.callFunction({
-  //     name:'getRating',
-  //     data:{
-  //       professorID: professorID,
-  //       target:'get_total_page_of_reviews_for_professor'
-  //     },
-  //     success(res){
-  //       console.log(res);
-  //       self.setData({totalPage: res.result})
-  //     }
-  //   })
-  // },
+
   getReviewsForCourseForProfessorForPage: function (page, courseID, professorID) { 
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getReviews',
       data:{
         courseID: courseID,
         target:'get_reviews_for_course_for_professor_for_page',
@@ -92,7 +79,7 @@ Page({
       success: (res)=>{
         console.log(res);
         this.setData({
-          reviews: res.result.data
+          reviews: res.result
         })
       },
       fail(err){
@@ -100,26 +87,6 @@ Page({
       }
     })
    },
-  // getReviewsForProfessorForPage(page, professorID){
-  //   let self = this;
-  //   wx.cloud.callFunction({
-  //     name:'getRating',
-  //     data:{
-  //       professorID: professorID,
-  //       target:'get_reviews_for_professor_for_page',
-  //       currentPageInReviews: page
-  //     },
-  //     success(res){
-  //       console.log(res);
-  //       self.setData({
-  //         reviews: res.result.data
-  //       })
-  //     },
-  //     fail(err){
-  //       console.log(err)
-  //     }
-  //   })
-  // },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
     //professorID=2424fa985fe1e0bf005e75e61823f605
@@ -140,32 +107,6 @@ Page({
   },
 
   handlePicker(e){
-    // let self = this;
-    // wx.cloud.callFunction({
-    //   name:'getRating',
-    //   data:{
-    //     courseID:e.detail,
-    //     professorID: this.data.professorID,
-    //     target:'professor_course'
-    //   },
-    //   success(res){
-    //     console.log(res);
-    //     let profess_course = res.result.rating.data[0];
-    //     let overall = parseFloat(profess_course.difficultyRating+profess_course.teachingRating+profess_course.workloadRating+profess_course.interestingRating)/4.0;
-    //     self.setData({
-    //       overallRating:overall,
-    //       difficultyRating:profess_course.difficultyRating,
-    //       interestRating:profess_course.interestingRating,
-    //       teachingRating:profess_course.teachingRating,
-    //       workloadRating:profess_course.workloadRating,
-    //       ratings:res.result.data.data
-    //     })
-        
-    //   },
-    //   fail(res){
-    //     console.log("fail");
-    //   }
-    // })
     console.log(e);
     const professorID = e.detail
     this.setData({currentPageInReviews: 1, professorID: professorID})

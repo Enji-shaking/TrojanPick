@@ -5,6 +5,7 @@
   margin-bottom: 46rpx;
   margin-left: 104rpx;
 }
+
 .english{
   font-family: Heiti SC;
   font-style: normal;
@@ -13,7 +14,7 @@
   line-height: 24.72rpx;
   align-items: center;
 
-color: #953A3A;
+  color: #953A3A;
 }
 
 .chinese{
@@ -39,6 +40,7 @@ color: #953A3A;
   width: 162rpx;
   height: 70rpx;
   margin-top: 17rpx;
+
   font-family: Heiti SC;
   font-style: normal;
   font-weight: normal;
@@ -47,13 +49,13 @@ color: #953A3A;
 }
 
 .picker-box{
-width: 314rpx;
-height: 70rpx;
-margin-left: 28rpx;
+  width: 314rpx;
+  height: 70rpx;
+  margin-left: 28rpx;
 
-background: #FFF7DB;
-border: 1px solid #F8C1B0;
-box-sizing: border-box;
+  background: #FFF7DB;
+  border: 1px solid #F8C1B0;
+  box-sizing: border-box;
 }
 
 .add{
@@ -93,7 +95,41 @@ box-sizing: border-box;
   height: 64rpx;
 }
 
-checkbox{
+input{
+  width: 314rpx;
+  height: 70rpx;
+  display: flex;
+  margin-left: 20rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  color: #953A3A;
+}
+
+.picker{
+  width: 314rpx;
+  height: 70rpx;
+  margin-left: 140rpx;
+  margin-top: 15rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  color: #953A3A;
+}
+
+.picker-box-short{
+  width: 136rpx;
+  height: 62rpx;
+  margin-left: 16rpx;
+
+  background: #FFF7DB;
+  border: 1px solid #F8C1B0;
+  box-sizing: border-box;
+}
+
+.label{
   height: 52rpx; 
   margin-top: 44rpx;
   margin-left: 274rpx;
@@ -139,4 +175,116 @@ checkbox{
   text-align: center;
 
   color: #953A3A;
+}
+
+.comment-size{
+  margin-left: 28rpx;
+  width: 314rpx;
+  height: 70rpx;
+}
+
+textarea{
+  width: 278rpx;
+  margin-left: 18rpx;
+  margin-right: 18rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+  align-items: center;
+  color: #6A6868;
+
+  overflow: auto;
+  word-wrap: normal;
+}
+
+.show-btn {
+  margin-top: 100rpx;
+  color: #22cc22;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  margin-left: 75rpx;
+  margin-right: 112rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  border-radius: 36rpx;
+}
+
+.modal-title {
+  padding-top: 50rpx;
+  font-size: 36rpx;
+  color: #030303;
+  text-align: center;
+}
+
+.modal-content {
+  padding: 50rpx 32rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #fff;
+  border: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+}
+
+.input {
+  width: 100%;
+  height: 82rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+input-holder {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #953A3A;
+  text-align: center;
 }

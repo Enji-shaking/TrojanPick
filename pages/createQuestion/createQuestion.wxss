@@ -1,7 +1,7 @@
 .newquestion{
   width: 276rpx;
   height: 72rpx;
-  margin-top: 496rpx;
+  margin-top: 162rpx;
   margin-bottom: 46rpx;
   margin-left: 122rpx;
   margin-right: 354rpx;
@@ -38,7 +38,9 @@ view.enterbox{
   box-sizing: border-box;
 }
 
-.enterbox input{
+.enterbox textarea{
+  width: 442rpx;
+  height: 200rpx;
   margin-left: 28rpx;
   margin-right: 28rpx;
   margin-top: 40rpx;
@@ -49,9 +51,11 @@ view.enterbox{
   font-weight: normal;
   font-size: 13px;
   line-height: 13px;
-  display: flex;
   align-items: center;
   color: #6A6868;
+
+  overflow: auto;
+  word-wrap: normal;
 }
 
 button{
@@ -72,6 +76,7 @@ button{
   width: 78rpx;
   height: 38rpx;
   margin: auto;
+  margin-bottom: 484rpx;
 
   font-family: Heiti SC;
   font-style: normal;

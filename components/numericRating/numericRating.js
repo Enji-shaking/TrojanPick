@@ -72,7 +72,7 @@ Component({
     console.log(this.properties.infoID);
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
-        name:'getWithRelation',
+        name:'getInfoById',
         data:{
           professorID:this.properties.professorID,
           target:"get_information_for_class_professor"
@@ -100,7 +100,7 @@ Component({
       })
     }else if(this.properties.dropDownType==2){
       wx.cloud.callFunction({
-        name:'getWithRelation',
+        name:'getInfoById',
         data:{
           courseID:this.properties.courseID,
           target:"get_information_for_class_professor"

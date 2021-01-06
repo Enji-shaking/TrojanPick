@@ -70,15 +70,17 @@
     </view>
 
     <view class="professor_card_displayer_wrapper">
-        <view class="professor_card"
+        <navigator class="professor_card"
             wx:for="{{prof_cards_info}}"
             wx:key="_id"
             wx:for-item="card"
+            data-courseID="{{card.professorID}}"
+            url="/pages/professorInfo/professorInfo?professorID={{card._id}}"
         >
-            <navigator class="professor_card_text" data-courseID="{{card.professorID}}" >
+            <view class="professor_card_text">
                 <view class="professor_card_text_line">{{card.professorName}}</view>
-            </navigator>
-        </view>
+            </view>
+        </navigator>
     </view>
 
 </view>
