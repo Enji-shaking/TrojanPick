@@ -112,7 +112,7 @@ Page({
     console.log(this.data.curCourseID);
     
     wx.cloud.callFunction({
-      name:"getRating",
+      name:"getReviews",
       data:{
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,
@@ -147,7 +147,7 @@ Page({
     console.log(this.data.curCourseID);
     
     wx.cloud.callFunction({
-      name:"getRating",
+      name:"getReviews",
       data:{
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,

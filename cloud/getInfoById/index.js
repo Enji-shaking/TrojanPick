@@ -6,15 +6,26 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
-  let {target} = event;
+  const {target, openID} = event;
   const db = cloud.database();
-  if(target=="fromProfessor"){
-    let {courseID} = event;
-    const data = await db.collection('classes').where({
-      _id:courseID
-    }).get();
+  if(target=="getCourseInfo"){
+    const { courseID } = event;
+    console.log(courseID);
+    const data = await db.collection('courses')
+      .where({
+        _id: courseID
+      })
+      .get()
+    const count = (await db.collection('saved_courses')
+      .where({
+        courseID: courseID,
+        openID: openID
+      })
+      .count()).total
+    console.log(data.data[0]);
+    data.data[0].isFavorite = count === 1;
     return data;
-  }else if(target=="fromCourse"){
+  }else if(target=="getProfessorInfo"){
     let {professorID} = event;
     const data = await db.collection('professors').where({
       _id:professorID
@@ -43,6 +54,29 @@ exports.main = async (event, context) => {
         professor_data.push(info.data[0]);
     }
     return {course_data,professor_data};
+  }else if(target=="get_information_for_class_professor"){
+    let {courseID, professorID} = event
+    let condition = {}
+    if(courseID) condition["courseID"] = courseID
+    if(professorID) condition["professorID"] = professorID
+    console.log(condition);
+    const data = await db.collection('course_professor')
+    .aggregate()
+    .match(condition)
+    .lookup({
+      from:'professors',
+      localField:'professorID',
+      foreignField:'_id',
+      as:'professorInfo'
+    })
+    .lookup({
+      from: 'courses',
+      localField: 'courseID',
+      foreignField: '_id',
+      as: 'courseInfo'
+    })
+    .end()
+    return data;
   }
   return {"":"error"};
 }

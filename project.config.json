@@ -22,9 +22,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -122,6 +121,12 @@
           "name": "professorInfo",
           "pathName": "pages/professorInfo/professorInfo",
           "query": "professorID=2424fa985fe1e0bf005e75e61823f605",
+          "scene": null
+        },
+        {
+          "name": "profile",
+          "pathName": "pages/profile/profile",
+          "query": "",
           "scene": null
         }
       ]

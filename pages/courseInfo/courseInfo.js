@@ -28,7 +28,7 @@ Page({
   //load the data from database, calculate the average of ratings and overall ratings
   getCourseInfo: function(courseID){
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getInfoById',
       data:{
         courseID:courseID,
         openID: this.data.openID,
@@ -59,7 +59,7 @@ Page({
   },
   getTotalPageForReviewsForCourseForProfessor: function(courseID, professorID){
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getReviews',
       data:{
         courseID: courseID,
         target:'get_total_page_of_reviews_for_course_for_professor',
@@ -74,7 +74,7 @@ Page({
   },
   getReviewsForCourseForProfessorForPage: function (page, courseID, professorID) { 
     wx.cloud.callFunction({
-      name:'getRating',
+      name:'getReviews',
       data:{
         courseID: courseID,
         target:'get_reviews_for_course_for_professor_for_page',

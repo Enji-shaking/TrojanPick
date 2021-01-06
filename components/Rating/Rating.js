@@ -90,7 +90,7 @@ Component({
       type:"Number",
       value:1
     },
-    //if type is 1, show user and professorName. 2 show user and courseCode
+    //if type is 1, show user and professor. 2 show user and courseCode
     //3 show professor and coursecode
     detail:{
       type:"Boolean",
