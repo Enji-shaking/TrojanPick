@@ -1,121 +1,92 @@
+<!--dropdown课程和教授还没有做呢-->
+<Header></Header>
 <view class='new-review'>
   <view class='chinese'>新建评价</view>
   <view class='english'>New Review</view>
 </view>
 
 <view class='dropbox-block'>
-  <text class='lables'>选择课程</text>
+  <text class='lables'>课程</text>
   <view class='picker-box'>
-    <picker></picker>
+    <input placeholder="e.g ITP115" bindinput="saveCourseCode" value="{{courseCode}}"/>
+    <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectCourse" hidden="{{hidden1}}">
+      <picker-view-column style="height: 300rpx">
+        <view wx:for="{{course_data}}" wx:key="a" style="line-height: 100rpx; text-align: center;">{{item.courseCode}}</view>
+      </picker-view-column>
+    </picker-view>
   </view>
-  <navigator class="add">
+  <navigator class="add" url="pages/addClass/addClass">
     <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
 
 <view class='dropbox-block'>
-  <text class='lables'>授课教授</text>
+  <text class='lables'>教授</text>
   <view class='picker-box'>
-    <picker></picker>
+    <input placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}"/>
+    <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectProfessor" hidden="{{hidden2}}">
+      <picker-view-column style="height: 300rpx">
+        <view wx:for="{{professor_data}}" wx:key="a" style="line-height: 100rpx; text-align: center;">{{item.professorName}}</view>
+      </picker-view-column>
+    </picker-view>
   </view>
-  <navigator class="add">
+  <navigator class="add" url="pages/addProfessor/addProfessor">
     <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
 
-<view class='rate-block'>
-  <text class='lables'>课程难度 </text>
-  <view class='star-block'>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
-    </navigator>
+<block wx:for='{{evaluateTitle}}' wx:key='' wx:for-index='idx'>
+  <view class='rate-block'>
+    <view class='lables'>{{item}}</view>
+    <!--星星评价  -->
+    <view class='star-block'>
+      <!--内层循环展示每个评价条目的星星  -->
+      <block wx:for="{{stars}}" wx:key=''>
+        <navigator class="star" data-score="{{item + 1}}" data-idx='{{idx}}' bindtap="selectStar">
+          <image class="imagestar" src="{{scores[idx] > item ?selectedSrc: unselectedSrc}}"></image>
+        </navigator>
+      </block>
+    </view>
   </view>
+</block>
+
+<view class='dropbox-block'>
+  <text class='lables'>评价</text>
+  <view class='picker-box' bindtap="showDialogBtn"></view>
 </view>
 
-<view class='rate-block'>
-  <text class='lables'>内容趣味性</text>
-  <view class='star-block'>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
-    </navigator>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">评价</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <textarea bindinput="saveContent" auto-height="true" class="input"></textarea>
+    </view>
   </view>
-</view>
-
-<view class='rate-block'>
-  <text class='lables'>workload</text>
-  <view class='star-block'>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
-    </navigator>
-  </view>
-</view>
-
-<view class='rate-block'>
-  <text class='lables'>teaching</text>
-  <view class='star-block'>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar' src="/icon/others/rate-star.svg"></image>
-    </navigator>
-    <navigator class="star">
-      <image class='imagestar'src="/icon/others/rate-star.svg"></image>
-    </navigator>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
   </view>
 </view>
 
 <view class='dropbox-block'>
   <text class='lables'>成绩 (选填) </text>
   <view class='picker-box'>
-    <picker></picker>
+    <picker bindchange="bindPickerChange" value="{{gradeIndex}}" range="{{gradeArray}}">
+      <view class="picker">{{gradeArray[gradeIndex]}}</view>
+    </picker>
   </view>
 </view>
 
-<checkbox>匿名发布评价</checkbox>
+<view class="label">
+  <label><switch type="checkbox" checked="{{anonymous}}" class="checkbox-size" bindchange="changeAnonymous"/>
+    匿名发布评价
+  </label>
+</view>
 
-<button class="buttonsubmit">
-  <text class="buttonname">确认</text>
+<button class="buttonsubmit" bindtap="submitQuestion">
+  <text class="buttonname">提交评价</text>
 </button>
+
+<BottomNav></BottomNav>

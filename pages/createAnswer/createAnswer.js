@@ -1,14 +1,10 @@
-// pages/viewQuestion/viewQuestion.js
+// pages/createAnswer/createAnswer.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    questionIndex: 0,
-    questionArray: [
-      
-    ],
 
   },
 
@@ -16,7 +12,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

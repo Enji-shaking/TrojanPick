@@ -1,12 +1,15 @@
+<Header></Header>
 <view class='newquestion'>
   <view class='chinese'>新建问题</view>
   <view class='english'>New Question</view>
 </view>
 
 <view class="enterbox">
-  <input type="text" placeholder="e.g 老师有口音吗？" />
+  <textarea placeholder="e.g 老师有口音吗？" bindinput="saveQuestion" fixed="true"></textarea>
 </view>
 
-<button>
+<button bindtap="submitQuestion">
   <text class="buttonname">确认</text>
 </button>
+
+<BottomNav></BottomNav>
