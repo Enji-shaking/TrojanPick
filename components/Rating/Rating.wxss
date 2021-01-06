@@ -31,10 +31,19 @@
 }
 .box .content {
   height: 144rpx;
+  position: relative;
 }
 .box .content .text {
   color: #6A6868;
   font-size: 26rpx;
+}
+.box .content .delete {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+}
+.box .content .invisible {
+  display: none;
 }
 .box .content .showAll {
   display: flex;

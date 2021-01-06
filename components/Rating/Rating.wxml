@@ -2,7 +2,10 @@
 <!-- 41+72+106+46 526 -->
 <view class="box border">
   <view class="top">
-    <view class="left" wx:if="{{type==1 || type==2}}">{{userName}}</view>
+    <view class="left" wx:if="{{type==1 || type==2}}">
+      {{userName}}
+      <image src="{{avatarURL}}" />
+    </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
     <!-- todo get the professorname by ID -->
     <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
@@ -13,6 +16,7 @@
       {{content}}
     </view>
     <navigator url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
+    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" bind:tap="deteleTapped" />
   </view>
   <view class="content borderTop" wx:if="{{detail}}">
     <view class="text">

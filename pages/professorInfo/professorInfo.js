@@ -92,7 +92,7 @@ Page({
       success: (res)=>{
         console.log(res);
         this.setData({
-          reviews: res.result.data
+          reviews: res.result
         })
       },
       fail(err){

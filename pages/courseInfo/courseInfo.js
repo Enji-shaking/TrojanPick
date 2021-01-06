@@ -85,7 +85,7 @@ Page({
       success: (res)=>{
         console.log(res);
         this.setData({
-          reviews: res.result.data
+          reviews: res.result
         })
       },
       fail(err){
@@ -106,16 +106,20 @@ Page({
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, courseID, undefined)
-  
 
-    
   },
   handlePagination(e){
     console.log(e.detail);
     this.setData({currentPageInReviews: e.detail})
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
-
+  deleteTappedFromReview(e){
+    console.log(e);
+    const d = this.data.reviews
+    d.splice(e.detail.index, 1);
+    this.setData({reviews: d})
+    console.log(d);
+  },
   favoriteCourseTap(options){
     //Here we need to call a function to change favorite course
     if(this.data.isFavorite){
