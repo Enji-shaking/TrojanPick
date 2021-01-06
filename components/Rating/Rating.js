@@ -265,7 +265,6 @@ Component({
         },
         success(res){
           self.setData({
-          
             courseCode:res.result.data[0].courseCode
           })
         },

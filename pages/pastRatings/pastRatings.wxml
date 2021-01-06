@@ -9,6 +9,6 @@
   <picker mode="selector" value="{{list_id}}" range="{{professor_list}}" range-key="{{'list_value'}}" bindchange="chooseProPicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
   </picker>
-  <Rating wx:for="{{ratings}}" wx:key="index" type="3" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
+  <Rating wx:for="{{reviews}}" wx:key="index" type="3" difficultRat="{{item.difficultyRating}}" interestRat="{{item.interestingRating}}" workloadRat="{{workloadRating}}" teachRat="{{teachingRating}}" content="{{item.content}}" voteDown="{{item.down_vote_count}}" voteUp="{{item.up_vote_count}}" professorID="{{item.professorID}}" comments="{{item.comments}}"></Rating>
   <BottomNav></BottomNav>
 </view>

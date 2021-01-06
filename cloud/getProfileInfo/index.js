@@ -15,12 +15,19 @@ exports.main = async (event, context) => {
     const data = await db.collection('users').where({
       openID:userID
     }).get();
+    let { professorID, courseID } = event;
+    const condition = {};
+    if (courseID) condition["courseID"] = courseID;
+    if (professorID) condition["professorID"] = professorID;
     const myReviewID = data.data[0].myReviewIDs;
     let reviews = [];
     for(let i=0;i<myReviewID.length;i++){
-      let review = await db.collection('reviews').where({
+      let review = await db.collection('reviews')
+      .where(condition)
+      .where({
         _id:myReviewID[i]
-      }).get();
+      })
+      .get();
       reviews.push(review);
     }
     return reviews;
@@ -36,7 +43,6 @@ exports.main = async (event, context) => {
       foreignField:'_id',
       as:'reviews'
     })
-    
     .end();
     return data;
   }else if(target=="savedClasses"){

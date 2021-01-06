@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ratings:[],
+    reviews:[],
     courses:[],
     professors:[],
     professor_list:[{
@@ -48,7 +48,7 @@ Page({
         courses.add(e.courseID);
       })
       self.setData({
-      ratings:res.result[0].data,
+      reviews:res.result[0].data,
       courses:Array.from(courses),
       professors:Array.from(professors)
       })
@@ -110,23 +110,17 @@ Page({
     console.log(this.data.curCourseID);
     
     wx.cloud.callFunction({
-      name:"getRating",
+      name:"getProfileInfo",
       data:{
         courseID:this.data.curCourseID,
-        pfessorID:this.data.curProfessorID,
+        professorID:this.data.curProfessorID,
         userID:this.data.userID,
-        target:'get_rating_saved_reviews'
+        target:'pastRatings'
       }
     })
     .then(res => {
       console.log(res.result);
-      let list = res.result.data.list;
-      let reviews = []; 
-      list.forEach( e => {
-        if(e.review.length!=0){
-          reviews.push(e.review[0])
-        }
-      })
+      let reviews = res.result[0].data;
       self.setData({
         reviews:reviews
       })
@@ -145,23 +139,17 @@ Page({
     console.log(this.data.curCourseID);
     
     wx.cloud.callFunction({
-      name:"getRating",
+      name:"getProfileInfo",
       data:{
         courseID:this.data.curCourseID,
-        pfessorID:this.data.curProfessorID,
+        professorID:this.data.curProfessorID,
         userID:this.data.userID,
-        target:'get_rating_saved_reviews'
+        target:'pastRatings'
       }
     })
     .then(res => {
       console.log(res.result);
-      let list = res.result.data.list;
-      let reviews = []; 
-      list.forEach( e => {
-        if(e.review.length!=0){
-          reviews.push(e.review[0])
-        }
-      })
+      let reviews = res.result[0].data;
       self.setData({
         reviews:reviews
       })
