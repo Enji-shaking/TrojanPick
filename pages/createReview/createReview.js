@@ -133,7 +133,7 @@ Page({
   // 选择星星
   selectStar: function(e){
     var score = e.currentTarget.dataset.score
-    this.data.scores[e.currentTarget.dataset.idx] = score,
+    this.data.scores[e.currentTarget.dataset.idx] = score
     this.setData({
       scores: this.data.scores,
       score: score
@@ -208,59 +208,4 @@ Page({
     this.hideModal();
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })

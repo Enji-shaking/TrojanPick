@@ -15,12 +15,12 @@ exports.main = async (event, context) => {
     console.log(wxContext);
     return wxContext.OPENID
   }else if(target === "addNewUser"){
-    const {avatarUrl, userName} = event
+    const {avatarUrl, nickName} = event
     db.collection("users").add({
       data:{
         avatarUrl: avatarUrl,
         openID: openID,
-        userName: userName,
+        nickName: nickName,
         myAnswerIDs: [],
         myCommentIDs: [],
         myQuestionIDs: [],
@@ -28,11 +28,11 @@ exports.main = async (event, context) => {
       }
     })
   }else if(target === "updateUser"){
-    const {avatarUrl, userName} = event
+    const {avatarUrl, nickName} = event
     db.collection("users").where({openID: openID}).update({
       data:{
         avatarUrl: avatarUrl,
-        userName: userName
+        nickName: nickName
       }
     })
   }

@@ -123,19 +123,34 @@ exports.main = async (event, context) => {
     }).remove()
   }else if(target === "make_comment"){
     const {content} = event
+    console.log(event);
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
         commentCount: _.inc(1)
       }
     })
-    const p2 = db.collection("comments").add({
+    db.collection("comments").add({
       data:{
         down_vote_count: 0,
         up_vote_count: 0,
         reviewID: reviewID,
-        content: content
+        content: content,
+        openID: openID
       }
-    })
-    return await Promise.all([p1, p2])
+    }).then( e=>{
+        db.collection("users").where({openID: openID}).update({
+          data:{
+            myCommentIDs: _.push(e._id)
+          }
+        })
+      }
+    )
+    await Promise.all([p1])
+    // console.log(p2);
+    // const p3 = db.collection("users").where({openID: openID}).update({
+    //   data:{
+    //     myCommentIDs
+    //   }
+    // })
   }
 }

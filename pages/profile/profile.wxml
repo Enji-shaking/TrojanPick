@@ -5,9 +5,9 @@
         <image class="icon" src="{{avatarUrl}}" mode="widthFix"></image>
     </view>
     <view class="welcome_row_text_wrapper" wx:if="{{hasPersonalInfo}}">
-        <view class="welcome_text_line_1">Welcome {{userName}}</view>
+        <view class="welcome_text_line_1">Welcome {{nickName}}</view>
         <view class="welcome_text_line"></view>
-        <view class="welcome_text_line_2" bind:tap="onTapUpdateInfo">Updated your userName and avatar? <text class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to update</text> </view>
+        <view class="welcome_text_line_2" bind:tap="onTapUpdateInfo">Updated your nickName and avatar? <text class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to update</text> </view>
         <!-- <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view> -->
     </view>
     <view class="welcome_row_text_wrapper" wx:if="{{!hasPersonalInfo}}">

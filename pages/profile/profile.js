@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: "",
+    nickName: "",
     avatarUrl: "/icon/ours/empty_icon.png",
     openID:"",
     hasPersonalInfo: false
@@ -38,7 +38,7 @@ Page({
           this.setData({
             hasPersonalInfo: true,
             avatarUrl: res.data.avatarUrl,
-            userName: res.data.userName
+            nickName: res.data.nickName
           })
         },
         fail: e=>{
@@ -73,7 +73,7 @@ Page({
       data: {
         hasPersonalInfo: true,
         avatarUrl: data.avatarUrl,
-        userName: data.userName
+        nickName: data.nickName
       },
       success: (result) => {
         console.log(result);
@@ -86,7 +86,7 @@ Page({
       data: {
         target: type==="add"?"addNewUser":"updateUser",
         avatarUrl: data.avatarUrl,
-        userName: data.userName,
+        nickName: data.nickName,
         openID: this.data.openID,
       },
     })
@@ -94,13 +94,13 @@ Page({
     this.setData({
       hasPersonalInfo: true,
       avatarUrl: data.avatarUrl,
-      userName: data.userName
+      nickName: data.nickName
     });
   },
   onGetUserInfoNewUser(e){
     //would only be triggered when we don't have userInfo in the storage, neither did we get any information from the database
     console.log(e);
-    processUserInfo(e.detail, "add")
+    this.processUserInfo(e.detail, "add")
   },
   onTapUpdateInfo(){
     wx.getUserInfo({
@@ -128,14 +128,14 @@ Page({
           this.setData({
             hasPersonalInfo: true,
             avatarUrl: personalInfo[0].avatarUrl,
-            userName: personalInfo[0].userName
+            nickName: personalInfo[0].nickName
           });
           wx.setStorage({
             key: 'userInfo',
             data: {
               hasPersonalInfo: true,
               avatarUrl: personalInfo[0].avatarUrl,
-              userName: personalInfo[0].userName
+              nickName: personalInfo[0].nickName
             },
             success: (result) => {
               console.log(result);

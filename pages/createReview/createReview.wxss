@@ -226,7 +226,7 @@ textarea{
   margin-right: 112rpx;
   overflow: hidden;
   position: fixed;
-  top: 30%;
+  top: 20%;
   left: 0;
   z-index: 9999;
   background: #f9f9f9;
