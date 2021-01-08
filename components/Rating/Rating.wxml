@@ -1,6 +1,7 @@
 <!--components/Rating/Rating.wxml-->
 <!-- 41+72+106+46 526 -->
-<view class="box border">
+<navigator url="../../pages/ratingInfo/ratingInfo?reviewID={{reviewID}}">
+  <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
       {{userName}}
@@ -70,3 +71,5 @@
     </view>
   </view>
 </view>
+
+</navigator>

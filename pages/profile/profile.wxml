@@ -30,7 +30,7 @@
             <image mode="widthFix" class="content_row_right_image" src="/icon/others/bookmark.svg"></image>
         </view>
     </navigator>
-    <navigator class="row" url="../favoriteRatings/favoriteRatings?userID={{userID}}">
+    <navigator class="row" url="../savedReviews/savedReviews?userID={{userID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">收藏评价</view>
             <view class="content_row_left_text_line_2">Favorite Comments</view>

@@ -8,7 +8,7 @@ const _ = db.command;
 exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   // const openID = wxContext.OPENID
-  const { target, reviewID, openID } = event
+  const { target, reviewID, openID,commentID } = event
   if(target === "vote_review_up_new"){
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
@@ -137,5 +137,74 @@ exports.main = async (event, context) => {
       }
     })
     return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_up_new"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        up_vote_count: _.inc(1)
+      }
+    })
+    const p2 = db.collection("voted_comments").add({
+      data:{
+        openID: openID,
+        commentID: commentID,
+        voted_by_me: 1
+      }
+    })
+    return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_up_fromDown"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        up_vote_count: _.inc(1),
+        down_vote_count: _.inc(-1)
+      }
+    })
+    const p2 = db.collection("voted_comments").where({openID: openID, commentID: commentID}).update({data:{voted_by_me: 1}})
+    return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_up_cancel"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        up_vote_count: _.inc(-1),
+      }
+    })
+    const p2 = db.collection("voted_comments")
+        .where({commentID: commentID, openID: openID})
+        .remove()
+    return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_down_new"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        down_vote_count: _.inc(1)
+      }
+    })
+    const p2 = db.collection("voted_comments").add({
+      data:{
+        openID: openID,
+        commentID: commentID,
+        voted_by_me: -1
+      }
+    })
+    return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_down_fromUp"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        up_vote_count: _.inc(-1),
+        down_vote_count: _.inc(1)
+      }
+    })
+    const p2 = db.collection("voted_comments")
+          .where({openID: openID, commentID: commentID})
+          .update({data:{voted_by_me: -1}})
+    return await Promise.all([p1, p2])
+  }else if(target=="vote_comment_down_cancel"){
+    const p1 = db.collection("comments").where({_id: commentID}).update({
+      data:{
+        down_vote_count: _.inc(-1),
+      }
+    })
+    const p2 = db.collection("voted_comments")
+        .where({commentID: commentID, openID: openID})
+        .remove()
+    return await Promise.all([p1, p2])
+    
   }
 }

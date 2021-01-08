@@ -113,6 +113,33 @@ exports.main = async (event, context) => {
       })
       .end()
     return { data };
+  }else if(target=="get_review_detail"){
+    const {reviewID} = event;
+    let data = db.collection('reviews')
+      .aggregate()
+      .match({
+        _id:reviewID
+      })
+      .lookup({
+        from: 'users',
+        localField: 'openID',
+        foreignField: 'openID',
+        as: 'userInfo'
+      })
+      .lookup({
+        from: 'professors',
+        localField: 'professorID',
+        foreignField: '_id',
+        as: 'professorInfo'
+      })
+      .lookup({
+        from: 'courses',
+        localField: 'courseID',
+        foreignField: '_id',
+        as: 'courseInfo'
+      })
+      .end();
+      return data;
   }
   return { "": "" };
 }

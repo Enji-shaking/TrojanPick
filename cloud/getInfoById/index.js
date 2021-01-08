@@ -77,6 +77,38 @@ exports.main = async (event, context) => {
     })
     .end()
     return data;
+  }else if(target=="get_comments_by_reviewID"){
+    const {reviewID} = event;
+    let data = db.collection('comments')
+    .aggregate()
+    .match({
+      reviewID:reviewID
+    })
+    .lookup({
+      from:'users',
+      localField:'openID',
+      foreignField:'openID',
+      as:'user'
+    })
+    .end();
+    //check if it's been voted by me
+    let my_voted_comments_raw = db.collection("voted_comments").where(
+      { openID: openID }
+    ).get();
+    [data, my_voted_comments_raw] = await Promise.all([data, my_voted_comments_raw]);  
+    let my_voted_comments = {}
+    for (let i = 0; i < my_voted_comments_raw.data.length; i++) {
+      my_voted_comments[my_voted_comments_raw.data[i].commentID] = my_voted_comments_raw.data[i].voted_by_me
+    }
+    //update voted_by_me, posted_by_me, saved_by_me
+    data.list = data.list.map((item) => {
+      let temp = item
+      temp.posted_by_me = item.openID === openID
+      temp.voted_by_me = (item._id in my_voted_comments ? my_voted_comments[item._id] : 0)
+      return temp
+    })
+    console.log(data.list);
+    return data;
   }
   return {"":"error"};
 }
