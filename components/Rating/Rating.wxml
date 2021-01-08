@@ -1,6 +1,7 @@
 <!--components/Rating/Rating.wxml-->
 <!-- 41+72+106+46 526 -->
-<view class="box border">
+<navigator url="../../pages/ratingInfo/ratingInfo?reviewID={{reviewID}}">
+  <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
       {{nickName}}
@@ -71,7 +72,6 @@
   </view>
 </view>
 
-
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
@@ -86,3 +86,5 @@
     <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">确定</view>
   </view>
 </view>
+
+</navigator>

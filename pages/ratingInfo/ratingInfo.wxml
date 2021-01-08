@@ -1,8 +1,0 @@
-<!--pages/ratingInfo/ratingInfo.wxml-->
-<view class="ratingInfo">
-  <Header></Header>
-  <view class="title">评价详情</view>
-  <view class="line"></view>
-  <Rating detail="{{true}}"></Rating>
-  <BottomNav></BottomNav>
-</view>

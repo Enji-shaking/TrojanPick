@@ -1,0 +1,54 @@
+/* components/reviewComment.wxss */
+.comment{
+  width: 554rpx;
+  height: 204rpx;
+  border: 1px solid #F8C1B0;
+  border-top: none;
+  background-color: #FFF7DB;
+  margin: auto;
+  box-sizing: border-box;
+}
+.comment .top{
+  display: flex;
+}
+.comment .top .avatar image{
+  border-radius: 50%;
+}
+.comment .top .right{
+  display: flex;
+  flex-direction: column;
+}
+.comment .top .right .username{
+  color: #953A3A;
+  font-size: 14px;
+}
+.comment .top .right .date{
+  color: #A8A8A8;
+  font-size: 9px;
+}
+.comment .bottom {
+  display: flex;
+  height: 88rpx;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.comment .bottom view {
+  position: relative;
+}
+.comment .bottom view .commentInput {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+.comment .bottom view image {
+  width: 40rpx;
+  height: 38rpx;
+}
+.comment .bottom view text {
+  color: #6A6868;
+  font-size: 26rpx;
+}
