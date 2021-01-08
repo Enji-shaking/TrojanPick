@@ -4,7 +4,7 @@
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
       {{userName}}
-      <image src="{{avatarURL}}" />
+      <image src="{{avatarUrl}}" />
     </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
     <!-- todo get the professorname by ID -->

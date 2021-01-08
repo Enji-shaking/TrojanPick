@@ -11,7 +11,7 @@
     <input placeholder="e.g ITP115" bindinput="saveCourseCode" value="{{courseCode}}"/>
     <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectCourse" hidden="{{hidden1}}">
       <picker-view-column style="height: 300rpx">
-        <view wx:for="{{course_data}}" wx:key="a" style="line-height: 100rpx; text-align: center;">{{item.courseCode}}</view>
+        <view wx:for="{{course_data}}" wx:key="index" style="line-height: 100rpx; text-align: center;">{{item.courseCode}}</view>
       </picker-view-column>
     </picker-view>
   </view>
@@ -26,7 +26,7 @@
     <input placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}"/>
     <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectProfessor" hidden="{{hidden2}}">
       <picker-view-column style="height: 300rpx">
-        <view wx:for="{{professor_data}}" wx:key="a" style="line-height: 100rpx; text-align: center;">{{item.professorName}}</view>
+        <view wx:for="{{professor_data}}" wx:key="index" style="line-height: 100rpx; text-align: center;">{{item.professorName}}</view>
       </picker-view-column>
     </picker-view>
   </view>
@@ -35,16 +35,16 @@
   </navigator>
 </view>
 
-<block wx:for='{{evaluateTitle}}' wx:key='' wx:for-index='idx'>
+<block wx:for='{{evaluateTitle}}' wx:key='idx' wx:for-index='idx'>
   <view class='rate-block'>
     <view class='lables'>{{item}}</view>
     <!--星星评价  -->
     <view class='star-block'>
       <!--内层循环展示每个评价条目的星星  -->
-      <block wx:for="{{stars}}" wx:key=''>
-        <navigator class="star" data-score="{{item + 1}}" data-idx='{{idx}}' bindtap="selectStar">
+      <block wx:for="{{stars}}" wx:key='index'>
+        <view class="star" data-score="{{item + 1}}" data-idx='{{idx}}' bindtap="selectStar">
           <image class="imagestar" src="{{scores[idx] > item ?selectedSrc: unselectedSrc}}"></image>
-        </navigator>
+        </view>
       </block>
     </view>
   </view>

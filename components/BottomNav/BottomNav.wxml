@@ -1,8 +1,8 @@
 <view class="bottom_nav_wrapper">
-    <view class="image_1"><image class="bottom_nav_image" src="/icon/others/house.svg" mode="widthFix" />
-      </view>
-    <view class="image_2"><image class="bottom_nav_image" src="/icon/others/user.svg" mode="widthFix" />
-      </view>
-    <view class="image_3"><image class="bottom_nav_image" src="/icon/others/pen.svg" mode="widthFix" />
-      </view>
+    <navigator class="image_1"><image class="bottom_nav_image" src="/icon/others/house.svg" mode="widthFix" />
+      </navigator>
+    <navigator class="image_2"><image class="bottom_nav_image" src="/icon/others/user.svg" mode="widthFix" />
+      </navigator>
+    <navigator class="image_3" url="/pages/createReview/createReview" ><image class="bottom_nav_image" src="/icon/others/pen.svg" mode="widthFix" />
+    </navigator>
 </view>

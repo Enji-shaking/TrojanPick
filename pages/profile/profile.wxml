@@ -4,15 +4,19 @@
     <view class="welcome_image_wrapper">
         <image class="icon" src="{{avatarUrl}}" mode="widthFix"></image>
     </view>
-    <view class="welcome_row_text_wrapper">
-        <view class="welcome_text_line_1">Welcome {{nickName}}</view>
+    <view class="welcome_row_text_wrapper" wx:if="{{hasPersonalInfo}}">
+        <view class="welcome_text_line_1">Welcome {{userName}}</view>
         <view class="welcome_text_line"></view>
-        <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view>
+        <view class="welcome_text_line_2" bind:tap="onTapUpdateInfo">Updated your userName and avatar? <text class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to update</text> </view>
+        <!-- <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view> -->
+    </view>
+    <view class="welcome_row_text_wrapper" wx:if="{{!hasPersonalInfo}}">
+        <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfoNewUser">Log in</button>
     </view>
 </view>
 
-<view class="content_wrapper">
-    <navigator class="row" url="../pastRatings/pastRatings?userID={{userID}}">
+<view class="content_wrapper" wx:if="{{hasPersonalInfo}}">
+    <navigator class="row" url="../pastRatings/pastRatings?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">历史评价</view>
             <view class="content_row_left_text_line_2">Past Reviews</view>
@@ -21,7 +25,7 @@
             <image mode="widthFix" class="content_row_right_image" src="/icon/others/pen.svg"></image>
         </view>
     </navigator>
-    <navigator class="row" url="../savedClasses/savedClasses?userID={{userID}}">
+    <navigator class="row" url="../savedClasses/savedClasses?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">收藏课程</view>
             <view class="content_row_left_text_line_2">Favorite Courses</view>
@@ -30,7 +34,7 @@
             <image mode="widthFix" class="content_row_right_image" src="/icon/others/bookmark.svg"></image>
         </view>
     </navigator>
-    <navigator class="row" url="../favoriteRatings/favoriteRatings?userID={{userID}}">
+    <navigator class="row" url="../favoriteRatings/favoriteRatings?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">收藏评价</view>
             <view class="content_row_left_text_line_2">Favorite Comments</view>
