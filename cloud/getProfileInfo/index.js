@@ -9,12 +9,13 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const $ = db.command.aggregate;
   const _ = db.command;
-  let {target} = event;
-  let {userID} = event;
+  const {target, openID} = event;
+  console.log(openID);
   if(target=="pastRatings"){
     const data = await db.collection('users').where({
-      openID:userID
+      openID:openID
     }).get();
+    console.log(data);
     let { professorID, courseID } = event;
     const condition = {};
     if (courseID) condition["courseID"] = courseID;
@@ -35,7 +36,7 @@ exports.main = async (event, context) => {
     const data = await db.collection('saved_reviews')
     .aggregate()
     .match({
-      openID:userID
+      openID:openID
     })
     .lookup({
       from:'reviews',
@@ -52,7 +53,7 @@ exports.main = async (event, context) => {
       const data = await db.collection('saved_courses')
       .aggregate()
       .match({
-        openID:userID
+        openID:openID
       })
       .lookup({
         from:'courses',
@@ -67,7 +68,7 @@ exports.main = async (event, context) => {
       const data = await db.collection('saved_courses')
       .aggregate()
       .match({
-        openID:userID
+        openID:openID
       })
       .lookup({
         from:'courses',

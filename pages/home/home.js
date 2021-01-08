@@ -160,43 +160,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getOpenID()
+    this.loadInitialInfo();
+  },
+
+  getOpenID(){
+    wx.cloud.callFunction({
+      name: "userRelatedFn",
+      data:{
+        target: "openID",
+      },
+      success: e=>{
+        console.log(e);
+        wx.setStorage({
+          key: 'openID',
+          data: e.result
+        });          
+      }
+    })
+  },
+  
+  loadInitialInfo() { 
+    this.setData({
+      course_cards_info: [],
+      prof_cards_info: [],
+      searchCourseCode: [],
+      searchProfessorName: [],
+      picker_index: 0
+    })
+    this.queryParamsCourses = { 
+      currentPage: 1,
+      target: "recommended_courses",
+      courseCode: "",
+      sort: 0
+    }
+    this.queryParamsProfessors = { 
+      currentPage: 1,
+      target: "default_professors",
+      professorName: "",
+    }
     this.searchProfessorCloud()
     this.searchCourseCloud()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.loadInitialInfo()
   },
 
 

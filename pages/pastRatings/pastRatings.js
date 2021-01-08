@@ -20,7 +20,7 @@ Page({
     professorName: "全部",
     curProfessorID: "",
     curCourseID: "",
-    userID: ""
+    openID: ""
   },
 
   /**
@@ -29,13 +29,13 @@ Page({
   onLoad: function (options) {
     let self = this;
     this.setData({
-      userID: options.userID
+      openID: options.openID
     })
     wx.cloud.callFunction({
       name: 'getProfileInfo',
       data: {
         target: "pastRatings",
-        userID: options.userID
+        openID: options.openID
       }
     })
       .then(res => {
@@ -114,7 +114,7 @@ Page({
       data: {
         courseID: this.data.curCourseID,
         professorID: this.data.curProfessorID,
-        userID: this.data.userID,
+        openID: this.data.openID,
         target: 'pastRatings'
       }
     })
@@ -143,7 +143,7 @@ Page({
       data: {
         courseID: this.data.curCourseID,
         professorID: this.data.curProfessorID,
-        userID: this.data.userID,
+        openID: this.data.openID,
         target: 'pastRatings'
       }
     })

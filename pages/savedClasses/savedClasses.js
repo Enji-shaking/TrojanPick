@@ -26,7 +26,7 @@ Page({
       name:'getProfileInfo',
       data:{
         target:"savedClasses",
-        userID:options.userID
+        openID:options.openID
       }
     })
     .then(res => {

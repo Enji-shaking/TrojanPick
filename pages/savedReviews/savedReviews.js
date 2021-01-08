@@ -20,7 +20,7 @@ Page({
     courseName:"全部",
     curProfessorID:"",
     curCourseID:"",
-    userID:""
+    openID:""
   },
 
   /**
@@ -29,13 +29,13 @@ Page({
   onLoad: function (options) {
     let self = this;
     this.setData({
-      userID:options.userID
+      openID:options.openID
     })
     wx.cloud.callFunction({
       name:'getProfileInfo',
       data:{
         target:"favoriteRatings",
-        userID:options.userID
+        openID:options.openID
       }
     })
     .then(res =>{
@@ -116,7 +116,7 @@ Page({
       data:{
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,
-        userID:this.data.userID,
+        openID:this.data.openID,
         target:'get_rating_saved_reviews'
       }
     })
@@ -151,7 +151,7 @@ Page({
       data:{
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,
-        userID:this.data.userID,
+        openID:this.data.openID,
         target:'get_rating_saved_reviews'
       }
     })
