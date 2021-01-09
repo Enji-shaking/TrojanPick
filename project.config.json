@@ -128,6 +128,12 @@
           "pathName": "pages/profile/profile",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "createQuestion",
+          "pathName": "pages/createQuestion/createQuestion",
+          "query": "courseID=85ff8afa5fe0d2c500579fd92f4aff16",
+          "scene": null
         }
       ]
     }

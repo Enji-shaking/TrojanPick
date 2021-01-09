@@ -15,5 +15,5 @@
 <navigator class="myNav" url="/pages/signup/signup">signup page</navigator>
 <navigator class="myNav" url="/pages/courseInfo/courseInfo">course Info</navigator>
 <navigator class="myNav" url="/pages/professorInfo/professorInfo">professor Info</navigator>
-<navigator class="myNav" url="/pages/favoriteReviews/favoriteReviews">favorite Reviews</navigator>
+<navigator class="myNav" url="/pages/savedReviews/savedReviews">favorite Reviews</navigator>
 <navigator class="myNav" url="/pages/pastReviews/pastReviews">past Reviews</navigator>

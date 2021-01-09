@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
       reviews.push(review);
     }
     return reviews;
-  }else if(target=="favoriteReviews"){
+  }else if(target=="savedReviews"){
     const data = await db.collection('saved_reviews')
     .aggregate()
     .match({

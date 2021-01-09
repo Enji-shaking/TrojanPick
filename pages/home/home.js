@@ -168,6 +168,7 @@ Page({
     //     target: "deteleComment"
     //   }
     // })
+
   },
 
   getOpenID(){

@@ -303,9 +303,9 @@ Component({
         commentCount: this.data.commentCount + 1
       })
       wx.cloud.callFunction({
-        name: 'vote_save',
+        name: 'addEntries',
         data: {
-          target: "make_comment",
+          target: "makeComment",
           reviewID: this.properties.reviewID,
           openID: this.data.openID,
           content: content
