@@ -5,7 +5,7 @@ cloud.init()
 const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const {target, openID} = event
+  let {target, openID} = event
   if(target === "checkUserInfo"){
     return await db.collection("users")
     .where({openID: openID})
@@ -14,25 +14,31 @@ exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
     console.log(wxContext);
     return wxContext.OPENID
-  }else if(target === "addNewUser"){
-    const {avatarUrl, userName} = event
+  }else if(target === "tryToAddNewUser"){
+    const {avatarUrl, nickName} = event
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
     db.collection("users").add({
       data:{
-        avatarUrl: avatarUrl,
+        // avatarUrl: avatarUrl,
         openID: openID,
-        userName: userName,
-        myAnswerIDs: [],
-        myCommentIDs: [],
-        myQuestionIDs: [],
-        myReviewIDs: []
+        // nickName: nickName,
+        // myAnswerIDs: [],
+        // myCommentIDs: [],
+        // myQuestionIDs: [],
+        // myReviewIDs: []
       }
     })
+    .catch(error=>{
+      console.log(error)
+    })
+    return openID
   }else if(target === "updateUser"){
-    const {avatarUrl, userName} = event
+    const {avatarUrl, nickName} = event
     db.collection("users").where({openID: openID}).update({
       data:{
         avatarUrl: avatarUrl,
-        userName: userName
+        nickName: nickName
       }
     })
   }

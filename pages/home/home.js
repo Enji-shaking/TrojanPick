@@ -162,13 +162,19 @@ Page({
   onLoad: function (options) {
     this.getOpenID()
     this.loadInitialInfo();
+    // wx.cloud.callFunction({
+    //   name: "deleteEntries",
+    //   data:{
+    //     target: "deteleComment"
+    //   }
+    // })
   },
 
   getOpenID(){
     wx.cloud.callFunction({
       name: "userRelatedFn",
       data:{
-        target: "openID",
+        target: "tryToAddNewUser",
       },
       success: e=>{
         console.log(e);

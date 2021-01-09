@@ -1,7 +1,7 @@
-.pastRatings {
+.pastReviews {
   margin-bottom: 340rpx;
 }
-.pastRatings .title {
+.pastReviews .title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   color: #953A3A;
   margin-top: 116rpx;
 }
-.pastRatings .line {
+.pastReviews .line {
   width: 406rpx;
   border: 1px solid #F8C1B0;
   margin: auto;

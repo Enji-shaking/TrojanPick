@@ -1,10 +1,9 @@
 <!--components/Rating/Rating.wxml-->
 <!-- 41+72+106+46 526 -->
-<navigator url="../../pages/ratingInfo/ratingInfo?reviewID={{reviewID}}">
   <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
-      {{userName}}
+      {{nickName}}
       <image src="{{avatarUrl}}" />
     </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
@@ -12,13 +11,13 @@
     <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
     <view class="right" wx:if="{{type==2 || type==3}}">课程: {{courseCode}}</view>
   </view>
-  <view class="content borderTop" wx:if="{{!detail}}">
+  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{reviewID}}" class="content borderTop" wx:if="{{!detail}}">
     <view class="text">
       {{content}}
     </view>
     <navigator url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
     <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" bind:tap="deteleTapped" />
-  </view>
+  </navigator>
   <view class="content borderTop" wx:if="{{detail}}">
     <view class="text">
       {{content}}
@@ -60,8 +59,8 @@
       <image src="{{voted_by_me===-1?'../../icon/others/downvote.svg':'../../icon/others/downvote_grey.svg'}}"></image>
       <text>{{voteDown}}</text>
     </view>
-    <view>
-      <input class="commentInput" bindconfirm="onCommentInputConfirm" />
+    <view bind:tap="showDialogBox">
+      <!-- <input class="commentInput" bindconfirm="onCommentInputConfirm" /> -->
       <image src="../../icon/others/comment.svg"></image>
       <text>{{commentCount}}</text>
     </view>
@@ -72,4 +71,17 @@
   </view>
 </view>
 
-</navigator>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">评价</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <textarea auto-focus="{{true}}" bindinput="saveContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">确定</view>
+  </view>
+</view>

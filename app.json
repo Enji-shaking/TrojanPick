@@ -5,7 +5,7 @@
     "pages/home/home",
     "pages/savedReviews/savedReviews",
     "pages/savedClasses/savedClasses",
-    "pages/pastRatings/pastRatings",
+    "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
     "pages/test/test",
