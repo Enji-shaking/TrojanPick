@@ -1,4 +1,4 @@
-// pages/favoriteRatings/favoriteRatings.js
+// pages/savedReviews/savedReviews.js
 Page({
 
   /**

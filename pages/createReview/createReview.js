@@ -150,7 +150,7 @@ Page({
   },
 
   // 提交问题
-  submitQuestion:function(e){
+  submitReview:function(e){
     if(this.data.courseCode.trim() === "" || this.data.professorName.trim() === "" || this.data.content.trim() === ""){
       wx.showToast({
         title: '未填写完成',
@@ -158,8 +158,9 @@ Page({
       return false;
     }
     wx.cloud.callFunction({
-      name: "createReview",
+      name: "addEntries",
       data: {
+        target: "createReview",
         courseID: this.data.courseID,
         professorID: this.data.professorID,
         difficultyRating: this.data.scores[0],

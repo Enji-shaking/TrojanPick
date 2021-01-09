@@ -5,7 +5,8 @@ Page({
    * Page initial data
    */
   newQuestion: '',
-  courseID: 'ITP115',
+  courseID: '',
+  openID: '',
 
   saveQuestion(e){
       this.newQuestion = e.detail.value;
@@ -20,11 +21,13 @@ Page({
       return false;
     }
     wx.cloud.callFunction({
-      name: 'createQuestion',
+      name: 'addEntries',
       data: {
         //在onload那里接受“我要提问”button传来的courseID
         courseID: this.courseID,
         newQuestion: this.newQuestion.trim(),
+        openID: this.openID,
+        target: 'createQuestion'
       },
       success: res=>{
         wx.showToast({
@@ -32,11 +35,11 @@ Page({
           icon: 'success',
           duration: 1000
         })
-      setTimeout(function () {
-        wx.navigateBack({
-          delta: 1
-        })
-      }, 1000)
+        // setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        // }, 1000)
         console.log(res);
       },
       fail: err=>{
@@ -49,7 +52,9 @@ Page({
    */
 
   onLoad: function (options) {
-  
+    this.courseID = options.courseID
+    this.openID = wx.getStorageSync('openID');
+    console.log(this.openID);
   },
 
   /**

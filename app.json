@@ -17,7 +17,8 @@
     "pages/addRating/addRating",
     "pages/bindUSC/bindUSC",
     "pages/signup/signup",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/createQuestion/createQuestion"
   ],
   "window": {
     "backgroundTextStyle": "light",

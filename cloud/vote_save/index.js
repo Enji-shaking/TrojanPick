@@ -121,38 +121,6 @@ exports.main = async (event, context) => {
         openID: openID,
         courseID: courseID
     }).remove()
-  }else if(target === "make_comment"){
-    const {content} = event
-    console.log(event);
-    const p1 = db.collection("reviews").where({_id: reviewID}).update({
-      data:{
-        commentCount: _.inc(1)
-      }
-    })
-    const p2 = db.collection("comments").add({
-      data:{
-        down_vote_count: 0,
-        up_vote_count: 0,
-        reviewID: reviewID,
-        content: content,
-        openID: openID
-      }
-    }).then( e=>{
-        db.collection("users").where({openID: openID}).update({
-          data:{
-            myCommentIDs: _.push(e._id)
-          }
-        })
-      }
-    )
-    return await Promise.all([p1, p2])
-    // console.log(p2);
-    // const p3 = db.collection("users").where({openID: openID}).update({
-    //   data:{
-    //     myCommentIDs
-    //   }
-    // })
-    // })
   }else if(target=="vote_comment_up_new"){
     const p1 = db.collection("comments").where({_id: commentID}).update({
       data:{
