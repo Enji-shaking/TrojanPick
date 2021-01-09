@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
     })
     .end();
     return data;
-  }else if(target=="savedClasses"){
+  }else if(target=="savedCourses"){
     let {prefix} = event;
 
     if(prefix == undefined){
