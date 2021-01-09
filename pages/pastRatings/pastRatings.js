@@ -1,4 +1,4 @@
-// pages/pastRatings/pastRatings.js
+// pages/pastReviews/pastReviews.js
 Page({
 
   /**
@@ -34,7 +34,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getProfileInfo',
       data: {
-        target: "pastRatings",
+        target: "pastReviews",
         openID: options.openID
       }
     })
@@ -115,7 +115,7 @@ Page({
         courseID: this.data.curCourseID,
         professorID: this.data.curProfessorID,
         openID: this.data.openID,
-        target: 'pastRatings'
+        target: 'pastReviews'
       }
     })
       .then(res => {
@@ -144,7 +144,7 @@ Page({
         courseID: this.data.curCourseID,
         professorID: this.data.curProfessorID,
         openID: this.data.openID,
-        target: 'pastRatings'
+        target: 'pastReviews'
       }
     })
       .then(res => {

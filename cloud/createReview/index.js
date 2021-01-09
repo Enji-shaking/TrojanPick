@@ -8,6 +8,11 @@ const db = cloud.database()
 
 exports.main = async (event, context) => {
   const _ = db.command
+  let numReviews
+  let workloadRating
+  let difficultyRating
+  let interestingRating
+  let teachingRating
 
   // course_professor里面用courseID和professorID进行查找
   let course_professor_Rating = await db.collection('course_professor').where({
@@ -30,11 +35,11 @@ exports.main = async (event, context) => {
   }
   // 如果data返回值，update它的avg
   else{
-    let numReviews = course_professor_Rating.data[0].numReviews;
-    let workloadRating =course_professor_Rating.data[0].workloadRating;
-    let difficultyRating = course_professor_Rating.data[0].difficultyRating;
-    let interestingRating = course_professor_Rating.data[0].interestingRating;
-    let teachingRating = course_professor_Rating.data[0].teachingRating;
+    numReviews = course_professor_Rating.data[0].numReviews;
+    workloadRating =course_professor_Rating.data[0].workloadRating;
+    difficultyRating = course_professor_Rating.data[0].difficultyRating;
+    interestingRating = course_professor_Rating.data[0].interestingRating;
+    teachingRating = course_professor_Rating.data[0].teachingRating;
     db.collection('course_professor').doc(course_professor_Rating.data[0]._id).update({
       data: {
         workloadRating: (event.workloadRating + workloadRating * numReviews) / (numReviews + 1),
@@ -56,11 +61,11 @@ exports.main = async (event, context) => {
   let courseRatings = await db.collection('courses').where({
     _id: event.courseID
   }).get();
-  let numReviews = courseRatings.data[0].numReviews;
-  let workloadRating = courseRatings.data[0].workloadRating;
-  let difficultyRating = courseRatings.data[0].difficultyRating;
-  let interestingRating = courseRatings.data[0].interestingRating;
-  let teachingRating = courseRatings.data[0].teachingRating;
+  numReviews = courseRatings.data[0].numReviews;
+  workloadRating = courseRatings.data[0].workloadRating;
+  difficultyRating = courseRatings.data[0].difficultyRating;
+  interestingRating = courseRatings.data[0].interestingRating;
+  teachingRating = courseRatings.data[0].teachingRating;
 
   db.collection('courses').doc(event.courseID).update({
     data: {

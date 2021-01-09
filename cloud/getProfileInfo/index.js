@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
   const _ = db.command;
   const {target, openID} = event;
   console.log(openID);
-  if(target=="pastRatings"){
+  if(target=="pastReviews"){
     const data = await db.collection('users').where({
       openID:openID
     }).get();
@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
       reviews.push(review);
     }
     return reviews;
-  }else if(target=="favoriteRatings"){
+  }else if(target=="favoriteReviews"){
     const data = await db.collection('saved_reviews')
     .aggregate()
     .match({

@@ -17,7 +17,7 @@
 </view>
 
 <view class="content_wrapper" wx:if="{{hasPersonalInfo}}">
-    <navigator class="row" url="../pastRatings/pastRatings?openID={{openID}}">
+    <navigator class="row" url="../pastReviews/pastReviews?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">历史评价</view>
             <view class="content_row_left_text_line_2">Past Reviews</view>

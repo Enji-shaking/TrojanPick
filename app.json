@@ -3,7 +3,7 @@
     "pages/profile/profile",
     "pages/savedReviews/savedReviews",
     "pages/savedClasses/savedClasses",
-    "pages/pastRatings/pastRatings",
+    "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
     "pages/home/home",

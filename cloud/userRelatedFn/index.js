@@ -23,10 +23,10 @@ exports.main = async (event, context) => {
         // avatarUrl: avatarUrl,
         openID: openID,
         // nickName: nickName,
-        myAnswerIDs: [],
-        myCommentIDs: [],
-        myQuestionIDs: [],
-        myReviewIDs: []
+        // myAnswerIDs: [],
+        // myCommentIDs: [],
+        // myQuestionIDs: [],
+        // myReviewIDs: []
       }
     })
     .catch(error=>{

@@ -1,5 +1,5 @@
-<!--pages/pastRatings/pastRatings.wxml-->
-<view class="pastRatings">
+<!--pages/pastReviews/pastReviews.wxml-->
+<view class="pastReviews">
   <Header></Header>
   <view class="title">历史评价</view>
   <view class="line"></view>
