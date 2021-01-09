@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/profile/profile",
-    "pages/favoriteRatings/favoriteRatings",
+    "pages/savedReviews/savedReviews",
     "pages/savedClasses/savedClasses",
     "pages/pastRatings/pastRatings",
     "pages/professorInfo/professorInfo",
@@ -10,7 +10,7 @@
     "pages/test/test",
     "pages/testCloud/testCloud",
     "pages/index/index",
-    "pages/ratingInfo/ratingInfo",
+    "pages/reviewInfo/reviewInfo",
     "pages/logs/logs",
     "pages/addClass/addClass",
     "pages/addProfessor/addProfessor",
