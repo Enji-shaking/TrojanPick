@@ -77,7 +77,7 @@
   <view class="modal-title">评价</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea auto-focus="{{true}}" bindinput="saveContent" value="{{inputCommentContent}}" auto-height="true" class="input"></textarea>
+      <textarea auto-focus="{{true}}" bindinput="saveContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
     </view>
   </view>
   <view class="modal-footer">

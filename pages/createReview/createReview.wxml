@@ -61,7 +61,7 @@
   <view class="modal-title">评价</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea bindinput="saveContent" value="{{content}}" auto-height="true" class="input"></textarea>
+      <textarea maxlength="200" bindinput="saveContent" value="{{content}}" auto-height="true" class="input"></textarea>
     </view>
   </view>
   <view class="modal-footer">
