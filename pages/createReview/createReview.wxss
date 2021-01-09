@@ -52,12 +52,15 @@ color: #953A3A;
   width: 314rpx;
   height: 70rpx;
   margin-left: 28rpx;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
   background: #FFF7DB;
   border: 1px solid #F8C1B0;
   box-sizing: border-box;
+}
+
+.picker-box-review-content{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .add{
