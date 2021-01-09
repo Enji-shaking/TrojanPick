@@ -39,6 +39,10 @@ Component({
     posted_by_me:{
       type:'string',
       value:false
+    },
+    openID:{
+      type:'string',
+      value:"oH5r15EPI59JgaNhhebzuDsOpPEo"
     }
   },
 
@@ -79,7 +83,7 @@ Component({
           data: {
             target: "vote_comment_up_fromDown",
             openID: this.data.openID,
-            commentID: this.properties.reviewID
+            commentID: this.properties.commentID
           },
           success: (res) => {
 

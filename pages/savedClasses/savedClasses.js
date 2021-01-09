@@ -25,7 +25,7 @@ Page({
     wx.cloud.callFunction({
       name:'getProfileInfo',
       data:{
-        target:"savedClasses",
+        target:"savedCourses",
         openID:options.openID
       }
     })
@@ -61,7 +61,7 @@ Page({
     wx.cloud.callFunction({
       name:'getProfileInfo',
       data:{
-        target:"savedClasses",
+        target:"savedCourses",
         prefix:this.data.favorite_classes_prefix[this.data.prefix_index]
       }
     })

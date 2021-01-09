@@ -34,7 +34,7 @@ Page({
     wx.cloud.callFunction({
       name:'getProfileInfo',
       data:{
-        target:"favoriteRatings",
+        target:"savedReviews",
         openID:options.openID
       }
     })
