@@ -174,16 +174,27 @@ Page({
         up_vote_count: this.data.up_vote_count,
         down_vote_count: this.data.down_vote_count,
         favoriteCount: this.data.favoriteCount
-      },
-
-      sucess: res=>{
-        console.log("获取数据成功", res)
-        // console.log一份数据给后台？
-      },
-      fail: err=>{
-        console.log("获取数据失败", err)
       }
     })
+    .then(res=>{
+      console.log("获取数据成功", res)
+      wx.showToast({
+        title: 'Success',
+        duration: 1500,
+        mask: true,
+        success: (result) => {
+          wx.navigateBack({
+            delta: 1
+          });
+        },
+        fail: () => {},
+        complete: () => {}
+      });  
+    })
+    .catch(err=>{
+      console.log("获取数据失败", err)
+    })
+      
   },
 
   showDialogBtn: function() {

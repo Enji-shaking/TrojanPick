@@ -34,6 +34,14 @@ Component({
       type: "String",
       value: "https://www.impactplus.com/hubfs/404-error-page-examples-best.jpg"
     },
+    anonymous:{
+      type: "Boolean",
+      value: false
+    },
+    anonymousAvatarUrl:{
+      type: "String",
+      value: ""
+    },
     professorName: {
       type: "String",
       value: "professor id"

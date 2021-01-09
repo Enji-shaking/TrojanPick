@@ -3,8 +3,8 @@
   <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
-      {{nickName}}
-      <image src="{{avatarUrl}}" />
+      {{!anonymous?nickName:"Anonymous"}}
+      <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
     </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
     <!-- todo get the professorname by ID -->

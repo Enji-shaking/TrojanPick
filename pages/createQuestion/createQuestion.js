@@ -25,7 +25,7 @@ Page({
       data: {
         //在onload那里接受“我要提问”button传来的courseID
         courseID: this.courseID,
-        newQuestion: this.newQuestion.trim(),
+        content: this.newQuestion.trim(),
         openID: this.openID,
         target: 'createQuestion'
       },

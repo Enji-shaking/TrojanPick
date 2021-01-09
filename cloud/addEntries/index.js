@@ -1,9 +1,8 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+cloud.init()
 const db = cloud.database()
 const _ = db.command
-
-cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -36,7 +35,8 @@ exports.main = async (event, context) => {
     )
     return await Promise.all([p1, p2])
   }else if(target === "createReview"){
-  const { professorID, content, courseID } = event
+  const { professorID, content, courseID, anonymous } = event
+  console.log(event);
     let numReviews
     let workloadRating
     let difficultyRating
@@ -47,6 +47,7 @@ exports.main = async (event, context) => {
       courseID: courseID,
       professorID: professorID
     }).get()
+    console.log(course_professor_Rating);
     // 如果data返回为undefined：创建一条新的course_professor数据
     if(course_professor_Rating.data[0] === undefined){
       db.collection('course_professor').add({
@@ -94,23 +95,22 @@ exports.main = async (event, context) => {
     difficultyRating = courseRatings.data[0].difficultyRating;
     interestingRating = courseRatings.data[0].interestingRating;
     teachingRating = courseRatings.data[0].teachingRating;
-
-    db.collection('courses').doc(event.courseID).update({
+    console.log(courseRatings);
+    db.collection('courses').doc(courseID).update({
       data: {
-      workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
-      interestingRating: (interestingRating * numReviews + event.interestingRating) / (numReviews + 1),
-      teachingRating: (teachingRating * numReviews + event.teachingRating) / (numReviews + 1),
-      difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
-      numReviews: _.inc(1),
+        workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
+        interestingRating: (interestingRating * numReviews + event.interestingRating) / (numReviews + 1),
+        teachingRating: (teachingRating * numReviews + event.teachingRating) / (numReviews + 1),
+        difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
+        numReviews: _.inc(1),
       },
-      success(res) {
+      success(res) {  
         console.log(res.data)
       },
       fail(res){
         console.log(res)
       }
     })
-
     // 改professor里面的avg
     let professorRatings = await db.collection('professors').where({
       _id: professorID
@@ -120,7 +120,6 @@ exports.main = async (event, context) => {
     difficultyRating = professorRatings.data[0].difficultyRating;
     interestingRating = professorRatings.data[0].interestingRating;
     teachingRating = professorRatings.data[0].teachingRating;
-
     db.collection('professors').doc(professorID).update({
       data: {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
@@ -140,7 +139,7 @@ exports.main = async (event, context) => {
     // 添加review
     const wxContext = cloud.getWXContext()
     const {OPENID} = wxContext
-    
+    const anonymousAvatarUrl = "/icon/avatar/"+Math.floor(Math.random() * 9)+".svg";
     return await db.collection('reviews').add({
       data:{ 
           courseID: courseID,
@@ -150,13 +149,14 @@ exports.main = async (event, context) => {
           workloadRating: event.workloadRating,
           teachingRating: event.teachingRating,
           grade: event.grade,
-          anonymous: event.anonymous,
+          anonymous: anonymous,
+          anonymousAvatarUrl: anonymous?anonymousAvatarUrl:null,
           content: content,
           commentCount: 0,
           up_vote_count: 0,
           down_vote_count: 0,
           favoriteCount: 0,
-          openid: OPENID,
+          openID: OPENID,
           postedTime: currentTime
       }
     })

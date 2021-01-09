@@ -14,6 +14,7 @@ exports.main = async (event, context) => {
   const _ = db.command;
   if (target === "get_reviews_for_course_for_professor_for_page") {
     let { courseID, currentPageInReviews, professorID } = event
+    console.log(currentPageInReviews);
     const condition = {}
     if (courseID) condition["courseID"] = courseID
     if (professorID) condition["professorID"] = professorID
@@ -23,8 +24,8 @@ exports.main = async (event, context) => {
     let data = db.collection('reviews')
       .aggregate()
       .match(condition)
-      .limit(MAX_LIMIT)
       .skip(MAX_LIMIT * (currentPageInReviews - 1))
+      .limit(MAX_LIMIT)
       .lookup({
         from: 'users',
         localField: 'openID',
