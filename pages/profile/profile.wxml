@@ -11,6 +11,7 @@
         <!-- <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view> -->
     </view>
     <view class="welcome_row_text_wrapper" wx:if="{{!hasPersonalInfo}}">
+        <!-- we don't have any avatarUrl and nickName for the user yet -->
         <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfoNewUser">Log in</button>
     </view>
 </view>

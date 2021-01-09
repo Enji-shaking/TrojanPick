@@ -50,7 +50,45 @@ Page({
       });
     }
   },
-  
+
+  getPersonalInfoFromDatabase(){
+    wx.cloud.callFunction({
+      name: "userRelatedFn",
+      data: {
+        target: "checkUserInfo",
+        openID: this.data.openID
+      },
+      success: (e)=>{
+        console.log(e);
+        const personalInfo = e.result.data
+        //only if we saved avatarUrl to the database, we obtained the related information
+        if(personalInfo.length > 0 && personalInfo[0].avatarUrl){
+          this.setData({
+            hasPersonalInfo: true,
+            avatarUrl: personalInfo[0].avatarUrl,
+            nickName: personalInfo[0].nickName
+          });
+          wx.setStorage({
+            key: 'userInfo',
+            data: {
+              hasPersonalInfo: true,
+              avatarUrl: personalInfo[0].avatarUrl,
+              nickName: personalInfo[0].nickName
+            },
+            success: (result) => {
+              console.log(result);
+            },
+            fail: (err) => {console.log(err);}
+          });
+        }
+        // else{do nothing}
+      },
+      fail: (e)=>{
+        console.log("fail");
+        console.log(e);
+      }
+    })
+  },
   //print a placeholder
     //the placeholder have a button
     //if the user allows, insert userinfo into database, save it locally, goto **
@@ -64,8 +102,7 @@ Page({
       
       //if we don't, do nothing, go to *** 
       
-  processUserInfo(rawData, type){
-    const data = JSON.parse(rawData)
+  processUserInfo(data, type){
     console.log(data);
     //1. set user info
     wx.setStorage({
@@ -84,7 +121,7 @@ Page({
     wx.cloud.callFunction({
       name: "userRelatedFn",
       data: {
-        target: type==="add"?"addNewUser":"updateUser",
+        target: type==="updateUser",
         avatarUrl: data.avatarUrl,
         nickName: data.nickName,
         openID: this.data.openID,
@@ -100,7 +137,9 @@ Page({
   onGetUserInfoNewUser(e){
     //would only be triggered when we don't have userInfo in the storage, neither did we get any information from the database
     console.log(e);
-    this.processUserInfo(e.detail, "add")
+    if(e.detail.userInfo){
+      this.processUserInfo(e.detail.userInfo)
+    }
   },
   onTapUpdateInfo(){
     wx.getUserInfo({
@@ -114,41 +153,5 @@ Page({
       complete: () => {}
     });
   },
-  getPersonalInfoFromDatabase(){
-    wx.cloud.callFunction({
-      name: "userRelatedFn",
-      data: {
-        target: "checkUserInfo",
-        openID: this.data.openID
-      },
-      success: (e)=>{
-        console.log(e);
-        const personalInfo = e.result.data
-        if(personalInfo.length > 0){
-          this.setData({
-            hasPersonalInfo: true,
-            avatarUrl: personalInfo[0].avatarUrl,
-            nickName: personalInfo[0].nickName
-          });
-          wx.setStorage({
-            key: 'userInfo',
-            data: {
-              hasPersonalInfo: true,
-              avatarUrl: personalInfo[0].avatarUrl,
-              nickName: personalInfo[0].nickName
-            },
-            success: (result) => {
-              console.log(result);
-            },
-            fail: (err) => {console.log(err);}
-          });
-            
-        }
-      },
-      fail: (e)=>{
-        console.log("fail");
-        console.log(e);
-      }
-    })
-  },
+
 })

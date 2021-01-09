@@ -168,7 +168,7 @@ Page({
     wx.cloud.callFunction({
       name: "userRelatedFn",
       data:{
-        target: "openID",
+        target: "tryToAddNewUser",
       },
       success: e=>{
         console.log(e);
