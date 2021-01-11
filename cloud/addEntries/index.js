@@ -9,8 +9,7 @@ exports.main = async (event, context) => {
   const {target, openID} = event
   let currentTime = getCurrentTime()
   if(target === "makeComment"){
-  const { content, reviewID } = event
-
+    const { content, reviewID } = event
     console.log(event);
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
