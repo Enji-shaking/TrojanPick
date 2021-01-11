@@ -1,14 +1,7 @@
 // TODO:
-// 1. 修改picker-view样式，hidden的时间太快了
-// 2. transfer courseCode and professorName to courseID and professorID in order to save review
-// 3. console.log all data to enji
-// 4. calculate all averages and update information in the professors/classes review
-// 5. future update with UI (the modal: 如何可以使用户pull up键盘的时候它处于页面上端； 最大字数限制等)
+// 1. modal: 最大字数限制，字体等，取消/确定button功能不同，失焦事件
 
 Page({
-  /**
-   * Page initial data
-   */
   data: {
     evaluateTitle:['课程难度', '内容趣味性', 'workload', 'teaching'],
     stars:[0, 1, 2, 3, 4],
@@ -20,97 +13,196 @@ Page({
     gradeArray: [' ', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'P', 'F', 'IP'],
     showModal: false,
 
-    grade: "",
+    grade: " ",
     courseCode: "",
     courseID: "",
     classCode: "",
     professorName: "",
     professorID: "",
-    course_professor_ID: "",
     anonymous: false,
     content: "",
     commentCount: 0,
     up_vote_count: 0,
     down_vote_count: 0,
     favoriteCount: 0,
-    hidden1: true,
-    hidden2: true,
     course_data: [],
-    professor_data: []
+    professor_data: [],
+    show_course: false, // 是否显示下拉框
+    show_prof: false,
+    correctCourse: false, // 判断user是否选择了正确的课程
+    correctProfessor: false,
+    course_blurred: false, // 判断input框是否失焦
+    prof_blurred: false,
   },
 
-  // 调用云函数按照用户输入找到相应courseCode
+  // input搜索节流var
+  course_timer: -1,
+  prof_timer: -1,
+
+  // course input失焦时下拉框消失
+  bindBlurCourse(e){
+    this.setData({
+      show_course: false,
+      course_blurred: true
+    })
+  },
+
+  // professor input失焦时下拉框消失
+  bindBlurProf(e){
+    this.setData({
+      show_prof: false,
+      prof_blurred: true
+    })
+  },
+
+  // user没有input或输入courseCode查找不到
+  loadEmptyCourse(){
+    this.setData({
+      course_data: [],
+      show_course: false,
+      correctCourse: false
+    })
+  },
+
+  // user没有input或输入professorName查找不到
+  loadEmptyProf(){
+    this.setData({
+      professor_data: [],
+      show_prof: false,
+      correctProfessor: false
+    })
+  },
+
+  // 保存输入courseCode & 从数据库找课程信息
   saveCourseCode(e){
-    wx.cloud.callFunction({
-      name: "getRelatedInfo",
-      data: {
-        target: "courses",
-        courseCode: e.detail.value
-      },
-      success: (res)=>{
-        console.log(res.result.data);
-        this.setData({
-          course_data: res.result.data
-        })
-      },
-      fail: err=>{
-        console.log(err)
-      }
-    })
-    
-    this.setData({
-      courseCode: e.detail.value,
-      hidden1: false
-    })
-    console.log("成功选择course为 ", this.data.courseCode)
+    if(e.detail.value === ""){
+      this.loadEmptyCourse()
+    }
+    else{
+      this.setData({
+        courseCode: e.detail.value,
+        course_blurred: false
+      })
+      // setTimeout不可以直接传参数
+      this.course_timer = setTimeout(this.searchCourse,1000)
+    }
   },
 
-  // picker-view选择course
+  /*
+  bindTapCourse: function(){
+    this.setData({
+      course_blurred: false
+    })
+  },
+  */
+
+  // search in the database for courseCode
+  searchCourse: function(){
+    if(!this.data.course_blurred){
+      wx.cloud.callFunction({
+        name: "getRelatedInfo",
+        data: {
+          target: "courses",
+          courseCode: this.data.courseCode
+        },
+        success: (res)=>{
+          this.setData({
+            course_data: res.result.data,
+          })
+          if(res.result.data[0] === undefined){
+            this.loadEmptyCourse()
+          }
+          else{
+            this.setData({
+              show_course: true,
+            })
+            // user自己输入了完全正确的courseCode
+            if(res.result.data[0].courseCode === this.data.courseCode){
+              this.setData({
+                correctCourse: true,
+                courseID: this.data.course_data[0]._id,
+                show_course: false
+              })
+            }
+          }
+        },
+        fail: err=>{
+          console.log(err)
+        }
+      })
+    }
+ },
+
+  // 点击选择课程
   selectCourse: function(e){
-    console.log("current index selected is" , e.detail.value)
     this.setData({
-      courseID: this.data.course_data[e.detail.value]._id,
-      courseCode: this.data.course_data[e.detail.value].courseCode,
-      hidden1: true
-    })
-    console.log("current course selected is ", this.data.courseID)
+      courseCode: this.data.course_data[e.currentTarget.dataset.index].courseCode,
+      courseID: this.data.course_data[e.currentTarget.dataset.index]._id,
+      show_course: false,
+      correctCourse: true
+    });
   },
 
-  // 调用云函数按照用户输入找到相应professor name
+  // 保存输入professorName & 从数据库找教授信息
   saveProfName(e){
-    wx.cloud.callFunction({
-      name: "getRelatedInfo",
-      data: {
-        target: "professors",
-        professorName: e.detail.value
-      },
-      success: (res)=>{
-        console.log(res);
-        this.setData({
-          professor_data: res.result.data
-        })
-      },
-      fail: err=>{
-        console.log(err)
-      }
-    })
-    
-    this.setData({
-      professorName: e.detail.value,
-      hidden2: false
-    })
-    console.log("成功选择professor为 ", this.data.professorName)
+    if(e.detail.value === ""){
+      this.loadEmptyProf()
+    }
+    else{
+      this.setData({
+        professorName: e.detail.value,
+        prof_blurred: false
+      })
+      // setTimeout不可以直接传参数
+      this.prof_timer = setTimeout(this.searchProfessor,1000)
+    }
   },
 
-  // picker-view选择professor
+  // search in the database for professorName
+  searchProfessor: function(){
+    if(!this.data.prof_blurred){
+      wx.cloud.callFunction({
+        name: "getRelatedInfo",
+        data: {
+          target: "professors",
+          professorName: this.data.professorName
+        },
+        success: (res)=>{
+          this.setData({
+            professor_data: res.result.data
+          })
+          if(res.result.data[0] === undefined){
+            this.loadEmptyProf()
+          }
+          else{
+            this.setData({
+              show_prof: true,
+            })
+            // user自己输入了完全正确的professorName
+            if(res.result.data[0].professorName === this.data.professorName){
+              this.setData({
+                correctProfessor: true,
+                professorID: this.data.professor_data[0]._id,
+                show_prof: false
+              })
+            }
+          }
+        },
+        fail: err=>{
+          console.log(err)
+        }
+      })
+    }
+ },
+
+  // 点击选择professor
   selectProfessor: function(e){
-    console.log("current index selected is" , e.detail.value)
     this.setData({
-      professorID: this.data.professor_data[e.detail.value]._id,
-      professorName: this.data.professor_data[e.detail.value].professorName,
-      hidden2: true
+      professorID: this.data.professor_data[e.currentTarget.dataset.index]._id,
+      professorName: this.data.professor_data[e.currentTarget.dataset.index].professorName,
+      show_prof: false,
+      correctProfessor: true
     })
-    console.log("current professor selected is ", this.data.professorID)
   },
 
   // 保存评价
@@ -118,7 +210,6 @@ Page({
     this.setData({
       content: e.detail.value
     })
-    console.log("成功填写评价为 ", this.data.content)
   },
 
   // 选择成绩
@@ -149,18 +240,32 @@ Page({
     console.log("checkbox选择改变，携带值为", this.data.anonymous)
   },
 
-  // 提交问题
+  // 提交Review
   submitReview:function(e){
     if(this.data.courseCode.trim() === "" || this.data.professorName.trim() === "" || this.data.content.trim() === ""){
       wx.showToast({
-        title: '未填写完成',
+        icon: 'none',
+        title: '未填写完成'
+      })
+      return false;
+    }
+    else if(!this.data.correctCourse){
+      wx.showToast({
+        icon: 'none',
+        title: '请填写有效课程'
+      })
+      return false;
+    }
+    else if(!this.data.correctProfessor){
+      wx.showToast({
+        icon: 'none',
+        title: '请填写有效教授'
       })
       return false;
     }
     wx.cloud.callFunction({
-      name: "addEntries",
+      name: "createReview",
       data: {
-        target: "createReview",
         courseID: this.data.courseID,
         professorID: this.data.professorID,
         difficultyRating: this.data.scores[0],
@@ -177,11 +282,22 @@ Page({
       },
 
       sucess: res=>{
-        console.log("获取数据成功", res)
-        // console.log一份数据给后台？
+        console.log("提交Review成功", res.data),
+        wx.showToast({
+          icon: "success",
+          title: "提交成功"
+        })
+        /*
+        setTimeout(function(){
+          //要延时执行的代码
+          wx.navigateBack({
+            delta: 1,
+          })
+         }, 2000) //延迟时间 这里是2秒
+         */
       },
       fail: err=>{
-        console.log("获取数据失败", err)
+        console.log("提交Review失败", err)
       }
     })
   },
