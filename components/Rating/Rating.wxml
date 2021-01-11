@@ -15,7 +15,7 @@
     <view class="text">
       {{content}}
     </view>
-    <navigator url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
+    <navigator wx:if="{{!deleted}}" url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
     <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" bind:tap="deteleTapped" />
   </navigator>
   <view class="content borderTop" wx:if="{{detail}}">

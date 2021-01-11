@@ -22,6 +22,10 @@ Component({
       type: "String",
       value: ""
     },
+    deleted:{
+      type:"Bool",
+      value:false
+    },
     index: {
       type: "Number",
       value: ""
@@ -101,7 +105,7 @@ Component({
       value: false
     },
     //if detail is true, show all content
-    couseID: {
+    courseID: {
       type: "String",
       value: ""
     },

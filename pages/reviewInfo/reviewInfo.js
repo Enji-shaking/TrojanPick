@@ -30,7 +30,7 @@ Page({
       name:'getReviews',
       data:{
         target:'get_review_detail',
-        reviewID:'2f6ab8515fe21c000057b09d2c15653f',
+        reviewID:options.reviewID,
       }
     })
     .then(res => {
@@ -45,7 +45,7 @@ Page({
       name:'getInfoById',
       data:{
         target:'get_comments_by_reviewID',
-        reviewID:"2f6ab8515fe21c000057b09d2c15653f",
+        reviewID:options.reviewID,
         openID:"oH5r15EPI59JgaNhhebzuDsOpPEo"
       }
     })

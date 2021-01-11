@@ -20,7 +20,15 @@ Page({
     courseName:"全部",
     curProfessorID:"",
     curCourseID:"",
-    openID:""
+    openID:"",
+    deleted:{
+      deleted:true,
+      content:"[用户已删除评论]",
+      down_vote_count:0,
+      favoriteCount:0,
+      commentCount:0,
+      up_vote_count:0
+    }
   },
 
   /**
@@ -35,7 +43,7 @@ Page({
       name:'getProfileInfo',
       data:{
         target:"savedReviews",
-        openID:options.openID
+        openID:options.openID,
       }
     })
     .then(res =>{
@@ -43,11 +51,18 @@ Page({
       let cloud_result = res.result.list;
       let professors = new Set();
       let courses = new Set();
+      console.log(cloud_result);
       for(let i=0;i<cloud_result.length;i++){
-        reviews.push(...cloud_result[i].reviews);
-        professors.add(cloud_result[i].reviews[0].professorID);
-        courses.add(cloud_result[i].reviews[0].courseID);
+        if(cloud_result[i].reviews.length==0){
+          reviews.push(self.data.deleted);
+        }else{
+          reviews.push(...cloud_result[i].reviews);
+          professors.add(cloud_result[i].reviews[0].professorID);
+          courses.add(cloud_result[i].reviews[0].courseID);
+        }
+        
       }
+      console.log(reviews);
       self.setData({
         reviews:reviews,
         courses:Array.from(courses),
@@ -64,8 +79,6 @@ Page({
           courses:self.data.courses
         },
         success(res){
-          console.log(self.data.courses);
-          console.log(res);
           let professor_list = [];
           let course_list = [];
           let item = {
@@ -92,7 +105,6 @@ Page({
             course_list:course_list,
             professor_list:professor_list
           })
-          console.log(self.data.course_list);
         },
         fail(err){
         }
