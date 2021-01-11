@@ -1,6 +1,3 @@
-// TODO:
-// 1. modal: 最大字数限制，字体等，取消/确定button功能不同，失焦事件
-
 Page({
   data: {
     evaluateTitle:['课程难度', '内容趣味性', 'workload', 'teaching'],
@@ -33,6 +30,7 @@ Page({
     correctProfessor: false,
     course_blurred: false, // 判断input框是否失焦
     prof_blurred: false,
+    content_len: 0, // 评价字数
   },
 
   // input搜索节流var
@@ -193,7 +191,7 @@ Page({
         }
       })
     }
- },
+  },
 
   // 点击选择professor
   selectProfessor: function(e){
@@ -202,13 +200,6 @@ Page({
       professorName: this.data.professor_data[e.currentTarget.dataset.index].professorName,
       show_prof: false,
       correctProfessor: true
-    })
-  },
-
-  // 保存评价
-  saveContent(e){
-    this.setData({
-      content: e.detail.value
     })
   },
 
@@ -280,25 +271,30 @@ Page({
         down_vote_count: this.data.down_vote_count,
         favoriteCount: this.data.favoriteCount
       },
-
-      sucess: res=>{
-        console.log("提交Review成功", res.data),
+      success: res=>{
+        console.log("提交Review成功"),
         wx.showToast({
           icon: "success",
           title: "提交成功"
         })
-        /*
+        // 返回上一页面
         setTimeout(function(){
-          //要延时执行的代码
           wx.navigateBack({
             delta: 1,
           })
-         }, 2000) //延迟时间 这里是2秒
-         */
+         }, 2000)
       },
       fail: err=>{
         console.log("提交Review失败", err)
       }
+    })
+  },
+
+  // 保存评价
+  saveContent(e){
+    this.setData({ 
+      content: e.detail.value,
+      content_len: parseInt(e.detail.value.length)
     })
   },
 
@@ -318,11 +314,14 @@ Page({
   },
 
   onCancel: function () {
+    this.setData({
+      content: "",
+      content_len: 0
+    })
     this.hideModal();
   },
 
   onConfirm: function () {
     this.hideModal();
-  },
-
+  }
 })

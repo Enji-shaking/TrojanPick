@@ -165,12 +165,11 @@ input{
 }
 
 .buttonsubmit{
-  width: 204px;
-  height: 43px;
-  margin-top: 52rpx;
-  margin-bottom: 672rpx;
-  margin-left: 170rpx;
-  margin-right: 170rpx;
+  width: 330rpx;
+  height: 74rpx;
+  margin-top: 26rpx;
+  margin-bottom: 214rpx;
+  margin-left: 210rpx;
 
   background: #F5C2BF;
   border: 1px solid #F8C1B0;
@@ -243,7 +242,7 @@ textarea{
   margin-right: 112rpx;
   overflow: hidden;
   position: fixed;
-  top: 20%;
+  top: 10%;
   left: 0;
   z-index: 9999;
   background: #f9f9f9;
@@ -332,4 +331,14 @@ input-holder {
    align-items: center;
    text-align: center;
    color: #953A3A;
+ }
+
+ .length-text{
+   margin-top: 20rpx;
+   font-family: Heiti SC;
+   font-style: normal;
+   font-size: 30rpx;
+   line-height: 30rpx;
+   text-align: right;
+   color: #666;
  }

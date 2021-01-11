@@ -1,4 +1,3 @@
-<!--dropdown课程和教授还没有做呢-->
 <Header></Header>
 <view class='new-review'>
   <view class='chinese'>新建评价</view>
@@ -59,8 +58,9 @@
   <view class="modal-title">评价</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea bindinput="saveContent" value="{{content}}" auto-height="true" class="input"></textarea>
+      <textarea bindinput="saveContent" maxlength="200" value="{{content}}" auto-height="true" class="input"></textarea>
     </view>
+    <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
     <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
