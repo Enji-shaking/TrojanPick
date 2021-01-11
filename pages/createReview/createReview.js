@@ -240,8 +240,8 @@ Page({
     console.log("checkbox选择改变，携带值为", this.data.anonymous)
   },
 
-  // 提交问题
-  submitQuestion:function(e){
+  // 提交Review
+  submitReview:function(e){
     if(this.data.courseCode.trim() === "" || this.data.professorName.trim() === "" || this.data.content.trim() === ""){
       wx.showToast({
         icon: 'none',
@@ -295,7 +295,6 @@ Page({
           })
          }, 2000) //延迟时间 这里是2秒
          */
-
       },
       fail: err=>{
         console.log("提交Review失败", err)

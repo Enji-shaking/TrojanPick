@@ -83,7 +83,7 @@
   </label>
 </view>
 
-<button class="buttonsubmit" bindtap="submitQuestion">
+<button class="buttonsubmit" bindtap="submitReview">
   <text class="buttonname">提交评价</text>
 </button>
 
