@@ -31,11 +31,18 @@ Page({
     course_blurred: false, // 判断input框是否失焦
     prof_blurred: false,
     content_len: 0, // 评价字数
+
+    openID: "",
   },
 
   // input搜索节流var
   course_timer: -1,
   prof_timer: -1,
+
+  onLoad: function (options) { 
+    const openID = wx.getStorageSync("openID");
+    this.setData({openID})
+  },
 
   // course input失焦时下拉框消失
   bindBlurCourse(e){
@@ -73,6 +80,7 @@ Page({
 
   // 保存输入courseCode & 从数据库找课程信息
   saveCourseCode(e){
+    clearTimeout(this.course_timer)
     if(e.detail.value === ""){
       this.loadEmptyCourse()
     }
@@ -96,6 +104,7 @@ Page({
 
   // search in the database for courseCode
   searchCourse: function(){
+    console.log("search course");
     if(!this.data.course_blurred){
       wx.cloud.callFunction({
         name: "getRelatedInfo",
@@ -143,6 +152,7 @@ Page({
 
   // 保存输入professorName & 从数据库找教授信息
   saveProfName(e){
+    clearTimeout(this.prof_timer)
     if(e.detail.value === ""){
       this.loadEmptyProf()
     }
@@ -255,8 +265,10 @@ Page({
       return false;
     }
     wx.cloud.callFunction({
-      name: "createReview",
+      name: "addEntries",
       data: {
+        target: "createReview",
+        openID: this.data.openID,
         courseID: this.data.courseID,
         professorID: this.data.professorID,
         difficultyRating: this.data.scores[0],
@@ -272,7 +284,7 @@ Page({
         favoriteCount: this.data.favoriteCount
       },
       success: res=>{
-        console.log("提交Review成功"),
+        console.log("提交Review成功")
         wx.showToast({
           icon: "success",
           title: "提交成功"

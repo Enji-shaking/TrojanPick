@@ -62,7 +62,7 @@ Page({
       name:'getProfileInfo',
       data:{
         target:"savedCourses",
-        prefix:this.data.favorite_classes_prefix[this.data.prefix_index]
+        prefix:this.data.favorite_classes_prefix[this.data.prefix_index]!=="全部"?this.data.favorite_classes_prefix[this.data.prefix_index]:""
       }
     })
     .then(res => {
