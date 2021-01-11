@@ -25,7 +25,7 @@
   line-height: 46rpx;
   align-items: center;
 
-color: #953A3A;
+  color: #953A3A;
 }
 
 .dropbox-block{
@@ -58,9 +58,21 @@ color: #953A3A;
 }
 
 .picker-box-review-content{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-content-text{
+  width: 274rpx;
+
+  margin-left: 20rpx;
+  margin-top: 16rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  color: #953A3A;
 }
 
 .add{
@@ -276,7 +288,7 @@ input-holder {
   display: flex;
   flex-direction: row;
   height: 86rpx;
-  border-top: 1px solid #dedede;
+  border-top: 2rpx solid #dedede;
   font-size: 34rpx;
   line-height: 86rpx;
 }
@@ -285,7 +297,7 @@ input-holder {
   width: 50%;
   color: #666;
   text-align: center;
-  border-right: 1px solid #dedede;
+  border-right: 2rpx solid #dedede;
 }
 
 .btn-confirm {
@@ -293,3 +305,31 @@ input-holder {
   color: #953A3A;
   text-align: center;
 }
+
+.option_box{
+  width: 314rpx;
+  margin-left: -2rpx;
+  margin-top: 0rpx;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-top: 0;
+  background: #FFF7DB;
+ }
+
+ .option{
+   height: 45rpx;
+   display: block;
+   line-height: 40rpx;
+   font-size: 30rpx;
+   border-bottom: 2rpx solid #F8C1B0;
+   padding: 10rpx;
+
+   font-family: Heiti SC;
+   font-style: normal;
+   font-size: 30rpx;
+   line-height: 30rpx;
+   align-items: center;
+   text-align: center;
+   color: #953A3A;
+ }

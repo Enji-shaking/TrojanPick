@@ -8,14 +8,12 @@
 <view class='dropbox-block'>
   <text class='lables'>课程</text>
   <view class='picker-box'>
-    <input placeholder="e.g ITP115" bindinput="saveCourseCode" value="{{courseCode}}"/>
-    <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectCourse" hidden="{{hidden1}}">
-      <picker-view-column style="height: 300rpx">
-        <view wx:for="{{course_data}}" wx:key="index" style="line-height: 100rpx; text-align: center;">{{item.courseCode}}</view>
-      </picker-view-column>
-    </picker-view>
+    <input placeholder="e.g ITP115" bindinput="saveCourseCode" value="{{courseCode}}" bindblur="bindBlurCourse"/>
+    <view class='option_box' style='height:{{show_course?(225):0}}rpx; z-index: 1; position: absolute'>
+      <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
+    </view>
   </view>
-  <navigator class="add" url="pages/addClass/addClass">
+  <navigator class="add" url="pages/addClass/addClass" hover-class="none">
     <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
@@ -23,14 +21,12 @@
 <view class='dropbox-block'>
   <text class='lables'>教授</text>
   <view class='picker-box'>
-    <input placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}"/>
-    <picker-view indicator-style="height: 50px;" style="width: 314rpx; height: 320rpx; margin-top: 0rpx;" bindchange="selectProfessor" hidden="{{hidden2}}">
-      <picker-view-column style="height: 300rpx">
-        <view wx:for="{{professor_data}}" wx:key="index" style="line-height: 100rpx; text-align: center;">{{item.professorName}}</view>
-      </picker-view-column>
-    </picker-view>
+    <input placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}" bindblur="bindBlurProf"/>
+    <view class='option_box' style='height:{{show_prof?(225):0}}rpx;'>
+      <view class='option' wx:for='{{professor_data}}' wx:key='this' data-index='{{index}}' catchtap='selectProfessor'>{{item.professorName}}</view>
+    </view>
   </view>
-  <navigator class="add" url="pages/addProfessor/addProfessor">
+  <navigator class="add" url="pages/addProfessor/addProfessor" hover-class="none">
     <image class='imageadd' src="/icon/others/add.svg"></image>
   </navigator>
 </view>
@@ -52,7 +48,9 @@
 
 <view class='dropbox-block'>
   <text class='lables'>评价</text>
-  <view class='picker-box picker-box-review-content' bindtap="showDialogBtn">{{content}}</view>
+  <view class='picker-box' bindtap="showDialogBtn">
+    <view class= 'review-content-text picker-box-review-content'>{{content}}</view>
+  </view>
 </view>
 
 <!--弹窗-->
@@ -85,7 +83,7 @@
   </label>
 </view>
 
-<button class="buttonsubmit" bindtap="submitReview">
+<button class="buttonsubmit" bindtap="submitQuestion">
   <text class="buttonname">提交评价</text>
 </button>
 
