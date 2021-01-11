@@ -46,6 +46,10 @@ Component({
       type: "String",
       value: ""
     },
+    anonymousNickName:{
+      type:"String",
+      value:""
+    },
     professorName: {
       type: "String",
       value: "professor id"

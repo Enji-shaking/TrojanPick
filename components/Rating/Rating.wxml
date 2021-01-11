@@ -3,7 +3,7 @@
   <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
-      {{!anonymous?nickName:"Anonymous"}}
+      {{!anonymous?nickName:anonymousNickName}}
       <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
     </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>

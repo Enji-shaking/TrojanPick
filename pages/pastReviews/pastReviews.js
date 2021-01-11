@@ -39,8 +39,12 @@ Page({
       }
     })
       .then(res => {
-        console.log(res.result[0].data);
-        let reviews = res.result[0].data;
+        console.log(res.result);
+        let reviews = [];
+        for(let i=0;i<res.result.length;i++){
+          reviews.push(res.result[i].data[0]);
+        }
+        console.log(reviews);
         let professors = new Set();
         let courses = new Set();
         reviews.forEach(e => {
@@ -48,7 +52,7 @@ Page({
           courses.add(e.courseID);
         })
         self.setData({
-          reviews: res.result[0].data,
+          reviews: reviews,
           courses: Array.from(courses),
           professors: Array.from(professors)
         })
