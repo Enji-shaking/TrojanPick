@@ -11,7 +11,7 @@
     <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
     <view class="right" wx:if="{{type==2 || type==3}}">课程: {{courseCode}}</view>
   </view>
-  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{reviewID}}" class="content borderTop" wx:if="{{!detail}}">
+  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}">
     <view class="text">
       {{content}}
     </view>
@@ -28,36 +28,36 @@
       <view class="text">
         课程难度
       </view>
-      <Stars Rating="{{difficultRat}}"></Stars>
+      <Stars Rating="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         内容趣味性
       </view>
-      <Stars Rating="{{interestRat}}"></Stars>
+      <Stars Rating="{{interestingRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         workload
       </view>
-      <Stars Rating="{{workloadRat}}"></Stars>
+      <Stars Rating="{{workloadRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         teaching
       </view>
-      <Stars Rating="{{teachRat}}"></Stars>
+      <Stars Rating="{{teachingRating}}"></Stars>
     </view> 
 
   </view>
   <view class="bottom borderTop">
     <view bind:tap="upVoteTapped">
       <image src="{{voted_by_me===1?'../../icon/others/like.svg': '../../icon/others/like_grey.svg'}}"></image>
-      <text>{{voteUp}}</text>
+      <text>{{up_vote_count}}</text>
     </view>
     <view bind:tap="downVoteTapped">
       <image src="{{voted_by_me===-1?'../../icon/others/downvote.svg':'../../icon/others/downvote_grey.svg'}}"></image>
-      <text>{{voteDown}}</text>
+      <text>{{down_vote_count}}</text>
     </view>
     <view bind:tap="showDialogBox">
       <!-- <input class="commentInput" bindconfirm="onCommentInputConfirm" /> -->
@@ -77,7 +77,7 @@
   <view class="modal-title">评价</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea auto-focus="{{true}}" bindinput="saveContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
+      <textarea auto-focus="{{true}}" bindinput="onInputContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
     </view>
   </view>
   <view class="modal-footer">

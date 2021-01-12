@@ -30,7 +30,7 @@
   border-right: 1px solid #F8C1B0;
 }
 .box .content {
-  height: 144rpx;
+  height: 210rpx;
   position: relative;
 }
 .box .content .text {

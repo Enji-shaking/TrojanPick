@@ -4,95 +4,21 @@ Component({
    * 组件的属性列表
    */
   observers: {
-    'index': function () {
-      const openID = wx.getStorageSync("openID");
+    'item': function () {
+      const {anonymous, anonymousAvatarUrl, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me} = this.properties.item
+      const courseCode = this.properties.item.courseInfo[0].courseCode
+      const professorName = this.properties.item.professorInfo[0].professorName
+      const nickName = this.properties.item.userInfo[0].nickName
+      const avatarUrl = this.properties.item.userInfo[0].avatarUrl
       this.setData({
-        voteUp: this.properties.voteUpProp,
-        voteDown: this.properties.voteDownProp,
-        commentCount: this.properties.commentCountProp,
-        favoriteCount: this.properties.favoriteCountProp,
-        voted_by_me: this.properties.voted_by_me_prop,
-        saved_by_me: this.properties.saved_by_me_prop,
-        openID: openID
+        anonymous, anonymousAvatarUrl, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl
       })
     }
   },
   properties: {
-    reviewID: {
-      type: "String",
-      value: ""
-    },
-    deleted:{
-      type:"Bool",
-      value:false
-    },
-    index: {
-      type: "Number",
-      value: ""
-    },
-    nickName: {
-      type: "String",
-      value: "User Name"
-    },
-    avatarUrl: {
-      type: "String",
-      value: "https://www.impactplus.com/hubfs/404-error-page-examples-best.jpg"
-    },
-    anonymous:{
-      type: "Boolean",
-      value: false
-    },
-    anonymousAvatarUrl:{
-      type: "String",
-      value: ""
-    },
-    professorName: {
-      type: "String",
-      value: "professor id"
-    },
-    courseID: {
-      type: "String",
-      value: ""
-    },
-    courseCode: {
-      type: "String",
-      value: ""
-    },
-    content: {
-      type: "String",
-      value: "评价..."
-    },
-    difficultRat: {
-      type: "Number",
-      value: 0
-    },
-    interestRat: {
-      type: "Number",
-      value: 0
-    },
-    workloadRat: {
-      type: "Number",
-      value: 0
-    },
-    teachRat: {
-      type: "Number",
-      value: 0
-    },
-    voteUpProp: {
-      type: "Number",
-      value: 0
-    },
-    voteDownProp: {
-      type: "Number",
-      value: 0
-    },
-    commentCountProp: {
-      type: "Number",
-      value: 20
-    },
-    favoriteCountProp: {
-      type: "Number",
-      value: 0
+    item: {
+      type: "Object",
+      value: {}
     },
     type: {
       type: "Number",
@@ -104,32 +30,13 @@ Component({
       type: "Boolean",
       value: false
     },
-    //if detail is true, show all content
-    courseID: {
-      type: "String",
-      value: ""
-    },
-    posted_by_me: {
-      type: "Boolean",
-      value: false,
-
-    },
-    voted_by_me_prop: {
-      type: "Number",
-      value: 0
-    },
-    saved_by_me_prop: {
-      type: "Boolean",
-      value: false
-    }
+    // //if detail is true, show all content
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    professorName: "",
-    courseCode: "",
     openID: ""
   },
 
@@ -138,43 +45,43 @@ Component({
    */
   methods: {
     upVoteTapped: function () {
-      if (this.data.voted_by_me === 0) {
+      if (this.data.item.voted_by_me === 0) {
         this.setData({
           voted_by_me: 1,
-          voteUp: this.data.voteUp + 1
+          up_vote_count: this.data.up_vote_count + 1
         })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_up_new",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
           }
         })
       } else if (this.data.voted_by_me === -1) {
-        this.setData({ voted_by_me: 1, voteUp: this.data.voteUp + 1, voteDown: this.data.voteDown - 1 })
+        this.setData({ voted_by_me: 1, up_vote_count: this.data.up_vote_count + 1, down_vote_count: this.data.down_vote_count - 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_up_fromDown",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
           }
         })
       } else if (this.data.voted_by_me === 1) {
-        this.setData({ voted_by_me: 0, voteUp: this.data.voteUp - 1 })
+        this.setData({ voted_by_me: 0, up_vote_count: this.data.up_vote_count - 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_up_cancel",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
@@ -184,39 +91,39 @@ Component({
     },
     downVoteTapped: function () {
       if (this.data.voted_by_me === 0) {
-        this.setData({ voted_by_me: -1, voteDown: this.data.voteDown + 1 })
+        this.setData({ voted_by_me: -1, down_vote_count: this.data.down_vote_count + 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_down_new",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
           }
         })
       } else if (this.data.voted_by_me === 1) {
-        this.setData({ voted_by_me: -1, voteUp: this.data.voteUp - 1, voteDown: this.data.voteDown + 1 })
+        this.setData({ voted_by_me: -1, up_vote_count: this.data.up_vote_count - 1, down_vote_count: this.data.down_vote_count + 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_down_fromUp",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
           }
         })
       } else if (this.data.voted_by_me === -1) {
-        this.setData({ voted_by_me: 0, voteDown: this.data.voteDown - 1 })
+        this.setData({ voted_by_me: 0, down_vote_count: this.data.down_vote_count - 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
           data: {
             target: "vote_review_down_cancel",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
@@ -235,7 +142,7 @@ Component({
           data: {
             target: "save_review",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
@@ -251,7 +158,7 @@ Component({
           data: {
             target: "unsave_review",
             openID: this.data.openID,
-            reviewID: this.properties.reviewID
+            reviewID: this.data._id
           },
           success: (res) => {
 
@@ -269,14 +176,14 @@ Component({
     //     name: 'vote_save',
     //     data: {
     //       target: "make_comment",
-    //       reviewID: this.properties.reviewID,
+    //       reviewID: this.data._id,
     //       openID: this.data.openID,
     //       content: content
     //     }
     //   })
     // },
     deteleTapped: function () {
-      console.log(this.properties.reviewID);
+      console.log(this.data._id);
       console.log(this.properties.index);
       this.triggerEvent("deleteTappedFromReview", { index: this.properties.index })
       // wx.cloud.callFunction({
@@ -318,7 +225,7 @@ Component({
         name: 'addEntries',
         data: {
           target: "makeComment",
-          reviewID: this.properties.reviewID,
+          reviewID: this.data._id,
           openID: this.data.openID,
           content: content
         }
@@ -329,7 +236,7 @@ Component({
       this.hideModal();
     },
      // 保存评价
-    saveContent(e){
+     onInputContent(e){
       this.setData({
         inputCommentContent: e.detail.value
       })
@@ -337,5 +244,10 @@ Component({
     },
   },
   
+  attached: function(){
+    const openID = wx.getStorageSync("openID");
+    console.log(openID);
+    this.setData({openID})
+  }
 
 })
