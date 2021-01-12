@@ -3,8 +3,18 @@
   <view class="box border">
   <view class="top">
     <view class="left" wx:if="{{type==1 || type==2}}">
-      {{!anonymous?nickName:anonymousNickName}}
-      <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
+      <view class="left_avatar">
+        <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
+      </view>
+      <view class="left_text">
+        <text class="left_nickName" selectable="false" space="false" decode="false">{{!anonymous?nickName:anonymousNickName}}
+        </text>
+
+        <text class="left_postedDate" selectable="false" space="false" decode="false">{{postedTime}}</text>
+          
+      </view>
+        
+        
     </view>
     <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
     <!-- todo get the professorname by ID -->

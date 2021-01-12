@@ -5,13 +5,13 @@ Component({
    */
   observers: {
     'item': function () {
-      const {anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me} = this.properties.item
+      const {anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime} = this.properties.item
       const courseCode = this.properties.item.courseInfo[0].courseCode
       const professorName = this.properties.item.professorInfo[0].professorName
       const nickName = this.properties.item.userInfo[0].nickName
       const avatarUrl = this.properties.item.userInfo[0].avatarUrl
       this.setData({
-        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl
+        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime
       })
     }
   },
@@ -37,7 +37,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    openID: ""
+    openID: "",
+    postedTime: "xxxx-xx-xx"
   },
 
   /**
