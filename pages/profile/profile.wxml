@@ -1,18 +1,23 @@
 <Header></Header>
 
-<view class="welcome_row">
+<view class="login_wrapper" wx:if="{{!hasPersonalInfo}}">
+    <!-- we don't have any avatarUrl and nickName for the user yet -->
+    <view class="mask"></view>
+    <view class="login_text">Welcome to</view>
+    <view class="login_line"></view>
+    <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfoNewUser">One click login <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
+</view>
+
+<view class="welcome_row" wx:if="{{hasPersonalInfo}}">
     <view class="welcome_image_wrapper">
         <image class="icon" src="{{avatarUrl}}" mode="widthFix"></image>
     </view>
-    <view class="welcome_row_text_wrapper" wx:if="{{hasPersonalInfo}}">
+    <view class="welcome_row_text_wrapper">
         <view class="welcome_text_line_1">Welcome {{nickName}}</view>
         <view class="welcome_text_line"></view>
         <view class="welcome_text_line_2" bind:tap="onTapUpdateInfo">Updated your nickName and avatar? <text class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to update</text> </view>
         <!-- <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view> -->
-    </view>
-    <view class="welcome_row_text_wrapper" wx:if="{{!hasPersonalInfo}}">
-        <!-- we don't have any avatarUrl and nickName for the user yet -->
-        <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfoNewUser">Log in</button>
     </view>
 </view>
 
