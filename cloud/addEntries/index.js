@@ -139,6 +139,8 @@ exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
     const {OPENID} = wxContext
     const anonymousAvatarUrl = "/icon/avatar/"+Math.floor(Math.random() * 9)+".svg";
+    const anonymousNickNameOptions = ["深藏blue","book思议","无fak说","Vans如意","皮蛋solo粥","jackyfive","letyou","多少艾克以重来"];
+    const anonymousNickName = anonymousNickNameOptions[Math.random()*anonymousNickNameOptions.length];
     return await db.collection('reviews').add({
       data:{ 
           courseID: courseID,
@@ -150,6 +152,7 @@ exports.main = async (event, context) => {
           grade: event.grade,
           anonymous: anonymous,
           anonymousAvatarUrl: anonymous?anonymousAvatarUrl:null,
+          anonymousNickName:anonymous?anonymousNickName:null,
           content: content,
           commentCount: 0,
           up_vote_count: 0,
