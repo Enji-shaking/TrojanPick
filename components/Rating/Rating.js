@@ -340,6 +340,10 @@ Component({
       console.log("成功填写评价为 ", this.data.inputCommentContent)
     },
   },
-  
+  attached:function(){
+    console.log("教授:" + this.properties.professorName);
+    console.log("课程:" + this.properties.courseCode);
+    console.log("昵称:" + this.properties.anonymousNickName);
+  }
 
 })

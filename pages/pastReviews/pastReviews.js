@@ -40,11 +40,7 @@ Page({
     })
       .then(res => {
         console.log(res.result);
-        let reviews = [];
-        for(let i=0;i<res.result.length;i++){
-          reviews.push(res.result[i].data[0]);
-        }
-        console.log(reviews);
+        let reviews = res.result;
         let professors = new Set();
         let courses = new Set();
         reviews.forEach(e => {
