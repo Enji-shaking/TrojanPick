@@ -118,14 +118,14 @@ Page({
         target: 'pastReviews'
       }
     })
-      .then(res => {
-        console.log(res.result);
-        let reviews = res.result[0].data;
-        self.setData({
-          reviews: reviews
-        })
+    .then(res => {
+      console.log(res.result);
+      let reviews = res.result;
+      self.setData({
+        reviews: reviews
       })
-      .catch(console.error)
+    })
+    .catch(console.error)
   },
   chooseProPicker(e) {
     console.log(e.detail);
@@ -149,7 +149,7 @@ Page({
     })
       .then(res => {
         console.log(res.result);
-        let reviews = res.result[0].data;
+        let reviews = res.result;
         self.setData({
           reviews: reviews
         })

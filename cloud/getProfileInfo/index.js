@@ -6,7 +6,7 @@ cloud.init()
 // 云函数入口函数
 const db = cloud.database();
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
+  // const wxContext = cloud.getWXContext()
   const $ = db.command.aggregate;
   const _ = db.command;
   const {target, openID} = event;
@@ -133,7 +133,7 @@ exports.main = async (event, context) => {
   }
   console.log(data.list);
   return data.list;
-  }else if(target=="savedClasses"){
+  }else if(target=="savedCourses"){
     let {prefix} = event;
 
     if(prefix == undefined){
