@@ -20,12 +20,15 @@ Component({
       type: "Object",
       value: {}
     },
-    type: {
-      type: "Number",
-      value: 1
+    hideCourse: {
+      type: "Boolean",
+      value: false
     },
-    //if type is 1, show user and professor. 2 show user and courseCode
-    //3 show professor and coursecode
+    hideProfessor:{
+      type: "Boolean",
+      value: false
+    },
+    
     detail: {
       type: "Boolean",
       value: false

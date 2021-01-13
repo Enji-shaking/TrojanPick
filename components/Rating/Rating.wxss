@@ -37,6 +37,21 @@
   color: #A8A8A8;
   font-size: 18rpx;
 }
+.box .top .right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.box .top .right .right_row {
+  padding-left: 80rpx;
+  font-size: 22rpx;
+}
+.box .top .right .right_row.only {
+  font-size: 26rpx;
+}
+.box .top .right .hidden {
+  display: none;
+}
 .box .top image {
   width: 60rpx;
   height: 60rpx;
@@ -49,6 +64,10 @@
 .box .content .text {
   color: #6A6868;
   font-size: 26rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 .box .content .delete {
   position: absolute;

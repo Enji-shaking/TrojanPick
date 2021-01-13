@@ -2,7 +2,7 @@
 <!-- 41+72+106+46 526 -->
   <view class="box border">
   <view class="top">
-    <view class="left" wx:if="{{type==1 || type==2}}">
+    <view class="left">
       <view class="left_avatar">
         <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
       </view>
@@ -16,11 +16,16 @@
         
         
     </view>
-    <view class="left" wx:if="{{type==3}}">教授: {{professorName}}</view>
-    <!-- todo get the professorname by ID -->
-    <view class="right" wx:if="{{type==1}}">教授: {{professorName}}</view>
-    <view class="right" wx:if="{{type==2 || type==3}}">课程: {{courseCode}}</view>
+    <view class="right">
+      <view class="right_row {{hideProfessor?'':'hidden' + hideCourse?'':'only'}}">
+        教授: {{professorName}}
+      </view>
+      <view class="right_row {{hideCourse?'':'hidden' + hideProfessor?'':'only'}}">
+        课程: {{courseCode}}
+      </view>
+    </view>
   </view>
+
   <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}">
     <view class="text">
       {{content}}
@@ -28,11 +33,13 @@
     <navigator wx:if="{{!deleted}}" url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
     <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" bind:tap="deteleTapped" />
   </navigator>
+
   <view class="content borderTop" wx:if="{{detail}}">
     <view class="text">
       {{content}}
     </view>
   </view>
+
   <view class="rating borderTop">
     <view class="singleRating">
       <view class="text">
@@ -60,6 +67,7 @@
     </view> 
 
   </view>
+  
   <view class="bottom borderTop">
     <view bind:tap="upVoteTapped">
       <image src="{{voted_by_me===1?'../../icon/others/like.svg': '../../icon/others/like_grey.svg'}}"></image>
