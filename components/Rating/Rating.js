@@ -5,7 +5,7 @@ Component({
    */
   observers: {
     'item': function () {
-      const {anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime} = this.properties.item
+      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime } = this.properties.item
       const courseCode = this.properties.item.courseInfo[0].courseCode
       const professorName = this.properties.item.professorInfo[0].professorName
       const nickName = this.properties.item.userInfo[0].nickName
@@ -201,7 +201,7 @@ Component({
     },
 
     //modal
-    showDialogBox: function() {
+    showDialogBox: function () {
       this.setData({
         showModal: true
       })
@@ -211,14 +211,14 @@ Component({
         showModal: false
       });
     },
-  
+
     onCancelSendMessage: function () {
       this.setData({
         inputCommentContent: ""
       });
       this.hideModal();
     },
-  
+
     onConfirmSendMessage: function (e) {
       console.log(e);
       const content = e.detail.value
@@ -239,19 +239,19 @@ Component({
       });
       this.hideModal();
     },
-     // 保存评价
-     onInputContent(e){
+    // 保存评价
+    onInputContent(e) {
       this.setData({
         inputCommentContent: e.detail.value
       })
       console.log("成功填写评价为 ", this.data.inputCommentContent)
     },
   },
-  
-  attached: function(){
+
+  attached: function () {
     const openID = wx.getStorageSync("openID");
     console.log(openID);
-    this.setData({openID})
+    this.setData({ openID })
   }
 
 })

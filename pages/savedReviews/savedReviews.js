@@ -47,18 +47,19 @@ Page({
       }
     })
     .then(res =>{
+      console.log(res.result);
       let reviews = [];
-      let cloud_result = res.result.list;
+      let cloud_result = res.result;
       let professors = new Set();
       let courses = new Set();
       console.log(cloud_result);
       for(let i=0;i<cloud_result.length;i++){
-        if(cloud_result[i].reviews.length==0){
+        if(cloud_result[i]==undefined){
           reviews.push(self.data.deleted);
         }else{
-          reviews.push(...cloud_result[i].reviews);
-          professors.add(cloud_result[i].reviews[0].professorID);
-          courses.add(cloud_result[i].reviews[0].courseID);
+          reviews.push(cloud_result[i]);
+          professors.add(cloud_result[i].professorInfo[0]._id);
+          courses.add(cloud_result[i].courseInfo[0]._id);
         }
         
       }

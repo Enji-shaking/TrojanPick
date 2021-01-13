@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/createReview/createReview",
     "pages/profile/profile",
+    "pages/createReview/createReview",
     "pages/courseInfo/courseInfo",
     "pages/reviewInfo/reviewInfo",
     "pages/home/home",
