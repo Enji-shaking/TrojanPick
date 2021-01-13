@@ -14,7 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    course_cards_info:[]
+    // course_cards_info:[]
   },
 
   /**
@@ -24,8 +24,8 @@ Component({
 
   },
   attached:function(){
-    this.setData({
-      course_cards_info:this.properties.course_cards_info
-    })
+    // this.setData({
+    //   course_cards_info:this.properties.course_cards_info
+    // })
   }
 })

@@ -29,8 +29,21 @@
 .box .top .left {
   border-right: 1px solid #F8C1B0;
 }
+.box .top .left .left_text {
+  padding-left: 16rpx;
+  flex-direction: column;
+}
+.box .top .left .left_text .left_postedTime {
+  color: #A8A8A8;
+  font-size: 18rpx;
+}
+.box .top image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
 .box .content {
-  height: 144rpx;
+  height: 210rpx;
   position: relative;
 }
 .box .content .text {
