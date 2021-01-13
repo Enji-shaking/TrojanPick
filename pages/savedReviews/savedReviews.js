@@ -130,7 +130,7 @@ Page({
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,
         openID:this.data.openID,
-        target:'get_rating_saved_reviews'
+        target:'get_all_saved_reviews'
       }
     })
     .then(res => {
@@ -138,6 +138,7 @@ Page({
       let list = res.result.data.list;
       let reviews = []; 
       list.forEach( e => {
+        console.log(e);
         if(e.review.length!=0){
           reviews.push(e.review[0])
         }
@@ -165,7 +166,7 @@ Page({
         courseID:this.data.curCourseID,
         pfessorID:this.data.curProfessorID,
         openID:this.data.openID,
-        target:'get_rating_saved_reviews'
+        target:'get_all_saved_reviews'
       }
     })
     .then(res => {

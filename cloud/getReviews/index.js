@@ -89,7 +89,7 @@ exports.main = async (event, context) => {
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return totalPage
   }
-  else if (target == "get_rating_saved_reviews") {
+  else if (target == "get_all_saved_reviews") {
     let { professorID, courseID, userID } = event;
     const condition = {};
     if (courseID) condition["courseID"] = courseID;
