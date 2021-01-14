@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/pastReviews/pastReviews",
+    "pages/savedReviews/savedReviews",
+
+    "pages/courseInfo/courseInfo",
     "pages/profile/profile",
     "pages/createReview/createReview",
-    "pages/courseInfo/courseInfo",
     "pages/reviewInfo/reviewInfo",
     "pages/home/home",
-    "pages/savedReviews/savedReviews",
     "pages/savedClasses/savedClasses",
-    "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
     "pages/test/test",
     "pages/testCloud/testCloud",

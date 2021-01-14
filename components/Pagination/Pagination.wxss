@@ -1,5 +1,21 @@
 /* components/Pagination/Pagination.wxss */
 .active{
-  color: blue;
-  text-decoration: underline;
+  color: white;
+  /* text-decoration: underline; */
+  background-color: #FFC61B;
+}
+.container{
+  width: 60%;
+  margin: auto;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.container view{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 15rpx 15rpx 15rpx 15rpx;
+  text-align: center;
 }

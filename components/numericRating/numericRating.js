@@ -68,7 +68,6 @@ Component({
     }
   },
   ready:function(){
-    let self = this;
     console.log(this.properties.infoID);
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
@@ -127,8 +126,6 @@ Component({
           console.log("fail");
         }
       })
-    }else if(this.properties.dropDownType==3){
-      
     }
   }
 })

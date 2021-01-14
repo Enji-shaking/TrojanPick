@@ -2,24 +2,25 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init()
-
+const MAX_LIMIT = 3;
 // 云函数入口函数
 const db = cloud.database();
 exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   const $ = db.command.aggregate;
   const _ = db.command;
-  const {target, openID} = event;
-  console.log(openID);
+  const {target, openID,courseID,professorID,currentPageInReviews} = event;
+  const condition = {};
+  condition["openID"] = openID;
+  if (courseID) condition["courseID"] = courseID;
+  if (professorID) condition["professorID"] = professorID;
   if(target=="pastReviews"){
-    let { professorID, courseID } = event;
-    const condition = {};
-    condition["openID"] = openID;
-    if (courseID) condition["courseID"] = courseID;
-    if (professorID) condition["professorID"] = professorID;
+    console.log(condition);
     let data = db.collection('reviews')
     .aggregate()
     .match(condition)
+    .skip(MAX_LIMIT * (currentPageInReviews - 1))
+    .limit(MAX_LIMIT)
     .lookup({
       from: 'users',
       localField: 'openID',
@@ -69,20 +70,87 @@ exports.main = async (event, context) => {
   })
   console.log(data.list);
   return data.list;
-  }else if(target=="savedReviews"){
+  }else if(target=="countTotalPagesPastReviews"){
+    let data = await db.collection('reviews')
+    .aggregate()
+    .match(condition)
+    .lookup({
+      from: 'users',
+      localField: 'openID',
+      foreignField: 'openID',
+      as: 'userInfo'
+    })
+    .lookup({
+      from: 'professors',
+      localField: 'professorID',
+      foreignField: '_id',
+      as: 'professorInfo'
+    })
+    .lookup({
+      from: 'courses',
+      localField: 'courseID',
+      foreignField: '_id',
+      as: 'courseInfo'
+    })
+    .count("count")
+    .end();
+    console.log(data);
+    const count = data.list[0].count;
+    console.log(count);
+    const totalPage = Math.ceil(count / MAX_LIMIT)
+    return totalPage;
+  }else if(target=="getAllPickerPastReviews"){
+    let data = db.collection('reviews')
+    .aggregate()
+    .match(condition)
+    .lookup({
+      from: 'users',
+      localField: 'openID',
+      foreignField: 'openID',
+      as: 'userInfo'
+    })
+    .lookup({
+      from: 'professors',
+      localField: 'professorID',
+      foreignField: '_id',
+      as: 'professorInfo'
+    })
+    .lookup({
+      from: 'courses',
+      localField: 'courseID',
+      foreignField: '_id',
+      as: 'courseInfo'
+    })
+    .end();
+
+  [data] = await Promise.all([data]);
+  console.log(data.list);
+  return data.list;
+  }
+  else if(target=="savedReviews"){
     console.log(openID);
     let data = db.collection('saved_reviews')
     .aggregate()
     .match({
       openID:openID
     })
+    .skip(MAX_LIMIT * (currentPageInReviews - 1))
+    .limit(MAX_LIMIT)
     .lookup({
       from:'reviews',
-      localField:'reviewID',
-      foreignField:'_id',
+      let:{
+        reviewID:'$reviewID'
+      },
+      pipeline:$.pipeline()
+        .match(condition)
+        .match(_.expr($.and([
+          $.eq(['$$reviewID','$_id']),
+        ])))
+        .done(),
       as:'reviews'
     })
     .end();
+
     //check if it's been voted by me
     let my_voted_reviews_raw = db.collection("voted_reviews").where(
       { openID: openID }
@@ -102,14 +170,6 @@ exports.main = async (event, context) => {
       my_saved_reviews[my_saved_reviews_raw.data[i].reviewID] = 1
     }
     console.log(data);
-    // let list = [];
-    // console.log(data);
-    // for(let i=0;i<data.list.length;i++){
-    //     list.push(...data.list[i].reviews);
-    // }
-    // console.log(list);
-    // data.list = list;
-    //update voted_by_me, posted_by_me, saved_by_me
     for(let i=0;i<data.list.length;i++){
       if(data.list[i].reviews.length!=0){
         let temp = data.list[i].reviews[0]
@@ -133,7 +193,76 @@ exports.main = async (event, context) => {
     }
     console.log(data.list);
     return data.list;
-  }else if(target=="savedCourses"){
+  }else if(target=="countTotalPagesSavedReviews"){
+    let data = await db.collection('saved_reviews')
+    .aggregate()
+    .match({
+      openID:openID
+    })
+    .lookup({
+      from:'reviews',
+      let:{
+        reviewID:'$reviewID'
+      },
+      pipeline:$.pipeline()
+        .match(condition)
+        .match(_.expr($.and([
+          $.eq(['$$reviewID','$_id']),
+        ])))
+        .done(),
+      as:'reviews'
+    })
+    .count("count")
+    .end()
+    console.log(data);
+    const count = data.list[0].count
+    const totalPage = Math.ceil(count / MAX_LIMIT)
+    return totalPage;
+  }else if(target=="getAllPickerSavedReviews"){
+    console.log(openID);
+    let data = db.collection('saved_reviews')
+    .aggregate()
+    .match({
+      openID:openID
+    })
+    .lookup({
+      from:'reviews',
+      let:{
+        reviewID:'$reviewID'
+      },
+      pipeline:$.pipeline()
+        .match(condition)
+        .match(_.expr($.and([
+          $.eq(['$$reviewID','$_id']),
+        ])))
+        .done(),
+      as:'reviews'
+    })
+    .end();
+
+
+    [data] = await Promise.all([data]);
+    for(let i=0;i<data.list.length;i++){
+      if(data.list[i].reviews.length!=0){
+        let temp = data.list[i].reviews[0]
+        temp.courseInfo=(await db.collection('courses').where({
+          _id:temp.courseID
+        }).get()).data;
+        temp.professorInfo=(await db.collection('professors').where({
+          _id:temp.professorID
+        }).get()).data;
+        temp.userInfo=(await db.collection('users').where({
+          openID:openID
+        }).get()).data;
+        data.list[i] = temp;
+      }else{
+        data.list[i] = undefined;
+      }
+    }
+    console.log(data.list);
+    return data.list;
+  }
+  else if(target=="savedCourses"){
     let {prefix} = event;
 
     if(prefix == undefined){
@@ -178,8 +307,11 @@ exports.main = async (event, context) => {
       .end()
       return data;
     }
-  }else if(target=="user"){
-    
   }
   return {};
 }
+
+
+  // const count = data.total
+  // const totalPage = Math.ceil(count / MAX_LIMIT)
+  // return totalPage

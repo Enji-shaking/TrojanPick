@@ -11,6 +11,6 @@
   </picker>
   <BottomNav></BottomNav>
   <Rating wx:for="{{reviews}}" wx:key="_id" item="{{item}}"></Rating>
-
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}"></Pagination>
 
 </view>

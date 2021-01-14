@@ -28,90 +28,22 @@ Page({
       favoriteCount:0,
       commentCount:0,
       up_vote_count:0
-    }
+    },
+    totalPage: 0,
+    currentPageInReviews: 1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self = this;
+    // options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
     this.setData({
       openID:options.openID
     })
-    wx.cloud.callFunction({
-      name:'getProfileInfo',
-      data:{
-        target:"savedReviews",
-        openID:options.openID,
-      }
-    })
-    .then(res =>{
-      console.log(res.result);
-      let reviews = [];
-      let cloud_result = res.result;
-      let professors = new Set();
-      let courses = new Set();
-      console.log(cloud_result);
-      for(let i=0;i<cloud_result.length;i++){
-        if(cloud_result[i]==undefined){
-          reviews.push(self.data.deleted);
-        }else{
-          reviews.push(cloud_result[i]);
-          professors.add(cloud_result[i].professorInfo[0]._id);
-          courses.add(cloud_result[i].courseInfo[0]._id);
-        }
-        
-      }
-      console.log(reviews);
-      self.setData({
-        reviews:reviews,
-        courses:Array.from(courses),
-        professors:Array.from(professors)
-      });
-    })
-    .then(() => {
-      //retrieve course list and professor list
-      wx.cloud.callFunction({
-        name:'getInfoById',
-        data:{
-          target:"list",
-          professors:self.data.professors,
-          courses:self.data.courses
-        },
-        success(res){
-          let professor_list = [];
-          let course_list = [];
-          let item = {
-            list_id:undefined,
-            list_value:"全部"
-          }
-          professor_list.push(item);
-          course_list.push(item);
-          res.result.course_data.forEach( e => {
-            let item = {
-              list_id:e._id,
-              list_value:e.courseCode
-            }
-            course_list.push(item);
-          })
-          res.result.professor_data.forEach( e =>{
-            let item = {
-              list_id:e._id,
-              list_value:e.professorName
-            }
-            professor_list.push(item);
-          })
-          self.setData({
-            course_list:course_list,
-            professor_list:professor_list
-          })
-        },
-        fail(err){
-        }
-      })
-    })
-    .catch(console.error)
+    this.getReviewsForCourseForProfessorForPage(1,this.data.curCourseID,this.data.curProfessorID,true);
+    this.getTotalPage();
+    this.getAllPicker();
   },
 
   chooseCoursePicker(e){
@@ -121,65 +53,117 @@ Page({
       curCourseID:this.data.course_list[e.detail.value].list_id,
       courseName:this.data.course_list[e.detail.value].list_value
     })
-    console.log(this.data.curProfessorID);
-    console.log(this.data.curCourseID);
-    
-    wx.cloud.callFunction({
-      name:"getReviews",
-      data:{
-        courseID:this.data.curCourseID,
-        pfessorID:this.data.curProfessorID,
-        openID:this.data.openID,
-        target:'get_all_saved_reviews'
-      }
+    this.setData({
+      currentPageInReviews:1
     })
-    .then(res => {
-      console.log(res.result);
-      let list = res.result.data.list;
-      let reviews = []; 
-      list.forEach( e => {
-        console.log(e);
-        if(e.review.length!=0){
-          reviews.push(e.review[0])
-        }
-      })
-      self.setData({
-        reviews:reviews
-      })
-    })
-    .catch(console.error)
+    this.getReviewsForCourseForProfessorForPage(this.data.currentPageInReviews,this.data.curCourseID,this.data.curProfessorID,false);
+    this.getTotalPage();
   },
   chooseProPicker(e){
-    console.log(e.detail);
-    console.log(this.data.professor_list);
-    let self = this;
     this.setData({
       curProfessorID:this.data.professor_list[e.detail.value].list_id,
       professorName:this.data.professor_list[e.detail.value].list_value
     })
-    console.log(this.data.curProfessorID);
-    console.log(this.data.curCourseID);
-    
+    this.setData({
+      currentPageInReviews:1
+    })
+    this.getReviewsForCourseForProfessorForPage(this.data.currentPageInReviews,this.data.curCourseID,this.data.curProfessorID,false);
+    this.getTotalPage();
+  },
+  //update
+  getReviewsForCourseForProfessorForPage: function (page, courseID, professorID,onLoad) { 
     wx.cloud.callFunction({
-      name:"getReviews",
+      name:'getProfileInfo',
       data:{
-        courseID:this.data.curCourseID,
-        pfessorID:this.data.curProfessorID,
-        openID:this.data.openID,
-        target:'get_all_saved_reviews'
+        courseID: courseID,
+        target:'savedReviews',
+        professorID: professorID,
+        openID: this.data.openID,
+        currentPageInReviews: page
+      },
+      success: (res)=>{
+        console.log(res.result);
+        let reviews = [];
+        let cloud_result = res.result;
+        console.log(cloud_result);
+        for(let i=0;i<cloud_result.length;i++){
+          if(cloud_result[i]==undefined){
+            reviews.push(this.data.deleted);
+          }else{
+            reviews.push(cloud_result[i]);
+          }
+        }
+        console.log(reviews);
+        this.setData({
+          reviews:reviews,
+        });
+      },
+      fail(err){
+        console.log(err)
+      }
+    })
+   },
+  handlePagination(e){
+    console.log(e.detail);
+    this.setData({currentPageInReviews: e.detail})
+    this.getReviewsForCourseForProfessorForPage(e.detail, this.data.curCourseID, this.data.curProfessorID,false)
+  },
+  getAllPicker(){
+    wx.cloud.callFunction({
+      name:'getProfileInfo',
+      data:{
+        target:"getAllPickerSavedReviews",
+        openID:this.data.openID
       }
     })
     .then(res => {
-      console.log(res.result);
-      let list = res.result.data.list;
-      let reviews = []; 
-      list.forEach( e => {
-        if(e.review.length!=0){
-          reviews.push(e.review[0])
+      let cloud_result = res.result;
+      let visitedProfessor = new Set();
+      let visitedCourse = new Set();
+      let professor_list = [{list_id:undefined,list_value:"全部"}];
+      let course_list = [{list_id:undefined,list_value:"全部"}];
+      for(let i=0;i<cloud_result.length;i++){
+        if(cloud_result[i]){
+          if(!visitedProfessor.has(cloud_result[i].professorInfo[0]._id)){
+            let professorItem = {
+              list_id:cloud_result[i].professorInfo[0]._id,
+              list_value:cloud_result[i].professorInfo[0].professorName
+            }
+            professor_list.push(professorItem);
+            visitedProfessor.add(cloud_result[i].professorInfo[0]._id);
+          }
+          if(!visitedCourse.has(cloud_result[i].courseInfo[0]._id)){
+            let courseItem = {
+              list_id:cloud_result[i].courseInfo[0]._id,
+              list_value:cloud_result[i].courseInfo[0].courseCode
+            }
+            course_list.push(courseItem);
+            visitedCourse.add(cloud_result[i].courseInfo[0]._id);
+          }
         }
+      }
+      this.setData({
+        course_list:course_list,
+        professor_list:professor_list
       })
-      self.setData({
-        reviews:reviews
+      console.log(res);
+    })
+    .catch(console.error)
+  },
+  getTotalPage(){
+    wx.cloud.callFunction({
+      name:'getProfileInfo',
+      data:{
+        target:"countTotalPagesSavedReviews",
+        professorID:this.data.curProfessorID,
+        courseID:this.data.curCourseID,
+        openID:this.data.openID
+      }
+    })
+    .then(res=>{
+      console.log(res);
+      this.setData({
+        totalPage:res.result
       })
     })
     .catch(console.error)

@@ -5,7 +5,6 @@ Component({
    */
   observers:{
     'Rating': function () { 
-      console.log("rating is changed");
       this.setData({
         rating: this.properties.Rating,
         ratingRest: 5-this.properties.Rating

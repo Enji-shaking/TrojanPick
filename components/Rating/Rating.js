@@ -24,7 +24,6 @@ Component({
       this.setData({
         anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
       })
-      console.log(posted_by_me);
     }
   },
   properties: {

@@ -30,5 +30,8 @@ Component({
       console.log(e.currentTarget.dataset.page);
       this.triggerEvent("onClickItem", e.currentTarget.dataset.page)
     }
+  },
+  attached:function(){
+    console.log(this.properties.activePage);
   }
 })
