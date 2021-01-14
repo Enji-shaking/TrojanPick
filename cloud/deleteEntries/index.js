@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
     let delete_review = await db.collection('reviews').where({
       _id: reviewID
     }).get()
+    console.log(delete_review);
     let courseID = delete_review.data[0].courseID;
     let professorID = delete_review.data[0].professorID;
     let workloadRating = delete_review.data[0].workloadRating;
@@ -36,19 +37,20 @@ exports.main = async (event, context) => {
       reviewID: reviewID
     }).remove()
 
+    console.log("I'm here");
     // update averages
-    const _ = db.command
     // update averages in 'course_professor'
     let course_prof_data = await db.collection('course_professor').where({
       courseID: courseID,
       professorID: professorID
     }).get()
+    console.log(course_prof_data);
     let numReviews_orig = course_prof_data.data[0].numReviews;
     let workloadRating_orig = course_prof_data.data[0].workloadRating;
     let difficultyRating_orig = course_prof_data.data[0].difficultyRating;
     let interestingRating_orig = course_prof_data.data[0].interestingRating;
     let teachingRating_orig = course_prof_data.data[0].teachingRating;
-    db.collection('course_professor').doc(course_prof_data.data[0]._id).update({
+    await db.collection('course_professor').doc(course_prof_data.data[0]._id).update({
       data: {
         workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
         interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
@@ -57,17 +59,19 @@ exports.main = async (event, context) => {
         numReviews: numReviews_orig - 1
       }
     })
+    console.log("I'm here2");
 
     // update averages in 'courses'
     let course_data = await db.collection('courses').where({
       _id: courseID
     }).get();
+    console.log(course_data);
     numReviews_orig = course_data.data[0].numReviews;
     workloadRating_orig = course_data.data[0].workloadRating;
     difficultyRating_orig = course_data.data[0].difficultyRating;
     interestingRating_orig = course_data.data[0].interestingRating;
     teachingRating_orig = course_data.data[0].teachingRating;
-    db.collection('courses').doc(courseID).update({
+    await db.collection('courses').doc(courseID).update({
       data: {
         workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
         interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
@@ -76,6 +80,7 @@ exports.main = async (event, context) => {
         numReviews: numReviews_orig - 1
       }
     })
+    console.log("I'm here3");
 
     // update averages in 'professors'
     let prof_data = await db.collection('professors').where({
@@ -86,7 +91,7 @@ exports.main = async (event, context) => {
     difficultyRating_orig = prof_data.data[0].difficultyRating;
     interestingRating_orig = prof_data.data[0].interestingRating;
     teachingRating_orig = prof_data.data[0].teachingRating;
-    db.collection('professors').doc(professorID).update({
+    await db.collection('professors').doc(professorID).update({
       data: {
         workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
         interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
@@ -127,25 +132,12 @@ exports.main = async (event, context) => {
     db.collection("voted_comments").where({
       commentID: commentID
     }).remove()
-  }else if(target === "deteleComment"){
-    const c1 = await db.collection("comments").where({
-      _id: commentID,
-      openID: openID
-    }).get()
-    const _reviewID = c1.data[0].reviewID
-    console.log(reviewID);
-    db.collection("comments").where({
-      _id: commentID,
-      openID: openID
-    }).remove()
-    // const c1 = await db.collection("test").where({type: "apple"}).remove()
     db.collection("reviews").where({
-      _id: _reviewID
+      _id: reviewID
     }).update({
       data:{
         commentCount: _.inc(-1)
       }
     })
-
   }
 }

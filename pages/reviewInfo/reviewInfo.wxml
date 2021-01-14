@@ -4,7 +4,7 @@
   <view class="title">评价详情</view>
   <view class="line"></view>
  
-  <Rating item="{{review}}" bind:deleteTappedFromReview="onTapDeleteFromReviewInDetail" detail="{{true}}" bind:addNewComment="onAddNewComment" ></Rating>
+  <Rating item="{{review}}" bind:deleteTappedFromReview="onTapDeleteFromReviewInDetail" detail="{{true}}" bind:addNewComment="onAddNewComment" id="review" ></Rating>
 
   <Comment wx:for="{{comments}}" wx:key="_id" comment="{{item}}" bind:deleteTappedFromComment="onTapDeleteFromComment" data-index="{{index}}"></Comment>
   <BottomNav></BottomNav>

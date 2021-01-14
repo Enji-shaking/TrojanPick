@@ -38,6 +38,7 @@ Page({
     d.splice(e.target.dataset.index, 1);
     this.setData({comments: d})
     console.log(d);
+    this.review.onDeleteComment()
   },
   onTapDeleteFromReviewInDetail: function (e) {  
     wx.navigateBack({
@@ -52,6 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.review = this.selectComponent("#review")
     const openID = wx.getStorageSync("openID");
     const reviewID = options.reviewID
     console.log(openID);

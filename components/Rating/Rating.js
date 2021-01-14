@@ -215,7 +215,11 @@ Component({
       });
       this.hideModal();
     },
-
+    onDeleteComment: function () {  
+      this.setData({
+        commentCount: this.data.commentCount - 1
+      })
+    },
     onConfirmSendMessage: function () {
       this.setData({
         commentCount: this.data.commentCount + 1

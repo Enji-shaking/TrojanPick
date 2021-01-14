@@ -5,7 +5,7 @@ Component({
    */
   observers: {
     'comment': function () {
-      const { content, _id, down_vote_count, up_vote_count, voted_by_me, posted_by_me, postedTime} = this.properties.comment
+      const { content, _id, down_vote_count, up_vote_count, voted_by_me, posted_by_me, postedTime, reviewID} = this.properties.comment
       
       let nickName, avatarUrl
       if(this.properties.comment.userInfo){
@@ -14,7 +14,7 @@ Component({
       }
 
       this.setData({
-       content, commentID: _id, down_vote_count, up_vote_count, voted_by_me, posted_by_me, nickName, avatarUrl, postedTime
+       content, commentID: _id, down_vote_count, up_vote_count, voted_by_me, posted_by_me, nickName, avatarUrl, postedTime, reviewID
       })
       console.log(this.properties.comment);
       console.log(this.data);
@@ -45,7 +45,8 @@ Component({
         data: {
           target: "deleteComment",
           commentID: this.data.commentID,
-          openID: this.data.openID
+          openID: this.data.openID,
+          reviewID: this.data.reviewID
         }
       })
     },
