@@ -88,7 +88,7 @@ exports.main = async (event, context) => {
       from:'users',
       localField:'openID',
       foreignField:'openID',
-      as:'user'
+      as:'userInfo'
     })
     .end();
     //check if it's been voted by me
