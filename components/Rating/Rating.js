@@ -215,10 +215,12 @@ Component({
       });
       this.hideModal();
     },
-
-    onConfirmSendMessage: function (e) {
-      console.log(e);
-      const content = e.detail.value
+    onDeleteComment: function () {  
+      this.setData({
+        commentCount: this.data.commentCount - 1
+      })
+    },
+    onConfirmSendMessage: function () {
       this.setData({
         commentCount: this.data.commentCount + 1
       })
@@ -228,12 +230,21 @@ Component({
           target: "makeComment",
           reviewID: this.data._id,
           openID: this.data.openID,
-          content: content
+          content: this.data.inputCommentContent
         }
       })
-      this.setData({
-        inputCommentContent: ""
-      });
+      .then(res=>
+        {
+          //If added a comment in the page reviewInfo, this would show the comment at the very last
+          this.triggerEvent("addNewComment", {content: this.data.inputCommentContent, _id: res.result._id })
+          this.setData({
+            inputCommentContent: ""
+          });
+        }
+      )
+      
+      
+      
       this.hideModal();
     },
     // 保存评价

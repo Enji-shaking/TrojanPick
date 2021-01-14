@@ -22,17 +22,11 @@ exports.main = async (event, context) => {
         up_vote_count: 0,
         reviewID: reviewID,
         content: content,
-        openID: openID
+        postedTime: currentTime,
+        openID: openID,
       }
-    }).then( e=>{
-        db.collection("users").where({openID: openID}).update({
-          data:{
-            myCommentIDs: _.push(e._id)
-          }
-        })
-      }
-    )
-    return await Promise.all([p1, p2])
+    })
+    return await p2
   }else if(target === "createReview"){
   const { professorID, content, courseID, anonymous } = event
   console.log(event);
@@ -90,6 +84,7 @@ exports.main = async (event, context) => {
       _id: courseID
     }).get();
     numReviews = courseRatings.data[0].numReviews;
+    if(!numReviews) numReviews = 0
     workloadRating = courseRatings.data[0].workloadRating;
     difficultyRating = courseRatings.data[0].difficultyRating;
     interestingRating = courseRatings.data[0].interestingRating;
@@ -115,6 +110,7 @@ exports.main = async (event, context) => {
       _id: professorID
     }).get();
     numReviews = professorRatings.data[0].numReviews;
+    if(!numReviews) numReviews = 0
     workloadRating = professorRatings.data[0].workloadRating;
     difficultyRating = professorRatings.data[0].difficultyRating;
     interestingRating = professorRatings.data[0].interestingRating;
@@ -136,11 +132,9 @@ exports.main = async (event, context) => {
     })
 
     // 添加review
-    const wxContext = cloud.getWXContext()
-    const {OPENID} = wxContext
     const anonymousAvatarUrl = "/icon/avatar/"+Math.floor(Math.random() * 9)+".svg";
     const anonymousNickNameOptions = ["深藏blue","book思议","无fak说","Vans如意","皮蛋solo粥","jackyfive","letyou","多少艾克以重来"];
-    const anonymousNickName = anonymousNickNameOptions[Math.random()*anonymousNickNameOptions.length];
+    const anonymousNickName = anonymousNickNameOptions[Math.floor(Math.random()*anonymousNickNameOptions.length)];
     return await db.collection('reviews').add({
       data:{ 
           courseID: courseID,
@@ -158,7 +152,7 @@ exports.main = async (event, context) => {
           up_vote_count: 0,
           down_vote_count: 0,
           favoriteCount: 0,
-          openID: OPENID,
+          openID: openID,
           postedTime: currentTime
       }
     })

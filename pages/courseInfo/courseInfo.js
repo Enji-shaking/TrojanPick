@@ -20,7 +20,8 @@ Page({
     totalPage: 0,
     currentPageInReviews: 1,
     professorID: undefined,
-    openID: ""
+    openID: "",
+    dummy: 1
   },
   /**
    * 生命周期函数--监听页面加载
@@ -107,6 +108,9 @@ Page({
     this.getTotalPageForReviewsForCourseForProfessor(courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, courseID, undefined)
 
+  },
+  onShow: function () {  
+    this.setData({dummy: -this.data.dummy})
   },
   handlePagination(e){
     console.log(e.detail);
