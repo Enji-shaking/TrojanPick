@@ -43,20 +43,20 @@ Page({
         this.setData({
           professorName:professor.professorName,
           overallRating:overall,
-          difficultyRating:professor.difficultyRating,
-          interestRating:professor.interestingRating,
-          teachingRating:professor.teachingRating,
-          workloadRating:professor.workloadRating,
+          difficultyRating:(professor.difficultyRating).toFixed(2),
+          interestRating:(professor.interestingRating).toFixed(2),
+          teachingRating:(professor.teachingRating).toFixed(2),
+          workloadRating:(professor.workloadRating).toFixed(2),
         })
         if(res.result.rating){
           let rating = res.result.rating.data[0];
           overall = parseFloat(rating.difficultyRating+rating.teachingRating+rating.workloadRating+rating.interestingRating)/4.0;
           this.setData({
-            overallRating:overall,
-            difficultyRating:rating.difficultyRating,
-            interestRating:rating.interestingRating,
-            teachingRating:rating.teachingRating,
-            workloadRating:rating.workloadRating,
+            overallRating:(overall).toFixed(2),
+            difficultyRating:(rating.difficultyRating).toFixed(2),
+            interestRating:(rating.interestingRating).toFixed(2),
+            teachingRating:(rating.teachingRating).toFixed(2),
+            workloadRating:(rating.workloadRating).toFixed(2),
           })
         }
       },
@@ -104,7 +104,7 @@ Page({
    },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
+    options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
     
     const { professorID } = options

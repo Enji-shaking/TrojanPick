@@ -11,7 +11,7 @@
       <view class="descript">{{courseName}}</view>
     </view>
     <view class="middle"></view>
-    <view class="right">{{overallRating.toFixed(2)}}</view>
+    <view class="right">{{overallRating}}</view>
   </view>
   <view class="courseInfo">
     <view class="info">

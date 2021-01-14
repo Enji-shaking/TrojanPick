@@ -45,10 +45,10 @@ Page({
           courseCode: course.courseCode,
           courseName: course.courseName,
           overallRating: overall,
-          difficultyRating: course.difficultyRating,
-          interestRating: course.interestingRating,
-          teachingRating: course.teachingRating,
-          workloadRating: course.workloadRating,
+          difficultyRating: (course.difficultyRating).toFixed(2),
+          interestRating: (course.interestingRating).toFixed(2),
+          teachingRating: (course.teachingRating).toFixed(2),
+          workloadRating: (course.workloadRating).toFixed(2),
           courseDescript: course.courseDescrpt,
           courseUnit: course.courseUnit,
           isFavorite: course.isFavorite
@@ -57,11 +57,11 @@ Page({
           let rating = res.result.rating.data[0];
           overall = parseFloat(rating.difficultyRating + rating.teachingRating + rating.workloadRating + rating.interestingRating) / 4.0;
           this.setData({
-            overallRating: overall,
-            difficultyRating: rating.difficultyRating,
-            interestRating: rating.interestingRating,
-            teachingRating: rating.teachingRating,
-            workloadRating: rating.workloadRating,
+            overallRating: (overall).toFixed(2),
+            difficultyRating: (rating.difficultyRating).toFixed(2),
+            interestRating: (rating.interestingRating).toFixed(2),
+            teachingRating: (rating.teachingRating).toFixed(2),
+            workloadRating: (rating.workloadRating).toFixed(2),
           })
         }
       },
@@ -119,14 +119,17 @@ Page({
       courseID: courseID,
       openID: openID
     })
-
-  },
-  onShow: function () {
     this.getCourseInfo(this.data.courseID, undefined)
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
   },
+  // onShow: function () {
+  //   this.getCourseInfo(this.data.courseID, undefined)
+  //   //default with no professor
+  //   this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
+  //   this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
+  // },
   handlePagination(e) {
     console.log(e.detail);
     this.setData({ currentPageInReviews: e.detail })
