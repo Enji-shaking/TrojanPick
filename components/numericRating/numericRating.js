@@ -12,16 +12,16 @@ Component({
     //if 2 load all professors
     //if 3 load all
     interestRating:{
-      type:"float",
+      type:"Number",
       value:1
     },difficultyRating:{
-      type:"float",
+      type:"Number",
       value:1
     },workloadRating:{
-      type:"float",
+      type:"Number",
       value:1
     },teachRating:{
-      type:"float",
+      type:"Number",
       value:1
     },
     courseID:{

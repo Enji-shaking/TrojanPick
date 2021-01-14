@@ -8,9 +8,9 @@ Component({
       value:"",
       type:"String"
     },
-    "value":{
+    value:{
       value:0,
-      type:"float"
+      type:"Number"
     }
   },
 
@@ -18,7 +18,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-
   },
 
   /**
@@ -26,5 +25,6 @@ Component({
    */
   methods: {
 
-  }
+  },
+  
 })
