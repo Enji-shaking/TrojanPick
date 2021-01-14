@@ -23,19 +23,20 @@ Page({
     openID: ""
   },
   
-  getProfessorInfo(professorID){
+  getProfessorInfo(professorID,courseID){
     wx.cloud.callFunction({
       name:'getInfoById',
       data:{
         professorID: professorID,
         openID: this.data.openID,
         target:'getProfessorInfo',
+        courseID:courseID
       },
       success: (res)=>{
         console.log(res);
         console.log(res.result.data[0]);
-        let professor = res.result.data[0];
-        let overall = parseFloat(professor.difficultyRating+professor.teachingRating+professor.workloadRating+professor.interestingRating)/4.0;
+        let professor = res.result.data.data[0];
+        let overall = (parseFloat(professor.difficultyRating+professor.teachingRating+professor.workloadRating+professor.interestingRating)/4.0).toFixed(2);
         this.setData({
           professorName:professor.professorName,
           overallRating:overall,
@@ -44,6 +45,17 @@ Page({
           teachingRating:professor.teachingRating,
           workloadRating:professor.workloadRating,
         })
+        if(res.result.rating){
+          let rating = res.result.rating.data[0];
+          overall = parseFloat(rating.difficultyRating+rating.teachingRating+rating.workloadRating+rating.interestingRating)/4.0;
+          this.setData({
+            overallRating:overall,
+            difficultyRating:rating.difficultyRating,
+            interestRating:rating.interestingRating,
+            teachingRating:rating.teachingRating,
+            workloadRating:rating.workloadRating,
+          })
+        }
       },
       fail(err){
         console.log(err)
@@ -89,12 +101,13 @@ Page({
    },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    //professorID=2424fa985fe1e0bf005e75e61823f605
+    // options.professorID="2424fa985fe1e0bf005e75e61823f605"
     //在编译模式里面设置
+    
     const { professorID } = options
     const openID = wx.getStorageSync("openID");
     this.setData({professorID, openID: openID})
-    this.getProfessorInfo(professorID)
+    this.getProfessorInfo(professorID,undefined)
     // this.getTotalPageForReviewsForProfessor(professorID)
     // this.getReviewsForProfessorForPage(1, professorID)
     this.getTotalPageForReviewsForCourseForProfessor(undefined, professorID)
@@ -108,9 +121,10 @@ Page({
 
   handlePicker(e){
     console.log(e);
-    const professorID = e.detail
-    this.setData({currentPageInReviews: 1, professorID: professorID})
+    const courseID = e.detail
+    this.setData({currentPageInReviews: 1, courseID: courseID})
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
+    this.getProfessorInfo(this.data.professorID,this.data.courseID);
   }
 })

@@ -24,7 +24,6 @@ Component({
       type:"float",
       value:1
     },
-
     courseID:{
       type:"string",
       value: undefined

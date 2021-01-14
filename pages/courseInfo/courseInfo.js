@@ -27,19 +27,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   //load the data from database, calculate the average of ratings and overall ratings
-  getCourseInfo: function(courseID){
+  getCourseInfo: function(courseID,professorID){
     wx.cloud.callFunction({
       name:'getInfoById',
       data:{
         courseID:courseID,
         openID: this.data.openID,
-        target:'getCourseInfo'
+        target:'getCourseInfo',
+        professorID:professorID
       },
       success: (res)=>{
         console.log(res);
-        let course = res.result.data[0];
+        let course = res.result.data.data[0];
         //this needs to be fixed
-        let overall = parseFloat(course.difficultyRating+course.teachingRating+course.workloadRating+course.interestingRating)/4.0;
+        let overall = (parseFloat(course.difficultyRating+course.teachingRating+course.workloadRating+course.interestingRating)/4.0).toFixed(2);
         this.setData({
           courseCode:course.courseCode,
           courseName:course.courseName,
@@ -52,6 +53,17 @@ Page({
           courseUnit: course.courseUnit,
           isFavorite: course.isFavorite
         })
+        if(res.result.rating){
+          let rating = res.result.rating.data[0];
+          overall = parseFloat(rating.difficultyRating+rating.teachingRating+rating.workloadRating+rating.interestingRating)/4.0;
+          this.setData({
+            overallRating:overall,
+            difficultyRating:rating.difficultyRating,
+            interestRating:rating.interestingRating,
+            teachingRating:rating.teachingRating,
+            workloadRating:rating.workloadRating,
+          })
+        }
       },
       fail(res){
         console.log(res)
@@ -74,6 +86,7 @@ Page({
     })
   },
   getReviewsForCourseForProfessorForPage: function (page, courseID, professorID) { 
+    this.getCourseInfo(courseID,professorID);
     wx.cloud.callFunction({
       name:'getReviews',
       data:{
@@ -95,6 +108,8 @@ Page({
     })
    },
   onLoad: function (options) {
+    options.courseID="85ff8afa5fe0d3150057a17d0df84aec"
+    // options.courseID=this.data.courseID;
     const { courseID } = options
     // console.log(courseID);
     const openID = wx.getStorageSync("openID");
@@ -103,7 +118,7 @@ Page({
       courseID: courseID,
       openID: openID
     })
-    this.getCourseInfo(courseID)
+    this.getCourseInfo(courseID,undefined)
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, courseID, undefined)

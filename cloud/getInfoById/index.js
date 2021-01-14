@@ -9,7 +9,7 @@ exports.main = async (event, context) => {
   const {target, openID} = event;
   const db = cloud.database();
   if(target=="getCourseInfo"){
-    const { courseID } = event;
+    const { courseID,professorID} = event;
     console.log(courseID);
     const data = await db.collection('courses')
       .where({
@@ -24,13 +24,28 @@ exports.main = async (event, context) => {
       .count()).total
     console.log(data.data[0]);
     data.data[0].isFavorite = count === 1;
-    return data;
+    let rating = undefined;
+    if(professorID){
+        rating=await db.collection('course_professor').where({
+        courseID:courseID,
+        professorID:professorID
+      }).get();
+    }
+    return {rating,data}
   }else if(target=="getProfessorInfo"){
-    let {professorID} = event;
+    let {professorID,courseID} = event;
     const data = await db.collection('professors').where({
       _id:professorID
     }).get();
-    return data;
+    let rating = undefined;
+    if(courseID){
+        rating=await db.collection('course_professor').where({
+        courseID:courseID,
+        professorID:professorID
+      }).get();
+    }
+    return {rating,data}
+    
   }else if(target=="list"){
     let {courses,professors} = event;
     let course_data = [];
