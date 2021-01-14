@@ -33,7 +33,5 @@ Component({
 
   },
   ready: function () { 
-    console.log(this.properties.professorName);
-    console.log(this.properties.courseName);
    }
 })

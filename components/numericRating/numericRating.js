@@ -51,9 +51,6 @@ Component({
    */
   methods: {
     choosePicker(option){
-      console.log(option);
-      console.log(this.data.list[option.detail.value].item_id + this.data.list[option.detail.value].list_value);
-      console.log(this.data.list[option.detail.value].item_id);
       if(this.data.dropDownType==1){
         this.setData({
           courseName:this.data.list[option.detail.value].item_value,
@@ -67,7 +64,6 @@ Component({
     }
   },
   ready:function(){
-    console.log(this.properties.infoID);
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
         name:'getInfoById',
@@ -81,7 +77,7 @@ Component({
           let courseList = res.result.list;
           for(let i=0;i<courseList.length;i++){
             let item = {
-              item_id:courseList[i].professorID,
+              item_id:courseList[i].courseID,
               item_value:courseList[i].courseInfo[0].courseCode
             };
             temp.push(

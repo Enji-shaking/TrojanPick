@@ -1,5 +1,5 @@
 <!--components/SingleNumericRating/SingleNumericRating.wxml-->
 <view class="SingleNumericRating">
   <view class="top">{{name}}</view>
-  <view class="bot">{{value}}</view>
+  <view class="bot">{{value.toFixed(2)}}</view>
 </view>

@@ -17,7 +17,8 @@ Page({
       courseCode:"ITP 115",
       courseUnit:2,
     }],
-    professorID: -1,
+    professorID: undefined,
+    courseID:undefined,
     totalPage: 0,
     currentPageInReviews: 1,
     openID: ""
@@ -33,8 +34,10 @@ Page({
         courseID:courseID
       },
       success: (res)=>{
+        console.log(professorID)
+        console.log(courseID)
         console.log(res);
-        console.log(res.result.data[0]);
+        console.log(res.result.data.data[0]);
         let professor = res.result.data.data[0];
         let overall = (parseFloat(professor.difficultyRating+professor.teachingRating+professor.workloadRating+professor.interestingRating)/4.0).toFixed(2);
         this.setData({
@@ -101,7 +104,7 @@ Page({
    },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    // options.professorID="2424fa985fe1e0bf005e75e61823f605"
+    // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
     
     const { professorID } = options
@@ -118,13 +121,12 @@ Page({
     this.setData({currentPageInReviews: e.detail})
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
-
   handlePicker(e){
     console.log(e);
     const courseID = e.detail
     this.setData({currentPageInReviews: 1, courseID: courseID})
-    this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
-    this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
+    this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
+    this.getReviewsForCourseForProfessorForPage(1,this.data.courseID,this.data.professorID)
     this.getProfessorInfo(this.data.professorID,this.data.courseID);
   }
 })

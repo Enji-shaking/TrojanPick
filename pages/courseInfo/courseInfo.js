@@ -108,7 +108,7 @@ Page({
     })
    },
   onLoad: function (options) {
-    options.courseID="85ff8afa5fe0d3150057a17d0df84aec"
+    // options.courseID="85ff8afa5fe0d3150057a17d0df84aec"
     // options.courseID=this.data.courseID;
     const { courseID } = options
     // console.log(courseID);
