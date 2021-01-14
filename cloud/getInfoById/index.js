@@ -5,7 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext();
+  // const wxContext = cloud.getWXContext();
   const {target, openID} = event;
   const db = cloud.database();
   if(target=="getCourseInfo"){

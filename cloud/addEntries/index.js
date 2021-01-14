@@ -22,17 +22,11 @@ exports.main = async (event, context) => {
         up_vote_count: 0,
         reviewID: reviewID,
         content: content,
-        openID: openID
+        postedTime: currentTime,
+        openID: openID,
       }
-    }).then( e=>{
-        db.collection("users").where({openID: openID}).update({
-          data:{
-            myCommentIDs: _.push(e._id)
-          }
-        })
-      }
-    )
-    return await Promise.all([p1, p2])
+    })
+    return await p2
   }else if(target === "createReview"){
   const { professorID, content, courseID, anonymous } = event
   console.log(event);

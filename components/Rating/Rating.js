@@ -24,7 +24,6 @@ Component({
       this.setData({
         anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
       })
-      console.log(posted_by_me);
     }
   },
   properties: {
@@ -217,9 +216,7 @@ Component({
       this.hideModal();
     },
 
-    onConfirmSendMessage: function (e) {
-      console.log(e);
-      const content = e.detail.value
+    onConfirmSendMessage: function () {
       this.setData({
         commentCount: this.data.commentCount + 1
       })
@@ -229,12 +226,21 @@ Component({
           target: "makeComment",
           reviewID: this.data._id,
           openID: this.data.openID,
-          content: content
+          content: this.data.inputCommentContent
         }
       })
-      this.setData({
-        inputCommentContent: ""
-      });
+      .then(res=>
+        {
+          //If added a comment in the page reviewInfo, this would show the comment at the very last
+          this.triggerEvent("addNewComment", {content: this.data.inputCommentContent, _id: res.result._id })
+          this.setData({
+            inputCommentContent: ""
+          });
+        }
+      )
+      
+      
+      
       this.hideModal();
     },
     // 保存评价

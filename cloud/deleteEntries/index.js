@@ -32,6 +32,9 @@ exports.main = async (event, context) => {
         deleted: true
       }
     })
+    db.collection("comments").where({
+      reviewID: reviewID
+    }).remove()
 
     // update averages
     const _ = db.command

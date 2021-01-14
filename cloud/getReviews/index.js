@@ -142,6 +142,7 @@ exports.main = async (event, context) => {
       })
       .end();
       const reviewInfo = data.list[0]
+      console.log(reviewInfo);
       reviewInfo.posted_by_me = reviewInfo.openID === reviewInfo.userInfo[0].openID
       const checkSave = await db.collection("saved_reviews")
                           .where({openID: openID, reviewID: reviewID})
@@ -156,7 +157,7 @@ exports.main = async (event, context) => {
                           .where({openID: openID, reviewID: reviewID})
                           .get()
       console.log(checkVote);
-      if(checkVote.data[0].voted_by_me){
+      if(checkVote.data[0] && checkVote.data[0].voted_by_me){
         reviewInfo.voted_by_me = checkVote.data[0].voted_by_me
       }else{
         reviewInfo.voted_by_me = 0
