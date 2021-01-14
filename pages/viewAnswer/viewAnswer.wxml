@@ -1,0 +1,51 @@
+<Header></Header>
+<view class='question-title'>课程问答</view>
+<view class='line-1'></view>
+
+<view>
+  <view class='question-box'>
+    <view class='top'>
+      <text class="question-icon icon"></text>
+      <text class="question-text">{{question.content}}</text>
+      <text class="delete-icon icon"></text>
+    </view>
+    <view class='bottom'>
+      <text class="date-text">{{question.postedTime}}</text>
+    </view>
+  </view>
+  <view class='answer-box' wx:for="{{question.answers}}" wx:for-index="index">
+    <view class='top'>
+      <text class="answer-icon icon"></text>
+      <text class="answer-text">{{item.content}}</text>
+    </view>
+    <view class='bottom'>
+      <text class="date-text">{{item.postedTime}}</text>
+      <text class="delete-icon"></text>
+      <text class="upvote-icon downvote_grey-icon"></text>
+      <text class="upvote_grey-icon downvote-icon"></text>
+      <text class="upvote_grey-icon downvote_grey-icon"></text>
+    </view>
+  </view>
+</view>
+
+<button bindtap="createAnswer">
+  <text>添加回答</text>
+</button>
+
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">{{question.content}}</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <textarea bindinput="saveContent" maxlength="200" value="{{content}}" auto-height="true" class="input"></textarea>
+    </view>
+    <view class="length-text">{{content_len}}/200</view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onSave" data-status="cancel">保存</view>
+    <view class="btn-confirm" bindtap="onSubmit" data-status="confirm">提交</view>
+  </view>
+</view>
+
+<BottomNav></BottomNav>

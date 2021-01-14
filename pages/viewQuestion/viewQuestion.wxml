@@ -1,28 +1,18 @@
 <Header></Header>
 <view class='question-title'>课程问答</view>
 <view class='line-1'></view>
-<view></view>
-<view class='question-box'>
-  <view class='question-block'>
-    <text class="question-icon icon"></text>
-    <text class="q-and-ans"></text>
-  </view>
-  <view class='answer-block'>
-    <text class="answer-icon icon"></text>
-    <text class="q-and-ans">答案1</text>
-  </view>
-  <view class='line-2'></view>
-  </view>
-  <view class='question-box'>
-  <view class='question-block'>
-    <text class="question-icon icon"></text>
-    <text class="q-and-ans">问题2</text>
-  </view>
-  <view class='answer-block'>
-    <text class="answer-icon icon"></text>
-    <text class="q-and-ans">答案2</text>
-  </view>
-  <view class='line-2'></view>
-  </view>
 
-  <BottomNav></BottomNav>
+
+<navigator class='question-box' wx:for="{{questions}}" wx:for-index ='index' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
+  <view class='question-block'>
+    <text class="question-icon icon"></text>
+    <text class="q-and-ans">{{item.content}}</text>
+  </view>
+  <view class='answer-block'>
+    <text class="answer-icon icon"></text>
+    <text class="q-and-ans">{{item.answers[0].content}}</text>
+  </view>
+</navigator>
+
+
+<BottomNav></BottomNav>
