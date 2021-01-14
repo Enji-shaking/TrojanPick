@@ -66,6 +66,7 @@ exports.main = async (event, context) => {
     }
 
     //update voted_by_me, posted_by_me, saved_by_me
+    //voted_by_me: 1, 0 (no vote), 01
     data.list = data.list.map((item) => {
       let temp = item
       temp.posted_by_me = item.openID === openID
@@ -116,7 +117,7 @@ exports.main = async (event, context) => {
     return { data };
   }else if(target=="get_review_detail"){
     const {reviewID} = event;
-    let data = db.collection('reviews')
+    let data = await db.collection('reviews')
       .aggregate()
       .match({
         _id:reviewID
@@ -140,7 +141,28 @@ exports.main = async (event, context) => {
         as: 'courseInfo'
       })
       .end();
-      return data;
+      const reviewInfo = data.list[0]
+      reviewInfo.posted_by_me = reviewInfo.openID === reviewInfo.userInfo[0].openID
+      const checkSave = await db.collection("saved_reviews")
+                          .where({openID: openID, reviewID: reviewID})
+                          .get()
+      console.log(checkSave);
+      if(checkSave.data.length === 0){
+        reviewInfo.saved_by_me = false
+      }else{
+        reviewInfo.saved_by_me = true
+      }
+      const checkVote = await db.collection("voted_reviews")
+                          .where({openID: openID, reviewID: reviewID})
+                          .get()
+      console.log(checkVote);
+      if(checkVote.data[0].voted_by_me){
+        reviewInfo.voted_by_me = checkVote.data[0].voted_by_me
+      }else{
+        reviewInfo.voted_by_me = 0
+      }
+      console.log(reviewInfo);
+      return reviewInfo;
   }
   return { "": "" };
 }

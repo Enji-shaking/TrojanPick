@@ -5,14 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isFavorite:false,
-    courseCode:"",
-    professorName:"",
-    difficultyRating:0,
-    interestRating:0,
-    workloadRating:0,
-    teachingRating:0,
-    reviews:[],
+    review:{},
     questions:[1,2,3],
     totalPage: 0,
     currentPageInReviews: 1,
@@ -25,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self = this;
     wx.cloud.callFunction({
       name:'getReviews',
       data:{
@@ -36,11 +28,11 @@ Page({
     .then(res => {
       console.log(res);
       this.setData({
-        reviews:res.result.list
-
+        review:res.result
       })
     })
     .catch(console.error)
+
     wx.cloud.callFunction({
       name:'getInfoById',
       data:{
@@ -51,11 +43,11 @@ Page({
     })
     .then(res => {
       console.log(res.result);
-      self.setData({
+      this.setData({
         comments:res.result.list
       })
-      console.log(self.data.comments);
-      console.log(self.data.comments[0].content);
+      console.log(this.data.comments);
+      console.log(this.data.comments[0].content);
     })
     .catch(console.error)
   }

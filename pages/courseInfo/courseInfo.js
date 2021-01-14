@@ -116,7 +116,7 @@ Page({
   deleteTappedFromReview(e){
     console.log(e);
     const d = this.data.reviews
-    d.splice(e.detail.index, 1);
+    d.splice(e.target.dataset.index, 1);
     this.setData({reviews: d})
     console.log(d);
   },

@@ -5,14 +5,26 @@ Component({
    */
   observers: {
     'item': function () {
-      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime } = this.properties.item
-      const courseCode = this.properties.item.courseInfo[0].courseCode
-      const professorName = this.properties.item.professorInfo[0].professorName
-      const nickName = this.properties.item.userInfo[0].nickName
-      const avatarUrl = this.properties.item.userInfo[0].avatarUrl
+      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted } = this.properties.item
+      
+      let courseCode
+      if(this.properties.item.courseInfo){
+        courseCode = this.properties.item.courseInfo[0].courseCode
+      }
+      let professorName 
+      if(this.properties.item.professorInfo){
+        professorName = this.properties.item.professorInfo[0].professorName
+      }
+      let nickName, avatarUrl
+      if(this.properties.item.userInfo){
+        nickName = this.properties.item.userInfo[0].nickName
+        avatarUrl = this.properties.item.userInfo[0].avatarUrl
+      }
+
       this.setData({
-        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime
+        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
       })
+      console.log(posted_by_me);
     }
   },
   properties: {
@@ -28,7 +40,6 @@ Component({
       type: "Boolean",
       value: false
     },
-    
     detail: {
       type: "Boolean",
       value: false
@@ -41,7 +52,11 @@ Component({
    */
   data: {
     openID: "",
-    postedTime: "xxxx-xx-xx"
+    postedTime: "xxxx-xx-xx",
+    difficultyRating: 0,
+    interestingRating: 0,
+    workloadRating: 0,
+    teachingRating: 0,
   },
 
   /**
@@ -170,34 +185,17 @@ Component({
         })
       }
     },
-    // onCommentInputConfirm: function (e) {
-    //   console.log(e);
-    //   const content = e.detail.value
-    //   this.setData({
-    //     commentCount: this.data.commentCount + 1
-    //   })
-    //   wx.cloud.callFunction({
-    //     name: 'vote_save',
-    //     data: {
-    //       target: "make_comment",
-    //       reviewID: this.data._id,
-    //       openID: this.data.openID,
-    //       content: content
-    //     }
-    //   })
-    // },
+
     deteleTapped: function () {
-      console.log(this.data._id);
-      console.log(this.properties.index);
-      this.triggerEvent("deleteTappedFromReview", { index: this.properties.index })
-      // wx.cloud.callFunction({
-      //   name: 'delete',
-      //   data: {
-      //     target: "deleteReview",
-      //     reviewID: this.data.reviewID,
-      //     openID: this.data.openID
-      //   }
-      // })
+      this.triggerEvent("deleteTappedFromReview")
+      wx.cloud.callFunction({
+        name: 'deleteEntries',
+        data: {
+          target: "deleteReview",
+          reviewID: this.data._id,
+          openID: this.data.openID
+        }
+      })
     },
 
     //modal

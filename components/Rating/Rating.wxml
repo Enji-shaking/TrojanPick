@@ -32,7 +32,7 @@
     </view>
     <navigator wx:if="{{!deleted}}" url="../../pages/ratingInfo/ratingInfo" class="showAll"> 展开</navigator>
 
-    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" bind:tap="deteleTapped" />
+    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
     
   </navigator>
 
@@ -40,6 +40,7 @@
     <view class="text">
       {{content}}
     </view>
+    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
   </view>
 
   <view class="rating borderTop">

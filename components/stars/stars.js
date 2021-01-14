@@ -3,10 +3,19 @@ Component({
   /**
    * 组件的属性列表
    */
+  observers:{
+    'Rating': function () { 
+      console.log("rating is changed");
+      this.setData({
+        rating: this.properties.Rating,
+        ratingRest: 5-this.properties.Rating
+      })
+    }
+  },
   properties: {
-    "Rating":{
-      type:"int",
-      value:0
+    Rating:{
+      type:"Number",
+      value:-1
     }
   },
 
@@ -14,8 +23,10 @@ Component({
    * 组件的初始数据
    */
   data: {
-    ratingArray:[],
-    restArray:[]
+    // ratingArray:[],
+    // restArray:[]
+    rating: 0,
+    ratingRest: 5
   },
 
   /**
@@ -25,17 +36,9 @@ Component({
  
   },
   attached:function(){
-    let rating = this.data.ratingArray;
-    let rest = this.data.restArray;
-    for(let i=0;i<this.properties.Rating;i++){
-      rating.push(1);
-    }
-    for(let i=0;i<5-this.properties.Rating;i++){
-      rest.push(1);
-    }
     this.setData({
-      ratingArray:rating,
-      restArray:rest
+      rating: this.properties.Rating,
+      ratingRest: 5-this.properties.Rating
     })
   }
 })
