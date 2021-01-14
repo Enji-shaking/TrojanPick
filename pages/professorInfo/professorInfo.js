@@ -106,13 +106,16 @@ Page({
     
     const { professorID } = options
     const openID = wx.getStorageSync("openID");
-    this.setData({professorID, openID: openID})
-    this.getProfessorInfo(professorID,undefined)
-    // this.getTotalPageForReviewsForProfessor(professorID)
-    // this.getReviewsForProfessorForPage(1, professorID)
-    this.getTotalPageForReviewsForCourseForProfessor(undefined, professorID)
-    this.getReviewsForCourseForProfessorForPage(1, undefined, professorID)
+    this.setData({professorID, openID})
   },
+  onShow: function (param) {  
+    this.getProfessorInfo(this.data.professorID,undefined)
+    // this.getTotalPageForReviewsForProfessor(this.data.professorID)
+    // this.getReviewsForProfessorForPage(1, this.data.professorID)
+    this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
+    this.getReviewsForCourseForProfessorForPage(1, undefined, this.data.professorID)
+  },
+  
   handlePagination(e){
     console.log(e.detail);
     this.setData({currentPageInReviews: e.detail})

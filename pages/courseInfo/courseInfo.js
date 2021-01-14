@@ -108,6 +108,7 @@ Page({
     })
    },
   onLoad: function (options) {
+    console.log("onload");
     options.courseID="85ff8afa5fe0d3150057a17d0df84aec"
     // options.courseID=this.data.courseID;
     const { courseID } = options
@@ -118,14 +119,13 @@ Page({
       courseID: courseID,
       openID: openID
     })
-    this.getCourseInfo(courseID,undefined)
-    //default with no professor
-    this.getTotalPageForReviewsForCourseForProfessor(courseID, undefined)
-    this.getReviewsForCourseForProfessorForPage(1, courseID, undefined)
-
+    
   },
   onShow: function () {  
-    this.setData({dummy: -this.data.dummy})
+    this.getCourseInfo(this.data.courseID,undefined)
+    //default with no professor
+    this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
+    this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
   },
   handlePagination(e){
     console.log(e.detail);
