@@ -21,8 +21,9 @@ Page({
     professorID: undefined,
     courseID: undefined,
     totalPage: 0,
-    currentPageInReviews: 0,
-    openID: ""
+    currentPageInReviews: 1,
+    openID: "",
+    isHot:true
   },
 
   getProfessorInfo(professorID, courseID) {
@@ -135,17 +136,34 @@ Page({
     });
     this.getProfessorInfo(this.data.professorID, undefined)
     this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
-    this.getReviewsForCourseForProfessorForPage(1, undefined, this.data.professorID)
+    this.getHotReviewsForCourseForProfessor(this.data.professorID,undefined)
   },
 
   handlePagination(e) {
     console.log(e.detail);
+    if(e.detail==0){
+      this.setData({
+        isHot:true
+      })
+      this.getHotReviewsForCourseForProfessor(this.data.professorID,this.data.courseID);
+    }else{
+      this.setData({
+        isHot:false
+      })
+      this.setData({ currentPageInReviews: e.detail })
+      this.counter = 1
+      wx.showLoading({
+        title: "loading",
+        mask: true,
+      });
+      
+      this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    }
     this.counter = 1
     wx.showLoading({
       title: "loading",
       mask: true,
     });
-    this.setData({ currentPageInReviews: e.detail })
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
   handlePicker(e) {
@@ -162,7 +180,25 @@ Page({
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
     this.getProfessorInfo(this.data.professorID, this.data.courseID);
   },
-  getHotReviewsForCourseForProfessor(courseID, professorID) {
-
+  getHotReviewsForCourseForProfessor(professorID,courseID){
+    wx.cloud.callFunction({
+      name:"getReviews",
+      data:{
+        courseID:courseID,
+        professorID:professorID,
+        target:"get_hot_reviews_for_course_for_professor",
+        openID:this.data.openID
+      }
+    })
+    .then(res => {
+        console.log(res);
+        this.setData({
+          reviews: res.result
+        })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
+    })
   }
 })

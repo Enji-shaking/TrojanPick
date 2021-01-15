@@ -22,6 +22,6 @@
 
 
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
-  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{currentPageInReviews==0}}"></Pagination>
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>
   <BottomNav></BottomNav>
 </view>

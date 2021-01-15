@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/courseInfo/courseInfo",
     "pages/professorInfo/professorInfo",
+    "pages/courseInfo/courseInfo",
     "pages/pastReviews/pastReviews",
     "pages/savedReviews/savedReviews",
     "pages/profile/profile",

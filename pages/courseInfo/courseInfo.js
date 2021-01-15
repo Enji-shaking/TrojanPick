@@ -19,10 +19,11 @@ Page({
     reviews: [],
     questions: [1, 2, 3],
     totalPage: 0,
-    currentPageInReviews: 0,
+    currentPageInReviews: 1,
     professorID: undefined,
     openID: "",
-    dummy: 1
+    dummy: 1,
+    isHot:true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -124,6 +125,7 @@ Page({
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
+    // options.courseID="a8831daa5fe0cf9d00657ae1018fcc6d";
     console.log("onload");
     const { courseID } = options
     // console.log(courseID);
@@ -146,17 +148,31 @@ Page({
     this.getCourseInfo(this.data.courseID, undefined)
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
-    this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
+    // this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
+    //default get hot reviews
+    this.getHotReviewsForCourseForProfessor(this.data.courseID,undefined);
   },
   handlePagination(e) {
     console.log(e.detail);
-    this.setData({ currentPageInReviews: e.detail })
-    this.counter = 1
-    wx.showLoading({
-      title: "loading",
-      mask: true,
-    });
-    this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    if(e.detail==0){
+      this.setData({
+        isHot:true
+      })
+      this.getHotReviewsForCourseForProfessor(this.data.courseID,this.data.professorID);
+    }else{
+      this.setData({
+        isHot:false
+      })
+      this.setData({ currentPageInReviews: e.detail })
+      this.counter = 1
+      wx.showLoading({
+        title: "loading",
+        mask: true,
+      });
+      
+      this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    }
+    
   },
 
   deleteTappedFromReview(e) {
@@ -203,5 +219,26 @@ Page({
     this.setData({ currentPageInReviews: 1, professorID: professorID })
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
+  },
+  getHotReviewsForCourseForProfessor(courseID,professorID){
+    wx.cloud.callFunction({
+      name:"getReviews",
+      data:{
+        courseID:courseID,
+        professorID:professorID,
+        target:"get_hot_reviews_for_course_for_professor",
+        openID:this.data.openID
+      }
+    })
+    .then(res => {
+        console.log(res);
+        this.setData({
+          reviews: res.result
+        })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
+    })
   }
 })
