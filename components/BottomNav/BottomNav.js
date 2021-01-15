@@ -1,3 +1,6 @@
+let app = getApp();
+
+  
 // components/BottomNav/BottomNav.js
 Component({
   /**
@@ -11,13 +14,75 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    onHome: false,
+    onProfile: false,
+    onCreate: false,
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    
+    onTapHome: function () {  
+      console.log("home");
+      if(!this.data.onHome){
+        wx.navigateTo({
+          url: '/pages/home/home',
+        });
+        app.globalData.onHome = true;
+        app.globalData.onProfile = false;
+        app.globalData.onCreate = false;
+      }else{
+        wx.showToast({
+          title: 'At Home Page',
+          icon: 'none',
+          duration: 1500,
+          mask: true,
+        });
+          
+      }
+        
+    },
+    onTapProfile: function () {  
+      console.log("profile");
+      if(!this.data.onProfile){
+        wx.navigateTo({
+          url: '/pages/profile/profile',
+        });
+        app.globalData.onHome = false;
+        app.globalData.onProfile = true;
+        app.globalData.onCreate = false;
+      }else{
+        wx.showToast({
+          title: 'At Profile Page',
+          icon: 'none',
+          duration: 1500,
+          mask: true,
+        });
+      }
+    },
+    onTapCreate: function () {  
+      console.log("create");
+      if(!this.data.onCreate){
+        wx.navigateTo({
+          url: '/pages/createReview/createReview',
+        });
+        app.globalData.onHome = false;
+        app.globalData.onProfile = false;
+        app.globalData.onCreate = true;
+      }else{
+        wx.showToast({
+          title: 'At Create Page',
+          icon: 'none',
+          duration: 1500,
+          mask: true,
+        });
+      }
+    },
+  },
+  attached: function () {  
+    // console.log("bottom");
+    const {onHome, onProfile, onCreate} = app.globalData
+    this.setData({onHome, onProfile, onCreate})
   }
 })

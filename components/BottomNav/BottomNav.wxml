@@ -1,8 +1,5 @@
 <view class="bottom_nav_wrapper">
-    <navigator class="image_1" url="/pages/home/home"><image class="bottom_nav_image" src="/icon/others/house.svg" mode="widthFix" />
-      </navigator>
-    <navigator class="image_2" url="/pages/profile/profile"><image class="bottom_nav_image" src="/icon/others/user.svg" mode="widthFix" />
-      </navigator>
-    <navigator class="image_3" url="/pages/createReview/createReview" ><image class="bottom_nav_image" src="/icon/others/pen.svg" mode="widthFix" />
-    </navigator>
+    <image class="bottom_nav_image" src="/icon/others/house.svg" mode="widthFix" bind:tap="onTapHome" />
+    <image class="bottom_nav_image" src="/icon/others/user.svg" mode="widthFix" bind:tap="onTapProfile" />
+    <image class="bottom_nav_image" src="/icon/others/pen.svg" mode="widthFix" bind:tap="onTapCreate" />
 </view>
