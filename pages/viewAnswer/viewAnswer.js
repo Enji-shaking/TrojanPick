@@ -1,7 +1,3 @@
-// TODO:
-// 1. PostedTime
-// 3. Upvote Downvote
-
 Page({
   data: {
     questionID: "",
@@ -12,6 +8,8 @@ Page({
     content_len: 0,
     own_question: false,
     own_answer: [],
+    attitude_on_answer: [],
+    votes: [],
 
     openID: "",
   },
@@ -21,9 +19,10 @@ Page({
       name: "getQuestions",
       data:{
         target: "answers",
-        questionID: this.data.questionID
+        questionID: this.data.questionID,
       },
       success: res=>{
+        console.log(res)
         this.setData({
           question: res.result.list[0],
           answers: res.result.list[0].answers
@@ -51,9 +50,32 @@ Page({
       fail: err=>{
         console.log(err)
       }
+    }),
+    wx.cloud.callFunction({
+      name: "getQuestions",
+      data:{
+        target: "answer_votes",
+        questionID: this.data.questionID,
+        openID: this.data.openID
+      },
+      success: res=>{
+        console.log(res.result)
+        for(let i = 0; i < this.data.answers.length; i++){
+          if(this.data.answers[i]._id in res.result){
+            this.data.votes.push(res.result[this.data.answers[i]._id])
+          }
+          else{
+            this.data.votes.push(0)
+          }
+        }
+        this.setData({
+          votes: this.data.votes
+        })
+        console.log(this.data.votes)
+      }
     })
   },
-
+  
   loadEmptyAnswers: function(){
     this.setData({
       answers: [],
@@ -64,8 +86,8 @@ Page({
     const openID = wx.getStorageSync("openID");
     this.setData({openID})
     this.setData({
-      questionID: "21ded5cb5ffd6ed804b50c3f4caa6f28"
-      // questionID: options.questionID
+      // questionID: "21ded5cb5ffd6ed804b50c3f4caa6f28"
+      questionID: options.questionID
     })
     this.searchAnswers()
   },
@@ -129,6 +151,7 @@ Page({
         })
         this.hideModal();
         this.data.answers.push({
+          _id: res.result._id,
           questionID: this.data.questionID,
           openID: this.data.openID,
           content: this.data.content,
@@ -137,9 +160,11 @@ Page({
           postedTime: "111-11-11"
         });
         this.data.own_answer.push(true),
+        this.data.votes.push(0),
         this.setData({
           answers: this.data.answers,
-          own_answer: this.data.own_answer
+          own_answer: this.data.own_answer,
+          votes: this.data.votes
         })
       }
     })
@@ -150,7 +175,7 @@ Page({
       name: "deleteQuestionAnswer",
       data:{
         target: "deleteQuestion",
-        questionID: this.data.question._id
+        questionID: this.data.questionID
       },
       success: res=>{
         this.setData({
@@ -175,14 +200,123 @@ Page({
       success: res=>{
         this.data.answers.splice(e.currentTarget.dataset.index, 1),
         this.data.own_answer.splice(e.currentTarget.dataset.index, 1),
+        this.data.votes.splice(e.currentTarget.dataset.index, 1),
         this.setData({
           answers: this.data.answers,
-          own_answer: this.data.own_answer
+          own_answer: this.data.own_answer,
+          votes: this.data.votes
         })
       },
       fail: err=>{
         console.log(err)
       }
+    })
+  },
+
+  vote_answer_up_cancel: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = 0
+    this.data.answers[e.currentTarget.dataset.index].up_vote_count--
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_up_cancel",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+      }
+    })
+  },
+
+  vote_answer_down_fromUp: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = -1
+    this.data.answers[e.currentTarget.dataset.index].up_vote_count--
+    this.data.answers[e.currentTarget.dataset.index].down_vote_count++
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_down_fromUp",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+      }
+    })
+  },
+
+  vote_answer_up_fromDown: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = 1
+    this.data.answers[e.currentTarget.dataset.index].up_vote_count++
+    this.data.answers[e.currentTarget.dataset.index].down_vote_count--
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_up_fromDown",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+      }
+    })
+  },
+
+  vote_answer_down_cancel: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = 0
+    this.data.answers[e.currentTarget.dataset.index].down_vote_count--
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_down_cancel",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+      }
+    })
+  },
+
+  vote_answer_up_new: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = 1
+    this.data.answers[e.currentTarget.dataset.index].up_vote_count++
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_up_new",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+        questionID: this.data.questionID
+      }
+    })
+  },
+
+  vote_answer_down_new: function(e){
+    this.data.votes[e.currentTarget.dataset.index] = -1
+    this.data.answers[e.currentTarget.dataset.index].down_vote_count++
+    this.setData({
+      votes: this.data.votes,
+      answers: this.data.answers
+      
+    })
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "vote_answer_down_new",
+        openID: this.data.openID,
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+        questionID: this.data.questionID
+      },
     })
   }
 })
