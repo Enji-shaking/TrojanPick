@@ -186,15 +186,29 @@ Component({
     },
 
     deteleTapped: function () {
-      this.triggerEvent("deleteTappedFromReview")
-      wx.cloud.callFunction({
-        name: 'deleteEntries',
-        data: {
-          target: "deleteReview",
-          reviewID: this.data._id,
-          openID: this.data.openID
-        }
-      })
+      wx.showModal({
+        title: 'Reminder',
+        content: 'Are you sure you want to delete this?',
+        showCancel: true,
+        cancelText: 'Cancel',
+        cancelColor: '#000000',
+        confirmText: 'Confirm',
+        confirmColor: '#3CC51F',
+        success: (result) => {
+          if (result.confirm) {
+            console.log("confirm"); 
+            this.triggerEvent("deleteTappedFromReview")
+            wx.cloud.callFunction({
+              name: 'deleteEntries',
+              data: {
+                target: "deleteReview",
+                reviewID: this.data._id,
+                openID: this.data.openID
+              }
+            })
+          }
+        },
+      });
     },
 
     //modal

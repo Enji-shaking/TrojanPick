@@ -59,6 +59,10 @@ Page({
             workloadRating:(rating.workloadRating).toFixed(2),
           })
         }
+        this.counter--;
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
       },
       fail(err){
         console.log(err)
@@ -77,6 +81,10 @@ Page({
       success: (res)=>{
         console.log(res);
         this.setData({totalPage: res.result})
+        this.counter--;
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
       }
     })
   },
@@ -96,6 +104,10 @@ Page({
         this.setData({
           reviews: res.result
         })
+        this.counter--;
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
       },
       fail(err){
         console.log(err)
@@ -111,25 +123,39 @@ Page({
     const openID = wx.getStorageSync("openID");
     this.setData({professorID, openID})
   },
+  counter:0,
   onShow: function (param) {  
+    this.counter = 3
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     this.getProfessorInfo(this.data.professorID,undefined)
-    // this.getTotalPageForReviewsForProfessor(this.data.professorID)
-    // this.getReviewsForProfessorForPage(1, this.data.professorID)
     this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1, undefined, this.data.professorID)
   },
   
   handlePagination(e){
     console.log(e.detail);
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     this.setData({currentPageInReviews: e.detail})
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
   handlePicker(e){
     console.log(e);
+    this.counter = 3
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     const courseID = e.detail
     this.setData({currentPageInReviews: 1, courseID: courseID})
+    this.getProfessorInfo(this.data.professorID,this.data.courseID);
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1,this.data.courseID,this.data.professorID)
-    this.getProfessorInfo(this.data.professorID,this.data.courseID);
   }
 })
