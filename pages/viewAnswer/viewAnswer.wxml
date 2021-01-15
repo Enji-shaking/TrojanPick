@@ -7,23 +7,20 @@
     <view class='top'>
       <text class="question-icon icon"></text>
       <text class="question-text">{{question.content}}</text>
-      <text class="delete-icon icon"></text>
+      <text wx:if="{{own_question}}" class="delete-icon icon" bindtap="deleteQuestion"></text>
     </view>
     <view class='bottom'>
       <text class="date-text">{{question.postedTime}}</text>
     </view>
   </view>
-  <view class='answer-box' wx:for="{{question.answers}}" wx:for-index="index">
+  <view class='answer-box' wx:for="{{answers}}" wx:for-index="index">
     <view class='top'>
       <text class="answer-icon icon"></text>
       <text class="answer-text">{{item.content}}</text>
     </view>
     <view class='bottom'>
       <text class="date-text">{{item.postedTime}}</text>
-      <text class="delete-icon"></text>
-      <text class="upvote-icon downvote_grey-icon"></text>
-      <text class="upvote_grey-icon downvote-icon"></text>
-      <text class="upvote_grey-icon downvote_grey-icon"></text>
+      <text wx:if="{{own_answer[index]}}" data-index="{{index}}" bindtap="deleteAnswer" class="delete-icon icon" ></text>
     </view>
   </view>
 </view>
