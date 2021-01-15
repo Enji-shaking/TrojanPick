@@ -188,7 +188,26 @@ exports.main = async (event, context) => {
         }).get()).data;
         data.list[i] = temp;
       }else{
-        data.list[i] = undefined;
+        console.log("deleted");
+        console.log(data.list[i]);
+        let item = {
+          deleted:true,
+          content:"[用户已删除评论]",
+          down_vote_count:0,
+          favoriteCount:0,
+          commentCount:0,
+          up_vote_count:0
+        }
+        item.professorInfo=(await db.collection('professors').where({
+          _id:data.list[i].professorID
+        }).get()).data;
+        item.courseInfo = (await db.collection('courses').where({
+          _id:data.list[i].courseID
+        }).get()).data;
+        item.userInfo=(await db.collection('users').where({
+          openID:data.list[i].ownerOpenID
+        }).get()).data;
+        data.list[i] = item;
       }
     }
     console.log(data.list);
