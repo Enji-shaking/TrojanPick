@@ -15,6 +15,10 @@ Component({
     isHot:{
       type:"Boolean",
       value:true
+    },
+    showHot:{
+      type:"Boolean",
+      value:true
     }
   },
 

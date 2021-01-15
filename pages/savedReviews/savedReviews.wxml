@@ -11,6 +11,6 @@
   </picker>
   <BottomNav></BottomNav>
   <Rating wx:for="{{reviews}}" wx:key="_id" data-index="{{index}}" item="{{item}}" bind:unsaveADeletedReview="unsaveADeletedReview" bind:deleteTappedFromReview="deleteTappedFromReview" ></Rating>
-  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}"></Pagination>
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
 
 </view>

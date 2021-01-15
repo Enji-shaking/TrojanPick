@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/savedReviews/savedReviews",
+    "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
-    "pages/pastReviews/pastReviews",
-    "pages/savedReviews/savedReviews",
     "pages/profile/profile",
     "pages/createReview/createReview",
     "pages/reviewInfo/reviewInfo",
