@@ -1,16 +1,17 @@
 // TODO:
 // 1. PostedTime
-// 2. Delete Answer
 // 3. Upvote Downvote
 
 Page({
   data: {
     questionID: "",
     question: "",
+    answers: [],
     showModal: false,
     content: "",
     content_len: 0,
-    submittedNewAnswer: false,
+    own_question: false,
+    own_answer: [],
 
     openID: "",
   },
@@ -25,14 +26,37 @@ Page({
       success: res=>{
         this.setData({
           question: res.result.list[0],
+          answers: res.result.list[0].answers
         })
         if(res.result.list[0].answers[0] === undefined){
           this.loadEmptyAnswers()
         }
+        if(this.data.question.openID === this.data.openID){
+          this.setData({
+            own_question: true
+          })
+        }
+        for(var i = 0; i < this.data.answers.length; i++){
+          if(this.data.answers[i].openID === this.data.openID){
+            this.data.own_answer.push(true)
+          }
+          else{
+            this.data.own_answer.push(false)
+          }
+        }
+        this.setData({
+          own_answer: this.data.own_answer
+        })
       },
       fail: err=>{
         console.log(err)
       }
+    })
+  },
+
+  loadEmptyAnswers: function(){
+    this.setData({
+      answers: [],
     })
   },
 
@@ -104,7 +128,7 @@ Page({
           title: '回答成功'
         })
         this.hideModal();
-        this.data.question.answers.push({
+        this.data.answers.push({
           questionID: this.data.questionID,
           openID: this.data.openID,
           content: this.data.content,
@@ -112,9 +136,52 @@ Page({
           down_vote_count: 0,
           postedTime: "111-11-11"
         });
+        this.data.own_answer.push(true),
         this.setData({
-          question: this.data.question
+          answers: this.data.answers,
+          own_answer: this.data.own_answer
         })
+      }
+    })
+  },
+
+  deleteQuestion: function(){
+    wx.cloud.callFunction({
+      name: "deleteQuestionAnswer",
+      data:{
+        target: "deleteQuestion",
+        questionID: this.data.question._id
+      },
+      success: res=>{
+        this.setData({
+          question: ""
+        })
+        this.loadEmptyAnswers()
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
+    })
+  },
+
+  deleteAnswer: function(e){
+    console.log(this.data.answers[e.currentTarget.dataset.index]._id)
+    wx.cloud.callFunction({
+      name: 'deleteQuestionAnswer',
+      data:{
+        target: 'deleteAnswer',
+        answerID: this.data.answers[e.currentTarget.dataset.index]._id
+      },
+      success: res=>{
+        this.data.answers.splice(e.currentTarget.dataset.index, 1),
+        this.data.own_answer.splice(e.currentTarget.dataset.index, 1),
+        this.setData({
+          answers: this.data.answers,
+          own_answer: this.data.own_answer
+        })
+      },
+      fail: err=>{
+        console.log(err)
       }
     })
   }
