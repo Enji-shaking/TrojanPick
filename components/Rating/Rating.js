@@ -1,5 +1,13 @@
 // components/Rating/Rating.js
 
+//This component has three events could be triggered from outside
+//unsaveADeletedReview: this should only be triggered on the page of saved reviews. This should work as delete the review from the page
+//deleteTappedFromReview: this corresponds to tap the delete button from the review. Now, it's called from reviewInfo, "courseInfo/professorInfo,etc", and savedReviews
+  // in reviewInfo, it goes back a page
+  // in the latter, it manipulate the array
+  // in the saved reviews, it should manipulate the array
+//addNewComment: correspond to add a new comment in the page of reviewInfo, which would add comments below
+
 Component({
   /**
    * 组件的属性列表
@@ -188,7 +196,31 @@ Component({
         })
       }
     },
-
+    savedTappedDeleted: function(){
+      wx.showModal({
+        title: 'Reminder',
+        content: 'This record is only available for you. If you decide to unsave this, it would be deleted permanently',
+        showCancel: true,
+        cancelText: 'Cancel',
+        cancelColor: '#000000',
+        confirmText: 'Confirm',
+        confirmColor: '#3CC51F',
+        success: (result) => {
+          if (result.confirm) {
+            this.triggerEvent("unsaveADeletedReview")
+            wx.cloud.callFunction({
+              name: 'vote_save',
+              data: {
+                target: "unsave_review",
+                openID: this.data.openID,
+                reviewID: this.data._id
+              }
+            })
+          }
+        }
+      });
+        
+    },
     deteleTapped: function () {
       wx.showModal({
         title: 'Reminder',

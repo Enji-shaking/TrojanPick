@@ -26,7 +26,7 @@
     </view>
   </view>
 
-  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}">
+  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}" hover-class="none">
     <view class="text">
       {{content}}
     </view>
@@ -84,10 +84,16 @@
       <image src="../../icon/others/comment.svg"></image>
       <text>{{commentCount}}</text>
     </view>
-    <view bind:tap="saveTapped">
+
+    <view bind:tap="saveTapped" wx:if="{{!deleted}}">
       <image src="{{saved_by_me===true?'../../icon/others/favorite.svg':'../../icon/others/favorite_grey.svg'}}"></image>
       <text>{{favoriteCount}}</text>
     </view>
+
+    <view bind:tap="savedTappedDeleted" wx:if="{{deleted}}">
+      <image src="{{'../../icon/others/favorite_grey.svg'}}"></image>
+    </view>
+
   </view>
 </view>
 

@@ -200,5 +200,15 @@ Page({
         }
     })
     .catch(console.error)
-  }
+  },
+  unsaveADeletedReview: function (e) {  
+    const d = this.data.reviews
+    d.splice(e.currentTarget.dataset.index, 1)
+    this.setData({reviews: d})
+  },
+  deleteTappedFromReview(e) {
+    const d = this.data.reviews
+    d.splice(e.target.dataset.index, 1);
+    this.setData({ reviews: d })
+  },
 })

@@ -157,5 +157,10 @@ Page({
       })
     })
     .catch(console.error)
-  }
+  },
+  deleteTappedFromReview(e) {
+    const d = this.data.reviews
+    d.splice(e.target.dataset.index, 1);
+    this.setData({ reviews: d })
+  },
 })
