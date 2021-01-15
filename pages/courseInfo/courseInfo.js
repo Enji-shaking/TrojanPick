@@ -18,7 +18,7 @@ Page({
     reviews: [],
     questions: [1, 2, 3],
     totalPage: 0,
-    currentPageInReviews: 1,
+    currentPageInReviews: 0,
     professorID: undefined,
     openID: "",
     dummy: 1
@@ -133,8 +133,13 @@ Page({
   handlePagination(e) {
     console.log(e.detail);
     this.setData({ currentPageInReviews: e.detail })
-    this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    if(e.detail==0){
+      
+    }else{
+      this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    }
   },
+
   deleteTappedFromReview(e) {
     console.log(e);
     const d = this.data.reviews

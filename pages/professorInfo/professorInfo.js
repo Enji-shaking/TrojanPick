@@ -20,7 +20,7 @@ Page({
     professorID: undefined,
     courseID:undefined,
     totalPage: 0,
-    currentPageInReviews: 1,
+    currentPageInReviews: 0,
     openID: ""
   },
   
@@ -131,5 +131,8 @@ Page({
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1,this.data.courseID,this.data.professorID)
     this.getProfessorInfo(this.data.professorID,this.data.courseID);
+  },
+  getHotReviewsForCourseForProfessor(courseID,professorID){
+
   }
 })

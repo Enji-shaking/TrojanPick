@@ -3,11 +3,18 @@
   color: white;
   /* text-decoration: underline; */
   background-color: #FFC61B;
+  border-radius: 15rpx 15rpx 15rpx 15rpx;
+}
+.hot{
+  width: max-content;
+  margin: auto;
+  margin-top: 50rpx;
+  padding:10rpx;
 }
 .container{
   width: 60%;
   margin: auto;
-  margin-top: 50rpx;
+  margin-top: 20rpx;
   margin-bottom: 50rpx;
   display: flex;
   flex-direction: row;
@@ -16,6 +23,5 @@
 .container view{
   width: 50rpx;
   height: 50rpx;
-  border-radius: 15rpx 15rpx 15rpx 15rpx;
   text-align: center;
 }

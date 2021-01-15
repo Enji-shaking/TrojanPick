@@ -28,7 +28,7 @@
   <!-- questions and anwers -->
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
 
-  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}"></Pagination>
+  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{currentPageInReviews==0}}"></Pagination>
   <view class="questionTitle">课程问答</view>
 
 

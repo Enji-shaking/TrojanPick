@@ -11,6 +11,10 @@ Component({
     activePage:{
       type: "int",
       value: 1
+    },
+    isHot:{
+      type:"Boolean",
+      value:true
     }
   },
 

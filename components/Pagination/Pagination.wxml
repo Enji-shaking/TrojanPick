@@ -1,8 +1,9 @@
+<view bindtap="buttonTapped" data-page="{{0}}" class="{{isHot?'hot active':'hot'}}">热门</view>
 <view class="container">
     <view bindtap="buttonTapped" data-page="{{1}}">...</view>
     <view wx:if="{{activePage-2>0}}" data-page="{{activePage-2}}" bindtap="buttonTapped" class="">{{activePage-2}}</view>
     <view wx:if="{{activePage-1>0}}" data-page="{{activePage-1}}" bindtap="buttonTapped">{{activePage-1}}</view>
-    <view data-page="{{activePage}}" bindtap="buttonTapped" class="active">{{activePage}}</view>
+    <view data-page="{{activePage}}" bindtap="buttonTapped" class="{{isHot?'':'active'}}">{{activePage}}</view>
     <view wx:if="{{activePage+1<=pages}}" data-page="{{activePage+1}}" bindtap="buttonTapped">{{activePage+1}}</view>
     <view wx:if="{{activePage+2<=pages}}" data-page="{{activePage+2}}" bindtap="buttonTapped">{{activePage+2}}</view>
     <!-- <view wx:for="{{pages}}" wx:key="index" wx:for-index="index" data-page="{{index+1}}" bindtap="buttonTapped" class="{{(activePage-1)===index?'active':''}}">
