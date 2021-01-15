@@ -135,14 +135,14 @@ Page({
       return false
     }
     wx.cloud.callFunction({
-      name: 'createAnswer',
+      name: 'addEntries',
       data: {
+        target: "createAnswer",
         questionID: this.data.questionID,
         openID: this.data.openID,
         content: this.data.content,
         up_vote_count: 0,
-        down_vote_count: 0,
-        postedTime: "111-11-11"
+        down_vote_count: 0
       },
       success: res=>{
         wx.showToast({
@@ -172,7 +172,7 @@ Page({
 
   deleteQuestion: function(){
     wx.cloud.callFunction({
-      name: "deleteQuestionAnswer",
+      name: "deleteEntries",
       data:{
         target: "deleteQuestion",
         questionID: this.data.questionID
@@ -190,9 +190,8 @@ Page({
   },
 
   deleteAnswer: function(e){
-    console.log(this.data.answers[e.currentTarget.dataset.index]._id)
     wx.cloud.callFunction({
-      name: 'deleteQuestionAnswer',
+      name: 'deleteEntries',
       data:{
         target: 'deleteAnswer',
         answerID: this.data.answers[e.currentTarget.dataset.index]._id
