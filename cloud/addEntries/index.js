@@ -29,6 +29,28 @@ exports.main = async (event, context) => {
     return await p2
   }else if(target === "createReview"){
   const { professorID, content, courseID, anonymous } = event
+
+  const pastRatingCourse =( await db.collection("reviews")
+          .where({openID: openID, courseID: courseID})
+          .count()).total
+  if(pastRatingCourse > 2){
+    return {success: false, content: `2/2 limt reached for this course`}
+  }
+
+  const pastRatingProfessor =( await db.collection("reviews")
+          .where({openID: openID, professorID: professorID})
+          .count()).total
+  if(pastRatingProfessor > 4){
+    return {success: false, content: `4/4 limt reached for this professor`}
+  }
+
+  const pastRating =( await db.collection("reviews")
+          .where({openID: openID})
+          .count()).total
+  if(pastRating > 50){
+    return {success: false, content: `50/50 limit reached for all reviews`}
+  }
+
   console.log(event);
     let numReviews
     let workloadRating

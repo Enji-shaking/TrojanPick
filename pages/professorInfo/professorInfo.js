@@ -1,138 +1,168 @@
 // pages/professorInfo/professorInfo.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    professorName:"",
-    overallRating:"",
-    difficultyRating:0,
-    interestRating:0,
-    workloadRating:0,
-    teachingRating:0,
-    reviews:[],
+    professorName: "",
+    overallRating: "",
+    difficultyRating: 0,
+    interestRating: 0,
+    workloadRating: 0,
+    teachingRating: 0,
+    reviews: [],
     // pageNumber:1,
     // itemNumberPerPage:2,
-    courseTaught:[{
-      courseCode:"ITP 115",
-      courseUnit:2,
+    courseTaught: [{
+      courseCode: "ITP 115",
+      courseUnit: 2,
     }],
     professorID: undefined,
-    courseID:undefined,
+    courseID: undefined,
     totalPage: 0,
     currentPageInReviews: 0,
     openID: ""
   },
-  
-  getProfessorInfo(professorID,courseID){
+
+  getProfessorInfo(professorID, courseID) {
     wx.cloud.callFunction({
-      name:'getInfoById',
-      data:{
+      name: 'getInfoById',
+      data: {
         professorID: professorID,
         openID: this.data.openID,
-        target:'getProfessorInfo',
-        courseID:courseID
+        target: 'getProfessorInfo',
+        courseID: courseID
       },
-      success: (res)=>{
+      success: (res) => {
         console.log(professorID)
         console.log(courseID)
         console.log(res);
         console.log(res.result.data.data[0]);
         let professor = res.result.data.data[0];
-        let overall = (parseFloat(professor.difficultyRating+professor.teachingRating+professor.workloadRating+professor.interestingRating)/4.0).toFixed(2);
+        let overall = (parseFloat(professor.difficultyRating + professor.teachingRating + professor.workloadRating + professor.interestingRating) / 4.0).toFixed(2);
         this.setData({
-          professorName:professor.professorName,
-          overallRating:overall,
-          difficultyRating:(professor.difficultyRating).toFixed(2),
-          interestRating:(professor.interestingRating).toFixed(2),
-          teachingRating:(professor.teachingRating).toFixed(2),
-          workloadRating:(professor.workloadRating).toFixed(2),
+          professorName: professor.professorName,
+          overallRating: overall,
+          difficultyRating: (professor.difficultyRating).toFixed(2),
+          interestRating: (professor.interestingRating).toFixed(2),
+          teachingRating: (professor.teachingRating).toFixed(2),
+          workloadRating: (professor.workloadRating).toFixed(2),
         })
-        if(res.result.rating){
+        if (res.result.rating) {
           let rating = res.result.rating.data[0];
-          overall = parseFloat(rating.difficultyRating+rating.teachingRating+rating.workloadRating+rating.interestingRating)/4.0;
+          overall = parseFloat(rating.difficultyRating + rating.teachingRating + rating.workloadRating + rating.interestingRating) / 4.0;
           this.setData({
-            overallRating:(overall).toFixed(2),
-            difficultyRating:(rating.difficultyRating).toFixed(2),
-            interestRating:(rating.interestingRating).toFixed(2),
-            teachingRating:(rating.teachingRating).toFixed(2),
-            workloadRating:(rating.workloadRating).toFixed(2),
+            overallRating: (overall).toFixed(2),
+            difficultyRating: (rating.difficultyRating).toFixed(2),
+            interestRating: (rating.interestingRating).toFixed(2),
+            teachingRating: (rating.teachingRating).toFixed(2),
+            workloadRating: (rating.workloadRating).toFixed(2),
           })
         }
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       },
-      fail(err){
+      fail(err) {
         console.log(err)
       }
     })
   },
-  getTotalPageForReviewsForCourseForProfessor: function(courseID, professorID){
+  getTotalPageForReviewsForCourseForProfessor: function (courseID, professorID) {
     wx.cloud.callFunction({
-      name:'getReviews',
-      data:{
+      name: 'getReviews',
+      data: {
         courseID: courseID,
-        target:'get_total_page_of_reviews_for_course_for_professor',
+        target: 'get_total_page_of_reviews_for_course_for_professor',
         openID: this.data.openID,
         professorID: professorID
       },
-      success: (res)=>{
+      success: (res) => {
         console.log(res);
-        this.setData({totalPage: res.result})
+        this.setData({ totalPage: res.result })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       }
     })
   },
 
-  getReviewsForCourseForProfessorForPage: function (page, courseID, professorID) { 
+  getReviewsForCourseForProfessorForPage: function (page, courseID, professorID) {
     wx.cloud.callFunction({
-      name:'getReviews',
-      data:{
+      name: 'getReviews',
+      data: {
         courseID: courseID,
-        target:'get_reviews_for_course_for_professor_for_page',
+        target: 'get_reviews_for_course_for_professor_for_page',
         professorID: professorID,
         openID: this.data.openID,
         currentPageInReviews: page
       },
-      success: (res)=>{
+      success: (res) => {
         console.log(res);
         this.setData({
           reviews: res.result
         })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       },
-      fail(err){
+      fail(err) {
         console.log(err)
       }
     })
-   },
+  },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
+    // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
-    
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
     const { professorID } = options
     const openID = wx.getStorageSync("openID");
-    this.setData({professorID, openID})
+    this.setData({ professorID, openID })
   },
-  onShow: function (param) {  
-    this.getProfessorInfo(this.data.professorID,undefined)
-    // this.getTotalPageForReviewsForProfessor(this.data.professorID)
-    // this.getReviewsForProfessorForPage(1, this.data.professorID)
+  counter: 0,
+  onShow: function (param) {
+    this.counter = 3
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+    this.getProfessorInfo(this.data.professorID, undefined)
     this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1, undefined, this.data.professorID)
   },
-  
-  handlePagination(e){
+
+  handlePagination(e) {
     console.log(e.detail);
-    this.setData({currentPageInReviews: e.detail})
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+    this.setData({ currentPageInReviews: e.detail })
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
-  handlePicker(e){
+  handlePicker(e) {
     console.log(e);
+    this.counter = 3
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     const courseID = e.detail
-    this.setData({currentPageInReviews: 1, courseID: courseID})
+    this.setData({ currentPageInReviews: 1, courseID: courseID })
+    this.getProfessorInfo(this.data.professorID, this.data.courseID);
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
-    this.getReviewsForCourseForProfessorForPage(1,this.data.courseID,this.data.professorID)
-    this.getProfessorInfo(this.data.professorID,this.data.courseID);
+    this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
+    this.getProfessorInfo(this.data.professorID, this.data.courseID);
   },
-  getHotReviewsForCourseForProfessor(courseID,professorID){
+  getHotReviewsForCourseForProfessor(courseID, professorID) {
 
   }
 })

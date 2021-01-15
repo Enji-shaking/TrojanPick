@@ -69,6 +69,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    onHome: true,
+    onProfile: false,
+    onCreate: false,
   }
 })

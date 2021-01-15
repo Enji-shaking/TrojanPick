@@ -1,4 +1,5 @@
 // pages/courseInfo/courseInfo.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -64,6 +65,10 @@ Page({
             workloadRating: (rating.workloadRating).toFixed(2),
           })
         }
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       },
       fail(res) {
         console.log(res)
@@ -80,8 +85,12 @@ Page({
         professorID: professorID
       },
       success: (res) => {
-        console.log(res);
+        console.log(res)
         this.setData({ totalPage: res.result })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       }
     })
   },
@@ -101,6 +110,10 @@ Page({
         this.setData({
           reviews: res.result
         })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       },
       fail(err) {
         console.log(err)
@@ -108,9 +121,10 @@ Page({
     })
   },
   onLoad: function (options) {
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
     console.log("onload");
-    options.courseID = "85ff8afa5fe0d3150057a17d0df84aec"
-    // options.courseID=this.data.courseID;
     const { courseID } = options
     // console.log(courseID);
     const openID = wx.getStorageSync("openID");
@@ -119,25 +133,30 @@ Page({
       courseID: courseID,
       openID: openID
     })
+  },
+  counter: 0,
+
+  onShow: function () {
+    this.counter = 3
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+
     this.getCourseInfo(this.data.courseID, undefined)
     //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
   },
-  // onShow: function () {
-  //   this.getCourseInfo(this.data.courseID, undefined)
-  //   //default with no professor
-  //   this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
-  //   this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
-  // },
   handlePagination(e) {
     console.log(e.detail);
     this.setData({ currentPageInReviews: e.detail })
-    if(e.detail==0){
-      
-    }else{
-      this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
-    }
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+    this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
 
   deleteTappedFromReview(e) {
@@ -175,6 +194,11 @@ Page({
   //set this.data.professorID here
   handlePicker(e) {
     console.log(e);
+    this.counter = 2
+    wx.showLoading({
+      mask: true,
+    });
+
     const professorID = e.detail
     this.setData({ currentPageInReviews: 1, professorID: professorID })
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)

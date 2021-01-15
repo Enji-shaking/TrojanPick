@@ -243,24 +243,37 @@ Page({
 
   // 提交Review
   submitReview:function(e){
-    if(this.data.courseCode.trim() === "" || this.data.professorName.trim() === "" || this.data.content.trim() === ""){
+    if(this.data.courseCode.trim() === ""){
       wx.showToast({
         icon: 'none',
-        title: '未填写完成'
+        title: 'Please enter a course code'
+      })
+      return false;
+    } else if(this.data.professorName.trim() === "") {
+      wx.showToast({
+        icon: 'none',
+        title: 'Please enter a professor name'
+      })
+      return false;
+    }
+    else if(this.data.content.trim() === ""){
+      wx.showToast({
+        icon: 'none',
+        title: 'Please enter content'
       })
       return false;
     }
     else if(!this.data.correctCourse){
       wx.showToast({
         icon: 'none',
-        title: '请填写有效课程'
+        title: 'Course code invalid'
       })
       return false;
     }
     else if(!this.data.correctProfessor){
       wx.showToast({
         icon: 'none',
-        title: '请填写有效教授'
+        title: 'Professor name invalid'
       })
       return false;
     }
@@ -285,16 +298,26 @@ Page({
       },
       success: res=>{
         console.log("提交Review成功")
-        wx.showToast({
-          icon: "success",
-          title: "提交成功"
-        })
-        // 返回上一页面
-        setTimeout(function(){
-          wx.navigateBack({
-            delta: 1,
+        console.log(res);
+        if(res.result && res.result.success === false){
+          wx.showToast({
+            icon: "none",
+            title: res.result.content
           })
-         }, 2000)
+        }else{
+          wx.showToast({
+            title: 'Added successfully',
+            mask: true,
+            success: (result) => {
+              setTimeout(function(){
+                wx.navigateBack({
+                  delta: 1,
+                })
+               }, 2000)
+            },
+          });
+        }
+        // 返回上一页面
       },
       fail: err=>{
         console.log("提交Review失败", err)

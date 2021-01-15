@@ -38,17 +38,34 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    
+      
     deteleTapped: function(){
-      this.triggerEvent("deleteTappedFromComment")
-      wx.cloud.callFunction({
-        name: 'deleteEntries',
-        data: {
-          target: "deleteComment",
-          commentID: this.data.commentID,
-          openID: this.data.openID,
-          reviewID: this.data.reviewID
-        }
-      })
+      wx.showModal({
+        title: 'Reminder',
+        content: 'Are you sure you want to delete this?',
+        showCancel: true,
+        cancelText: 'Cancel',
+        cancelColor: '#000000',
+        confirmText: 'Confirm',
+        confirmColor: '#3CC51F',
+        success: (result) => {
+          if (result.confirm) {
+            console.log("confirm"); 
+            this.triggerEvent("deleteTappedFromComment")
+            wx.cloud.callFunction({
+              name: 'deleteEntries',
+              data: {
+                target: "deleteComment",
+                commentID: this.data.commentID,
+                openID: this.data.openID,
+                reviewID: this.data.reviewID
+              }
+            })
+          }
+        },
+      });
+
     },
     upVoteTapped: function () {
       console.log(this.data.voted_by_me);

@@ -1,4 +1,6 @@
 // pages/ratingInfo/ratingInfo.js
+const app = getApp();
+
 Page({
 
   /**
@@ -49,12 +51,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
+    wx.showLoading({
+      mask: true,
+      title: "loading"
+    });
+      
     this.review = this.selectComponent("#review")
     const openID = wx.getStorageSync("openID");
     const reviewID = options.reviewID
     console.log(openID);
     this.setData({ openID, reviewID })
-
+    let counter = 2
     wx.cloud.callFunction({
       name:'getReviews',
       data:{
@@ -67,6 +77,10 @@ Page({
       this.setData({
         review:res.result
       })
+      counter--;
+      if(counter === 0){
+        wx.hideLoading();
+      }
     })
     .catch(console.error)
 
@@ -85,6 +99,10 @@ Page({
       })
       console.log(this.data.comments);
       // console.log(this.data.comments[0].content);
+      counter--;
+      if(counter === 0){
+        wx.hideLoading();
+      }
     })
     .catch(console.error)
   }

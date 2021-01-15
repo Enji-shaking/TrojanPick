@@ -8,6 +8,7 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event, context) => {
   const {target, reviewID, openID, questionID, answerID, commentID} = event
+
   if(target === "deleteReview"){
     // get delete_review's ratings
     let delete_review = await db.collection('reviews').where({
@@ -27,6 +28,10 @@ exports.main = async (event, context) => {
     }).remove()
     db.collection("saved_reviews").where({
       openID: openID,
+      reviewID: reviewID
+    }).remove()
+    
+    db.collection("saved_reviews").where({
       reviewID: reviewID
     }).update({
       data:{
