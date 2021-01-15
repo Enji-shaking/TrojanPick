@@ -1,4 +1,5 @@
 // pages/professorInfo/professorInfo.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -116,9 +117,11 @@ Page({
    },
   onLoad: function (options) {
     //load the data from database, calculate the average of ratings and overall ratings
-    options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
+    // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
-    
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
     const { professorID } = options
     const openID = wx.getStorageSync("openID");
     this.setData({professorID, openID})

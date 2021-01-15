@@ -1,4 +1,5 @@
 // pages/courseInfo/courseInfo.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -120,9 +121,10 @@ Page({
     })
   },
   onLoad: function (options) {
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
     console.log("onload");
-    options.courseID = "85ff8afa5fe0d3150057a17d0df84aec"
-    // options.courseID=this.data.courseID;
     const { courseID } = options
     // console.log(courseID);
     const openID = wx.getStorageSync("openID");

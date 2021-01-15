@@ -1,4 +1,5 @@
 // components/Rating/Rating.js
+
 Component({
   /**
    * 组件的属性列表
@@ -63,7 +64,8 @@ Component({
    */
   methods: {
     upVoteTapped: function () {
-      if (this.data.item.voted_by_me === 0) {
+      if (this.data.voted_by_me === 0) {
+        console.log("up, 0");
         this.setData({
           voted_by_me: 1,
           up_vote_count: this.data.up_vote_count + 1
@@ -80,6 +82,7 @@ Component({
           }
         })
       } else if (this.data.voted_by_me === -1) {
+        console.log("up, -1");
         this.setData({ voted_by_me: 1, up_vote_count: this.data.up_vote_count + 1, down_vote_count: this.data.down_vote_count - 1 })
         wx.cloud.callFunction({
           name: 'vote_save',
@@ -93,6 +96,7 @@ Component({
           }
         })
       } else if (this.data.voted_by_me === 1) {
+        console.log("up, 1");
         this.setData({ voted_by_me: 0, up_vote_count: this.data.up_vote_count - 1 })
         wx.cloud.callFunction({
           name: 'vote_save',

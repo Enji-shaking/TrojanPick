@@ -80,7 +80,7 @@ Component({
       }
     },
   },
-  attached: function () {  
+  ready: function () {  
     // console.log("bottom");
     const {onHome, onProfile, onCreate} = app.globalData
     this.setData({onHome, onProfile, onCreate})

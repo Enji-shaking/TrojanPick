@@ -8,6 +8,11 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event, context) => {
   const {target, reviewID, openID, questionID, answerID, commentID} = event
+  
+  // if(target === "nonono"){
+  //   return -1
+  // }
+
   if(target === "deleteReview"){
     // get delete_review's ratings
     let delete_review = await db.collection('reviews').where({

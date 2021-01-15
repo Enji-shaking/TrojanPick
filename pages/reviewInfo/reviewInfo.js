@@ -1,4 +1,6 @@
 // pages/ratingInfo/ratingInfo.js
+const app = getApp();
+
 Page({
 
   /**
@@ -49,6 +51,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = false;
     wx.showLoading({
       mask: true,
       title: "loading"

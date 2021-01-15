@@ -165,10 +165,15 @@ Page({
     // wx.cloud.callFunction({
     //   name: "deleteEntries",
     //   data:{
-    //     target: "deteleComment"
-    //   }
+    //     target: "nonono"
+    //   },
+    //   success: res=>{console.log(res)},
+    //   fail: e=>{console.log(e)}
     // })
-
+    // wx.showToast({
+    //   icon: 'none',
+    //   title: "2/2 limt reached for all reviews"
+    // })
   },
 
   getOpenID(){

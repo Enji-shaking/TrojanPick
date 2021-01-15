@@ -36,8 +36,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  counter: 3,
   onLoad: function (options) {
     // options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+      
     this.setData({
       openID:options.openID
     })
@@ -47,6 +53,11 @@ Page({
   },
 
   chooseCoursePicker(e){
+    this.counter = 2
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     console.log(this.data.course_list);
     let self = this;
     this.setData({
@@ -60,6 +71,11 @@ Page({
     this.getTotalPage();
   },
   chooseProPicker(e){
+    this.counter = 2
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     this.setData({
       curProfessorID:this.data.professor_list[e.detail.value].list_id,
       professorName:this.data.professor_list[e.detail.value].list_value
@@ -97,6 +113,10 @@ Page({
         this.setData({
           reviews:reviews,
         });
+        this.counter--
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
       },
       fail(err){
         console.log(err)
@@ -104,6 +124,11 @@ Page({
     })
    },
   handlePagination(e){
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     console.log(e.detail);
     this.setData({currentPageInReviews: e.detail})
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.curCourseID, this.data.curProfessorID,false)
@@ -147,6 +172,10 @@ Page({
         professor_list:professor_list
       })
       console.log(res);
+      this.counter--
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
     })
     .catch(console.error)
   },
@@ -165,6 +194,10 @@ Page({
       this.setData({
         totalPage:res.result
       })
+      this.counter--
+        if(this.counter === 0){
+          wx.hideLoading();
+        }
     })
     .catch(console.error)
   }
