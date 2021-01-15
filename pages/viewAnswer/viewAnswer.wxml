@@ -21,6 +21,24 @@
     <view class='bottom'>
       <text class="date-text">{{item.postedTime}}</text>
       <text wx:if="{{own_answer[index]}}" data-index="{{index}}" bindtap="deleteAnswer" class="delete-icon icon" ></text>
+      <view wx:if="{{votes[index] == 1}}">
+        <text data-index="{{index}}" class="upvote-icon icon" bindtap="vote_answer_up_cancel"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.up_vote_count}}</text>
+        <text data-index="{{index}}" class="downvote-grey-icon icon" bindtap="vote_answer_down_fromUp"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.down_vote_count}}</text>
+      </view>
+      <view wx:if="{{votes[index] == -1}}">
+        <text data-index="{{index}}" class="upvote-grey-icon icon" bindtap="vote_answer_up_fromDown"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.up_vote_count}}</text>
+        <text data-index="{{index}}" class="downvote-icon icon" bindtap="vote_answer_down_cancel"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.down_vote_count}}</text>
+      </view>
+      <view wx:if="{{votes[index] == 0}}">
+        <text data-index="{{index}}" class="upvote-grey-icon icon" bindtap="vote_answer_up_new"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.up_vote_count}}</text>
+        <text data-index="{{index}}" class="downvote-grey-icon icon" bindtap="vote_answer_down_new"></text>
+        <text class="vote-text" data-index="{{index}}">{{item.down_vote_count}}</text>
+      </view>
     </view>
   </view>
 </view>

@@ -189,12 +189,15 @@ exports.main = async (event, context) => {
       }
     })
   }else if(target === "createAnswer"){
-    const {questionID} = event
+    const {content, questionID} = event
     return await db.collection('answers').add({
       data:{ 
         questionID: questionID,
         postedTime: currentTime,
-        openID: openID
+        content: content,
+        openID: openID,
+        up_vote_count: 0,
+        down_vote_count: 0
       }
     })
   }
