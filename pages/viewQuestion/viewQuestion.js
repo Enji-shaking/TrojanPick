@@ -24,6 +24,7 @@ Page({
         courseID: this.data.courseID
       },
       success: res=>{
+        console.log(res);
         this.setData({
           questions: res.result.list,
         })
