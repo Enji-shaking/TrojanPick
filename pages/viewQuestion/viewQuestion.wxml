@@ -17,5 +17,6 @@
   <text wx:if="{{!favored[index]}}" data-index="{{index}}" bindtap="favored_new">good_question | {{item.favoredCount}}</text>
 </view>
 
+<YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>
 
 <BottomNav></BottomNav>
