@@ -73,5 +73,6 @@ App({
     onHome: true,
     onProfile: false,
     onCreate: false,
+    needRefresh: false,
   }
 })

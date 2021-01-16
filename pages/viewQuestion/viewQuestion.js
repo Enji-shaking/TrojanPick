@@ -1,4 +1,6 @@
 // pages/viewQuestion/viewQuestion.js
+const app =  getApp();
+  
 Page({
   data: {
     questions: [],
@@ -19,6 +21,7 @@ Page({
         courseID: this.data.courseID
       },
       success: res=>{
+        console.log(res);
         this.setData({
           questions: res.result.list,
         })
@@ -38,4 +41,11 @@ Page({
     })
     this.searchQuestionsAndAnswers()
   },
+  onShow: function () {
+    if(app.globalData.needRefresh){
+      console.log("HEY");
+      this.searchQuestionsAndAnswers()
+      app.globalData.needRefresh = false
+    }  
+  }
 })

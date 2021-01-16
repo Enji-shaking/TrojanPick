@@ -3,7 +3,7 @@
 <view class='line-1'></view>
 
 
-<navigator class='question-box' wx:for="{{questions}}" wx:for-index ='index' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
+<navigator class='question-box' wx:for="{{questions}}" wx:key="_id" wx:for-index ='index' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
   <view class='question-block'>
     <text class="question-icon icon"></text>
     <text class="q-and-ans">{{item.content}}</text>

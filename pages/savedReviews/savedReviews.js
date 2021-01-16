@@ -39,10 +39,10 @@ Page({
   counter: 3,
   onLoad: function (options) {
     options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
-    // wx.showLoading({
-    //   title: "loading",
-    //   mask: true,
-    // });
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
       
     this.setData({
       openID:options.openID
@@ -54,10 +54,10 @@ Page({
 
   chooseCoursePicker(e){
     this.counter = 2
-    // wx.showLoading({
-    //   title: "loading",
-    //   mask: true,
-    // });
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     console.log(this.data.course_list);
     let self = this;
     this.setData({
@@ -72,10 +72,10 @@ Page({
   },
   chooseProPicker(e){
     this.counter = 2
-    // wx.showLoading({
-    //   title: "loading",
-    //   mask: true,
-    // });
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     this.setData({
       curProfessorID:this.data.professor_list[e.detail.value].list_id,
       professorName:this.data.professor_list[e.detail.value].list_value
@@ -103,11 +103,11 @@ Page({
         let cloud_result = res.result;
         console.log(cloud_result);
         for(let i=0;i<cloud_result.length;i++){
-          if(cloud_result[i].deleted){
+          // if(cloud_result[i].deleted){
+            // reviews.push(cloud_result[i]);
+          // }else{
             reviews.push(cloud_result[i]);
-          }else{
-            reviews.push(cloud_result[i]);
-          }
+          // }
         }
         console.log(reviews);
         this.setData({
@@ -125,10 +125,10 @@ Page({
    },
   handlePagination(e){
     this.counter = 1
-    // wx.showLoading({
-    //   title: "loading",
-    //   mask: true,
-    // });
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     console.log(e.detail);
     this.setData({currentPageInReviews: e.detail})
     this.getReviewsForCourseForProfessorForPage(e.detail, this.data.curCourseID, this.data.curProfessorID,false)

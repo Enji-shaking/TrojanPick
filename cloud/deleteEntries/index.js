@@ -175,7 +175,7 @@ exports.main = async (event, context) => {
         })
     }
 
-  }else if(target === "deteleQuestion"){
+  }else if(target === "deleteQuestion"){
     db.collection("questions").where({
       openID: openID,
       _id: questionID
@@ -183,17 +183,18 @@ exports.main = async (event, context) => {
     db.collection("answers").where({
       questionID: questionID
     }).remove()
-    db.collection("saved_questions").where({
-      openID: openID,
-      questionID: questionID
-    }).update({
-      data:{
-        deleted: true
-      }
-    })
-  }else if(target === "deteleAnswer"){
+    // db.collection("saved_questions").where({
+    //   openID: openID,
+    //   questionID: questionID
+    // }).update({
+    //   data:{
+    //     deleted: true
+    //   }
+    // })
+  }else if(target === "deleteAnswer"){
     db.collection("answers").where({
-      answerID: answerID
+      _id: answerID,
+      openID: openID
     }).remove()
     db.collection("voted_answers").where({
       answerID: answerID
