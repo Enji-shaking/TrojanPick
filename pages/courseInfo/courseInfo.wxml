@@ -33,12 +33,13 @@
 
 
   <view class="line"></view>
-  <navigator class="questions" url="../viewQuestion/viewQuestion?courseID={{courseID}}">
+  <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
       <text>问题1</text>
     </view>
   </navigator>
-  <YellowButton text="我要提问"></YellowButton>
+
+  <YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>
   <BottomNav></BottomNav>
 </view>

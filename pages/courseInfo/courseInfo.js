@@ -240,5 +240,11 @@ Page({
           wx.hideLoading();
         }
     })
+  },
+  navigateToCreateQuestion: function (){
+    wx.navigateTo({
+      url: '/pages/createQuestion/createQuestion?courseID='+this.data.courseID,
+    });
+      
   }
 })
