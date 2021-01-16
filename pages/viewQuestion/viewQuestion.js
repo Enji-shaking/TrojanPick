@@ -114,6 +114,7 @@ Page({
       success: res=>{
         // this.data.favored[e.currentTarget.dataset.index] = false
         this.data.questions[e.currentTarget.dataset.index].favoredCount--
+        this.data.questions[e.currentTarget.dataset.index].favored_by_me = false
         this.setData({
           // favored: this.data.favored,
           questions: this.data.questions
@@ -135,6 +136,7 @@ Page({
       success: res=>{
         // this.data.favored[e.currentTarget.dataset.index] = true
         this.data.questions[e.currentTarget.dataset.index].favoredCount++
+        this.data.questions[e.currentTarget.dataset.index].favored_by_me = true
         this.setData({
           // favored: this.data.favored,
           questions: this.data.questions
