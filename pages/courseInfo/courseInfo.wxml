@@ -33,6 +33,7 @@
 
 
   <view class="line"></view>
+  <view wx:if="{{questions.length == 0}}">目前还没有问题哦 快快去提问吧</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
