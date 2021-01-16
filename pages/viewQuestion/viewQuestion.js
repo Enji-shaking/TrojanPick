@@ -28,61 +28,13 @@ Page({
         this.setData({
           questions: res.result.list,
         })
-        // if(res.result.list[0] === undefined){
-        //   this.loadEmptyQuestions()
-        //   return false
-        // }
-        // for(var i = 0; i < this.data.questions.length; i++){
-        //   if(this.data.questions[i].openID === this.data.openID){
-        //     this.data.own_questions.push(true)
-        //   }
-        //   else{
-        //     this.data.own_questions.push(false)
-        //   }
-        // }
-        // this.setData({
-        //   own_questions: this.data.own_questions
-        // })
+
       },
       fail: err=>{
         console.log(err)
       }
     })
-    // find user's favored questions
-    // wx.cloud.callFunction({
-    //   name: "getQuestions",
-    //   data:{
-    //     target: "question_favored",
-    //     courseID: this.data.courseID,
-    //     openID: this.data.openID
-    //   },
-    //   success: res=>{
-    //     console.log(res)
-    //     if(res.result.length === 0){
-    //       for(let i = 0; i < this.data.questions.length; i++){
-    //         this.data.favored.push(false)
-    //       }
-    //     }
-    //     else{
-    //       for(let i = 0; i < this.data.questions.length; i++){
-    //         inter:
-    //         for(let j = 0; j < res.result.length; j++){
-    //           if(this.data.questions[i]._id === res.result[j]){
-    //             this.data.favored.push(true)
-    //             break inter
-    //           }
-    //           if(j === res.result.length - 1){
-    //             this.data.favored.push(false)
-    //           }
-    //         }
-    //       }
-    //     }
-    //     this.setData({
-    //       favored: this.data.favored
-    //     })
-    //     console.log(this.data.favored)
-    //   }
-    // })
+
   },
 
   deleteQuestion: function(e){

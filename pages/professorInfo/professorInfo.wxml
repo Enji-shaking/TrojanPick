@@ -1,4 +1,5 @@
 <!--pages/professorInfo/professorInfo.wxml-->
+<GradingInfo></GradingInfo>
 <view>
   <Header></Header>
   <view class="title">
