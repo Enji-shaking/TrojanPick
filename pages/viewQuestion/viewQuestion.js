@@ -92,12 +92,13 @@ Page({
         questionID: this.data.questions[e.currentTarget.dataset.index]._id
       },
       success: res=>{
-        this.data.questions.splice(e.currentTarget.dataset.index, 1),
-        this.data.own_questions.splice(e.currentTarget.dataset.index, 1),
+        this.data.questions.splice(e.currentTarget.dataset.index, 1)
+        this.data.own_questions.splice(e.currentTarget.dataset.index, 1)
         this.setData({
           questions: this.data.questions,
           own_question: this.data.own_questions,
         })
+        app.globalData.needRefresh = true
       }
     })
   },

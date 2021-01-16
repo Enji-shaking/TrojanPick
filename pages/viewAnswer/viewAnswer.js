@@ -13,7 +13,6 @@ Page({
     own_answer: [],
     attitude_on_answer: [],
     votes: [],
-
     openID: "",
   },
 
@@ -21,7 +20,7 @@ Page({
     wx.cloud.callFunction({
       name: "getQuestions",
       data:{
-        target: "answers",
+        target: "answersForAQuestion",
         questionID: this.data.questionID,
         openID: this.data.openID
       },

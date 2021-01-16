@@ -7,22 +7,51 @@ cloud.init()
 exports.main = async (event, context) => {
   var db = cloud.database()
   var $ = db.command.aggregate
-  const {target, openID} = event
+  const {target, openID, courseID} = event
   if(target === "questionsAndAnswers"){
-    const {courseID} = event
-    return db.collection('questions').aggregate().sort({
+    const my_favored_questions_raw = await db.collection("favored_questions").where({ 
+      openID: openID,
+      courseID: courseID 
+    }).get()
+    const my_favored_questions = new Set()
+    for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
+      my_favored_questions.add(my_favored_questions_raw.data[i].questionID)
+    }
+  
+    const data = await db.collection('questions').aggregate().sort({
       up_vote_count: -1
     }).match({
         courseID: courseID
     }).lookup({
       from: 'answers',
-      localField: '_id',
-      foreignField: 'questionID',
+      let: {
+          questionID: '$_id'
+      },
+      pipeline: $.pipeline()
+        .match(
+          {questionID: '$$questionID'}
+        )
+        .sort({up_vote_count: -1})
+        .limit(1)
+        .done()
+      ,
+      // foreignField: 'questionID',
       //only need to grab the first answer
       as: 'answers',
     }).end()
+
+    console.log(data);
+
+    data.list.forEach(item=>{
+      if(item._id in my_favored_questions){
+        item.favored_by_me = true
+      }else{
+        item.favored_by_me = false
+      }
+    })
+    return false
   }
-  else if(target === "answers"){
+  else if(target === "answersForAQuestion"){
     const {questionID} = event
     const data = await db.collection('questions').aggregate().sort({
       up_vote_count: -1
@@ -35,16 +64,31 @@ exports.main = async (event, context) => {
       as: 'answers',
     }).end()
     
-    let my_voted_answers_raw = await db.collection("voted_answers").where({ 
+    const my_voted_answers_raw = await db.collection("voted_answers").where({ 
       openID: openID,
       questionID: questionID 
     }).get()
 
-    let my_voted_answers = {}
+    const my_voted_answers = {}
     for (let i = 0; i < my_voted_answers_raw.data.length; i++) {
       my_voted_answers[my_voted_answers_raw.data[i].answerID] = my_voted_answers_raw.data[i].voted_by_me
     }
-    console.log(data);
+    
+    // const my_favored_questions = new Set()
+    let my_favored_questions_raw = await db.collection("favored_questions").where({ 
+      openID: openID,
+      questionID: questionID
+    }).get()
+    for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
+      // my_favored_questions.add(my_favored_questions_raw.data[i].questionID)
+      if(my_favored_questions_raw.data[i].questionID === questionID){
+        data.list[0].posted_by_me = true
+      }
+    }
+    if(data.list[0].posted_by_me === undefined){
+      data.list[0].posted_by_me = false
+    }
+
     data.list[0].answers.forEach(item=>{
       if(item.openID === openID){
         item.posted_by_me = true
@@ -60,28 +104,12 @@ exports.main = async (event, context) => {
 
     return data.list
 
-  }
-  else if(target === "answer_votes"){
-    // check votes for answers for a specific question ID
-    const {questionID, openID} = event
-   
-  }
-  else if(target === "question_favored"){
-    const {courseID, openID} = event
-   let my_favored_questions_raw = await db.collection("favored_questions").where({ 
-      openID: openID,
-      courseID: courseID 
-    }).get()
-    let my_favored_questions = []
-    for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
-      my_favored_questions.push(my_favored_questions_raw.data[i].questionID)
-    }
-    return my_favored_questions
   }else if(target === "top_questions"){
-    const {courseID} = event
     return await db.collection("questions").where({
       courseID: courseID
-    }).orderBy("favoredCount", "desc")
+    })
+    .limit(3)
+    .orderBy("favoredCount", "desc")
     .orderBy("postedTime", "desc").get()
   }
 }

@@ -6,10 +6,10 @@
 <view class='question-box' wx:for="{{questions}}" wx:for-index ='index'>
   <view class='question-block'>
     <text class="question-icon icon"></text>
-    <navigator class="q-and-ans" url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">{{item.content}}</navigator>
+    <navigator class="q-and-ans" url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">{{item.content}}</navigator>
     <text wx:if="{{own_questions[index]}}" data-index="{{index}}" class="delete-icon icon" bindtap="deleteQuestion"></text>
   </view>
-  <navigator class='answer-block' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
+  <navigator class='answer-block' url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
     <text class="answer-icon icon"></text>
     <text class="q-and-ans">{{item.answers[0].content}}</text>
   </navigator>
