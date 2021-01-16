@@ -36,7 +36,7 @@
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
-      <text>问题1</text>
+      <text>{{item}}</text>
     </view>
   </navigator>
 

@@ -268,5 +268,30 @@ exports.main = async (event, context) => {
         .where({answerID: answerID, openID: openID})
         .remove()
     return await Promise.all([p1, p2])
+  }else if(target === "favored_question_cancel"){
+    const p1 = db.collection("questions").where({_id: questionID}).update({
+      data:{
+        favoredCount: _.inc(-1),
+      }
+    })
+    const p2 = db.collection("favored_questions")
+        .where({questionID, openID: openID})
+        .remove()
+    return await Promise.all([p1, p2])
+  }else if(target === "favored_question_new"){
+    const p1 = db.collection("questions").where({_id: questionID}).update({
+      data:{
+        favoredCount: _.inc(1)
+      }
+    })
+    const {courseID} = event
+    const p2 = db.collection("favored_questions").add({
+      data:{
+        openID: openID,
+        questionID: questionID,
+        courseID: courseID
+      }
+    })
+    return await Promise.all([p1, p2])
   }
 }

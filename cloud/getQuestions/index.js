@@ -66,4 +66,22 @@ exports.main = async (event, context) => {
     const {questionID, openID} = event
    
   }
+  else if(target === "question_favored"){
+    const {courseID, openID} = event
+   let my_favored_questions_raw = await db.collection("favored_questions").where({ 
+      openID: openID,
+      courseID: courseID 
+    }).get()
+    let my_favored_questions = []
+    for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
+      my_favored_questions.push(my_favored_questions_raw.data[i].questionID)
+    }
+    return my_favored_questions
+  }else if(target === "top_questions"){
+    const {courseID} = event
+    return await db.collection("questions").where({
+      courseID: courseID
+    }).orderBy("favoredCount", "desc")
+    .orderBy("postedTime", "desc").get()
+  }
 }

@@ -183,6 +183,9 @@ exports.main = async (event, context) => {
     db.collection("answers").where({
       questionID: questionID
     }).remove()
+    db.collection("favored_questions").where({
+      questionID: questionID
+    }).remove()
     // db.collection("saved_questions").where({
     //   openID: openID,
     //   questionID: questionID

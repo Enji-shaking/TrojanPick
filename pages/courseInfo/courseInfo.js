@@ -17,13 +17,35 @@ Page({
     workloadRating: 0,
     teachingRating: 0,
     reviews: [],
-    questions: [1, 2, 3],
+    questions: [],
     totalPage: 0,
     currentPageInReviews: 1,
     professorID: undefined,
     openID: "",
     dummy: 1,
     isHot:true
+  },
+
+  getQuestions: function(){
+    wx.cloud.callFunction({
+      name: "getQuestions",
+      data:{
+        target: "top_questions",
+        courseID: this.data.courseID
+      },
+      success: res=>{
+        var question_num = 3
+        if(res.result.data.length < 3){
+          question_num = res.result.data.length
+        }
+        for(let i = 0; i < question_num; i++){
+          this.data.questions.push(res.result.data[i].content)
+        }
+        this.setData({
+          questions: this.data.questions
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -135,6 +157,7 @@ Page({
       courseID: courseID,
       openID: openID
     })
+    this.getQuestions()
   },
   counter: 0,
 
