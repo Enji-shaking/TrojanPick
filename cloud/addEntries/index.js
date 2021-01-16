@@ -185,7 +185,8 @@ exports.main = async (event, context) => {
         courseID: courseID,
         content: content,
         openID: openID,
-        postedTime: currentTime
+        postedTime: currentTime,
+        favoredCount: 0
       }
     })
   }else if(target === "createAnswer"){
