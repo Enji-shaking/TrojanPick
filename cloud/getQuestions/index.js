@@ -37,12 +37,10 @@ exports.main = async (event, context) => {
         .limit(1)
         .done()
       ,
-      // foreignField: 'questionID',
-      //only need to grab the first answer
+
       as: 'answers',
     }).end()
 
-    console.log(data);
 
     data.list.forEach(item=>{
       if(item._id in my_favored_questions){
@@ -50,8 +48,15 @@ exports.main = async (event, context) => {
       }else{
         item.favored_by_me = false
       }
+      if(item.openID === openID){
+        item.posted_by_me = true
+      }else{
+        item.posted_by_me = false
+      }
+
     })
-    return false
+    console.log(data);
+    return data
   }
   else if(target === "answersForAQuestion"){
     const {questionID} = event
