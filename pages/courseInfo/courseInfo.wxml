@@ -37,7 +37,8 @@
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
-      <text>{{item}}</text>
+      <text>{{item.content}}</text>
+      <text>{{item.favoredCount}}</text>
     </view>
   </navigator>
 

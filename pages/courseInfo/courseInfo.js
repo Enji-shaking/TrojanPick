@@ -39,7 +39,7 @@ Page({
           question_num = res.result.data.length
         }
         for(let i = 0; i < question_num; i++){
-          this.data.questions.push(res.result.data[i].content)
+          this.data.questions.push(res.result.data[i])
         }
         this.setData({
           questions: this.data.questions

@@ -156,5 +156,10 @@ Page({
       this.searchQuestionsAndAnswers()
       app.globalData.needRefresh = false
     }  
+  },
+  navigateToCreateQuestion: function (){
+    wx.navigateTo({
+      url: '/pages/createQuestion/createQuestion?courseID='+this.data.courseID,
+    })
   }
 })
