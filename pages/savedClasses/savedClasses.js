@@ -1,3 +1,6 @@
+const app =  getApp();
+
+  
 // pages/savedClasses/savedClasses.js
 Page({
 
@@ -20,6 +23,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  onShow: function () {  
+    if(app.globalData.needRefresh){
+      this.onLoad()
+      app.globalData.needRefresh = false
+    }  
+  },
   onLoad: function (options) {
     let self = this;
     wx.cloud.callFunction({

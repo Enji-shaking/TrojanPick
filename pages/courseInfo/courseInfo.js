@@ -44,6 +44,10 @@ Page({
         this.setData({
           questions: this.data.questions
         })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       }
     })
   },
@@ -143,7 +147,9 @@ Page({
       }
     })
   },
+  counter: 0,
   onLoad: function (options) {
+    this.counter = 4
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
@@ -158,22 +164,26 @@ Page({
       openID: openID
     })
     this.getQuestions()
-  },
-  counter: 0,
-
-  onShow: function () {
-    this.counter = 3
-    wx.showLoading({
-      title: "loading",
-      mask: true,
-    });
-
     this.getCourseInfo(this.data.courseID, undefined)
-    //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
-    // this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
-    //default get hot reviews
     this.getHotReviewsForCourseForProfessor(this.data.courseID,undefined);
+
+  },
+  onShow: function () {
+    if(app.globalData.needRefresh){
+      this.counter = 4
+      wx.showLoading({
+        title: "loading",
+        mask: true,
+      });
+
+      this.getQuestions()
+      this.getCourseInfo(this.data.courseID, undefined)
+      this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
+      this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
+      app.globalData.needRefresh = false
+    }
+
   },
   handlePagination(e) {
     console.log(e.detail);
@@ -187,6 +197,7 @@ Page({
         isHot:false
       })
       this.setData({ currentPageInReviews: e.detail })
+      
       this.counter = 1
       wx.showLoading({
         title: "loading",
@@ -226,6 +237,7 @@ Page({
         },
       })
     }
+    app.globalData.needRefresh = true
     this.setData({
       isFavorite: !this.data.isFavorite
     })

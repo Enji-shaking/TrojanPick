@@ -120,23 +120,32 @@ Page({
     //load the data from database, calculate the average of ratings and overall ratings
     // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
+    this.counter = 3
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
     const { professorID } = options
     const openID = wx.getStorageSync("openID");
     this.setData({ professorID, openID })
-  },
-  counter: 0,
-  onShow: function (param) {
-    this.counter = 3
-    wx.showLoading({
-      title: "loading",
-      mask: true,
-    });
+
     this.getProfessorInfo(this.data.professorID, undefined)
     this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
     this.getHotReviewsForCourseForProfessor(this.data.professorID,undefined)
+  },
+  counter: 0,
+  
+  onShow: function (param) {
+    if(app.globalData.needRefresh){
+      this.counter = 3
+      wx.showLoading({
+        title: "loading",
+        mask: true,
+      });
+      this.getProfessorInfo(this.data.professorID, undefined)
+      this.getTotalPageForReviewsForCourseForProfessor(undefined, this.data.professorID)
+     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
+      app.globalData.needRefresh = false
+    }
   },
 
   handlePagination(e) {

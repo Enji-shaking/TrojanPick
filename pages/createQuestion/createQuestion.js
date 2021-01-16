@@ -1,3 +1,6 @@
+const app =  getApp();
+
+  
 // pages/createQuestion/createQuestion.js
 Page({
 
@@ -35,11 +38,12 @@ Page({
           icon: 'success',
           duration: 1000
         })
-        // setTimeout(function () {
+        app.globalData.needRefresh = true
+        setTimeout(function () {
           wx.navigateBack({
             delta: 1
           })
-        // }, 1000)
+        }, 1000)
         console.log(res);
       },
       fail: err=>{
@@ -57,52 +61,4 @@ Page({
     console.log(this.openID);
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })
