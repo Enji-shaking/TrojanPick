@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/savedReviews/savedReviews",
+    "pages/savedClasses/savedClasses",
     "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
     "pages/courseInfo/courseInfo",
@@ -8,7 +9,6 @@
     "pages/createReview/createReview",
     "pages/reviewInfo/reviewInfo",
     "pages/home/home",
-    "pages/savedClasses/savedClasses",
     "pages/test/test",
     "pages/testCloud/testCloud",
     "pages/index/index",
