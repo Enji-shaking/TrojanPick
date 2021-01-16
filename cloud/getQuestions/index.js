@@ -7,6 +7,7 @@ cloud.init()
 exports.main = async (event, context) => {
   var db = cloud.database()
   var $ = db.command.aggregate
+  const _ = db.command
   const {target, openID, courseID} = event
   if(target === "questionsAndAnswers"){
     const my_favored_questions_raw = await db.collection("favored_questions").where({ 
@@ -29,7 +30,8 @@ exports.main = async (event, context) => {
       },
       pipeline: $.pipeline()
         .match(
-          {questionID: '$$questionID'}
+          // {questionID: '$$questionID'}
+          _.expr($.eq(['$questionID', '$$questionID']))
         )
         .sort({up_vote_count: -1})
         .limit(1)
