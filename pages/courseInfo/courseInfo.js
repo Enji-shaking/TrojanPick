@@ -125,7 +125,7 @@ Page({
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
-    // options.courseID="a8831daa5fe0cf9d00657ae1018fcc6d";
+    options.courseID="a8831daa5fe0cf9d00657ae1018fcc6d";
     console.log("onload");
     const { courseID } = options
     // console.log(courseID);

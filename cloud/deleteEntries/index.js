@@ -35,7 +35,10 @@ exports.main = async (event, context) => {
       reviewID: reviewID
     }).update({
       data:{
-        deleted: true
+        deleted: true,
+        courseID:courseID,
+        professorID:professorID,
+        ownerOpenID:openID
       }
     })
     db.collection("comments").where({
@@ -174,7 +177,18 @@ exports.main = async (event, context) => {
           }
         })
     }
-
+    //if there is no review between the professor and the course, remove it in the course_professor
+    delete_review = await db.collection('reviews').where({
+      professorID:professorID,
+      courseID:courseID
+    }).get();
+    if(delete_review.data.length==0){//now there is no relationship between the professor and teacher
+      //remove the field in the course_professor
+      db.collection('course_professor').where({
+        professorID:professorID,
+        courseID:courseID
+      }).remove();
+    }
   }else if(target === "deteleQuestion"){
     db.collection("questions").where({
       openID: openID,

@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/courseInfo/courseInfo",
+    "pages/home/home",
     "pages/savedReviews/savedReviews",
     "pages/savedClasses/savedClasses",
     "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
-    "pages/courseInfo/courseInfo",
     "pages/profile/profile",
     "pages/createReview/createReview",
     "pages/reviewInfo/reviewInfo",
-    "pages/home/home",
     "pages/test/test",
     "pages/testCloud/testCloud",
     "pages/index/index",

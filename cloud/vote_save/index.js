@@ -91,7 +91,11 @@ exports.main = async (event, context) => {
     const p2 = db.collection("saved_reviews").add({
       data:{
         openID: openID,
-        reviewID: reviewID
+        reviewID: reviewID,
+        ownerOpenID:"",
+        professorID:"",
+        courseID:"",
+        deleted:false
       }
     })
     return await Promise.all([p1, p2])
