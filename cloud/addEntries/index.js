@@ -1,6 +1,8 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const db = cloud.database()
 const _ = db.command
 
@@ -55,8 +57,8 @@ exports.main = async (event, context) => {
     let numReviews
     let workloadRating
     let difficultyRating
-    let interestingRating
-    let teachingRating
+    let entertainmentRating
+    let enrichmentRating
     // course_professor里面用courseID和professorID进行查找
     let course_professor_Rating = await db.collection('course_professor').where({
       courseID: courseID,
@@ -70,9 +72,9 @@ exports.main = async (event, context) => {
           courseID: courseID,
           professorID: professorID,
           difficultyRating: event.difficultyRating,
-          interestingRating: event.interestingRating,
+          entertainmentRating: event.entertainmentRating,
           workloadRating: event.workloadRating,
-          teachingRating: event.teachingRating,
+          enrichmentRating: event.enrichmentRating,
           numReviews: 1
         }
       })
@@ -82,13 +84,13 @@ exports.main = async (event, context) => {
       numReviews = course_professor_Rating.data[0].numReviews;
       workloadRating =course_professor_Rating.data[0].workloadRating;
       difficultyRating = course_professor_Rating.data[0].difficultyRating;
-      interestingRating = course_professor_Rating.data[0].interestingRating;
-      teachingRating = course_professor_Rating.data[0].teachingRating;
+      entertainmentRating = course_professor_Rating.data[0].entertainmentRating;
+      enrichmentRating = course_professor_Rating.data[0].enrichmentRating;
       db.collection('course_professor').doc(course_professor_Rating.data[0]._id).update({
         data: {
           workloadRating: (event.workloadRating + workloadRating * numReviews) / (numReviews + 1),
-          interestingRating: (event.interestingRating + interestingRating * numReviews) / (numReviews + 1),
-          teachingRating: (event.teachingRating + teachingRating * numReviews) / (numReviews + 1),
+          entertainmentRating: (event.entertainmentRating + entertainmentRating * numReviews) / (numReviews + 1),
+          enrichmentRating: (event.enrichmentRating + enrichmentRating * numReviews) / (numReviews + 1),
           difficultyRating: (event.difficultyRating + difficultyRating * numReviews) / (numReviews + 1),
           numReviews: _.inc(1)
         },
@@ -109,14 +111,14 @@ exports.main = async (event, context) => {
     if(!numReviews) numReviews = 0
     workloadRating = courseRatings.data[0].workloadRating;
     difficultyRating = courseRatings.data[0].difficultyRating;
-    interestingRating = courseRatings.data[0].interestingRating;
-    teachingRating = courseRatings.data[0].teachingRating;
+    entertainmentRating = courseRatings.data[0].entertainmentRating;
+    enrichmentRating = courseRatings.data[0].enrichmentRating;
     console.log(courseRatings);
     db.collection('courses').doc(courseID).update({
       data: {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
-        interestingRating: (interestingRating * numReviews + event.interestingRating) / (numReviews + 1),
-        teachingRating: (teachingRating * numReviews + event.teachingRating) / (numReviews + 1),
+        entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
+        enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
         numReviews: _.inc(1),
       },
@@ -135,13 +137,13 @@ exports.main = async (event, context) => {
     if(!numReviews) numReviews = 0
     workloadRating = professorRatings.data[0].workloadRating;
     difficultyRating = professorRatings.data[0].difficultyRating;
-    interestingRating = professorRatings.data[0].interestingRating;
-    teachingRating = professorRatings.data[0].teachingRating;
+    entertainmentRating = professorRatings.data[0].entertainmentRating;
+    enrichmentRating = professorRatings.data[0].enrichmentRating;
     db.collection('professors').doc(professorID).update({
       data: {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
-        interestingRating: (interestingRating * numReviews + event.interestingRating) / (numReviews + 1),
-        teachingRating: (teachingRating * numReviews + event.teachingRating) / (numReviews + 1),
+        entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
+        enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
         numReviews: _.inc(1),
       },
@@ -162,9 +164,9 @@ exports.main = async (event, context) => {
           courseID: courseID,
           professorID: professorID,
           difficultyRating: event.difficultyRating,
-          interestingRating: event.interestingRating,
+          entertainmentRating: event.entertainmentRating,
           workloadRating: event.workloadRating,
-          teachingRating: event.teachingRating,
+          enrichmentRating: event.enrichmentRating,
           grade: event.grade,
           anonymous: anonymous,
           anonymousAvatarUrl: anonymous?anonymousAvatarUrl:null,

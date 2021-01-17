@@ -34,8 +34,9 @@ App({
     })
   },
   onLaunch: function () {
+    console.log("launched");
     wx.cloud.init({
-      env: "trojanpick-1-6gmvcoz0a34e3c09"
+      env: "test-0gbtzjgqaae3f2b2"
     })
     wx.getSetting({
       success: res=>{

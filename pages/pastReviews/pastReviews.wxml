@@ -9,7 +9,7 @@
   <picker mode="selector" value="{{list_id}}" range="{{professor_list}}" range-key="{{'list_value'}}" bindchange="chooseProPicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
   </picker>
-  <Rating wx:for="{{reviews}}" wx:key="_id" item="{{item}}" bind:deleteTappedFromReview="deleteTappedFromReview" ></Rating>
+  <Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" bind:deleteTappedFromReview="deleteTappedFromReview" ></Review>
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
   <BottomNav></BottomNav>
 </view>

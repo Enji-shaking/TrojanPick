@@ -13,9 +13,9 @@ Page({
     courseDescript: "",
     courseUnit: 2,
     difficultyRating: 0,
-    interestRating: 0,
+    entertainmentRating: 0,
     workloadRating: 0,
-    teachingRating: 0,
+    enrichmentRating: 0,
     reviews: [],
     questions: [],
     totalPage: 0,
@@ -34,15 +34,9 @@ Page({
         courseID: this.data.courseID
       },
       success: res=>{
-        var question_num = 3
-        if(res.result.data.length < 3){
-          question_num = res.result.data.length
-        }
-        for(let i = 0; i < question_num; i++){
-          this.data.questions.push(res.result.data[i])
-        }
+        console.log(res);
         this.setData({
-          questions: this.data.questions
+          questions: res.result.list
         })
         this.counter--;
         if (this.counter === 0) {
@@ -68,14 +62,14 @@ Page({
         console.log(res);
         let course = res.result.data.data[0];
         //this needs to be fixed
-        let overall = (parseFloat(course.difficultyRating + course.teachingRating + course.workloadRating + course.interestingRating) / 4.0).toFixed(2);
+        let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2);
         this.setData({
           courseCode: course.courseCode,
           courseName: course.courseName,
           overallRating: overall,
           difficultyRating: (course.difficultyRating).toFixed(2),
-          interestRating: (course.interestingRating).toFixed(2),
-          teachingRating: (course.teachingRating).toFixed(2),
+          entertainmentRating: (course.entertainmentRating).toFixed(2),
+          enrichmentRating: (course.enrichmentRating).toFixed(2),
           workloadRating: (course.workloadRating).toFixed(2),
           courseDescript: course.courseDescrpt,
           courseUnit: course.courseUnit,
@@ -83,12 +77,12 @@ Page({
         })
         if (res.result.rating) {
           let rating = res.result.rating.data[0];
-          overall = parseFloat(rating.difficultyRating + rating.teachingRating + rating.workloadRating + rating.interestingRating) / 4.0;
+          overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
           this.setData({
             overallRating: (overall).toFixed(2),
             difficultyRating: (rating.difficultyRating).toFixed(2),
-            interestRating: (rating.interestingRating).toFixed(2),
-            teachingRating: (rating.teachingRating).toFixed(2),
+            entertainmentRating: (rating.entertainmentRating).toFixed(2),
+            enrichmentRating: (rating.enrichmentRating).toFixed(2),
             workloadRating: (rating.workloadRating).toFixed(2),
           })
         }

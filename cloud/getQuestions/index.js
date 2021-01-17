@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -53,7 +55,6 @@ exports.main = async (event, context) => {
       }else{
         item.posted_by_me = false
       }
-
     })
     console.log(data);
     return data
@@ -112,11 +113,31 @@ exports.main = async (event, context) => {
     return data.list
 
   }else if(target === "top_questions"){
-    return await db.collection("questions").where({
-      courseID: courseID
-    })
-    .limit(3)
-    .orderBy("favoredCount", "desc")
-    .orderBy("postedTime", "desc").get()
+    const questionLimit = 3
+    return await db.collection("questions")
+      .aggregate()
+      .match({
+        courseID: courseID
+      })
+      .sort({
+        favoredCount: -1,
+        postedTime: -1
+      })
+      .limit(questionLimit)
+      .lookup({
+        from: 'answers',
+        let: {
+            questionID: '$_id'
+        },
+        pipeline: $.pipeline()
+          .match(
+            _.expr($.eq(['$questionID', '$$questionID']))
+          )
+          .sort({up_vote_count: -1})
+          .limit(1)
+          .done()
+        ,
+        as: 'answers',
+      }).end()
   }
 }

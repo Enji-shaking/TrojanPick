@@ -1,4 +1,4 @@
-<!--components/Rating/Rating.wxml-->
+<!--components/Review/Review.wxml-->
 <!-- 41+72+106+46 526 -->
   <view class="box border">
   <view class="top">
@@ -47,25 +47,25 @@
       <view class="text">
         课程难度
       </view>
-      <Stars Rating="{{difficultyRating}}"></Stars>
+      <Stars Review="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         内容趣味性
       </view>
-      <Stars Rating="{{interestingRating}}"></Stars>
+      <Stars Review="{{entertainmentRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         workload
       </view>
-      <Stars Rating="{{workloadRating}}"></Stars>
+      <Stars Review="{{workloadRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         teaching
       </view>
-      <Stars Rating="{{teachingRating}}"></Stars>
+      <Stars Review="{{enrichmentRating}}"></Stars>
     </view> 
 
   </view>

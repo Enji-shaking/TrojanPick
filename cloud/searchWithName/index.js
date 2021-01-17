@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 const MAX_LIMIT = 3
 
@@ -23,13 +25,13 @@ exports.main = async (event, context) => {
       name = "difficultyRating"
       type = "asc"
     }else if(sort === 2){
-      name = "interestRating"
+      name = "entertainmentRating"
       type = "desc"
     }else if(sort === 3){
       name = "workloadRating"
       type = "asc"
     }else if(sort === 4){
-      name = "teachingRating"
+      name = "enrichmentRating"
       type = "desc"
     }
     let data = db.collection('courses').limit(MAX_LIMIT)
@@ -44,6 +46,7 @@ exports.main = async (event, context) => {
     count = count.total
 
     const totalPage = Math.ceil(count / MAX_LIMIT)
+    console.log(data);
     return {...data, totalPage, event}
   }else if(target === "search_courses"){
     const { courseCode, sort } = event
@@ -56,13 +59,13 @@ exports.main = async (event, context) => {
       name = "difficultyRating"
       type = "asc"
     }else if(sort === 2){
-      name = "interestRating"
+      name = "entertainmentRating"
       type = "desc"
     }else if(sort === 3){
       name = "workloadRating"
       type = "asc"
     }else if(sort === 4){
-      name = "teachingRating"
+      name = "enrichmentRating"
       type = "desc"
     }
     let data =  db.collection('courses').limit(MAX_LIMIT)

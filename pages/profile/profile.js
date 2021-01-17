@@ -121,7 +121,7 @@ Page({
     wx.cloud.callFunction({
       name: "userRelatedFn",
       data: {
-        target: type==="updateUser",
+        target: "updateUser",
         avatarUrl: data.avatarUrl,
         nickName: data.nickName,
         openID: this.data.openID,

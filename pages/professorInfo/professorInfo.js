@@ -8,9 +8,9 @@ Page({
     professorName: "",
     overallRating: "",
     difficultyRating: 0,
-    interestRating: 0,
+    entertainmentRating: 0,
     workloadRating: 0,
-    teachingRating: 0,
+    enrichmentRating: 0,
     reviews: [],
     // pageNumber:1,
     // itemNumberPerPage:2,
@@ -41,23 +41,23 @@ Page({
         console.log(res);
         console.log(res.result.data.data[0]);
         let professor = res.result.data.data[0];
-        let overall = (parseFloat(professor.difficultyRating + professor.teachingRating + professor.workloadRating + professor.interestingRating) / 4.0).toFixed(2);
+        let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
         this.setData({
           professorName: professor.professorName,
           overallRating: overall,
           difficultyRating: (professor.difficultyRating).toFixed(2),
-          interestRating: (professor.interestingRating).toFixed(2),
-          teachingRating: (professor.teachingRating).toFixed(2),
+          entertainmentRating: (professor.entertainmentRating).toFixed(2),
+          enrichmentRating: (professor.enrichmentRating).toFixed(2),
           workloadRating: (professor.workloadRating).toFixed(2),
         })
         if (res.result.rating) {
           let rating = res.result.rating.data[0];
-          overall = parseFloat(rating.difficultyRating + rating.teachingRating + rating.workloadRating + rating.interestingRating) / 4.0;
+          overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
           this.setData({
             overallRating: (overall).toFixed(2),
             difficultyRating: (rating.difficultyRating).toFixed(2),
-            interestRating: (rating.interestingRating).toFixed(2),
-            teachingRating: (rating.teachingRating).toFixed(2),
+            entertainmentRating: (rating.entertainmentRating).toFixed(2),
+            enrichmentRating: (rating.enrichmentRating).toFixed(2),
             workloadRating: (rating.workloadRating).toFixed(2),
           })
         }

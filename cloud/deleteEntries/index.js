@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const db = cloud.database();
 const _ = db.command;
 
@@ -19,8 +21,8 @@ exports.main = async (event, context) => {
     let professorID = delete_review.data[0].professorID;
     let workloadRating = delete_review.data[0].workloadRating;
     let difficultyRating = delete_review.data[0].difficultyRating;
-    let interestingRating = delete_review.data[0].interestingRating;
-    let teachingRating = delete_review.data[0].teachingRating;
+    let entertainmentRating = delete_review.data[0].entertainmentRating;
+    let enrichmentRating = delete_review.data[0].enrichmentRating;
 
     db.collection("reviews").where({
       openID: openID,
@@ -54,8 +56,8 @@ exports.main = async (event, context) => {
     if(!numReviews_orig) numReviews_orig = 0
     let workloadRating_orig = course_prof_data.data[0].workloadRating;
     let difficultyRating_orig = course_prof_data.data[0].difficultyRating;
-    let interestingRating_orig = course_prof_data.data[0].interestingRating;
-    let teachingRating_orig = course_prof_data.data[0].teachingRating;
+    let entertainmentRating_orig = course_prof_data.data[0].entertainmentRating;
+    let enrichmentRating_orig = course_prof_data.data[0].enrichmentRating;
 
     if(numReviews_orig === 1){
       db.collection('course_professor')
@@ -67,8 +69,8 @@ exports.main = async (event, context) => {
       .update({
         data: {
           workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
+          entertainmentRating: 0,
+          enrichmentRating: 0,
           difficultyRating: 0,
           numReviews: 0
           
@@ -84,8 +86,8 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
             
@@ -101,8 +103,8 @@ exports.main = async (event, context) => {
     // if(!numReviews_orig) numReviews_orig = 0
     workloadRating_orig = course_data.data[0].workloadRating;
     difficultyRating_orig = course_data.data[0].difficultyRating;
-    interestingRating_orig = course_data.data[0].interestingRating;
-    teachingRating_orig = course_data.data[0].teachingRating;
+    entertainmentRating_orig = course_data.data[0].entertainmentRating;
+    enrichmentRating_orig = course_data.data[0].enrichmentRating;
     if(numReviews_orig === 1){
       db.collection('courses')
       // .doc(courseID)
@@ -112,8 +114,8 @@ exports.main = async (event, context) => {
       .update({
         data: {
           workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
+          entertainmentRating: 0,
+          enrichmentRating: 0,
           difficultyRating: 0,
           numReviews: 0
         }
@@ -127,8 +129,8 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }
@@ -143,8 +145,8 @@ exports.main = async (event, context) => {
     if(!numReviews_orig) numReviews_orig = 1
     workloadRating_orig = prof_data.data[0].workloadRating;
     difficultyRating_orig = prof_data.data[0].difficultyRating;
-    interestingRating_orig = prof_data.data[0].interestingRating;
-    teachingRating_orig = prof_data.data[0].teachingRating;
+    entertainmentRating_orig = prof_data.data[0].entertainmentRating;
+    enrichmentRating_orig = prof_data.data[0].enrichmentRating;
     
     if(numReviews_orig === 1){
       db.collection('professors')
@@ -152,8 +154,8 @@ exports.main = async (event, context) => {
       .update({
         data: {
           workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
+          entertainmentRating: 0,
+          enrichmentRating: 0,
           difficultyRating: 0,
           numReviews: 0
         }
@@ -167,8 +169,8 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }

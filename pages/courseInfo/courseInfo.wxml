@@ -16,33 +16,39 @@
   </view>
   <view class="courseInfo">
     <view class="info">
-      <view class="courseTitle">课程简介</view>
+      <view class="courseTitle">Course Description</view>
       <view class="content">{{courseDescript}}</view>
     </view>
     <view class="unit"> <text>Units</text>: {{courseUnit}} </view>
   </view>
   <!-- selection tab and course ratings -->
- <NumericRating dropDownType="{{2}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker"></NumericRating>
+ <NumericRating dropDownType="{{2}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker"></NumericRating>
 <!-- user rating -->
-<Rating wx:for="{{reviews}}" wx:key="_id" item="{{item}}" hideCourse="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Rating>
+<Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" hideCourse="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Review>
 
   <!-- questions and anwers -->
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
 
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>
-  <view class="questionTitle">课程问答</view>
+  <view class="questionTitle">Questions and Answers</view>
 
 
   <view class="line"></view>
-  <view wx:if="{{questions.length == 0}}">目前还没有问题哦 快快去提问吧</view>
+  <view wx:if="{{questions.length == 0}}">No question yet. Go ask one!</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
-      <text>{{item.content}}</text>
+      <text>{{item.content}} | </text>
       <text>{{item.favoredCount}}</text>
+      <view wx:if="{{item.answers[0]}}">
+        {{item.answers[0].content}} | <image src="/icon/others/like.svg" /> {{item.answers[0].up_vote_count}}
+      </view>
+      <view wx:else>
+        No answer yet. Waiting for you!
+      </view>
     </view>
   </navigator>
 
-  <YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>
+  <YellowButton bind:tap="navigateToCreateQuestion" text="Ask a question"></YellowButton>
   <BottomNav></BottomNav>
 </view>
