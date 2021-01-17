@@ -23,7 +23,7 @@ Page({
     openID:"",
     deleted:{
       deleted:true,
-      content:"[用户已删除评论]",
+      content:"[The user has deleted this review]",
       down_vote_count:0,
       favoriteCount:0,
       commentCount:0,

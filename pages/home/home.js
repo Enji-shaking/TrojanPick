@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker_arr:['alphanumeric','difficulty (asc+)','interest (desc-)','workload (asc+)', 'learning (desc-)'],
+    picker_arr:['alphanumeric','difficulty (asc+)','entertainment (desc-)','workload (asc+)', 'enrichment (desc-)'],
     picker_index: 0,
     course_cards_info:[],
     prof_cards_info:[],
