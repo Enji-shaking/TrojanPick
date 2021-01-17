@@ -1,4 +1,4 @@
-<!--components/Rating/Rating.wxml-->
+<!--components/Review/Review.wxml-->
 <!-- 41+72+106+46 526 -->
   <view class="box border">
   <view class="top">
@@ -26,12 +26,12 @@
     </view>
   </view>
 
-  <navigator url="../../pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}" hover-class="none">
+  <navigator url="/pages/reviewInfo/reviewInfo?reviewID={{_id}}" class="content borderTop" wx:if="{{!detail}}" hover-class="none">
     <view class="text">
       {{content}}
     </view>
 
-    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
+    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
     
   </navigator>
 
@@ -39,7 +39,7 @@
     <view class="text">
       {{content}}
     </view>
-    <image src="../../icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
+    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
   </view>
 
   <view class="rating borderTop">
@@ -47,51 +47,51 @@
       <view class="text">
         课程难度
       </view>
-      <Stars Rating="{{difficultyRating}}"></Stars>
+      <Stars Review="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         内容趣味性
       </view>
-      <Stars Rating="{{interestingRating}}"></Stars>
+      <Stars Review="{{entertainmentRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         workload
       </view>
-      <Stars Rating="{{workloadRating}}"></Stars>
+      <Stars Review="{{workloadRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
         teaching
       </view>
-      <Stars Rating="{{teachingRating}}"></Stars>
+      <Stars Review="{{enrichmentRating}}"></Stars>
     </view> 
 
   </view>
   
   <view class="bottom borderTop">
     <view bind:tap="upVoteTapped">
-      <image src="{{voted_by_me===1?'../../icon/others/like.svg': '../../icon/others/like_grey.svg'}}"></image>
+      <image src="{{voted_by_me===1?'/icon/others/like.svg': '/icon/others/like_grey.svg'}}"></image>
       <text>{{up_vote_count}}</text>
     </view>
     <view bind:tap="downVoteTapped">
-      <image src="{{voted_by_me===-1?'../../icon/others/downvote.svg':'../../icon/others/downvote_grey.svg'}}"></image>
+      <image src="{{voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}"></image>
       <text>{{down_vote_count}}</text>
     </view>
     <view bind:tap="showDialogBox">
       <!-- <input class="commentInput" bindconfirm="onCommentInputConfirm" /> -->
-      <image src="../../icon/others/comment.svg"></image>
+      <image src="/icon/others/{{commentCount>0?'comment.svg':'comment_grey.svg'}}"></image>
       <text>{{commentCount}}</text>
     </view>
 
     <view bind:tap="saveTapped" wx:if="{{!deleted}}">
-      <image src="{{saved_by_me===true?'../../icon/others/favorite.svg':'../../icon/others/favorite_grey.svg'}}"></image>
+      <image src="{{saved_by_me===true?'/icon/others/favorite.svg':'/icon/others/favorite_grey.svg'}}"></image>
       <text>{{favoriteCount}}</text>
     </view>
 
     <view bind:tap="savedTappedDeleted" wx:if="{{deleted}}">
-      <image src="{{'../../icon/others/favorite_grey.svg'}}"></image>
+      <image src="{{'/icon/others/favorite_grey.svg'}}"></image>
     </view>
 
   </view>

@@ -13,17 +13,37 @@ Page({
     courseDescript: "",
     courseUnit: 2,
     difficultyRating: 0,
-    interestRating: 0,
+    entertainmentRating: 0,
     workloadRating: 0,
-    teachingRating: 0,
+    enrichmentRating: 0,
     reviews: [],
-    questions: [1, 2, 3],
+    questions: [],
     totalPage: 0,
     currentPageInReviews: 1,
     professorID: undefined,
     openID: "",
     dummy: 1,
     isHot:true
+  },
+
+  getQuestions: function(){
+    wx.cloud.callFunction({
+      name: "getQuestions",
+      data:{
+        target: "top_questions",
+        courseID: this.data.courseID
+      },
+      success: res=>{
+        console.log(res);
+        this.setData({
+          questions: res.result.list
+        })
+        this.counter--;
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,14 +62,14 @@ Page({
         console.log(res);
         let course = res.result.data.data[0];
         //this needs to be fixed
-        let overall = (parseFloat(course.difficultyRating + course.teachingRating + course.workloadRating + course.interestingRating) / 4.0).toFixed(2);
+        let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2);
         this.setData({
           courseCode: course.courseCode,
           courseName: course.courseName,
           overallRating: overall,
           difficultyRating: (course.difficultyRating).toFixed(2),
-          interestRating: (course.interestingRating).toFixed(2),
-          teachingRating: (course.teachingRating).toFixed(2),
+          entertainmentRating: (course.entertainmentRating).toFixed(2),
+          enrichmentRating: (course.enrichmentRating).toFixed(2),
           workloadRating: (course.workloadRating).toFixed(2),
           courseDescript: course.courseDescrpt,
           courseUnit: course.courseUnit,
@@ -57,12 +77,12 @@ Page({
         })
         if (res.result.rating) {
           let rating = res.result.rating.data[0];
-          overall = parseFloat(rating.difficultyRating + rating.teachingRating + rating.workloadRating + rating.interestingRating) / 4.0;
+          overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
           this.setData({
             overallRating: (overall).toFixed(2),
             difficultyRating: (rating.difficultyRating).toFixed(2),
-            interestRating: (rating.interestingRating).toFixed(2),
-            teachingRating: (rating.teachingRating).toFixed(2),
+            entertainmentRating: (rating.entertainmentRating).toFixed(2),
+            enrichmentRating: (rating.enrichmentRating).toFixed(2),
             workloadRating: (rating.workloadRating).toFixed(2),
           })
         }
@@ -121,7 +141,9 @@ Page({
       }
     })
   },
+  counter: 0,
   onLoad: function (options) {
+    this.counter = 4
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
@@ -135,22 +157,27 @@ Page({
       courseID: courseID,
       openID: openID
     })
-  },
-  counter: 0,
-
-  onShow: function () {
-    this.counter = 3
-    wx.showLoading({
-      title: "loading",
-      mask: true,
-    });
-
+    this.getQuestions()
     this.getCourseInfo(this.data.courseID, undefined)
-    //default with no professor
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
-    // this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, undefined)
-    //default get hot reviews
     this.getHotReviewsForCourseForProfessor(this.data.courseID,undefined);
+
+  },
+  onShow: function () {
+    if(app.globalData.needRefresh){
+      this.counter = 4
+      wx.showLoading({
+        title: "loading",
+        mask: true,
+      });
+
+      this.getQuestions()
+      this.getCourseInfo(this.data.courseID, undefined)
+      this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
+      this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
+      app.globalData.needRefresh = false
+    }
+
   },
   handlePagination(e) {
     console.log(e.detail);
@@ -164,6 +191,7 @@ Page({
         isHot:false
       })
       this.setData({ currentPageInReviews: e.detail })
+      
       this.counter = 1
       wx.showLoading({
         title: "loading",
@@ -203,6 +231,7 @@ Page({
         },
       })
     }
+    app.globalData.needRefresh = true
     this.setData({
       isFavorite: !this.data.isFavorite
     })

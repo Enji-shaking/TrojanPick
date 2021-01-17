@@ -3,16 +3,24 @@
 <view class='line-1'></view>
 
 
-<navigator class='question-box' wx:for="{{questions}}" wx:for-index ='index' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
+<view class='question-box' wx:for="{{questions}}" wx:key="_id" wx:for-index ='index'>
   <view class='question-block'>
     <text class="question-icon icon"></text>
-    <text class="q-and-ans">{{item.content}}</text>
+    <navigator class="q-and-ans" url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">{{item.content}}</navigator>
+    <text wx:if="{{item.posted_by_me}}" data-index="{{index}}" class="delete-icon icon" bindtap="deleteQuestion"></text>
   </view>
-  <view class='answer-block'>
+  <navigator class='answer-block' url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
     <text class="answer-icon icon"></text>
     <text class="q-and-ans">{{item.answers[0].content}}</text>
+  </navigator>
+  <view wx:if="{{item.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
+    undo_good_question | {{item.favoredCount}}
   </view>
-</navigator>
+  <view wx:if="{{!item.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
+    good_question | {{item.favoredCount}}
+  </view>
+</view>
 
+<YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>
 
 <BottomNav></BottomNav>

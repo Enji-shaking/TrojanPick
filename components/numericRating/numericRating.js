@@ -11,7 +11,7 @@ Component({
     //if 1 load all courses
     //if 2 load all professors
     //if 3 load all
-    interestRating:{
+    entertainmentRating:{
       type:"Number",
       value:1
     },difficultyRating:{
@@ -20,7 +20,7 @@ Component({
     },workloadRating:{
       type:"Number",
       value:1
-    },teachRating:{
+    },enrichmentRating:{
       type:"Number",
       value:1
     },

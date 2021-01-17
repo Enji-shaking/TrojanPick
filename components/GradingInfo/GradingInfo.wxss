@@ -1,0 +1,11 @@
+/* components/GradingInfo/gradingInfo.wxss */
+.invisible{
+    visibility: hidden;
+}
+.wrapper{
+    width: 300rpx;
+    font-size: 15rpx;
+    position: absolute;
+    right: 20rpx;
+    top: 600rpx;
+}

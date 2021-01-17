@@ -11,10 +11,10 @@
   </picker>
   <!-- four ratings values -->
   <view class="ratings">
-    <SingleNumericRating class="single" value="{{difficultyRating}}" name="课程难度"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{interestRating}}" name="内容趣味性"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{difficultyRating}}" name="Difficulty"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="内容趣味性"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{workloadRating}}" name="workload"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{teachRating}}" name="teaching"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{enrichmentRating}}" name="teaching"></SingleNumericRating>
   </view>
 
 </view>

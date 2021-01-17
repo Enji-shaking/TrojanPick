@@ -1,15 +1,17 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const db = cloud.database();
 const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const {target, reviewID, openID, questionID, answerID, commentID} = event
+  const { target, reviewID, openID, questionID, answerID, commentID } = event
 
-  if(target === "deleteReview"){
+  if (target === "deleteReview") {
     // get delete_review's ratings
     let delete_review = await db.collection('reviews').where({
       _id: reviewID
@@ -19,8 +21,8 @@ exports.main = async (event, context) => {
     let professorID = delete_review.data[0].professorID;
     let workloadRating = delete_review.data[0].workloadRating;
     let difficultyRating = delete_review.data[0].difficultyRating;
-    let interestingRating = delete_review.data[0].interestingRating;
-    let teachingRating = delete_review.data[0].teachingRating;
+    let entertainmentRating = delete_review.data[0].entertainmentRating;
+    let enrichmentRating = delete_review.data[0].enrichmentRating;
 
     db.collection("reviews").where({
       openID: openID,
@@ -30,15 +32,15 @@ exports.main = async (event, context) => {
       openID: openID,
       reviewID: reviewID
     }).remove()
-    
+
     db.collection("saved_reviews").where({
       reviewID: reviewID
     }).update({
-      data:{
+      data: {
         deleted: true,
-        courseID:courseID,
-        professorID:professorID,
-        ownerOpenID:openID
+        courseID: courseID,
+        professorID: professorID,
+        ownerOpenID: openID
       }
     })
     db.collection("comments").where({
@@ -54,30 +56,30 @@ exports.main = async (event, context) => {
     }).get()
     console.log(course_prof_data);
     let numReviews_orig = course_prof_data.data[0].numReviews;
-    if(!numReviews_orig) numReviews_orig = 0
+    if (!numReviews_orig) numReviews_orig = 0
     let workloadRating_orig = course_prof_data.data[0].workloadRating;
     let difficultyRating_orig = course_prof_data.data[0].difficultyRating;
-    let interestingRating_orig = course_prof_data.data[0].interestingRating;
-    let teachingRating_orig = course_prof_data.data[0].teachingRating;
+    let entertainmentRating_orig = course_prof_data.data[0].entertainmentRating;
+    let enrichmentRating_orig = course_prof_data.data[0].enrichmentRating;
 
-    if(numReviews_orig === 1){
+    if (numReviews_orig === 1) {
       db.collection('course_professor')
-      // .doc(course_prof_data.data[0]._id)
-      .where({
-        courseID: courseID,
-        professorID: professorID
-      })
-      .update({
-        data: {
-          workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
-          difficultyRating: 0,
-          numReviews: 0
-          
-        }
-      })
-    }else{
+        // .doc(course_prof_data.data[0]._id)
+        .where({
+          courseID: courseID,
+          professorID: professorID
+        })
+        .update({
+          data: {
+            workloadRating: 0,
+            entertainmentRating: 0,
+            enrichmentRating: 0,
+            difficultyRating: 0,
+            numReviews: 0
+
+          }
+        })
+    } else {
       db.collection('course_professor')
         // .doc(course_prof_data.data[0]._id)
         .where({
@@ -87,11 +89,11 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
-            
+
           }
         })
     }
@@ -104,24 +106,24 @@ exports.main = async (event, context) => {
     // if(!numReviews_orig) numReviews_orig = 0
     workloadRating_orig = course_data.data[0].workloadRating;
     difficultyRating_orig = course_data.data[0].difficultyRating;
-    interestingRating_orig = course_data.data[0].interestingRating;
-    teachingRating_orig = course_data.data[0].teachingRating;
-    if(numReviews_orig === 1){
+    entertainmentRating_orig = course_data.data[0].entertainmentRating;
+    enrichmentRating_orig = course_data.data[0].enrichmentRating;
+    if (numReviews_orig === 1) {
       db.collection('courses')
-      // .doc(courseID)
-      .where({
-        _id: courseID
-      })
-      .update({
-        data: {
-          workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
-          difficultyRating: 0,
-          numReviews: 0
-        }
-      })
-    }else{
+        // .doc(courseID)
+        .where({
+          _id: courseID
+        })
+        .update({
+          data: {
+            workloadRating: 0,
+            entertainmentRating: 0,
+            enrichmentRating: 0,
+            difficultyRating: 0,
+            numReviews: 0
+          }
+        })
+    } else {
       db.collection('courses')
         // .doc(courseID)
         .where({
@@ -130,38 +132,38 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }
         })
     }
-  
+
     // update averages in 'professors'
     let prof_data = await db.collection('professors').where({
       _id: professorID
     }).get();
     numReviews_orig = prof_data.data[0].numReviews;
-    if(!numReviews_orig) numReviews_orig = 1
+    if (!numReviews_orig) numReviews_orig = 1
     workloadRating_orig = prof_data.data[0].workloadRating;
     difficultyRating_orig = prof_data.data[0].difficultyRating;
-    interestingRating_orig = prof_data.data[0].interestingRating;
-    teachingRating_orig = prof_data.data[0].teachingRating;
-    
-    if(numReviews_orig === 1){
+    entertainmentRating_orig = prof_data.data[0].entertainmentRating;
+    enrichmentRating_orig = prof_data.data[0].enrichmentRating;
+
+    if (numReviews_orig === 1) {
       db.collection('professors')
-      .doc(professorID)
-      .update({
-        data: {
-          workloadRating: 0,
-          interestingRating: 0,
-          teachingRating: 0,
-          difficultyRating: 0,
-          numReviews: 0
-        }
-      })
-    }else{
+        .doc(professorID)
+        .update({
+          data: {
+            workloadRating: 0,
+            entertainmentRating: 0,
+            enrichmentRating: 0,
+            difficultyRating: 0,
+            numReviews: 0
+          }
+        })
+    } else {
       db.collection('professors')
         // .doc(professorID)
         .where({
@@ -170,8 +172,8 @@ exports.main = async (event, context) => {
         .update({
           data: {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
-            interestingRating: (interestingRating_orig * numReviews_orig - interestingRating) / (numReviews_orig - 1),
-            teachingRating: (teachingRating_orig * numReviews_orig - teachingRating) / (numReviews_orig - 1),
+            entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+            enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }
@@ -179,17 +181,17 @@ exports.main = async (event, context) => {
     }
     //if there is no review between the professor and the course, remove it in the course_professor
     delete_review = await db.collection('reviews').where({
-      professorID:professorID,
-      courseID:courseID
+      professorID: professorID,
+      courseID: courseID
     }).get();
-    if(delete_review.data.length==0){//now there is no relationship between the professor and teacher
+    if (delete_review.data.length == 0) {//now there is no relationship between the professor and teacher
       //remove the field in the course_professor
       db.collection('course_professor').where({
-        professorID:professorID,
-        courseID:courseID
+        professorID: professorID,
+        courseID: courseID
       }).remove();
     }
-  }else if(target === "deteleQuestion"){
+  } else if (target === "deleteQuestion") {
     db.collection("questions").where({
       openID: openID,
       _id: questionID
@@ -197,22 +199,26 @@ exports.main = async (event, context) => {
     db.collection("answers").where({
       questionID: questionID
     }).remove()
-    db.collection("saved_questions").where({
-      openID: openID,
+    db.collection("favored_questions").where({
       questionID: questionID
-    }).update({
-      data:{
-        deleted: true
-      }
-    })
-  }else if(target === "deteleAnswer"){
+    }).remove()
+    // db.collection("saved_questions").where({
+    //   openID: openID,
+    //   questionID: questionID
+    // }).update({
+    //   data:{
+    //     deleted: true
+    //   }
+    // })
+  } else if (target === "deleteAnswer") {
     db.collection("answers").where({
-      answerID: answerID
+      _id: answerID,
+      openID: openID
     }).remove()
     db.collection("voted_answers").where({
       answerID: answerID
     }).remove()
-  }else if(target === "deleteComment"){
+  } else if (target === "deleteComment") {
     db.collection("comments").where({
       _id: commentID,
       openID: openID
@@ -223,7 +229,7 @@ exports.main = async (event, context) => {
     db.collection("reviews").where({
       _id: reviewID
     }).update({
-      data:{
+      data: {
         commentCount: _.inc(-1)
       }
     })

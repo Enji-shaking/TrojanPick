@@ -1,4 +1,5 @@
 <!--pages/professorInfo/professorInfo.wxml-->
+<GradingInfo></GradingInfo>
 <view>
   <Header></Header>
   <view class="title">
@@ -14,11 +15,11 @@
     </view>
     <view class="unit" wx:for="{{courseTaught}}" wx:key="index" > <text>{{item.courseCode}}</text>: {{item.courseUnit}} units</view>
   </view>
-  <!-- numeric Rating with selection box and four ratings -->
-  <NumericRating dropDownType="{{1}}" interestRating="{{interestRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" teachRating="{{teachingRating}}" professorID="{{professorID}}" bindchoosePicker="handlePicker"></NumericRating>
+  <!-- numeric Review with selection box and four ratings -->
+  <NumericRating dropDownType="{{1}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" professorID="{{professorID}}" bindchoosePicker="handlePicker"></NumericRating>
   <!-- display user ratings  -->
 
-<Rating wx:for="{{reviews}}" item="{{item}}" hideProfessor="{{true}}"></Rating>
+<Review wx:for="{{reviews}}" item="{{item}}" hideProfessor="{{true}}"></Review>
 
 
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->

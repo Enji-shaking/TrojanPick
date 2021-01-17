@@ -1,4 +1,4 @@
-// components/Rating/Rating.js
+// components/Review/Review.js
 
 //This component has three events could be triggered from outside
 //unsaveADeletedReview: this should only be triggered on the page of saved reviews. This should work as delete the review from the page
@@ -14,7 +14,7 @@ Component({
    */
   observers: {
     'item': function () {
-      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted } = this.properties.item
+      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted } = this.properties.item
       
       let courseCode
       if(this.properties.item.courseInfo){
@@ -31,7 +31,7 @@ Component({
       }
 
       this.setData({
-        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, interestingRating, workloadRating, teachingRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
+        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
       })
     }
   },
@@ -62,9 +62,9 @@ Component({
     openID: "",
     postedTime: "xxxx-xx-xx",
     difficultyRating: 0,
-    interestingRating: 0,
+    entertainmentRating: 0,
     workloadRating: 0,
-    teachingRating: 0,
+    enrichmentRating: 0,
   },
 
   /**

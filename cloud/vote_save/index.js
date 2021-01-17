@@ -1,14 +1,16 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const db = cloud.database();
 const _ = db.command;
 // 云函数入口函数
 exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   // const openID = wxContext.OPENID
-  const { target, reviewID, openID,commentID} = event
+  const { target, reviewID, openID,commentID, questionID} = event
   if(target === "vote_review_up_new"){
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
@@ -271,6 +273,32 @@ exports.main = async (event, context) => {
     const p2 = db.collection("voted_answers")
         .where({answerID: answerID, openID: openID})
         .remove()
+    return await Promise.all([p1, p2])
+  }else if(target === "favored_question_cancel"){
+    const p1 = db.collection("questions").where({_id: questionID}).update({
+      data:{
+        favoredCount: _.inc(-1),
+      }
+    })
+    const p2 = db.collection("favored_questions")
+        .where({questionID, openID: openID})
+        .remove()
+    return await Promise.all([p1, p2])
+  }else if(target === "favored_question_new"){
+    console.log(event);
+    const p1 = db.collection("questions").where({_id: questionID}).update({
+      data:{
+        favoredCount: _.inc(1)
+      }
+    })
+    const {courseID} = event
+    const p2 = db.collection("favored_questions").add({
+      data:{
+        openID: openID,
+        questionID: questionID,
+        courseID: courseID
+      }
+    })
     return await Promise.all([p1, p2])
   }
 }

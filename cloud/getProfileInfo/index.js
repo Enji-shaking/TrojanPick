@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const MAX_LIMIT = 3;
 // 云函数入口函数
 const db = cloud.database();
@@ -192,7 +194,7 @@ exports.main = async (event, context) => {
         console.log(data.list[i]);
         let item = {
           deleted:true,
-          content:"[用户已删除评论]",
+          content:"[The user has deleted this review]",
           down_vote_count:0,
           favoriteCount:0,
           commentCount:0,

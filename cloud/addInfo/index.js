@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -21,8 +23,8 @@ exports.main = async (event, context) => {
         numReviews: 0,
         workloadRating: 0,
         difficultyRating: 0,
-        interestingRating: 0,
-        teachingRating: 0,
+        entertainmentRating: 0,
+        enrichmentRating: 0,
       }
     })
   }else if(target === "professor"){
@@ -30,7 +32,7 @@ exports.main = async (event, context) => {
     return await db.collection('professors').add({
       data:{ 
         professorName: professorName,
-        openid: OPENID
+        openID: OPENID
       }
     })
   }

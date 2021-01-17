@@ -1,0 +1,6 @@
+<view class="wrapper">
+    <view class="gradingInfo {{tapped?'invisible':''}}">
+        Overall grading: ( (5-workload (rating)) + (5 - difficulty) + interest + teaching quality) / 4
+    </view>
+    <image src="/icon/others/info.png" catch:tap="iconTapped"></image>
+</view>
