@@ -19,8 +19,8 @@
   <NumericRating dropDownType="{{1}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" professorID="{{professorID}}" bindchoosePicker="handlePicker"></NumericRating>
   <!-- display user ratings  -->
 
-<Review wx:for="{{reviews}}" item="{{item}}" hideProfessor="{{true}}"></Review>
-
+  <Review wx:for="{{reviews}}" item="{{item}}" wx:key="_id" hideProfessor="{{true}}"></Review>
+  <YellowButton text="Write a review" bind:tap="onTapCreateReview"></YellowButton>
 
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>

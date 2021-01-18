@@ -6,7 +6,7 @@ Page({
    */
   data: {
     professorName: "",
-    overallRating: "",
+    overallRating: 0,
     difficultyRating: 0,
     entertainmentRating: 0,
     workloadRating: 0,
@@ -23,7 +23,7 @@ Page({
     totalPage: 0,
     currentPageInReviews: 1,
     openID: "",
-    isHot:true
+    isHot:true,
   },
 
   getProfessorInfo(professorID, courseID) {
@@ -36,31 +36,36 @@ Page({
         courseID: courseID
       },
       success: (res) => {
-        console.log(professorID)
-        console.log(courseID)
+        // console.log(professorID)
+        // console.log(courseID)
         console.log(res);
         console.log(res.result.data.data[0]);
         let professor = res.result.data.data[0];
-        let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
+        if(professor.workloadRating){
+          let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
+          this.setData({
+            overallRating: overall,
+            difficultyRating: (professor.difficultyRating).toFixed(2),
+            entertainmentRating: (professor.entertainmentRating).toFixed(2),
+            enrichmentRating: (professor.enrichmentRating).toFixed(2),
+            workloadRating: (professor.workloadRating).toFixed(2),
+          })
+          if (res.result.rating) {
+            let rating = res.result.rating.data[0];
+            overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
+            this.setData({
+              overallRating: (overall).toFixed(2),
+              difficultyRating: (rating.difficultyRating).toFixed(2),
+              entertainmentRating: (rating.entertainmentRating).toFixed(2),
+              enrichmentRating: (rating.enrichmentRating).toFixed(2),
+              workloadRating: (rating.workloadRating).toFixed(2),
+            })
+          }
+        }
         this.setData({
           professorName: professor.professorName,
-          overallRating: overall,
-          difficultyRating: (professor.difficultyRating).toFixed(2),
-          entertainmentRating: (professor.entertainmentRating).toFixed(2),
-          enrichmentRating: (professor.enrichmentRating).toFixed(2),
-          workloadRating: (professor.workloadRating).toFixed(2),
+          courseTaught: res.result.courseCode
         })
-        if (res.result.rating) {
-          let rating = res.result.rating.data[0];
-          overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
-          this.setData({
-            overallRating: (overall).toFixed(2),
-            difficultyRating: (rating.difficultyRating).toFixed(2),
-            entertainmentRating: (rating.entertainmentRating).toFixed(2),
-            enrichmentRating: (rating.enrichmentRating).toFixed(2),
-            workloadRating: (rating.workloadRating).toFixed(2),
-          })
-        }
         this.counter--;
         if (this.counter === 0) {
           wx.hideLoading();
@@ -208,6 +213,11 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+    })
+  },
+  onTapCreateReview: function () {  
+    wx.navigateTo({
+      url: '/pages/createReview/createReview?professorID='+this.data.professorID+'&professorName='+this.data.professorName,
     })
   }
 })

@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
   let currentTime = getCurrentTime()
   if(target === "makeComment"){
     const { content, reviewID } = event
-    console.log(event);
+    console.log(event)
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
         commentCount: _.inc(1)
@@ -30,30 +30,33 @@ exports.main = async (event, context) => {
     })
     return await p2
   }else if(target === "createReview"){
-  const { professorID, content, courseID, anonymous } = event
+    const { professorID, content, courseID, anonymous } = event
 
-  const pastRatingCourse =( await db.collection("reviews")
-          .where({openID: openID, courseID: courseID})
-          .count()).total
-  if(pastRatingCourse > 2){
-    return {success: false, content: `2/2 limt reached for this course`}
-  }
+    //check for limit, no more than 2 reviews for the save course
+    //no more than 4 reviews for the same professor
+    //no more than 50 reviews for a student
+    const pastRatingCourse =( await db.collection("reviews")
+            .where({openID: openID, courseID: courseID})
+            .count()).total
+    if(pastRatingCourse > 2){
+      return {success: false, content: `2/2 limt reached for this course`}
+    }
 
-  const pastRatingProfessor =( await db.collection("reviews")
-          .where({openID: openID, professorID: professorID})
-          .count()).total
-  if(pastRatingProfessor > 4){
-    return {success: false, content: `4/4 limt reached for this professor`}
-  }
+    const pastRatingProfessor =( await db.collection("reviews")
+            .where({openID: openID, professorID: professorID})
+            .count()).total
+    if(pastRatingProfessor > 4){
+      return {success: false, content: `4/4 limt reached for this professor`}
+    }
 
-  const pastRating =( await db.collection("reviews")
-          .where({openID: openID})
-          .count()).total
-  if(pastRating > 50){
-    return {success: false, content: `50/50 limit reached for all reviews`}
-  }
+    const pastRating =( await db.collection("reviews")
+            .where({openID: openID})
+            .count()).total
+    if(pastRating > 50){
+      return {success: false, content: `50/50 limit reached for all reviews`}
+    }
 
-  console.log(event);
+    console.log(event)
     let numReviews
     let workloadRating
     let difficultyRating
@@ -64,7 +67,7 @@ exports.main = async (event, context) => {
       courseID: courseID,
       professorID: professorID
     }).get()
-    console.log(course_professor_Rating);
+    console.log(course_professor_Rating)
     // 如果data返回为undefined：创建一条新的course_professor数据
     if(course_professor_Rating.data[0] === undefined){
       db.collection('course_professor').add({
@@ -81,11 +84,11 @@ exports.main = async (event, context) => {
     }
     // 如果data返回值，update它的avg
     else{
-      numReviews = course_professor_Rating.data[0].numReviews;
-      workloadRating =course_professor_Rating.data[0].workloadRating;
-      difficultyRating = course_professor_Rating.data[0].difficultyRating;
-      entertainmentRating = course_professor_Rating.data[0].entertainmentRating;
-      enrichmentRating = course_professor_Rating.data[0].enrichmentRating;
+      numReviews = course_professor_Rating.data[0].numReviews
+      workloadRating =course_professor_Rating.data[0].workloadRating
+      difficultyRating = course_professor_Rating.data[0].difficultyRating
+      entertainmentRating = course_professor_Rating.data[0].entertainmentRating
+      enrichmentRating = course_professor_Rating.data[0].enrichmentRating
       db.collection('course_professor').doc(course_professor_Rating.data[0]._id).update({
         data: {
           workloadRating: (event.workloadRating + workloadRating * numReviews) / (numReviews + 1),
@@ -106,21 +109,28 @@ exports.main = async (event, context) => {
     // 改course里面的avg
     let courseRatings = await db.collection('courses').where({
       _id: courseID
-    }).get();
-    numReviews = courseRatings.data[0].numReviews;
-    if(!numReviews) numReviews = 0
-    workloadRating = courseRatings.data[0].workloadRating;
-    difficultyRating = courseRatings.data[0].difficultyRating;
-    entertainmentRating = courseRatings.data[0].entertainmentRating;
-    enrichmentRating = courseRatings.data[0].enrichmentRating;
-    console.log(courseRatings);
+    }).get()
+    numReviews = courseRatings.data[0].numReviews
+    if(!numReviews) {
+      numReviews = 0
+      workloadRating = 0
+      difficultyRating = 0
+      entertainmentRating = 0
+      enrichmentRating = 0
+    }else{
+      workloadRating = courseRatings.data[0].workloadRating
+      difficultyRating = courseRatings.data[0].difficultyRating
+      entertainmentRating = courseRatings.data[0].entertainmentRating
+      enrichmentRating = courseRatings.data[0].enrichmentRating
+    }
+    console.log(courseRatings)
     db.collection('courses').doc(courseID).update({
       data: {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
         entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
         enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
-        numReviews: _.inc(1),
+        numReviews: numReviews+1,
       },
       success(res) {  
         console.log(res.data)
@@ -132,20 +142,28 @@ exports.main = async (event, context) => {
     // 改professor里面的avg
     let professorRatings = await db.collection('professors').where({
       _id: professorID
-    }).get();
-    numReviews = professorRatings.data[0].numReviews;
-    if(!numReviews) numReviews = 0
-    workloadRating = professorRatings.data[0].workloadRating;
-    difficultyRating = professorRatings.data[0].difficultyRating;
-    entertainmentRating = professorRatings.data[0].entertainmentRating;
-    enrichmentRating = professorRatings.data[0].enrichmentRating;
+    }).get()
+    numReviews = professorRatings.data[0].numReviews
+    if(!numReviews) {
+      numReviews = 0
+      workloadRating = 0
+      difficultyRating = 0
+      entertainmentRating = 0
+      enrichmentRating = 0
+    }else{
+      workloadRating = courseRatings.data[0].workloadRating
+      difficultyRating = courseRatings.data[0].difficultyRating
+      entertainmentRating = courseRatings.data[0].entertainmentRating
+      enrichmentRating = courseRatings.data[0].enrichmentRating
+    }
+
     db.collection('professors').doc(professorID).update({
       data: {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
         entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
         enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
-        numReviews: _.inc(1),
+        numReviews: numReviews+1,
       },
       success(res) {
         console.log(res.data)
@@ -156,9 +174,10 @@ exports.main = async (event, context) => {
     })
 
     // 添加review
-    const anonymousAvatarUrl = "/icon/avatar/"+Math.floor(Math.random() * 9)+".svg";
-    const anonymousNickNameOptions = ["深藏blue","book思议","无fak说","Vans如意","皮蛋solo粥","jackyfive","letyou","多少艾克以重来"];
-    const anonymousNickName = anonymousNickNameOptions[Math.floor(Math.random()*anonymousNickNameOptions.length)];
+    const anonymousAvatarUrl = "/icon/avatar/"+Math.floor(Math.random() * 9)+".svg"
+    const anonymousNickNameOptions = ["alligator", "anteater", "armadillo", "auroch", "axolotl", "badger", "bat", "bear", "beaver", "blobfish", "buffalo", "camel", "chameleon", "cheetah", "chipmunk", "chinchilla", "chupacabra", "cormorant", "coyote", "crow", "dingo", "dinosaur", "dog", "dolphin", "dragon", "duck", "dumbo octopus", "elephant", "ferret", "fox", "frog", "giraffe", "goose", "gopher", "grizzly", "hamster", "hedgehog", "hippo", "hyena", "jackal", "jackalope", "ibex", "ifrit", "iguana", "kangaroo", "kiwi", "koala", "kraken", "lemur", "leopard", "liger", "lion", "llama", "manatee", "mink", "monkey", "moose", "narwhal", "nyan cat", "orangutan", "otter", "panda", "penguin", "platypus", "python", "pumpkin", "quagga", "quokka", "rabbit", "raccoon", "rhino", "sheep", "shrew", "skunk", "slow loris", "squirrel", "tiger", "turtle", "unicorn", "walrus", "wolf", "wolverine", "wombat"]
+    // https://evert.meulie.net/faqwd/complete-list-anonymous-animals-on-google-drive-docs-sheets-slides/
+    const anonymousNickName = anonymousNickNameOptions[Math.floor(Math.random()*anonymousNickNameOptions.length)]
     return await db.collection('reviews').add({
       data:{ 
           courseID: courseID,
@@ -169,8 +188,8 @@ exports.main = async (event, context) => {
           enrichmentRating: event.enrichmentRating,
           grade: event.grade,
           anonymous: anonymous,
-          anonymousAvatarUrl: anonymous?anonymousAvatarUrl:null,
-          anonymousNickName:anonymous?anonymousNickName:null,
+          anonymousAvatarUrl: anonymous?anonymousAvatarUrl:"N/A",
+          anonymousNickName:anonymous?anonymousNickName:"N/A",
           content: content,
           commentCount: 0,
           up_vote_count: 0,
@@ -213,5 +232,5 @@ function getCurrentTime(){
   if(month < 10) month = "0"+month
   let day = date.getDate()
   if(day < 10) day = "0"+day
-  return (`${year}-${month}-${day}`);
+  return (`${year}-${month}-${day}`)
 }

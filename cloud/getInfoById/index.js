@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
   const {target, openID} = event;
   const db = cloud.database();
   if(target=="getCourseInfo"){
-    const { courseID,professorID} = event;
+    const {courseID,professorID} = event;
     console.log(courseID);
     const data = await db.collection('courses')
       .where({
@@ -35,7 +35,7 @@ exports.main = async (event, context) => {
     }
     return {rating,data}
   }else if(target=="getProfessorInfo"){
-    let {professorID,courseID} = event;
+    const {professorID,courseID} = event;
     const data = await db.collection('professors').where({
       _id:professorID
     }).get();
@@ -46,7 +46,24 @@ exports.main = async (event, context) => {
         professorID:professorID
       }).get();
     }
-    return {rating,data}
+    const taughtClass = await db.collection('course_professor')
+      .aggregate()
+      .match({
+        professorID: professorID
+      })
+      .lookup({
+        from: "courses",
+        localField: "courseID",
+        foreignField: "_id",
+        as: "courseCode"
+      })
+      .end()
+    console.log(taughtClass);
+    const courseCode = taughtClass.list.map(item=>{
+      return {courseCode: item.courseCode[0].courseCode, courseUnit: item.courseCode[0].courseUnit}
+    })
+    console.log(courseCode);
+    return {rating, data, courseCode, taughtClass}
     
   }else if(target=="list"){
     let {courses,professors} = event;

@@ -26,13 +26,11 @@
 <!-- user rating -->
 <Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" hideCourse="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Review>
 
-  <!-- questions and anwers -->
-  <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
-
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>
+  
+  <YellowButton text="Write a review" bind:tap="onTapCreateReview"></YellowButton>
+  
   <view class="questionTitle">Questions and Answers</view>
-
-
   <view class="line"></view>
   <view wx:if="{{questions.length == 0}}">No question yet. Go ask one!</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
@@ -49,6 +47,6 @@
     </view>
   </navigator>
 
-  <YellowButton bind:tap="navigateToCreateQuestion" text="Ask a question"></YellowButton>
+  <YellowButton bind:tap="onTapCreateQuestion" text="Ask a question"></YellowButton>
   <BottomNav></BottomNav>
 </view>

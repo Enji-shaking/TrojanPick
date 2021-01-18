@@ -45,27 +45,27 @@
   <view class="rating borderTop">
     <view class="singleRating">
       <view class="text">
-        课程难度
+        Difficulty:
       </view>
-      <Stars Review="{{difficultyRating}}"></Stars>
+      <Stars Rating="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        内容趣味性
+        Entertainment:
       </view>
-      <Stars Review="{{entertainmentRating}}"></Stars>
+      <Stars Rating="{{entertainmentRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        workload
+        Workload:
       </view>
-      <Stars Review="{{workloadRating}}"></Stars>
+      <Stars Rating="{{workloadRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        teaching
+        Enrichment: 
       </view>
-      <Stars Review="{{enrichmentRating}}"></Stars>
+      <Stars Rating="{{enrichmentRating}}"></Stars>
     </view> 
 
   </view>

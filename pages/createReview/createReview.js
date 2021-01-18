@@ -1,3 +1,6 @@
+let app =  getApp();
+
+  
 Page({
   data: {
     evaluateTitle:['课程难度', '内容趣味性', 'workload', 'teaching'],
@@ -41,7 +44,26 @@ Page({
 
   onLoad: function (options) { 
     const openID = wx.getStorageSync("openID");
-    this.setData({openID})
+    //To sherry：你tmd要看！！！！！
+    //这里，我设置了courseID/professorID，如果是从一个页面直接点过来的话
+    //你改CSS的时候记得相应的搞一下!
+    console.log(options);
+    if(options.courseID){
+      this.setData({
+        courseCode: options.courseCode,
+        courseID: options.courseID,
+        openID: openID,
+        correctCourse: true,
+      })
+    }else if(options.professorID){
+      this.setData({
+        professorID: options.professorID,
+        professorName: options.professorName,
+        openID: openID,
+        correctProfessor: true,
+      })
+    }
+
   },
 
   // course input失焦时下拉框消失
@@ -87,7 +109,8 @@ Page({
     else{
       this.setData({
         courseCode: e.detail.value,
-        course_blurred: false
+        course_blurred: false,
+        correctCourse: false,
       })
       // setTimeout不可以直接传参数
       this.course_timer = setTimeout(this.searchCourse,1000)
@@ -159,7 +182,8 @@ Page({
     else{
       this.setData({
         professorName: e.detail.value,
-        prof_blurred: false
+        prof_blurred: false,
+        correctProfessor: false,
       })
       // setTimeout不可以直接传参数
       this.prof_timer = setTimeout(this.searchProfessor,1000)
@@ -305,6 +329,7 @@ Page({
             title: res.result.content
           })
         }else{
+          app.globalData.needRefresh = true
           wx.showToast({
             title: 'Added successfully',
             mask: true,

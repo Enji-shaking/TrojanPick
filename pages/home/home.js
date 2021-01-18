@@ -27,6 +27,7 @@ Page({
   },
   totalPageCourses: 99,
   totalPageProfessors: 99,
+  maxAllowPage: 10,
   onPickerChange(e){
     console.log(e);
     const {value} = e.detail
@@ -56,13 +57,15 @@ Page({
     this.performQuery(0).then((res)=>{
         console.log(res);
         const { data, totalPage }= res.result
-        this.totalPageCourses = totalPage
-        console.log(this.totalPageCourses);
-        const course_cards_info = data.map(v=>{return {_id: v._id, courseCode: v.courseCode, courseName: v.courseName}})
-        this.setData({course_cards_info: [...this.data.course_cards_info, ...course_cards_info]})
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        if(!data){
+          this.setData({course_cards_info: []})
+        }else{
+          this.totalPageCourses = totalPage
+          console.log(this.totalPageCourses);
+          const course_cards_info = data.map(v=>{return {_id: v._id, courseCode: v.courseCode, courseName: v.courseName}})
+          this.setData({course_cards_info: [...this.data.course_cards_info, ...course_cards_info]})
+        }
+        wx.hideLoading()
       })
       .catch((err)=>console.error(err))
   },
@@ -73,12 +76,16 @@ Page({
     this.performQuery(1).then((res)=>{
       console.log(res);
       const { data, totalPage }= res.result
-      this.totalPageProfessors = totalPage
-      const prof_cards_info = data.map(v=>{return {_id: v._id, professorName: v.professorName}})
-      this.setData({prof_cards_info: [...this.data.prof_cards_info, ...prof_cards_info]})
+      if(!data){
+        this.setData({course_cards_info: []})
+      }else{
+        this.totalPageProfessors = totalPage
+        const prof_cards_info = data.map(v=>{return {_id: v._id, professorName: v.professorName}})
+        this.setData({prof_cards_info: [...this.data.prof_cards_info, ...prof_cards_info]})
         wx.hideLoading({
           success: (res) => {},
         })
+      }
     })
     .catch((err)=>console.error(err))
 
@@ -132,7 +139,7 @@ Page({
     console.log("reach bottom");
     
     if(this.data.activeTab === 0){
-      if(this.totalPageCourses > this.queryParamsCourses.currentPage){
+      if(this.totalPageCourses > this.queryParamsCourses.currentPage && this.queryParamsCourses.currentPage < this.maxAllowPage){
         this.queryParamsCourses.currentPage++
         console.log(this.queryParamsCourses);
         this.searchCourseCloud()
@@ -143,7 +150,7 @@ Page({
         });
       }
     }else{
-      if(this.totalPageProfessors > this.queryParamsProfessors.currentPage){
+      if(this.totalPageProfessors > this.queryParamsProfessors.currentPage && this.queryParamsProfessors.currentPage < this.maxAllowPage){
         this.queryParamsProfessors.currentPage++
         console.log(this.queryParamsProfessors);
         this.searchProfessorCloud()
@@ -162,18 +169,6 @@ Page({
   onLoad: function (options) {
     this.getOpenID()
     this.loadInitialInfo();
-    // wx.cloud.callFunction({
-    //   name: "deleteEntries",
-    //   data:{
-    //     target: "nonono"
-    //   },
-    //   success: res=>{console.log(res)},
-    //   fail: e=>{console.log(e)}
-    // })
-    // wx.showToast({
-    //   icon: 'none',
-    //   title: "2/2 limt reached for all reviews"
-    // })
   },
 
   getOpenID(){
