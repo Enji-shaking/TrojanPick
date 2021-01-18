@@ -62,10 +62,14 @@ Page({
         professorID: professorID
       },
       success: (res) => {
-        console.log(res);
-        let course = res.result.data.data[0];
+        console.log(res)
+        let course = res.result.data.data[0]
+        if(!course){
+          console.log("no course found")
+          return
+        }
         if(course.numReviews){
-          let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2);
+          let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2)
           this.setData({
             overallRating: overall,
             difficultyRating: (course.difficultyRating).toFixed(2),

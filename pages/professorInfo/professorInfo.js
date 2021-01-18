@@ -41,6 +41,10 @@ Page({
         console.log(res);
         console.log(res.result.data.data[0]);
         let professor = res.result.data.data[0];
+        if(!professor){
+          console.log("No professor found");
+          return;
+        }
         if(professor.workloadRating){
           let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
           this.setData({
