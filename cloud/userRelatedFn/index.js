@@ -16,34 +16,37 @@ exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
     console.log(wxContext);
     return wxContext.OPENID
-  }else if(target === "tryToAddNewUser"){
-    const {avatarUrl, nickName} = event
-    const wxContext = cloud.getWXContext()
-    openID = wxContext.OPENID
-    db.collection("users").add({
-      data:{
-        // avatarUrl: avatarUrl,
-        openID: openID,
-        // nickName: nickName,
-        // myAnswerIDs: [],
-        // myCommentIDs: [],
-        // myQuestionIDs: [],
-        // myReviewIDs: []
-      }
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-    return openID
   }else if(target === "updateUser"){
     const {avatarUrl, nickName} = event
-    console.log("update");
-    db.collection("users").where({openID: openID}).update({
+    db.collection("users")
+    .where({openID: openID})
+    .update({
       data:{
         avatarUrl: avatarUrl,
         nickName: nickName
       }
     })
+  }else if(target === "login"){
+    const wxContext = cloud.getWXContext()
+    const {avatarUrl, nickName} = event
+    openID = wxContext.OPENID
+    try {
+      await db.collection("users").add({
+        data:{  
+          openID: openID,
+        }
+      })
+    } catch (error) {}
+    //same as update user
+    db.collection("users")
+    .where({openID: openID})
+    .update({
+      data:{
+        avatarUrl: avatarUrl,
+        nickName: nickName
+      }
+    })
+    return openID
   }
   // console.log(tryAdding);
   

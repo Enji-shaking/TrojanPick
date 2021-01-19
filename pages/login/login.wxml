@@ -1,26 +1,9 @@
 <Header></Header>
-
-<view class="welcome_row">
-    <view class="welcome_image_wrapper">
-        <image class="icon" src="/icon/ours/empty_icon.png" mode="widthFix"></image>
-    </view>
-    <view class="welcome_row_text_wrapper">
-        <view class="welcome_text_line_1">注册/登录</view>
-        <view class="welcome_text_line"></view>
-        <!-- <view class="welcome_text_line_2"></view> -->
-    </view>
-</view>
-
-<view class="content_wrapper">
-    <input type="text" class="row big_input_field" placeholder="Username"/>
-    <input type="text" class="row big_input_field" placeholder="Password"/>
-    <ConfirmButton title="Login" bind:onConfirm="login"></ConfirmButton>    
-    <view class="register_row">
-        <text class="register_text">No Account?</text>
-        <navigator url="/pages/signup/signup" class="register_nav"> Register </navigator>
-    </view>
-    <view class="line">------------- 其他登录方式 -------------</view>
-    <view class="wechatlogin">
-        <ConfirmButton title="Wechat Login" loginbutton="{{true}}" bind:onConfirm="weChatLogin"></ConfirmButton>
-    </view>
+<view class="login_wrapper">
+    <!-- we don't have any avatarUrl and nickName for the user yet -->
+    <view class="mask"></view>
+    <view class="login_text">Welcome to</view>
+    <view class="login_line"></view>
+    <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">One click login <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
 </view>

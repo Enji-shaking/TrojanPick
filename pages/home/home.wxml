@@ -47,7 +47,7 @@
                 <picker class="right_picker" mode="selector" range="{{picker_arr}}" value="{{picker_index}}" bindchange="onPickerChange">
                     <text class="picker_picked">{{picker_arr[picker_index]}}</text>
                 </picker>
-                  
+                
             </view>
         </view>
     </view>
@@ -84,5 +84,5 @@
     </view>
 
 </view>
-  
 <BottomNav></BottomNav>
+

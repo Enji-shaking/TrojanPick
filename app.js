@@ -38,35 +38,18 @@ App({
     wx.cloud.init({
       env: "test-0gbtzjgqaae3f2b2"
     })
-    wx.getSetting({
-      success: res=>{
-          wx.getUserInfo({
-            withCredentials: 'false',
-            lang: 'zh_CN',
-            timeout:10000,
-            success: (result) => {
-              console.log(result);
-              this.globalData.nickName = result.userInfo.nickName
-              this.globalData.avatarUrl = result.userInfo.avatarUrl
-            },
-            fail: () => {},
-            complete: () => {}
-          });
-        }
-    })
     const userInfo = wx.getStorageSync("userInfo");
     if(userInfo){
-      this.globalData.couldMakeReview = true
+      this.globalData.hasPersonalInfo = true
     }
-      
   },
   globalData: {
-    userInfo: null,
+    hasPersonalInfo: false,
     onHome: true,
     onProfile: false,
     onCreate: false,
     needRefresh: false,
     questionNeedRefresh: false,
-    couldMakeReview: false,
+    // couldMakeReview: false,
   }
 })
