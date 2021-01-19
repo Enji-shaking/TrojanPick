@@ -201,7 +201,13 @@ exports.main = async (event, context) => {
     })
   }else if(target === "createQuestion"){
     const { content, courseID } = event
-    return await db.collection('questions').add({
+    const pastQuestions =( await db.collection("questions")
+            .where({openID: openID, courseID: courseID})
+            .count()).total
+    if(pastQuestions > 2){
+      return {success: false}
+    }
+    db.collection('questions').add({
       data:{ 
         courseID: courseID,
         content: content,
@@ -210,6 +216,7 @@ exports.main = async (event, context) => {
         favoredCount: 0
       }
     })
+    return {success: true}
   }else if(target === "createAnswer"){
     const {content, questionID} = event
     return await db.collection('answers').add({

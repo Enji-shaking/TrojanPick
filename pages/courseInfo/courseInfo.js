@@ -21,7 +21,8 @@ Page({
     questions: [],
     totalPage: 0,
     currentPageInReviews: 1,
-    professorID: undefined,
+    professorID: "",
+    professorName: "",
     openID: "",
     dummy: 1,
     isHot:true
@@ -157,7 +158,7 @@ Page({
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
-    options.courseID="429d17da60052ed9000642326f246b24";
+    // options.courseID="429d17da60052ed9000642326f246b24";
     console.log("onload");
     const { courseID } = options
     // console.log(courseID);
@@ -175,17 +176,19 @@ Page({
   },
   onShow: function () {
     if(app.globalData.needRefresh){
-      this.counter = 4
+      this.counter = 3
       wx.showLoading({
         title: "loading",
         mask: true,
       });
-
-      this.getQuestions()
       this.getCourseInfo(this.data.courseID, undefined)
       this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
       this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
       app.globalData.needRefresh = false
+    }
+    if(app.globalData.questionNeedRefresh){
+      this.getQuestions()
+      app.globalData.questionNeedRefresh = false
     }
 
   },
@@ -254,8 +257,9 @@ Page({
       mask: true,
     });
 
-    const professorID = e.detail
-    this.setData({ currentPageInReviews: 1, professorID: professorID })
+    const professorID = e.detail.id
+    const professorName = e.detail.value
+    this.setData({ currentPageInReviews: 1, professorID, professorName })
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
   },
@@ -286,8 +290,17 @@ Page({
     });   
   },
   onTapCreateReview: function () {  
+    if(!app.globalData.couldMakeReview){
+      wx.showToast({
+        title: 'Please go to profile and login first',
+        icon: 'none',
+        duration: 1500,
+        mask: false,
+      });
+      return;
+    }
     wx.navigateTo({
-      url: '/pages/createReview/createReview?courseID='+this.data.courseID+'&courseCode='+this.data.courseCode,
-    })
+      url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}`,
+    });
   }
 })

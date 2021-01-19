@@ -15,37 +15,42 @@ exports.main = async (event, context) => {
     const my_favored_questions_raw = await db.collection("favored_questions").where({ 
       openID: openID,
       courseID: courseID 
-    }).get()
+    })
+    .get()
     const my_favored_questions = new Set()
     for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
       my_favored_questions.add(my_favored_questions_raw.data[i].questionID)
     }
-  
-    const data = await db.collection('questions').aggregate().sort({
-      up_vote_count: -1
-    }).match({
+    console.log(my_favored_questions);
+    const data = await db.collection('questions')
+    .aggregate()
+    .sort({
+      favoredCount: -1,
+      postedTime: -1
+    })
+    .match({
         courseID: courseID
-    }).lookup({
+    })
+    .lookup({
       from: 'answers',
       let: {
           questionID: '$_id'
       },
       pipeline: $.pipeline()
         .match(
-          // {questionID: '$$questionID'}
           _.expr($.eq(['$questionID', '$$questionID']))
         )
-        .sort({up_vote_count: -1})
+        .sort({favoredCount: -1})
         .limit(1)
         .done()
       ,
-
       as: 'answers',
-    }).end()
+    })
+    .end()
 
-
+    console.log(openID);
     data.list.forEach(item=>{
-      if(item._id in my_favored_questions){
+      if(my_favored_questions.has(item._id )){
         item.favored_by_me = true
       }else{
         item.favored_by_me = false

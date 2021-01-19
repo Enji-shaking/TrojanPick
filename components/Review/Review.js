@@ -179,20 +179,30 @@ Component({
           }
         })
       } else {
-        this.setData({
-          saved_by_me: !this.data.saved_by_me,
-          favoriteCount: this.data.favoriteCount - 1
-        })
-        wx.cloud.callFunction({
-          name: 'vote_save',
-          data: {
-            target: "unsave_review",
-            openID: this.data.openID,
-            reviewID: this.data._id
+        wx.showModal({
+          title: 'Reminder',
+          content: 'Are you sure you want to unsave this review?',
+          showCancel: true,
+          cancelText: 'Cancel',
+          cancelColor: '#000000',
+          confirmText: 'Confirm',
+          confirmColor: '#3CC51F',
+          success: (result) => {
+            if (result.confirm) {
+              this.setData({
+                saved_by_me: !this.data.saved_by_me,
+                favoriteCount: this.data.favoriteCount - 1
+              })
+              wx.cloud.callFunction({
+                name: 'vote_save',
+                data: {
+                  target: "unsave_review",
+                  openID: this.data.openID,
+                  reviewID: this.data._id
+                },
+              })
+            }
           },
-          success: (res) => {
-
-          }
         })
       }
     },
