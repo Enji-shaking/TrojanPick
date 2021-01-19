@@ -131,6 +131,7 @@ exports.main = async (event, context) => {
   }
   else if(target=="savedReviews"){
     console.log(openID);
+    delete condition.openID;
     let data = db.collection('saved_reviews')
     .aggregate()
     .match({
@@ -200,12 +201,9 @@ exports.main = async (event, context) => {
           commentCount:0,
           up_vote_count:0
         }
-        item.professorInfo=(await db.collection('professors').where({
-          _id:data.list[i].professorID
-        }).get()).data;
-        item.courseInfo = (await db.collection('courses').where({
-          _id:data.list[i].courseID
-        }).get()).data;
+        data.list[i].professorID
+        item.professorInfo={professorName:data.list[i].professorName};
+        item.courseInfo = {courseCode:data.list[i].courseCode};
         item.userInfo=(await db.collection('users').where({
           openID:data.list[i].ownerOpenID
         }).get()).data;

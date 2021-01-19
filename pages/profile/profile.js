@@ -22,13 +22,13 @@ Page({
     })
     console.log("hey");
     console.log("hey2");
-
+    console.log(this.data.openID);
     if(this.data.openID === ""){
-      const data = wx.getStorageSync("openID");
+      const data = wx.getStorageSync('openID');
       console.log(data);
       this.setData({openID: data})
     }
-
+    console.log(this.data.openID);
     if(!this.data.hasPersonalInfo){
       wx.getStorage({
         key: "userInfo",
@@ -117,6 +117,7 @@ Page({
       },
       fail: (err) => {console.log(err);}
     });
+    console.log(this.data.openID);
     //2. insert to database
     wx.cloud.callFunction({
       name: "userRelatedFn",

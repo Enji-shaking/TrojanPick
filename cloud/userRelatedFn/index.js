@@ -37,6 +37,7 @@ exports.main = async (event, context) => {
     return openID
   }else if(target === "updateUser"){
     const {avatarUrl, nickName} = event
+    console.log("update");
     db.collection("users").where({openID: openID}).update({
       data:{
         avatarUrl: avatarUrl,

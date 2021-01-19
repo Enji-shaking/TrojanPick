@@ -182,7 +182,9 @@ Page({
         wx.setStorage({
           key: 'openID',
           data: e.result
-        });          
+        });  
+        const data = wx.getStorageSync('openID');
+        console.log("data"+data);        
       }
     })
   },
