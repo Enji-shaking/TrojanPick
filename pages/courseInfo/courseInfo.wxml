@@ -48,5 +48,5 @@
   </navigator>
 
   <YellowButton bind:tap="onTapCreateQuestion" text="Ask a question"></YellowButton>
-  <BottomNav></BottomNav>
+  <BottomNav courseID="{{courseID}}" courseCode="{{courseCode}}" professorID="{{professorID}}" professorName="{{professorName}}"></BottomNav>
 </view>

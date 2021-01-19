@@ -49,13 +49,16 @@ Page({
     //你改CSS的时候记得相应的搞一下!
     console.log(options);
     if(options.courseID){
+      console.log("there is courseID");
       this.setData({
         courseCode: options.courseCode,
         courseID: options.courseID,
         openID: openID,
         correctCourse: true,
       })
-    }else if(options.professorID){
+    }
+    if(options.professorID){
+      console.log("there is professorID");
       this.setData({
         professorID: options.professorID,
         professorName: options.professorName,

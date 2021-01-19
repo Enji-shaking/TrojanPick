@@ -22,6 +22,7 @@ Page({
     totalPage: 0,
     currentPageInReviews: 1,
     professorID: undefined,
+    professorName: "",
     openID: "",
     dummy: 1,
     isHot:true
@@ -254,8 +255,9 @@ Page({
       mask: true,
     });
 
-    const professorID = e.detail
-    this.setData({ currentPageInReviews: 1, professorID: professorID })
+    const professorID = e.detail.id
+    const professorName = e.detail.value
+    this.setData({ currentPageInReviews: 1, professorID, professorName })
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
   },
@@ -296,7 +298,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/createReview/createReview?courseID='+this.data.courseID+'&courseCode='+this.data.courseCode,
-    })
+      url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}`,
+    });
   }
 })

@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    professorName: "",
     overallRating: 0,
     difficultyRating: 0,
     entertainmentRating: 0,
@@ -18,8 +17,10 @@ Page({
       courseCode: "ITP 115",
       courseUnit: 2,
     }],
+    professorName: "",
     professorID: undefined,
     courseID: undefined,
+    courseCode: "",
     totalPage: 0,
     currentPageInReviews: 1,
     openID: "",
@@ -191,8 +192,9 @@ Page({
       title: "loading",
       mask: true,
     });
-    const courseID = e.detail
-    this.setData({ currentPageInReviews: 1, courseID: courseID })
+    const courseID = e.detail.id
+    const courseCode = e.detail.value
+    this.setData({ currentPageInReviews: 1, courseID, courseCode })
     this.getProfessorInfo(this.data.professorID, this.data.courseID);
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
@@ -230,7 +232,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/createReview/createReview?professorID='+this.data.professorID+'&professorName='+this.data.professorName,
-    })
+      url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}`,
+    });
   }
 })

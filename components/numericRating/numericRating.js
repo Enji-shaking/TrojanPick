@@ -60,7 +60,7 @@ Component({
           professorName:this.data.list[option.detail.value].item_value
         })
       }
-      this.triggerEvent("choosePicker",this.data.list[option.detail.value].item_id);
+      this.triggerEvent("choosePicker",{id: this.data.list[option.detail.value].item_id, value: this.data.list[option.detail.value].item_value});
     }
   },
   ready:function(){

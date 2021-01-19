@@ -7,7 +7,22 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    courseID: {
+      type: String,
+      value: ""
+    },
+    courseCode: {
+      type: String,
+      value: ""
+    },
+    professorID: {
+      type: String,
+      value: ""
+    },
+    professorName: {
+      type: String,
+      value: ""
+    },
   },
 
   /**
@@ -74,7 +89,7 @@ Component({
       console.log("create");
       if(!this.data.onCreate){
         wx.navigateTo({
-          url: '/pages/createReview/createReview',
+          url: `/pages/createReview/createReview?courseID=${this.properties.courseID}&courseCode=${this.properties.courseCode}&professorID=${this.properties.professorID}&professorName=${this.properties.professorName}`,
         });
         app.globalData.onHome = false;
         app.globalData.onProfile = false;
