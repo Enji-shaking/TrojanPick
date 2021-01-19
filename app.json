@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/courseInfo/courseInfo",
-    "pages/home/home",
     "pages/savedReviews/savedReviews",
+    "pages/home/home",
+    "pages/index/index",
+    "pages/courseInfo/courseInfo",
     "pages/savedClasses/savedClasses",
     "pages/pastReviews/pastReviews",
     "pages/professorInfo/professorInfo",
@@ -11,7 +12,6 @@
     "pages/reviewInfo/reviewInfo",
     "pages/test/test",
     "pages/testCloud/testCloud",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/addClass/addClass",
     "pages/addProfessor/addProfessor",
