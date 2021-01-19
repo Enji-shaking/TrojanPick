@@ -21,7 +21,8 @@ Page({
       name: "getQuestions",
       data: {
         target: "questionsAndAnswers",
-        courseID: this.data.courseID
+        courseID: this.data.courseID,
+        openID: this.data.openID    
       },
       success: res=>{
         console.log(res);
@@ -38,25 +39,37 @@ Page({
   },
 
   deleteQuestion: function(e){
-    wx.cloud.callFunction({
-      name: "deleteEntries",
-      data:{
-        target: "deleteQuestion",
-        questionID: this.data.questions[e.currentTarget.dataset.index]._id
+    wx.showModal({
+      title: 'Reminder',
+      content: 'Are you sure you want to delete this question?',
+      showCancel: true,
+      cancelText: 'Cancel',
+      cancelColor: '#000000',
+      confirmText: 'Confirm',
+      confirmColor: '#3CC51F',
+      success: (result) => {
+        if (result.confirm) {
+          wx.cloud.callFunction({
+            name: "deleteEntries",
+            data:{
+              target: "deleteQuestion",
+              questionID: this.data.questions[e.currentTarget.dataset.index]._id
+            },
+            success: res=>{
+              this.data.questions.splice(e.currentTarget.dataset.index, 1)
+              this.setData({
+                questions: this.data.questions,
+              })
+              app.globalData.questionNeedRefresh = true
+            }
+          })
+        }
       },
-      success: res=>{
-        this.data.questions.splice(e.currentTarget.dataset.index, 1)
-        // this.data.own_questions.splice(e.currentTarget.dataset.index, 1)
-        this.setData({
-          questions: this.data.questions,
-          // own_question: this.data.own_questions,
-        })
-        app.globalData.needRefresh = true
-      }
     })
   },
 
   favored_cancel: function(e){
+    app.globalData.questionNeedRefresh = true
     wx.cloud.callFunction({
       name: "vote_save",
       data:{
@@ -77,6 +90,7 @@ Page({
   },
 
   favored_new: function(e){
+    app.globalData.questionNeedRefresh = true
     console.log(this.data.questions[e.currentTarget.dataset.index].content)
     wx.cloud.callFunction({
       name: "vote_save",
@@ -107,10 +121,10 @@ Page({
     this.searchQuestionsAndAnswers()
   },
   onShow: function () {
-    if(app.globalData.needRefresh){
+    if(app.globalData.questionNeedRefresh){
       console.log("HEY");
       this.searchQuestionsAndAnswers()
-      app.globalData.needRefresh = false
+      app.globalData.questionNeedRefresh = false
     }  
   },
   navigateToCreateQuestion: function (){

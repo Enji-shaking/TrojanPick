@@ -158,7 +158,7 @@ Page({
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
-    options.courseID="429d17da60052ed9000642326f246b24";
+    // options.courseID="429d17da60052ed9000642326f246b24";
     console.log("onload");
     const { courseID } = options
     // console.log(courseID);
@@ -176,17 +176,19 @@ Page({
   },
   onShow: function () {
     if(app.globalData.needRefresh){
-      this.counter = 4
+      this.counter = 3
       wx.showLoading({
         title: "loading",
         mask: true,
       });
-
-      this.getQuestions()
       this.getCourseInfo(this.data.courseID, undefined)
       this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
       this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)
       app.globalData.needRefresh = false
+    }
+    if(app.globalData.questionNeedRefresh){
+      this.getQuestions()
+      app.globalData.questionNeedRefresh = false
     }
 
   },

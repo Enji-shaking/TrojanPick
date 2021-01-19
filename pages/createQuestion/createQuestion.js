@@ -16,10 +16,11 @@ Page({
   },
 
   submitQuestion(e){
+    app.globalData.questionNeedRefresh = true
     if(this.newQuestion.trim() === ""){
       wx.showToast({
-        title: '输入不能为空',
-        icon: 'loading'
+        title: 'Input can\'t be empty',
+        icon: 'none'
       })
       return false;
     }
@@ -33,18 +34,39 @@ Page({
         target: 'createQuestion'
       },
       success: res=>{
-        wx.showToast({
-          title: "提交成功",
-          icon: 'success',
-          duration: 1000
-        })
-        app.globalData.needRefresh = true
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
         console.log(res);
+        if(res.result.success){
+          app.globalData.needRefresh = true
+          wx.showToast({
+            title: "success",
+            icon: 'success',
+            duration: 2000,
+            mask: false,
+            success: (result) => {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 2000)
+            },
+          })
+        }else{
+          wx.showToast({
+            title: 'You can\'t ask more than 3 questions to a course',
+            icon: 'none',
+            image: '',
+            duration: 2000,
+            mask: false,
+            success: (result) => {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 2000)
+            },
+          });
+            
+        }
       },
       fail: err=>{
         console.error(err)

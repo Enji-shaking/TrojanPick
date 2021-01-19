@@ -66,6 +66,7 @@ App({
     onProfile: false,
     onCreate: false,
     needRefresh: false,
+    questionNeedRefresh: false,
     couldMakeReview: false,
   }
 })
