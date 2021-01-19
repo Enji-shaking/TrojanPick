@@ -102,6 +102,9 @@ exports.main = async (event, context) => {
     })
     return await Promise.all([p1, p2])
   }else if(target === "unsave_review"){
+    console.log(openID)
+    const {reviewID} = event;
+    console.log(reviewID)
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{
         favoriteCount: _.inc(-1)

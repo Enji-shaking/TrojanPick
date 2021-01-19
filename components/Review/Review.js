@@ -65,6 +65,7 @@ Component({
     entertainmentRating: 0,
     workloadRating: 0,
     enrichmentRating: 0,
+    _id:""
   },
 
   /**
@@ -217,6 +218,7 @@ Component({
         confirmColor: '#3CC51F',
         success: (result) => {
           if (result.confirm) {
+            console.log(this.data._id);
             this.triggerEvent("unsaveADeletedReview")
             wx.cloud.callFunction({
               name: 'vote_save',
@@ -291,6 +293,7 @@ Component({
           reviewID: this.data._id,
           openID: this.data.openID,
           content: this.data.inputCommentContent
+
         }
       })
       .then(res=>
@@ -318,8 +321,16 @@ Component({
 
   attached: function () {
     const openID = wx.getStorageSync("openID");
+    // const openID = "oH5r15EPI59JgaNhhebzuDsOpPEo";
     console.log(openID);
-    this.setData({ openID })
+    console.log(this.properties.item);
+    console.log(this.properties.item._id);
+    const _id = this.properties.item._id;
+    this.setData({
+      openID:openID,
+      _id:_id
+    })
+    
   }
 
 })

@@ -23,7 +23,9 @@ exports.main = async (event, context) => {
     let difficultyRating = delete_review.data[0].difficultyRating;
     let entertainmentRating = delete_review.data[0].entertainmentRating;
     let enrichmentRating = delete_review.data[0].enrichmentRating;
-
+    let courseCode = delete_review.data[0].courseCode;
+    let professorName = delete_review.data[0].professorName;
+    let postedTime = delete_review.data[0].postedTime;
     db.collection("reviews").where({
       openID: openID,
       _id: reviewID
@@ -32,15 +34,18 @@ exports.main = async (event, context) => {
       openID: openID,
       reviewID: reviewID
     }).remove()
-
+    console.log(openID)
+    console.log(courseCode)
+    console.log(professorName)
     db.collection("saved_reviews").where({
       reviewID: reviewID
     }).update({
       data: {
         deleted: true,
-        courseID: courseID,
-        professorID: professorID,
-        ownerOpenID: openID
+        courseCode: courseCode,
+        professorName: professorName,
+        ownerOpenID: openID,
+        postedTime:postedTime
       }
     })
     db.collection("comments").where({

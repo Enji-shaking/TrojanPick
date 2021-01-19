@@ -176,7 +176,6 @@ exports.main = async (event, context) => {
     for(let i=0;i<data.list.length;i++){
       if(data.list[i].reviews.length!=0){
         let temp = data.list[i].reviews[0]
-      
         temp.posted_by_me = temp.openID === openID
         temp.voted_by_me = (temp._id in my_voted_reviews ? my_voted_reviews[temp._id] : 0)
         temp.saved_by_me = (temp._id in my_saved_reviews ? true : false)
@@ -187,7 +186,7 @@ exports.main = async (event, context) => {
           _id:temp.professorID
         }).get()).data;
         temp.userInfo=(await db.collection('users').where({
-          openID:openID
+          openID:temp.openID
         }).get()).data;
         data.list[i] = temp;
       }else{
@@ -197,16 +196,18 @@ exports.main = async (event, context) => {
           deleted:true,
           content:"[The user has deleted this review]",
           down_vote_count:0,
-          favoriteCount:0,
+          favoriteCount:1,
           commentCount:0,
-          up_vote_count:0
+          up_vote_count:0,
+          saved_by_me:true
         }
-        data.list[i].professorID
-        item.professorInfo={professorName:data.list[i].professorName};
-        item.courseInfo = {courseCode:data.list[i].courseCode};
+        item._id = data.list[i].reviewID;
+        item.professorInfo=[{professorName:data.list[i].professorName}];
+        item.courseInfo = [{courseCode:data.list[i].courseCode}];
         item.userInfo=(await db.collection('users').where({
           openID:data.list[i].ownerOpenID
         }).get()).data;
+        item.postedTime = data.list[i].postedTime;
         data.list[i] = item;
       }
     }

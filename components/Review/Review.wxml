@@ -91,7 +91,7 @@
     </view>
 
     <view bind:tap="savedTappedDeleted" wx:if="{{deleted}}">
-      <image src="{{'/icon/others/favorite_grey.svg'}}"></image>
+      <image src="{{'/icon/others/favorite.svg'}}"></image>
     </view>
 
   </view>
