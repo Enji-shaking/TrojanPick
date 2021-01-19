@@ -62,6 +62,15 @@ Component({
       }
     },
     onTapCreate: function () {  
+      if(!app.globalData.couldMakeReview){
+        wx.showToast({
+          title: 'Please go to profile and login first',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+        return;
+      }
       console.log("create");
       if(!this.data.onCreate){
         wx.navigateTo({

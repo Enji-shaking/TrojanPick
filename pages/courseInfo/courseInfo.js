@@ -286,6 +286,15 @@ Page({
     });   
   },
   onTapCreateReview: function () {  
+    if(!app.globalData.couldMakeReview){
+      wx.showToast({
+        title: 'Please go to profile and login first',
+        icon: 'none',
+        duration: 1500,
+        mask: false,
+      });
+      return;
+    }
     wx.navigateTo({
       url: '/pages/createReview/createReview?courseID='+this.data.courseID+'&courseCode='+this.data.courseCode,
     })

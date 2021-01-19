@@ -40,6 +40,7 @@ Page({
             avatarUrl: res.data.avatarUrl,
             nickName: res.data.nickName
           })
+          app.globalData.couldMakeReview = true
         },
         fail: e=>{
           this.getPersonalInfoFromDatabase()
@@ -76,7 +77,8 @@ Page({
               nickName: personalInfo[0].nickName
             },
             success: (result) => {
-              console.log(result);
+              console.log(result)
+              app.globalData.couldMakeReview = true
             },
             fail: (err) => {console.log(err);}
           });
@@ -133,6 +135,8 @@ Page({
       avatarUrl: data.avatarUrl,
       nickName: data.nickName
     });
+    //4. allow to make review
+    app.globalData.couldMakeReview = true
   },
   onGetUserInfoNewUser(e){
     //would only be triggered when we don't have userInfo in the storage, neither did we get any information from the database

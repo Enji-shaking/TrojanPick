@@ -40,9 +40,6 @@ App({
     })
     wx.getSetting({
       success: res=>{
-        // console.log(res);
-        // if(res.authSetting['scope.userInfo']){
-
           wx.getUserInfo({
             withCredentials: 'false',
             lang: 'zh_CN',
@@ -56,18 +53,12 @@ App({
             complete: () => {}
           });
         }
-        // else{
-        //   wx.openSetting({
-        //     success: (result) => {
-        //       console.log(result);
-        //     },
-        //     fail: () => {},
-        //     complete: () => {}
-        //   });
-            
-        // }
-          
     })
+    const userInfo = wx.getStorageSync("userInfo");
+    if(userInfo){
+      this.globalData.couldMakeReview = true
+    }
+      
   },
   globalData: {
     userInfo: null,
@@ -75,5 +66,6 @@ App({
     onProfile: false,
     onCreate: false,
     needRefresh: false,
+    couldMakeReview: false,
   }
 })
