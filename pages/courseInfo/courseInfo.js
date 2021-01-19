@@ -21,7 +21,7 @@ Page({
     questions: [],
     totalPage: 0,
     currentPageInReviews: 1,
-    professorID: undefined,
+    professorID: "",
     professorName: "",
     openID: "",
     dummy: 1,

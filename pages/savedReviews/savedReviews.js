@@ -38,7 +38,7 @@ Page({
    */
   counter: 3,
   onLoad: function (options) {
-    options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
+    // options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
     wx.showLoading({
       title: "loading",
       mask: true,
@@ -88,6 +88,7 @@ Page({
   },
   //update
   getReviewsForCourseForProfessorForPage: function (page, courseID, professorID,onLoad) { 
+    console.log(arguments);
     wx.cloud.callFunction({
       name:'getProfileInfo',
       data:{
@@ -120,6 +121,14 @@ Page({
       },
       fail(err){
         console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        });
       }
     })
    },
@@ -177,7 +186,17 @@ Page({
           wx.hideLoading();
         }
     })
-    .catch(console.error)
+    .catch(err=>{
+      console.error(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      });
+    })
   },
   getTotalPage(){
     wx.cloud.callFunction({
@@ -199,7 +218,17 @@ Page({
           wx.hideLoading();
         }
     })
-    .catch(console.error)
+    .catch(err=>{
+      console.error(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      });
+    })
   },
   unsaveADeletedReview: function (e) {  
     const d = this.data.reviews
