@@ -1,7 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
+  env: "test-0gbtzjgqaae3f2b2"
 })
 const db = cloud.database()
 const _ = db.command
