@@ -10,7 +10,7 @@ Page({
     nickName: "",
     avatarUrl: "/icon/ours/empty_icon.png",
     openID:"",
-    hasPersonalInfo: false
+    hasPersonalInfo: false,
   },
 
   /**
@@ -34,16 +34,15 @@ Page({
         key: "userInfo",
         success: (res)=>{
           console.log(res);
-          //set data
           this.setData({
-            hasPersonalInfo: true,
             avatarUrl: res.data.avatarUrl,
             nickName: res.data.nickName
           })
-          app.globalData.couldMakeReview = true
         },
         fail: e=>{
-          this.getPersonalInfoFromDatabase()
+          wx.redirectTo({
+            url: '/pages/login/login',
+          });
         },
         complete(c){
           wx.hideLoading()
@@ -52,45 +51,45 @@ Page({
     }
   },
 
-  getPersonalInfoFromDatabase(){
-    wx.cloud.callFunction({
-      name: "userRelatedFn",
-      data: {
-        target: "checkUserInfo",
-        openID: this.data.openID
-      },
-      success: (e)=>{
-        console.log(e);
-        const personalInfo = e.result.data
-        //only if we saved avatarUrl to the database, we obtained the related information
-        if(personalInfo.length > 0 && personalInfo[0].avatarUrl){
-          this.setData({
-            hasPersonalInfo: true,
-            avatarUrl: personalInfo[0].avatarUrl,
-            nickName: personalInfo[0].nickName
-          });
-          wx.setStorage({
-            key: 'userInfo',
-            data: {
-              hasPersonalInfo: true,
-              avatarUrl: personalInfo[0].avatarUrl,
-              nickName: personalInfo[0].nickName
-            },
-            success: (result) => {
-              console.log(result)
-              app.globalData.couldMakeReview = true
-            },
-            fail: (err) => {console.log(err);}
-          });
-        }
-        // else{do nothing}
-      },
-      fail: (e)=>{
-        console.log("fail");
-        console.log(e);
-      }
-    })
-  },
+  // getPersonalInfoFromDatabase(){
+  //   wx.cloud.callFunction({
+  //     name: "userRelatedFn",
+  //     data: {
+  //       target: "checkUserInfo",
+  //       openID: this.data.openID
+  //     },
+  //     success: (e)=>{
+  //       console.log(e);
+  //       const personalInfo = e.result.data
+  //       //only if we saved avatarUrl to the database, we obtained the related information
+  //       if(personalInfo.length > 0 && personalInfo[0].avatarUrl){
+  //         this.setData({
+  //           hasPersonalInfo: true,
+  //           avatarUrl: personalInfo[0].avatarUrl,
+  //           nickName: personalInfo[0].nickName
+  //         });
+  //         wx.setStorage({
+  //           key: 'userInfo',
+  //           data: {
+  //             hasPersonalInfo: true,
+  //             avatarUrl: personalInfo[0].avatarUrl,
+  //             nickName: personalInfo[0].nickName
+  //           },
+  //           success: (result) => {
+  //             console.log(result)
+  //             // app.globalData.couldMakeReview = true
+  //           },
+  //           fail: (err) => {console.log(err);}
+  //         });
+  //       }
+  //       // else{do nothing}
+  //     },
+  //     fail: (e)=>{
+  //       console.log("fail");
+  //       console.log(e);
+  //     }
+  //   })
+  // },
   //print a placeholder
     //the placeholder have a button
     //if the user allows, insert userinfo into database, save it locally, goto **
@@ -104,13 +103,12 @@ Page({
       
       //if we don't, do nothing, go to *** 
       
-  processUserInfo(data, type){
+  processUserInfo(data){
     console.log(data);
     //1. set user info
     wx.setStorage({
       key: 'userInfo',
       data: {
-        hasPersonalInfo: true,
         avatarUrl: data.avatarUrl,
         nickName: data.nickName
       },
@@ -135,26 +133,17 @@ Page({
       avatarUrl: data.avatarUrl,
       nickName: data.nickName
     });
-    //4. allow to make review
-    app.globalData.couldMakeReview = true
+
   },
-  onGetUserInfoNewUser(e){
-    //would only be triggered when we don't have userInfo in the storage, neither did we get any information from the database
-    console.log(e);
-    if(e.detail.userInfo){
-      this.processUserInfo(e.detail.userInfo)
-    }
-  },
+
   onTapUpdateInfo(){
     wx.getUserInfo({
       withCredentials: 'false',
       lang: 'zh_CN',
       timeout:10000,
       success: (result) => {
-        this.processUserInfo(result.rawData);
-      },
-      fail: () => {},
-      complete: () => {}
+        this.processUserInfo(result.detail.userInfo);
+      }
     });
   },
 

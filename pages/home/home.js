@@ -1,4 +1,5 @@
 // pages/home/home.js
+let app =  getApp();
 Page({
 
   /**
@@ -12,6 +13,7 @@ Page({
     activeTab: 0,
     searchCourseCode: "",
     searchProfessorName: "",
+    hasPersonalInfo: false
   },
   queryParamsCourses: { 
     currentPage: 1,
@@ -167,25 +169,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOpenID()
-    this.loadInitialInfo();
+    if(!app.globalData.hasPersonalInfo){
+      wx.redirectTo({
+        url: '/pages/login/login',
+      });
+    }else{
+      this.loadInitialInfo();
+    }
   },
 
-  getOpenID(){
-    wx.cloud.callFunction({
-      name: "userRelatedFn",
-      data:{
-        target: "tryToAddNewUser",
-      },
-      success: e=>{
-        console.log(e);
-        wx.setStorage({
-          key: 'openID',
-          data: e.result
-        });          
-      }
-    })
-  },
   
   loadInitialInfo() { 
     this.setData({

@@ -1,11 +1,38 @@
 // pages/login/login.js
+let app =  getApp();
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  onGetUserInfo(e){
+    console.log(e);
+    if(e.detail.userInfo){
+      this.processUserInfo(e.detail.userInfo)
+    }
   },
+  processUserInfo(data){
+    console.log(data);
+    //1. set user info
+    wx.setStorageSync('userInfo', {
+      avatarUrl: data.avatarUrl,
+      nickName: data.nickName
+    });
 
+    //2. insert userinfo to database as well as set the openID
+    wx.cloud.callFunction({
+      name: "userRelatedFn",
+      data: {
+        target: "login",
+        avatarUrl: data.avatarUrl,
+        nickName: data.nickName,
+        openID: this.data.openID,
+      },
+      success: res=>{
+        console.log(res);
+        wx.setStorageSync('openID', res.result);
+        app.globalData.hasPersonalInfo = true
+        wx.redirectTo({
+          url: '/pages/home/home',
+        });
+      }
+    })
+  },
 })

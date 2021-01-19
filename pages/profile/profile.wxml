@@ -1,15 +1,8 @@
 <Header></Header>
 
-<view class="login_wrapper" wx:if="{{!hasPersonalInfo}}">
-    <!-- we don't have any avatarUrl and nickName for the user yet -->
-    <view class="mask"></view>
-    <view class="login_text">Welcome to</view>
-    <view class="login_line"></view>
-    <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
-    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfoNewUser">One click login <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
-</view>
 
-<view class="welcome_row" wx:if="{{hasPersonalInfo}}">
+
+<view class="welcome_row">
     <view class="welcome_image_wrapper">
         <image class="icon" src="{{avatarUrl}}" mode="widthFix"></image>
     </view>
@@ -21,7 +14,7 @@
     </view>
 </view>
 
-<view class="content_wrapper" wx:if="{{hasPersonalInfo}}">
+<view class="content_wrapper">
     <navigator class="row" url="../pastReviews/pastReviews?openID=oH5r15EPI59JgaNhhebzuDsOpPEo">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">历史评价</view>

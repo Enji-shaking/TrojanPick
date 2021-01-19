@@ -259,6 +259,7 @@ Component({
 
     //modal
     showDialogBox: function () {
+      
       this.setData({
         showModal: true
       })
