@@ -61,9 +61,71 @@ Component({
         })
       }
       this.triggerEvent("choosePicker",{id: this.data.list[option.detail.value].item_id, value: this.data.list[option.detail.value].item_value});
+    },
+    //This function is to be called outside of the component. Could consider remove it if it's too slow
+    ready(){
+      if(this.properties.dropDownType==1){
+        wx.cloud.callFunction({
+          name:'getInfoById',
+          data:{
+            professorID:this.properties.professorID,
+            target:"get_information_for_class_professor"
+          },
+          success: (res)=>{
+            console.log(res);
+            let temp = [{item_id: undefined, item_value: "course"}];
+            let courseList = res.result.list;
+            for(let i=0;i<courseList.length;i++){
+              let item = {
+                item_id:courseList[i].courseID,
+                item_value:courseList[i].courseInfo[0].courseCode
+              };
+              temp.push(
+                item
+              );
+            }
+            this.setData({
+              list:temp
+            })
+          },
+          fail(res){
+            console.log("fail");
+          }
+        })
+      }else if(this.properties.dropDownType==2){
+        wx.cloud.callFunction({
+          name:'getInfoById',
+          data:{
+            courseID:this.properties.courseID,
+            target:"get_information_for_class_professor"
+          },
+          success: (res)=>{
+            console.log(res);
+            let temp = [{item_id: undefined, item_value: "professor"}];
+            let professorList = res.result.list;
+            for(let i=0;i<professorList.length;i++){
+              let item = {
+                item_id:professorList[i].professorID,
+                item_value:professorList[i].professorInfo[0].professorName
+              }
+              temp.push(
+                item
+              )
+            }
+            this.setData({
+              list:temp
+            })
+            console.log(this.data.list);
+          },
+          fail(res){
+            console.log("fail");
+          }
+        })
+      }
     }
+    
   },
-  ready:function(){
+  ready: function(){
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
         name:'getInfoById',

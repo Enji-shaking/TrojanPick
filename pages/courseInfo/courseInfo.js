@@ -9,7 +9,7 @@ Page({
     isFavorite: false,
     courseCode: "",
     courseName: "",
-    overallRating: "",
+    overallRating: 0,
     courseDescript: "",
     courseUnit: 2,
     difficultyRating: 0,
@@ -69,7 +69,7 @@ Page({
           console.log("no course found")
           return
         }
-        if(course.numReviews){
+        if(course.numReviews != undefined){
           let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2)
           this.setData({
             overallRating: overall,
@@ -90,6 +90,9 @@ Page({
             })
           }
         }
+        // else{
+          // this.setData({})
+        // }
         this.setData({
           courseCode: course.courseCode,
           courseName: course.courseName,
@@ -154,7 +157,13 @@ Page({
   },
   counter: 0,
   onLoad: function (options) {
+    //This line could be considered to remove. This is to reset the info under the professor list in the numericRating component
+    this.myNumeric = this.selectComponent("#myNumeric")
     this.counter = 4
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;
@@ -176,6 +185,8 @@ Page({
   },
   onShow: function () {
     if(app.globalData.needRefresh){
+      //works together with the line in onLoad, to update information
+      this.myNumeric.ready()
       this.counter = 3
       wx.showLoading({
         title: "loading",
@@ -217,11 +228,21 @@ Page({
   },
 
   deleteTappedFromReview(e) {
+    //works together with the line in onLoad, to update information
+    this.myNumeric.ready()
     console.log(e);
     const d = this.data.reviews
     d.splice(e.target.dataset.index, 1);
     this.setData({ reviews: d })
     console.log(d);
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+    this.getCourseInfo(this.data.courseID, undefined)
+    // this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, undefined)
+    // this.getHotReviewsForCourseForProfessor(this.data.courseID,undefined);
   },
   favoriteCourseTap(options) {
     //Here we need to call a function to change favorite course

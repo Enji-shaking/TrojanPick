@@ -3,7 +3,7 @@ let app =  getApp();
   
 Page({
   data: {
-    evaluateTitle:['课程难度', '内容趣味性', 'workload', 'teaching'],
+    evaluateTitle:['Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
     stars:[0, 1, 2, 3, 4],
     unselectedSrc: "/icon/others/rate-star.svg",
     selectedSrc: "/icon/others/favorite.svg",
@@ -13,7 +13,7 @@ Page({
     gradeArray: [' ', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'P', 'F', 'IP'],
     showModal: false,
 
-    grade: " ",
+    grade: "N/A",
     courseCode: "",
     courseID: "",
     classCode: "",
@@ -304,6 +304,10 @@ Page({
       })
       return false;
     }
+    wx.showLoading({
+      title: "Loading",
+      mask: true,
+    });
     wx.cloud.callFunction({
       name: "addEntries",
       data: {
@@ -327,14 +331,16 @@ Page({
         console.log("提交Review成功")
         console.log(res);
         if(res.result && res.result.success === false){
+          wx.hideLoading();
           wx.showToast({
             icon: "none",
             title: res.result.content
           })
         }else{
           app.globalData.needRefresh = true
+          wx.hideLoading();
           wx.showToast({
-            title: 'Added successfully',
+            title: 'Success',
             mask: true,
             success: (result) => {
               setTimeout(function(){
