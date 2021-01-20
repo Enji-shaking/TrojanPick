@@ -10,6 +10,7 @@
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
   </picker>
   <Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" bind:deleteTappedFromReview="deleteTappedFromReview" ></Review>
-  <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
+  <View wx:if="{{totalPage==0}}">There is no content yet</View>
+  <Pagination wx:if="{{totalPage!=0}}" pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
   <BottomNav></BottomNav>
 </view>

@@ -97,10 +97,15 @@ exports.main = async (event, context) => {
     .count("count")
     .end();
     console.log(data);
-    const count = data.list[0].count;
-    console.log(count);
-    const totalPage = Math.ceil(count / MAX_LIMIT)
-    return totalPage;
+    if(data.list.length==0){
+      return 0;
+    }else{
+      const count = data.list[0].count;
+      console.log(count);
+      const totalPage = Math.ceil(count / MAX_LIMIT)
+      return totalPage;
+    }
+    
   }else if(target=="getAllPickerPastReviews"){
     let data = db.collection('reviews')
     .aggregate()
@@ -235,9 +240,14 @@ exports.main = async (event, context) => {
     .count("count")
     .end()
     console.log(data);
-    const count = data.list[0].count
-    const totalPage = Math.ceil(count / MAX_LIMIT)
-    return totalPage;
+    if(data.list.length==0){
+      return 0;
+    }else{
+      const count = data.list[0].count
+      const totalPage = Math.ceil(count / MAX_LIMIT)
+      return totalPage;
+    }
+    
   }else if(target=="getAllPickerSavedReviews"){
     console.log(openID);
     let data = db.collection('saved_reviews')

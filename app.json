@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/savedReviews/savedReviews",
     "pages/home/home",
+    "pages/savedReviews/savedReviews",
     "pages/index/index",
     "pages/courseInfo/courseInfo",
     "pages/savedClasses/savedClasses",
