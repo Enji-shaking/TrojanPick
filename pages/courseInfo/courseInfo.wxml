@@ -32,7 +32,7 @@
   
   <view class="questionTitle">Questions and Answers</view>
   <view class="line"></view>
-  <view wx:if="{{questions.length == 0}}">No question yet. Go ask one!</view>
+  <view class="q-ans-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index">
       <image src="../../icon/others/question.svg"></image>
@@ -41,8 +41,8 @@
       <view wx:if="{{item.answers[0]}}">
         {{item.answers[0].content}} | <image src="/icon/others/like.svg" /> {{item.answers[0].up_vote_count}}
       </view>
-      <view wx:else>
-        No answer yet. Waiting for you!
+      <view class="q-ans-placeholder"mwx:else>
+        No Answer Yet. Answer If You Know!
       </view>
     </view>
   </navigator>

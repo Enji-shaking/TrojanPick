@@ -9,15 +9,15 @@
 
     <view class="row">
         <view class="text">
-            教授姓名
+            Professor Name
         </view>
         <view class="textInput">
-            <input type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
+            <input class="text" type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
         </view>
     </view>
 
     <view class="confirmButtonWrapper">
-        <ConfirmButton title="确认" bind:onConfirm="onConfirm"></ConfirmButton>
+        <ConfirmButton title="Submit" bind:onConfirm="onConfirm"></ConfirmButton>
     </view>
 </view>
 

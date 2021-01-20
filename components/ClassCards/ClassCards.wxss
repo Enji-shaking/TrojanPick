@@ -26,8 +26,10 @@
   font-weight: bold;
   font-size: 44rpx;
   line-height: 46rpx;
+  color: #953A3A;
 }
 .class_card_displayer_wrapper .class_card .class_card_text .class_card_text_line_2 {
   font-size: 24rpx;
   line-height: 23rpx;
+  color: #953A3A;
 }

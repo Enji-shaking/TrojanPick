@@ -5,7 +5,7 @@
 </view>
 
 <view class="enterbox">
-  <textarea placeholder="e.g 老师有口音吗？" bindinput="saveQuestion" fixed="true"></textarea>
+  <textarea placeholder="e.g 这节课需要用到课本吗？" bindinput="saveQuestion" fixed="true"></textarea>
 </view>
 
 <button bindtap="submitQuestion">

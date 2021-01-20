@@ -38,7 +38,7 @@ Page({
         if(res.result.success){
           app.globalData.needRefresh = true
           wx.showToast({
-            title: "success",
+            title: "提交成功",
             icon: 'success',
             duration: 2000,
             mask: false,

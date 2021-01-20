@@ -13,8 +13,22 @@
     font-size: 30rpx;
     line-height: 30rpx;
 }
+
 .wechat-logo{
     margin-left: 10rpx;
     width: 36rpx;
     height: 36rpx;
+}
+
+.confirm-text{
+    font-family: Heiti SC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30rpx;
+    line-height: 30rpx;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #953A3A;
 }

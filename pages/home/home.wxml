@@ -7,7 +7,7 @@
                 课程评价
             </view>
             <view class="left_rating_text_line_2">
-                View by classes
+                View by Classes
             </view>
         </view>
     </view>
@@ -18,7 +18,7 @@
                 教授评价
             </view>
             <view class="right_rating_text_line_2">
-                View by profs
+                View by Profs
             </view>
         </view>
     </view>  
@@ -30,7 +30,7 @@
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input value="{{searchCourseCode}}" bind:input="onSearchCourseInput" type="text" class="search_bar_input" placeholder="搜索课名" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchCourseCode}}" bind:input="onSearchCourseInput" type="text" class="search_bar_input" placeholder="Search a Course" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
                 <image bind:tap="onTapSearchClass" src="/icon/others/search.svg" mode="widthFix" />

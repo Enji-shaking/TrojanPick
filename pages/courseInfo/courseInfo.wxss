@@ -91,3 +91,7 @@
   font-size: 26rpx;
   color: #6A6868;
 }
+
+.q-ans-placeholder{
+  
+}

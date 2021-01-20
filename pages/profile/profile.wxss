@@ -6,6 +6,7 @@
 }
 .welcome_row .welcome_image_wrapper .icon {
   width: 140rpx;
+  border-radius: 100rpx
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line_1 {
   padding-top: 32rpx;
@@ -15,6 +16,7 @@
   font-size: 36rpx;
   line-height: 43rpx;
   text-align: center;
+  color: #953A3A;
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line {
   width: 406rpx;
@@ -24,16 +26,17 @@
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line_2 {
   font-size: 22rpx;
-  line-height: 22rpx;
+  line-height: 26rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  color: #6A6868;
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line_2 .bindUSC {
-  display: inline-block;
   text-decoration: underline;
   font-weight: bold;
+  color: #953A3A;
 }
 .content_wrapper {
   margin-top: 80rpx;
@@ -57,6 +60,16 @@
   flex-direction: column;
   justify-items: center;
   margin-left: 36rpx;
+  color: #953A3A;
+}
+.content_wrapper .row .content_row_left_text .content_row_left_text_line_2{
+  font-size: 22rpx;
+  display: flex;
+}
+
+.content_wrapper .row .content_row_left_text .content_row_left_text_line_1{
+  font-size: 38rpx;
+  display: flex;
 }
 .content_wrapper .row .content_row_right_image_wrapper {
   flex: 1;

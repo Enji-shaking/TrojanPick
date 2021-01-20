@@ -1,9 +1,9 @@
 let app =  getApp();
-
+// TODO:
   
 Page({
   data: {
-    evaluateTitle:['课程难度', '内容趣味性', 'workload', 'teaching'],
+    evaluateTitle:['Difficulty', 'Entertainment', 'Workload', 'Teaching'],
     stars:[0, 1, 2, 3, 4],
     unselectedSrc: "/icon/others/rate-star.svg",
     selectedSrc: "/icon/others/favorite.svg",
@@ -34,7 +34,8 @@ Page({
     course_blurred: false, // 判断input框是否失焦
     prof_blurred: false,
     content_len: 0, // 评价字数
-
+    text_color: "#953A3A", // 默认字的颜色
+    text_color_prof: "#953A3A",
     openID: "",
   },
 
@@ -44,9 +45,6 @@ Page({
 
   onLoad: function (options) { 
     const openID = wx.getStorageSync("openID");
-    //To sherry：你tmd要看！！！！！
-    //这里，我设置了courseID/professorID，如果是从一个页面直接点过来的话
-    //你改CSS的时候记得相应的搞一下!
     console.log(options);
     if(options.courseID){
       console.log("there is courseID");
@@ -55,6 +53,7 @@ Page({
         courseID: options.courseID,
         openID: openID,
         correctCourse: true,
+        text_color: "#953A3A"
       })
     }
     if(options.professorID){
@@ -64,13 +63,14 @@ Page({
         professorName: options.professorName,
         openID: openID,
         correctProfessor: true,
+        text_color_prof: "#953A3A"
       })
     }
-
   },
 
   // course input失焦时下拉框消失
   bindBlurCourse(e){
+    if(this.data.active)
     this.setData({
       show_course: false,
       course_blurred: true
@@ -90,7 +90,8 @@ Page({
     this.setData({
       course_data: [],
       show_course: false,
-      correctCourse: false
+      correctCourse: false,
+      text_color: "#6A6868"
     })
   },
 
@@ -99,7 +100,8 @@ Page({
     this.setData({
       professor_data: [],
       show_prof: false,
-      correctProfessor: false
+      correctProfessor: false,
+      text_color_prof: "#6A6868"
     })
   },
 
@@ -114,6 +116,7 @@ Page({
         courseCode: e.detail.value,
         course_blurred: false,
         correctCourse: false,
+        text_color: "#6A6868"
       })
       // setTimeout不可以直接传参数
       this.course_timer = setTimeout(this.searchCourse,1000)
@@ -153,6 +156,7 @@ Page({
             if(res.result.data[0].courseCode === this.data.courseCode){
               this.setData({
                 correctCourse: true,
+                text_color: "#953A3A",
                 courseID: this.data.course_data[0]._id,
                 show_course: false
               })
@@ -172,7 +176,8 @@ Page({
       courseCode: this.data.course_data[e.currentTarget.dataset.index].courseCode,
       courseID: this.data.course_data[e.currentTarget.dataset.index]._id,
       show_course: false,
-      correctCourse: true
+      correctCourse: true,
+      text_color: "#953A3A"
     });
   },
 
@@ -187,6 +192,7 @@ Page({
         professorName: e.detail.value,
         prof_blurred: false,
         correctProfessor: false,
+        text_color_prof: "#6A6868"
       })
       // setTimeout不可以直接传参数
       this.prof_timer = setTimeout(this.searchProfessor,1000)
@@ -214,9 +220,10 @@ Page({
               show_prof: true,
             })
             // user自己输入了完全正确的professorName
-            if(res.result.data[0].professorName === this.data.professorName){
+            if(res.result.data[0].professorName == this.data.professorName){
               this.setData({
                 correctProfessor: true,
+                text_color_prof: "#953A3A",
                 professorID: this.data.professor_data[0]._id,
                 show_prof: false
               })
@@ -236,7 +243,8 @@ Page({
       professorID: this.data.professor_data[e.currentTarget.dataset.index]._id,
       professorName: this.data.professor_data[e.currentTarget.dataset.index].professorName,
       show_prof: false,
-      correctProfessor: true
+      correctProfessor: true,
+      text_color_prof: "#953A3A"
     })
   },
 
@@ -293,14 +301,14 @@ Page({
     else if(!this.data.correctCourse){
       wx.showToast({
         icon: 'none',
-        title: 'Course code invalid'
+        title: 'Invalid Course'
       })
       return false;
     }
     else if(!this.data.correctProfessor){
       wx.showToast({
         icon: 'none',
-        title: 'Professor name invalid'
+        title: 'Invalid Professor'
       })
       return false;
     }

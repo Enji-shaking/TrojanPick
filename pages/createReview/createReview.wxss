@@ -30,8 +30,8 @@
 
 .dropbox-block{
   height: 70rpx;
-  margin-left: 102rpx;
-  margin-right: 72rpx;
+  margin-left: 100rpx;
+  /*margin-right: 72rpx;*/
   margin-top: 32rpx;
   display: flex;
 }
@@ -51,7 +51,16 @@
 .picker-box{
   width: 314rpx;
   height: 70rpx;
-  margin-left: 28rpx;
+  margin-left: 45rpx;
+  background: #FFF7DB;
+  border: 1px solid #F8C1B0;
+  box-sizing: border-box;
+}
+
+.drop-box-long{
+  width: 314rpx;
+  height: 70rpx;
+  margin-left: 45rpx;
   background: #FFF7DB;
   border: 1px solid #F8C1B0;
   box-sizing: border-box;
@@ -79,7 +88,6 @@
   width: 42rpx;
   height: 42rpx;
   margin-left: 30rpx;
-  display: flex
 }
 
 .imageadd{
@@ -90,14 +98,14 @@
 
 .rate-block{
   height: 60rpx;
-  margin-left: 102rpx;
+  margin-left: 100rpx;
   margin-right: 144rpx;
   margin-top: 26rpx;
   display: flex;
 }
 
 .star-block{
-  margin-left: 26rpx;
+  margin-left: 45rpx;
   width: 188rpx;
   height: 60rpx;
   display: flex;
@@ -120,8 +128,8 @@ input{
   font-family: Heiti SC;
   font-style: normal;
   font-weight: normal;
-  font-size: 30rpx;
-  color: #953A3A;
+  font-size: 26rpx;
+  color: #6A6868;
 }
 
 .picker{
@@ -165,32 +173,7 @@ input{
 }
 
 .buttonsubmit{
-  width: 330rpx;
-  height: 74rpx;
   margin-top: 26rpx;
-  margin-bottom: 214rpx;
-  margin-left: 210rpx;
-
-  background: #F5C2BF;
-  border: 1px solid #F8C1B0;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.buttonname{
-  width: 78rpx;
-  height: 38rpx;
-  margin: auto;
-
-  font-family: Heiti SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 30rpx;
-  line-height: 30rpx;
-  align-items: center;
-  text-align: center;
-
-  color: #953A3A;
 }
 
 .comment-size{
@@ -215,12 +198,7 @@ textarea{
   color: #6A6868;
 
   overflow: auto;
-  word-wrap: normal;
-}
-
-.show-btn {
-  margin-top: 100rpx;
-  color: #22cc22;
+  word-wrap: normal
 }
 
 .modal-mask {
@@ -247,13 +225,23 @@ textarea{
   z-index: 9999;
   background: #f9f9f9;
   border-radius: 36rpx;
+  border: 2rpx solid #F8C1B0;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .modal-title {
   padding-top: 50rpx;
-  font-size: 36rpx;
-  color: #030303;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34rpx;
+  line-height: 36rpx;
+  align-items: center;
   text-align: center;
+
+  color: #953A3A;
 }
 
 .modal-content {
@@ -262,10 +250,11 @@ textarea{
 
 .modal-input {
   display: flex;
-  background: #fff;
-  border: 2rpx solid #ddd;
+  background: #FFF7DB;
+  border: 2rpx solid #F8C1B0;
   border-radius: 4rpx;
   font-size: 28rpx;
+  box-sizing: border-box;
 }
 
 .input {
@@ -287,16 +276,16 @@ input-holder {
   display: flex;
   flex-direction: row;
   height: 86rpx;
-  border-top: 2rpx solid #dedede;
+  border-top: 2rpx solid #F8C1B0;
   font-size: 34rpx;
   line-height: 86rpx;
 }
 
 .btn-cancel {
   width: 50%;
-  color: #666;
+  color: #A8A8A8;
   text-align: center;
-  border-right: 2rpx solid #dedede;
+  border-right: 2rpx solid #F8C1B0;
 }
 
 .btn-confirm {
@@ -340,5 +329,5 @@ input-holder {
    font-size: 30rpx;
    line-height: 30rpx;
    text-align: right;
-   color: #666;
+   color: #A8A8A8;
  }

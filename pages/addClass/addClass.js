@@ -26,7 +26,8 @@ Page({
     console.log("Confirm button pressed from adding class");
     if(this.courseCode.trim() === "" || this.courseName.trim() === "" ){
       wx.showToast({
-        title: 'Please enter valid text',
+        title: 'Invalid Text',
+        icon: 'none'
       })
       return false
     }
@@ -39,6 +40,16 @@ Page({
       },
       success: res=>{
         console.log(res);
+        wx.showToast({
+          title: 'Success',
+          duration: 1500,
+          mask: true,
+          success: (result) => {
+            wx.navigateBack({
+              delta: 1
+            });
+          },
+        });
       },
       fail: err=>{
         console.error(err)

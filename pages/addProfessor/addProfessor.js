@@ -17,7 +17,8 @@ Page({
     console.log("Confirm button pressed from adding professors");
     if(this.professorName.trim() === ""){
       wx.showToast({
-        title: 'Please enter valid text',
+        title: 'Invalid Text',
+        icon: 'none'
       })
       return false
     }

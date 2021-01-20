@@ -5,7 +5,9 @@
   font-family: "Heiti SC";
   margin-left: 122rpx;
   margin-top: 120rpx;
+  color: #953A3A;
 }
+
 .title_wrapper .title_line_1 {
   font-size: 44rpx;
   line-height: 46rpx;
@@ -23,7 +25,15 @@
 }
 .content_wrapper .row .text {
   flex: 1;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  line-height: 40rpx;
+
+  color: #953A3A;
 }
+
 .content_wrapper .row .textInput {
   flex: 2;
   background: #FFF7DB;
@@ -35,4 +45,19 @@
 }
 .content_wrapper .confirmButtonWrapper {
   margin-top: 90rpx;
+}
+
+.content_wrapper .row .textInput .text{
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  height: 40rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  display: flex;
+  align-items: center;
+
+  color: #953A3A;
 }
