@@ -46,7 +46,7 @@ Page({
           console.log("No professor found");
           return;
         }
-        if(professor.workloadRating){
+        if(professor.numReviews != undefined){
           let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
           this.setData({
             overallRating: overall,
@@ -127,6 +127,8 @@ Page({
     })
   },
   onLoad: function (options) {
+    //This line could be considered to remove. This is to reset the info under the professor list in the numericRating component
+    this.myNumeric = this.selectComponent("#myNumeric")
     //load the data from database, calculate the average of ratings and overall ratings
     // options.professorID="2f6ab8515fe173e6004a1af22778d7e7"
     //在编译模式里面设置
@@ -146,6 +148,8 @@ Page({
   
   onShow: function (param) {
     if(app.globalData.needRefresh){
+      //works together with the line in onLoad, to update information
+      this.myNumeric.ready()
       this.counter = 3
       wx.showLoading({
         title: "loading",
@@ -221,18 +225,24 @@ Page({
         }
     })
   },
-  onTapCreateReview: function () {  
-    // if(!app.globalData.couldMakeReview){
-    //   wx.showToast({
-    //     title: 'Please go to profile and login first',
-    //     icon: 'none',
-    //     duration: 1500,
-    //     mask: false,
-    //   });
-    //   return;
-    // }
+  onTapCreateReview: function () { 
     wx.navigateTo({
       url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}`,
     });
-  }
+  },
+  deleteTappedFromReview(e) {
+    //works together with the line in onLoad, to update information
+    this.myNumeric.ready()
+    console.log(e);
+    const d = this.data.reviews
+    d.splice(e.target.dataset.index, 1);
+    this.setData({ reviews: d })
+    console.log(d);
+    this.counter = 1
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
+    this.getProfessorInfo(this.data.professorID, this.data.courseID);
+  },
 })

@@ -46,7 +46,7 @@
 </block>
 
 <view class='dropbox-block'>
-  <text class='lables'>Review</text>
+  <text class='lables'>Comment</text>
   <view class='picker-box' bindtap="showDialogBtn">
     <view class= 'review-content-text picker-box-review-content'>{{content}}</view>
   </view>
@@ -55,15 +55,15 @@
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">Review</view>
+  <view class="modal-title">Comment</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea placeholder="Start to Write Your Review!" bindinput="saveContent" maxlength="200" value="{{content}}" auto-height="true" class="input"></textarea>
+      <textarea placeholder="Start to Write Your Review!" bindinput="saveContent" maxlength="200" value="{{content}}" auto-height="true" class="input" auto-focus="{{true}}"></textarea>
     </view>
     <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">Cancel</view>
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">Clear</view>
     <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">Save</view>
   </view>
 </view>

@@ -143,7 +143,8 @@ Page({
       lang: 'zh_CN',
       timeout:10000,
       success: (result) => {
-        this.processUserInfo(result.detail.userInfo);
+        console.log(result);
+        this.processUserInfo(result.userInfo);
       }
     });
   },

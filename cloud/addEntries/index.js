@@ -38,14 +38,14 @@ exports.main = async (event, context) => {
     const pastRatingCourse =( await db.collection("reviews")
             .where({openID: openID, courseID: courseID})
             .count()).total
-    if(pastRatingCourse > 2){
+    if(pastRatingCourse > 1){
       return {success: false, content: `2/2 limt reached for this course`}
     }
 
     const pastRatingProfessor =( await db.collection("reviews")
             .where({openID: openID, professorID: professorID})
             .count()).total
-    if(pastRatingProfessor > 4){
+    if(pastRatingProfessor > 3){
       return {success: false, content: `4/4 limt reached for this professor`}
     }
 

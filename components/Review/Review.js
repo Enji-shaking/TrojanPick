@@ -14,7 +14,7 @@ Component({
    */
   observers: {
     'item': function () {
-      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted } = this.properties.item
+      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted, grade } = this.properties.item
       
       let courseCode
       if(this.properties.item.courseInfo){
@@ -31,7 +31,7 @@ Component({
       }
 
       this.setData({
-        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted
+        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted, grade
       })
     }
   },
@@ -233,7 +233,7 @@ Component({
       });
         
     },
-    deteleTapped: function () {
+    deleteTapped: function () {
       wx.showModal({
         title: 'Reminder',
         content: 'Are you sure you want to delete this?',
@@ -242,16 +242,18 @@ Component({
         cancelColor: '#000000',
         confirmText: 'Confirm',
         confirmColor: '#3CC51F',
-        success: (result) => {
+        success:  (result) => {
           if (result.confirm) {
             console.log("confirm"); 
-            this.triggerEvent("deleteTappedFromReview")
             wx.cloud.callFunction({
               name: 'deleteEntries',
               data: {
                 target: "deleteReview",
                 reviewID: this.data._id,
                 openID: this.data.openID
+              },
+              success: res =>{
+                this.triggerEvent("deleteTappedFromReview")
               }
             })
           }

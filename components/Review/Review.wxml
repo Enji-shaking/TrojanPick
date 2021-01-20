@@ -31,7 +31,7 @@
       {{content}}
     </view>
 
-    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
+    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
     
   </navigator>
 
@@ -39,7 +39,7 @@
     <view class="text">
       {{content}}
     </view>
-    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deteleTapped" />
+    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
   </view>
 
   <view class="rating borderTop">
@@ -67,6 +67,11 @@
       </view>
       <Stars Rating="{{enrichmentRating}}"></Stars>
     </view> 
+    <view class="singleRating">
+      <view class="text">
+        Grade: {{grade}}
+      </view>
+    </view>
 
   </view>
   

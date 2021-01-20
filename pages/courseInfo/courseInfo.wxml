@@ -22,7 +22,7 @@
     <view class="unit"> <text>Units</text>: {{courseUnit}} </view>
   </view>
   <!-- selection tab and course ratings -->
- <NumericRating dropDownType="{{2}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker"></NumericRating>
+ <NumericRating dropDownType="{{2}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker" id="myNumeric"></NumericRating>
 <!-- user rating -->
 <Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" hideCourse="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Review>
 
