@@ -70,7 +70,6 @@ Page({
 
   // course input失焦时下拉框消失
   bindBlurCourse(e){
-    if(this.data.active)
     this.setData({
       show_course: false,
       course_blurred: true
