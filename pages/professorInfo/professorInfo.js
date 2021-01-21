@@ -47,7 +47,7 @@ Page({
           return;
         }
         if(professor.numReviews != undefined){
-          let overall = (parseFloat(professor.difficultyRating + professor.enrichmentRating + professor.workloadRating + professor.entertainmentRating) / 4.0).toFixed(2);
+          let overall = (parseFloat((5-professor.difficultyRating) + professor.enrichmentRating + (5-professor.workloadRating) + professor.entertainmentRating) / 4.0).toFixed(2);
           this.setData({
             overallRating: overall,
             difficultyRating: (professor.difficultyRating).toFixed(2),

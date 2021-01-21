@@ -81,7 +81,7 @@ Page({
           return
         }
         if(course.numReviews != undefined){
-          let overall = (parseFloat(course.difficultyRating + course.enrichmentRating + course.workloadRating + course.entertainmentRating) / 4.0).toFixed(2)
+          let overall = (parseFloat((5-course.difficultyRating) + course.enrichmentRating + (5-course.workloadRating) + course.entertainmentRating) / 4.0).toFixed(2)
           this.setData({
             overallRating: overall,
             difficultyRating: (course.difficultyRating).toFixed(2),
