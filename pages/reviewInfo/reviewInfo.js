@@ -15,7 +15,15 @@ Page({
     openID: "",
     comments:[]
   },
-
+  getCurrentTime(){
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth()+1
+    if(month < 10) month = "0"+month
+    let day = date.getDate()
+    if(day < 10) day = "0"+day
+    return (`${year}-${month}-${day}`)
+  },
   onAddNewComment: function (e) { 
     console.log(e);
     const userInfo = wx.getStorageSync("userInfo")
@@ -28,7 +36,8 @@ Page({
       reviewID: this.data.reviewID,
       voted_by_me: 0,
       userInfo: [userInfo],
-      _id: e.detail._id
+      _id: e.detail._id,
+      postedTime: this.getCurrentTime()
     }
     const comments = this.data.comments
     comments.push(newComment)
