@@ -78,6 +78,14 @@ Page({
       },
       fail(err) {
         console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -97,6 +105,17 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+      },
+      fail(err) {
+        console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -123,6 +142,14 @@ Page({
       },
       fail(err) {
         console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -182,12 +209,12 @@ Page({
       
       this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
     }
-    this.counter = 1
-    wx.showLoading({
-      title: "loading",
-      mask: true,
-    });
-    this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
+    // this.counter = 1
+    // wx.showLoading({
+    //   title: "loading",
+    //   mask: true,
+    // });
+    // this.getReviewsForCourseForProfessorForPage(e.detail, this.data.courseID, this.data.professorID)
   },
   handlePicker(e) {
     console.log(e);
@@ -223,6 +250,17 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+    })
+    .catch(err => {
+      console.error(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      });
     })
   },
   onTapCreateReview: function () { 

@@ -13,19 +13,35 @@ exports.main = async (event, context) => {
 
   if (target === "deleteReview") {
     // get delete_review's ratings
-    let delete_review = await db.collection('reviews').where({
+    let delete_review = await db.collection('reviews')
+    .aggregate()
+    .match({
       _id: reviewID
-    }).get()
+    })
+    .lookup({
+      from: "courses",
+      localField: "courseID",
+      foreignField: "_id",
+      as: "courseInfo"
+    })
+    .lookup({
+      from: "professors",
+      localField: "professorID",
+      foreignField: "_id",
+      as: "professorInfo"
+    })
+    .end()
     console.log(delete_review);
-    let courseID = delete_review.data[0].courseID;
-    let professorID = delete_review.data[0].professorID;
-    let workloadRating = delete_review.data[0].workloadRating;
-    let difficultyRating = delete_review.data[0].difficultyRating;
-    let entertainmentRating = delete_review.data[0].entertainmentRating;
-    let enrichmentRating = delete_review.data[0].enrichmentRating;
-    let courseCode = delete_review.data[0].courseCode;
-    let professorName = delete_review.data[0].professorName;
-    let postedTime = delete_review.data[0].postedTime;
+    // return
+    let courseID = delete_review.list[0].courseID;
+    let professorID = delete_review.list[0].professorID;
+    let workloadRating = delete_review.list[0].workloadRating;
+    let difficultyRating = delete_review.list[0].difficultyRating;
+    let entertainmentRating = delete_review.list[0].entertainmentRating;
+    let enrichmentRating = delete_review.list[0].enrichmentRating;
+    let courseCode = delete_review.list[0].courseInfo[0].courseCode;
+    let professorName = delete_review.list[0].professorInfo[0].professorName;
+    let postedTime = delete_review.list[0].postedTime;
     db.collection("reviews").where({
       openID: openID,
       _id: reviewID

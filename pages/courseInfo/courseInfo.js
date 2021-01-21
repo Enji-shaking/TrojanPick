@@ -44,6 +44,17 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+      },
+      fail(err) {
+        console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -105,8 +116,16 @@ Page({
           wx.hideLoading();
         }
       },
-      fail(res) {
-        console.log(res)
+      fail(err) {
+        console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -126,6 +145,17 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+      },
+      fail(err) {
+        console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -152,6 +182,14 @@ Page({
       },
       fail(err) {
         console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   },
@@ -303,6 +341,17 @@ Page({
         if (this.counter === 0) {
           wx.hideLoading();
         }
+    })
+    .catch(err => {
+      console.log(err)
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      })
     })
   },
   onTapCreateQuestion: function (){

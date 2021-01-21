@@ -28,8 +28,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  counter: 3,
   onLoad: function (options) {
-    options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
+    // options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
     this.setData({
       openID: options.openID
     })
@@ -91,9 +96,21 @@ Page({
         this.setData({
           reviews:reviews,
         });
+        this.counter--
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
       },
       fail(err){
         console.log(err)
+        wx.hideLoading();
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+        });
       }
     })
    },
@@ -136,8 +153,22 @@ Page({
         professor_list:professor_list
       })
       console.log(res);
+      this.counter--
+        if (this.counter === 0) {
+          wx.hideLoading();
+        }
     })
-    .catch(console.error)
+    .catch(err => {
+      console.error(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      });
+    })
   },
    getTotalPage(){
     wx.cloud.callFunction({
@@ -155,8 +186,22 @@ Page({
       this.setData({
         totalPage:res.result
       })
+      this.counter--
+      if (this.counter === 0) {
+        wx.hideLoading();
+      }
     })
-    .catch(console.error)
+    .catch(err => {
+      console.error(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        image: '',
+        duration: 1500,
+        mask: false,
+      });
+    })
   },
   deleteTappedFromReview(e) {
     const d = this.data.reviews

@@ -44,6 +44,9 @@ Page({
   prof_timer: -1,
 
   onLoad: function (options) { 
+    app.globalData.onHome = false;
+    app.globalData.onProfile = false;
+    app.globalData.onCreate = true;
     const openID = wx.getStorageSync("openID");
     console.log(options);
     if(options.courseID){

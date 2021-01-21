@@ -15,7 +15,7 @@
 </view>
 
 <view class="content_wrapper">
-    <navigator class="row" url="../pastReviews/pastReviews?openID=oH5r15EPI59JgaNhhebzuDsOpPEo">
+    <navigator class="row" url="../pastReviews/pastReviews?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">历史评价</view>
             <view class="content_row_left_text_line_2">Past Reviews</view>
@@ -33,7 +33,7 @@
             <image mode="widthFix" class="content_row_right_image" src="/icon/others/bookmark.svg"></image>
         </view>
     </navigator>
-    <navigator class="row" url="../savedReviews/savedReviews?openID=oH5r15EPI59JgaNhhebzuDsOpPEo">
+    <navigator class="row" url="../savedReviews/savedReviews?openID={{openID}}">
         <view class="content_row_left_text">
             <view class="content_row_left_text_line_1">收藏评价</view>
             <view class="content_row_left_text_line_2">Favorite Reviews</view>

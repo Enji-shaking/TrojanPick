@@ -38,11 +38,11 @@ Page({
    */
   counter: 3,
   onLoad: function (options) {
-    options.openID = "oH5r15EPI59JgaNhhebzuDsOpPEo";
-    // wx.showLoading({
-    //   title: "loading",
-    //   mask: true,
-    // });
+    // options.openID = "oH5r15EPI59JgaNhhebzuDsOpPEo";
+    wx.showLoading({
+      title: "loading",
+      mask: true,
+    });
 
     this.setData({
       openID: options.openID
