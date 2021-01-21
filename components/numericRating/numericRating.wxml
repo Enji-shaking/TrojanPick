@@ -2,19 +2,19 @@
 <view class="numericRating">
   <!-- title -->
   <view class="title">
-    课程评价
+    Class Reviews
   </view>
   <view class="line"></view>
   <!-- selector holder -->
   <picker mode="selector" value="{{index}}" range="{{list}}" range-key="{{'item_value'}}" bindchange="choosePicker">
-    <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{dropDownType}}"></DropDown>
+    <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{dropDownType}}" class="picker-text"></DropDown>
   </picker>
   <!-- four ratings values -->
   <view class="ratings">
     <SingleNumericRating class="single" value="{{difficultyRating}}" name="Difficulty"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="内容趣味性"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{workloadRating}}" name="workload"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{enrichmentRating}}" name="teaching"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="Entertainment"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{workloadRating}}" name="Workload"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{enrichmentRating}}" name="Enrichment"></SingleNumericRating>
   </view>
 
 </view>

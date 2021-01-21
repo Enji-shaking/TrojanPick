@@ -6,6 +6,6 @@
     width: 300rpx;
     font-size: 15rpx;
     position: absolute;
-    right: 20rpx;
-    top: 600rpx;
+    left: 635rpx;
+    top: 424rpx;
 }

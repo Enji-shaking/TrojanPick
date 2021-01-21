@@ -1,13 +1,13 @@
 .title {
   margin: auto;
-  width: 406rpx;
+  width: 450rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 178rpx;
 }
 .title .left {
-  width: 60%;
+  width: 75%;
   color: #953A3A;
 }
 .title .left .top {
@@ -17,64 +17,93 @@
   justify-content: space-between;
 }
 .title .left .top image {
-  width: 40rpx;
+  width: 38rpx;
   height: 38rpx;
+  justify-items: center;
 }
 .title .left .top .courseCode {
-  font-size: 44rpx;
+  font-size: 38rpx;
   font-weight: bold;
+  font-family: Heiti SC;
+  font-style: normal;
 }
 .title .left .descript {
   font-size: 24rpx;
 }
 .title .middle {
-  width: 98px;
+  width: 98rpx;
   height: 0px;
-  border: 1px solid #F8C1B0;
+  border: 1rpx solid #F8C1B0;
   transform: rotate(90deg);
-  margin-top: 50rpx;
+  margin-top: 30rpx;
+  display: flex;
 }
 .title .right {
-  width: 40%;
+  width: 25%;
   color: #FDB713;
+  font-family: Heiti SC;
   font-size: 66rpx;
   line-height: 80rpx;
   display: flex;
-  align-items: center;
 }
 .courseInfo {
   background: #FFF7DB;
-  border: 1px solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width: 406rpx;
+  box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
+  width: 450rpx;
   margin: auto;
   margin-top: 20rpx;
 }
+.courseInfo .courseTitle{
+  line-height: 150%;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 26rpx;
+}
+.courseInfo .content{
+  line-height: 150%
+}
 .courseInfo .info {
-  height: 222rpx;
+  height: auto;
+  width: auto;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
   font-size: 26rpx;
   color: #6A6868;
+  font-family: Heiti SC;
+  align-items: center;
 }
 .courseInfo .unit {
-  color: #953A3A;
+  border-top: 2rpx solid #F8C1B0;
   height: 70rpx;
-  border-top: 1px solid #F8C1B0;
+  width: 450rpx;
+}
+.courseInfo .unit .unit-text{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  color: #953A3A;
   font-size: 26rpx;
+  font-family: Heiti SC;
+  font-style: italic;
 }
-.courseInfo .unit text {
-  font-weight: bold;
-}
+
 .questionTitle {
+  margin-top: 68rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #953A3A;
   font-size: 40rpx;
+  font-family: Heiti SC
 }
 .line {
-  width: 406rpx;
-  border: 1px solid #F8C1B0;
+  width: 450rpx;
+  border: 1rpx solid #F8C1B0;
   margin: auto;
   margin-top: 18rpx;
 }
@@ -92,6 +121,34 @@
   color: #6A6868;
 }
 
-.q-ans-placeholder{
-  
+.ans-placeholder{
+  color: #953A3A;
+  font-size: 26rpx;
+  font-family: Heiti SC;
+  margin-top: 15rpx;
+}
+
+.q-placeholder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #953A3A;
+  font-size: 26rpx;
+  font-family: Heiti SC;
+  margin-top: 18rpx;
+}
+
+.icon{
+  display: inline-block;
+  width: 28rpx;
+  height: 28rpx
+}
+
+.q-ans-box{
+  width: 554rpx;
+  height: auto;
+  padding-left: 50rpx;
+  box-sizing: border-box;
+  justify-items: center;
+  margin-top: 22rpx;
 }

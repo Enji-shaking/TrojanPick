@@ -10,6 +10,8 @@
   line-height: 41rpx;
   font-weight: 700;
   text-align: center;
+  font-family: Heiti SC;
+  color: #953A3A;
 }
 .top_header .line {
   width: 100%;
@@ -47,4 +49,17 @@
   display: inline-block;
   text-align: center;
   width: 100rpx;
+}
+.placeholder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35rpx;
+  color: #953A3A;
+  margin-top: 116rpx;
+  font-family: Heiti SC;
+}
+.picker_picked{
+  color: #953A3A;
+  font-family: Heiti SC;
 }

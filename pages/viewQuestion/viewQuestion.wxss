@@ -21,12 +21,12 @@
   margin: auto;
   margin-bottom: 40rpx;
 
-  border: 2rpx solid #F8C1B0
+  border: 1rpx solid #F8C1B0
 }
 
 .question-box{
   width: 554rpx;
-  height: 144rpx;
+  height: auto;
   margin-left: 98rpx;
 
   background: #FFF7DB;
@@ -47,24 +47,38 @@
 .delete-icon{
   background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M5.83435 0.845093H8.17417V1.2388H9.01915V0.789978C9.01926 0.354401 8.66507 0 8.22971 0H5.77881C5.34345 0 4.98926 0.354401 4.98926 0.789978V1.2388H5.83435V0.845093Z' fill='%23B92A33'/%3E %3Cpath d='M10.9704 4.58691H3.03772C2.82036 4.58691 2.64924 4.77234 2.66676 4.98906L3.32995 13.1896C3.36691 13.6474 3.74876 14 4.20752 14H9.80049C10.2592 14 10.6411 13.6474 10.6781 13.1895L11.3412 4.98906C11.3589 4.77234 11.1878 4.58691 10.9704 4.58691ZM4.95851 13.1253C4.94965 13.1259 4.94078 13.1262 4.93202 13.1262C4.71049 13.1262 4.52454 12.9537 4.51076 12.7296L4.09515 5.99736C4.08084 5.7644 4.25804 5.56392 4.49089 5.54961C4.72299 5.53551 4.92433 5.71228 4.93864 5.94534L5.35414 12.6776C5.36856 12.9105 5.19136 13.1109 4.95851 13.1253ZM7.4313 12.7036C7.4313 12.9369 7.24214 13.1261 7.00876 13.1261C6.77537 13.1261 6.58621 12.9369 6.58621 12.7036V5.9713C6.58621 5.73792 6.77537 5.54875 7.00876 5.54875C7.24203 5.54875 7.4313 5.73792 7.4313 5.9713V12.7036ZM9.91296 5.99619L9.51616 12.7284C9.50302 12.9529 9.31674 13.1261 9.09479 13.1261C9.08646 13.1261 9.07802 13.1259 9.06958 13.1254C8.83662 13.1116 8.65889 12.9117 8.67267 12.6787L9.06937 5.94641C9.08304 5.71346 9.28235 5.53572 9.51594 5.5495C9.7489 5.56317 9.92664 5.76323 9.91296 5.99619Z' fill='%23B92A33'/%3E %3Cpath d='M12.4318 3.28293L12.1543 2.45108C12.0811 2.2318 11.8758 2.08386 11.6446 2.08386H2.36383C2.13269 2.08386 1.92729 2.2318 1.85423 2.45108L1.57674 3.28293C1.52322 3.44336 1.59287 3.60699 1.72286 3.6886C1.77583 3.72182 1.83853 3.74179 1.90743 3.74179H12.1011C12.17 3.74179 12.2328 3.72182 12.2857 3.68849C12.4156 3.60689 12.4853 3.44325 12.4318 3.28293Z' fill='%23B92A33'/%3E %3C/svg%3E ");
   background-size: cover;
+  float: right;
 }
 
 .icon{
   display: inline-block;
   width: 28rpx;
-  height: 28rpx
+  height: 28rpx;
+  margin-top: 4rpx;
 }
 
-.q-and-ans{
+.question-text{
   margin-left: 16rpx;
 
   font-family: Heiti SC;
   font-style: normal;
   font-weight: normal;
-  font-size: 13px;
-  line-height: 13px;
+  font-size: 26rpx;
+  line-height: 26rpx;
   align-items: center;
 
+  color: #953A3A
+}
+
+.answer-text{
+  margin-left: 16rpx;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  align-items: center;
   color: #6A6868;
 }
 
@@ -78,10 +92,21 @@
 .answer-block{
   height: auto;
   margin-left: 54rpx;
-  margin-top: 22rpx;
+  margin-top: 50rpx;
   margin-right: 54rpx;
+  margin-bottom: 30rpx;
 }
 
-navigator{
-  display: inline
+.good_question{
+  float: right;
+  margin-right: 16rpx;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 26rpx;
+  align-items: center;
+
+  color: #953A3A
 }

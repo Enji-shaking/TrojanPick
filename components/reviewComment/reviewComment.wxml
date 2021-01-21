@@ -11,11 +11,11 @@
   <view class="bottom">
     <view bind:tap="upVoteTapped">
       <image src="{{voted_by_me===1?'../../icon/others/like.svg': '../../icon/others/like_grey.svg'}}"></image>
-      <text>{{up_vote_count}}</text>
+      <text style="margin-left: 6rpx">{{up_vote_count}}</text>
     </view>
     <view bind:tap="downVoteTapped">
       <image src="{{voted_by_me===-1?'../../icon/others/downvote.svg':'../../icon/others/downvote_grey.svg'}}"></image>
-      <text>{{down_vote_count}}</text>
+      <text style="margin-left: 6rpx">{{down_vote_count}}</text>
     </view>
     <view>
       <image src="../../icon/others/delete.svg" bind:tap="deteleTapped"></image>

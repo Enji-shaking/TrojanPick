@@ -16,8 +16,8 @@ Page({
       list_id: "",
       list_value: ""
     }],
-    courseName: "全部",
-    professorName: "全部",
+    courseName: "ALL",
+    professorName: "ALL",
     curProfessorID: "",
     curCourseID: "",
     openID: "",

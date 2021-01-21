@@ -19,7 +19,7 @@
       <view class="courseTitle">Course Description</view>
       <view class="content">{{courseDescript}}</view>
     </view>
-    <view class="unit"> <text>Units</text>: {{courseUnit}} </view>
+    <view class="unit"> <view class="unit-text"><text style="font-weight: bold">Units</text> : {{courseUnit}} </view></view>
   </view>
   <!-- selection tab and course ratings -->
  <NumericRating dropDownType="{{2}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker" id="myNumeric"></NumericRating>
@@ -28,23 +28,22 @@
 
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>
   
-  <YellowButton text="Write a review" bind:tap="onTapCreateReview"></YellowButton>
+  <YellowButton text="Write a Review" bind:tap="onTapCreateReview"></YellowButton>
   
-  <view class="questionTitle">Questions and Answers</view>
+  <view class="questionTitle">Q&A</view>
   <view class="line"></view>
-  <view class="q-ans-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
+  <view class="q-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
-    <view wx:for="{{questions}}" wx:key="index">
-      <image src="../../icon/others/question.svg"></image>
-      <text>{{item.content}} | </text>
+    <view wx:for="{{questions}}" wx:key="index" class="q-ans-box">
+      <image src="../../icon/others/question.svg" class="icon" ></image>
+      <text style="margin-left: 16rpx;">{{item.content}} | </text>
       <text>{{item.favoredCount}}</text>
-      <view wx:if="{{item.answers[0]}}">
-        {{item.answers[0].content}} | <image src="/icon/others/like.svg" /> {{item.answers[0].up_vote_count}}
-      </view>
-      <view class="q-ans-placeholder"mwx:else>
+      <view class="ans-placeholder" wx:if="{{item.answers.length == 0}}">
         No Answer Yet. Answer If You Know!
       </view>
+      <view class="ans-placeholder" wx:if="{{!item.answers.length == 0}}">{{item.answers[0].content}}</view>
     </view>
+    <view style="margin-bottom: 22rpx;"></view>
   </navigator>
 
   <YellowButton bind:tap="onTapCreateQuestion" text="Ask a question"></YellowButton>

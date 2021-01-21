@@ -1,7 +1,7 @@
 /* components/reviewComment.wxss */
 .comment{
   width: 554rpx;
-  height: 204rpx;
+  height: auto;
   border: 1px solid #F8C1B0;
   border-top: none;
   background-color: #FFF7DB;
@@ -10,25 +10,33 @@
 }
 .comment .top{
   display: flex;
+  margin-left: 44rpx;
 }
 .comment .top .avatar image{
   border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 28rpx;
 }
 .comment .top .right{
   display: flex;
   flex-direction: column;
+  margin-top: 24rpx;
 }
 .comment .top .right .username{
+  margin-left: 16rpx;
   color: #953A3A;
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .comment .top .right .date{
+  margin-left: 16rpx;
   color: #A8A8A8;
-  font-size: 9px;
+  font-size: 18rpx;
 }
 .comment .bottom {
+  margin-top: 20rpx;
   display: flex;
-  height: 88rpx;
+  height: 60rpx;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -51,4 +59,15 @@
 .comment .bottom view text {
   color: #6A6868;
   font-size: 26rpx;
+}
+.comment .content{
+  margin-top: 20rpx;
+  margin-left: 44rpx;
+  margin-right: 44rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  color: #6A6868;
 }

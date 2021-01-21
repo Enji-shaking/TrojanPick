@@ -1,8 +1,8 @@
 .border {
-  border: 1px solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
 }
 .borderTop {
-  border-top: 1px solid #F8C1B0;
+  border-top: 2rpx solid #F8C1B0;
   box-sizing: border-box;
 }
 .box {
@@ -25,15 +25,16 @@
   justify-content: center;
   font-size: 26rpx;
   color: #953A3A;
+  font-family: Heiti SC
 }
 .box .top .left {
-  border-right: 1px solid #F8C1B0;
+  border-right: 2rpx solid #F8C1B0;
 }
 .box .top .left .left_text {
   padding-left: 16rpx;
   flex-direction: column;
 }
-.box .top .left .left_text .left_postedTime {
+.box .top .left .left_text .left_postedDate {
   color: #A8A8A8;
   font-size: 18rpx;
 }
@@ -43,7 +44,7 @@
   align-items: start;
 }
 .box .top .right .right_row {
-  padding-left: 80rpx;
+  padding-left: 16rpx;
   font-size: 22rpx;
 }
 .box .top .right .right_row.only {
@@ -61,13 +62,19 @@
   height: 210rpx;
   position: relative;
 }
+
 .box .content .text {
+  height: 210rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
   color: #6A6868;
   font-size: 26rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  line-height: 150%;
   overflow: hidden;
+  white-space: nowrap;   
+  text-overflow: ellipsis;
 }
 .box .content .delete {
   position: absolute;
@@ -86,17 +93,16 @@
   color: #B55353;
 }
 .box .rating {
-  height: 270rpx;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
 .box .rating .singleRating {
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   color: #953A3A;
   font-size: 26rpx;
+  font-family: Heiti SC
 }
 .box .bottom {
   display: flex;
@@ -104,6 +110,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  justify-items: center;
 }
 .box .bottom view {
   position: relative;
@@ -123,6 +130,26 @@
   color: #6A6868;
   font-size: 26rpx;
 }
+
+textarea{
+  width: 278rpx;
+  margin-left: 18rpx;
+  margin-right: 18rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+  align-items: center;
+  color: #6A6868;
+
+  overflow: auto;
+  word-wrap: normal
+}
+
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -135,34 +162,50 @@
   z-index: 9000;
   color: #fff;
 }
+
 .modal-dialog {
   width: 600rpx;
   margin-left: 75rpx;
   margin-right: 112rpx;
   overflow: hidden;
   position: fixed;
-  top: 20%;
+  top: 10%;
   left: 0;
   z-index: 9999;
   background: #f9f9f9;
   border-radius: 36rpx;
+  border: 2rpx solid #F8C1B0;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .modal-title {
   padding-top: 50rpx;
-  font-size: 36rpx;
-  color: #030303;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34rpx;
+  line-height: 36rpx;
+  align-items: center;
   text-align: center;
+
+  color: #953A3A;
 }
+
 .modal-content {
   padding: 50rpx 32rpx;
 }
+
 .modal-input {
   display: flex;
-  background: #fff;
-  border: 2rpx solid #ddd;
+  background: #FFF7DB;
+  border: 2rpx solid #F8C1B0;
   border-radius: 4rpx;
   font-size: 28rpx;
+  box-sizing: border-box;
 }
+
 .input {
   width: 100%;
   height: 82rpx;
@@ -172,26 +215,55 @@
   box-sizing: border-box;
   color: #333;
 }
+
 input-holder {
   color: #666;
   font-size: 28rpx;
 }
+
 .modal-footer {
   display: flex;
   flex-direction: row;
   height: 86rpx;
-  border-top: 1px solid #dedede;
+  border-top: 2rpx solid #F8C1B0;
   font-size: 34rpx;
   line-height: 86rpx;
 }
+
 .btn-cancel {
   width: 50%;
-  color: #666;
+  color: #A8A8A8;
   text-align: center;
-  border-right: 1px solid #dedede;
+  border-right: 2rpx solid #F8C1B0;
 }
+
 .btn-confirm {
   width: 50%;
   color: #953A3A;
   text-align: center;
+}
+.rating .singleRating .text{
+  display: inline-block; 
+  margin-left: 85rpx;
+  margin-top: 12rpx;
+}
+
+.rating .singleRating Stars{
+  float: right; 
+  margin-right: 85rpx;
+  margin-top: 6rpx;
+}
+
+.rating .singleRating .text-right{
+  margin-left: 110rpx;
+}
+
+.length-text{
+  margin-top: 20rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  text-align: right;
+  color: #A8A8A8;
 }

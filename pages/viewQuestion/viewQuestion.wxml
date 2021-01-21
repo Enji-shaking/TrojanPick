@@ -3,22 +3,25 @@
 <view class='line-1'></view>
 
 
-<view class='question-box' wx:for="{{questions}}" wx:key="_id" wx:for-index ='index'>
+<view class='question-box' wx:for="{{questions}}" wx:for-index ='index'>
   <view class='question-block'>
     <text class="question-icon icon"></text>
-    <navigator class="q-and-ans" url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">{{item.content}}</navigator>
+    <navigator class="question-text" url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none" style="display: inline">{{item.content}}</navigator>
     <text wx:if="{{item.posted_by_me}}" data-index="{{index}}" class="delete-icon icon" bindtap="deleteQuestion"></text>
   </view>
-  <navigator class='answer-block' url="/pages/viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
+  <view class="good_question" style="margin-bottom: 10rpx; margin-top: 10rpx">
+    <view style="color: #6A6868;" wx:if="{{item.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
+      undo_good_question | {{item.favoredCount}}
+    </view>
+    <view style="color: #953A3A" wx:if="{{!item.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
+      good_question | {{item.favoredCount}}
+    </view>
+  </view>
+  <navigator class='answer-block' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
     <text class="answer-icon icon"></text>
-    <text class="q-and-ans">{{item.answers[0].content}}</text>
+    <text class="answer-text" wx:if="{{item.answers.length == 0}}">No Answers Yet. Answer If You Know!</text>
+    <text class="answer-text" wx:if="{{!item.answers.length == 0}}">{{item.answers[0].content}}</text>
   </navigator>
-  <view wx:if="{{item.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
-    undo_good_question | {{item.favoredCount}}
-  </view>
-  <view wx:if="{{!item.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
-    good_question | {{item.favoredCount}}
-  </view>
 </view>
 
 <YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>

@@ -5,11 +5,11 @@
 </view>
 
 <view class="enterbox">
-  <textarea placeholder="e.g 这节课需要用到课本吗？" bindinput="saveQuestion" fixed="true"></textarea>
+  <textarea placeholder="e.g. Is Textbook Needed?" bindinput="saveQuestion" fixed="true"></textarea>
 </view>
 
 <button bindtap="submitQuestion">
-  <text class="buttonname">确认</text>
+  <text class="buttonname">Submit</text>
 </button>
 
 <BottomNav></BottomNav>

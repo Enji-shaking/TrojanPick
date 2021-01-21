@@ -43,7 +43,7 @@ Page({
       let result = res.result.list;
       let course_card_cloud = [];
       let classes_prefix = new Set();
-      let final_prefix = ["全部"];
+      let final_prefix = ["ALL"];
       for(let i =0;i<result.length;i++){
         course_card_cloud.push(...result[i].courseInfo);
         let courseCode = result[i].courseInfo[0].courseCode;
@@ -72,7 +72,7 @@ Page({
       name:'getProfileInfo',
       data:{
         target:"savedCourses",
-        prefix:this.data.favorite_classes_prefix[this.data.prefix_index]!=="全部"?this.data.favorite_classes_prefix[this.data.prefix_index]:""
+        prefix:this.data.favorite_classes_prefix[this.data.prefix_index]!=="ALL"?this.data.favorite_classes_prefix[this.data.prefix_index]:""
       }
     })
     .then(res => {

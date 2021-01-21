@@ -18,10 +18,10 @@
     </view>
     <view class="right">
       <view class="right_row {{!hideProfessor?'':'hidden'}} {{!hideCourse?'':'only'}}">
-        教授: {{professorName}}
+        Prof: {{professorName}}
       </view>
-      <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}">
-        课程: {{courseCode}}
+      <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}" style="margin-top: 10rpx;">
+        Course: {{courseCode}}
       </view>
     </view>
   </view>
@@ -31,7 +31,7 @@
       {{content}}
     </view>
 
-    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
+    <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
     
   </navigator>
 
@@ -39,38 +39,39 @@
     <view class="text">
       {{content}}
     </view>
-    <image src="/icon/others/delete_grey.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
+    <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
   </view>
 
   <view class="rating borderTop">
-    <view class="singleRating">
+    <view class="singleRating" style="margin-top: 16rpx;">
       <view class="text">
-        Difficulty:
+        Difficulty
       </view>
       <Stars Rating="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        Entertainment:
+        Entertainment
       </view>
       <Stars Rating="{{entertainmentRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        Workload:
+        Workload
       </view>
       <Stars Rating="{{workloadRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        Enrichment: 
+        Enrichment
       </view>
       <Stars Rating="{{enrichmentRating}}"></Stars>
     </view> 
-    <view class="singleRating">
+    <view class="singleRating" style="margin-bottom: 16rpx;">
       <view class="text">
-        Grade: {{grade}}
+        Grade
       </view>
+      <text class="text-right">{{grade}}</text>
     </view>
 
   </view>
@@ -78,21 +79,21 @@
   <view class="bottom borderTop">
     <view bind:tap="upVoteTapped">
       <image src="{{voted_by_me===1?'/icon/others/like.svg': '/icon/others/like_grey.svg'}}"></image>
-      <text>{{up_vote_count}}</text>
+      <text style="margin-left: 6rpx">{{up_vote_count}}</text>
     </view>
     <view bind:tap="downVoteTapped">
       <image src="{{voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}"></image>
-      <text>{{down_vote_count}}</text>
+      <text style="margin-left: 6rpx">{{down_vote_count}}</text>
     </view>
     <view bind:tap="showDialogBox">
       <!-- <input class="commentInput" bindconfirm="onCommentInputConfirm" /> -->
       <image src="/icon/others/{{commentCount>0?'comment.svg':'comment_grey.svg'}}"></image>
-      <text>{{commentCount}}</text>
+      <text style="margin-left: 6rpx">{{commentCount}}</text>
     </view>
 
     <view bind:tap="saveTapped" wx:if="{{!deleted}}">
       <image src="{{saved_by_me===true?'/icon/others/favorite.svg':'/icon/others/favorite_grey.svg'}}"></image>
-      <text>{{favoriteCount}}</text>
+      <text style="margin-left: 6rpx">{{favoriteCount}}</text>
     </view>
 
     <view bind:tap="savedTappedDeleted" wx:if="{{deleted}}">
@@ -105,11 +106,12 @@
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">评价</view>
+  <view class="modal-title">Reply</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea auto-focus="{{true}}" bindinput="onInputContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
+      <textarea placeholder="What Do You Think?" auto-focus="{{true}}" bindinput="onInputContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
     </view>
+    <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
     <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">取消</view>

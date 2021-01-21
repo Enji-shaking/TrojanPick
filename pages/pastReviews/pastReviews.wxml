@@ -1,7 +1,7 @@
 <!--pages/pastReviews/pastReviews.wxml-->
 <view class="pastReviews">
   <Header></Header>
-  <view class="title">历史评价</view>
+  <view class="title">Past Reviews</view>
   <view class="line"></view>
   <picker mode="selector" value="{{list_id}}" range="{{course_list}}" range-key="{{'list_value'}}" bindchange="chooseCoursePicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{1}}"></DropDown>
@@ -10,7 +10,7 @@
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{2}}"></DropDown>
   </picker>
   <Review wx:for="{{reviews}}" wx:key="_id" item="{{item}}" bind:deleteTappedFromReview="deleteTappedFromReview" ></Review>
-  <View wx:if="{{totalPage==0}}">There is no content yet</View>
+  <View wx:if="{{totalPage==0}}" class="placeholder">There Is No Content Yet</View>
   <Pagination wx:if="{{totalPage!=0}}" pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
   <BottomNav></BottomNav>
 </view>

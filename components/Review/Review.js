@@ -52,6 +52,10 @@ Component({
       type: "Boolean",
       value: false
     },
+    content_len: {
+      type: "number",
+      value: 0
+    }
     // //if detail is true, show all content
   },
 
@@ -316,7 +320,8 @@ Component({
     // 保存评价
     onInputContent(e) {
       this.setData({
-        inputCommentContent: e.detail.value
+        inputCommentContent: e.detail.value,
+        content_len: parseInt(e.detail.value.length)
       })
       console.log("成功填写评价为 ", this.data.inputCommentContent)
     },
