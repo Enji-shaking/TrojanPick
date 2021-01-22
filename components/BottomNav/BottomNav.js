@@ -41,7 +41,7 @@ Component({
     onTapHome: function () {  
       console.log("home");
       if(!this.data.onHome){
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/home/home',
         });
         app.globalData.onHome = true;
@@ -61,7 +61,7 @@ Component({
     onTapProfile: function () {  
       console.log("profile");
       if(!this.data.onProfile){
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/profile/profile',
         });
         app.globalData.onHome = false;

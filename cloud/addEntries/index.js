@@ -31,7 +31,8 @@ exports.main = async (event, context) => {
     return await p2
   }else if(target === "createReview"){
     const { professorID, content, courseID, anonymous, forProf } = event
-
+    console.log(event);
+    // return
     //check for limit, no more than 2 reviews for the save course
     //no more than 4 reviews for the same professor
     //no more than 50 reviews for a student

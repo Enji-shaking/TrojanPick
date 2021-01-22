@@ -137,7 +137,8 @@ Page({
         this.setData({
           answers: this.data.answers,
           own_answer: this.data.own_answer,
-          votes: this.data.votes
+          votes: this.data.votes,
+          content: ""
         })
       }
     })
