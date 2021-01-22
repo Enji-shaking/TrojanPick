@@ -65,6 +65,7 @@ Component({
   data: {
     openID: "",
     postedTime: "xxxx-xx-xx",
+    overallRating: 0,
     difficultyRating: 0,
     entertainmentRating: 0,
     workloadRating: 0,

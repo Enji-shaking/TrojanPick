@@ -48,8 +48,8 @@
         Overall
       </view>
       <Stars Rating="{{overallRating}}"></Stars>
-    </view> 
-    <view class="singleRating" style="margin-top: 16rpx;">
+    </view>
+    <view class="singleRating">
       <view class="text">
         Difficulty
       </view>

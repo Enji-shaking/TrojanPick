@@ -3,11 +3,9 @@
     visibility: hidden;
 }
 .wrapper{
-    width: 100rpx;
-    font-size: 15rpx;
-    position: absolute;
-    left: 635rpx;
-    top: 475rpx;
+  width: 42rpx;
+  height: 42rpx;
+  margin-left: 30rpx;
 }
 
 .modal-mask {
