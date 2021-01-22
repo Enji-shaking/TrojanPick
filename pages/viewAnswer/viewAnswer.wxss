@@ -112,9 +112,9 @@
 }
 
 .delete{
-  position: absolute;
+  /* position: absolute;
   right: 24rpx;
-  bottom: 24rpx;   
+  bottom: 24rpx;    */
   width: 60rpx;
   height: 60rpx;
 }
