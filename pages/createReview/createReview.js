@@ -4,6 +4,7 @@ let app =  getApp();
 Page({
   data: {
     evaluateTitle:['Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
+    // evaluateTitleTA:['Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
     stars:[0, 1, 2, 3, 4],
     unselectedSrc: "/icon/others/rate-star.svg",
     selectedSrc: "/icon/others/favorite.svg",
@@ -12,7 +13,7 @@ Page({
     gradeIndex: 0,
     gradeArray: [' ', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'P', 'F', 'IP'],
     showModal: false,
-
+    forProf: true,
     grade: "N/A",
     courseCode: "",
     courseID: "",
@@ -21,10 +22,10 @@ Page({
     professorID: "",
     anonymous: false,
     content: "",
-    commentCount: 0,
-    up_vote_count: 0,
-    down_vote_count: 0,
-    favoriteCount: 0,
+    // commentCount: 0,
+    // up_vote_count: 0,
+    // down_vote_count: 0,
+    // favoriteCount: 0,
     course_data: [],
     professor_data: [],
     show_course: false, // 是否显示下拉框
@@ -69,6 +70,13 @@ Page({
         text_color_prof: "#953A3A"
       })
     }
+  },
+
+  tapSwitch(){
+    const forProf = !this.data.forProf
+    this.setData({
+      forProf
+    })
   },
 
   // course input失焦时下拉框消失
@@ -208,7 +216,8 @@ Page({
         name: "getRelatedInfo",
         data: {
           target: "professors",
-          professorName: this.data.professorName
+          professorName: this.data.professorName,
+          forProf: this.data.forProf
         },
         success: (res)=>{
           this.setData({
@@ -332,10 +341,7 @@ Page({
         grade: this.data.gradeArray[this.data.gradeIndex],
         anonymous: this.data.anonymous,
         content: this.data.content,
-        commentCount: this.data.commentCount,
-        up_vote_count: this.data.up_vote_count,
-        down_vote_count: this.data.down_vote_count,
-        favoriteCount: this.data.favoriteCount
+        forProf: this.data.forProf
       },
       success: res=>{
         console.log("提交Review成功")

@@ -109,9 +109,10 @@ exports.main = async (event, context) => {
     const totalPage = Math.ceil(count / MAX_LIMIT)
     return {...data, totalPage, event}
   }else if(target === "search_professors"){
-    const { professorName } = event
+    const { professorName, forProf } = event
     let data =  db.collection('professors')
         .where({
+          forProf: forProf,
           professorName: db.RegExp({
             regexp: professorName,
             options: 'i'
@@ -123,6 +124,7 @@ exports.main = async (event, context) => {
         .get()
     let count =  db.collection('professors')
         .where({
+          forProf: forProf,
           professorName: db.RegExp({
             regexp: professorName,
             options: 'i'
@@ -134,12 +136,17 @@ exports.main = async (event, context) => {
     return {...data, totalPage}
                                   
   }else if(target === "default_professors"){
+    const {forProf} = event
+    console.log(event);
     let data = db.collection('professors')
+      .where({
+        forProf: forProf
+      })
       .orderBy("professorName", "asc")
       .skip(MAX_LIMIT * (currentPage-1))
       .limit(MAX_LIMIT)
       .get();
-    let count = db.collection('professors').count();
+    let count = db.collection('professors').where({forProf: forProf}).count();
     [data, count] = await Promise.all([data, count])
     count = count.total
     const totalPage = Math.ceil(count / MAX_LIMIT)

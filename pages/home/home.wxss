@@ -1,3 +1,29 @@
+.TA-Mask {
+  background-color: #faf5ad;
+  position: absolute;
+  top: 275rpx;
+  bottom: -600rpx;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+.prof {
+  background-color: #faf5ad;
+}
+.ta {
+  background-color: #fff;
+}
+.switchButton {
+  position: absolute;
+  top: 500rpx;
+  right: 20rpx;
+  width: 80rpx !important;
+  /* background-color: #fff; */
+  font-size: 24rpx;
+  font-weight: 400;
+  text-align: center;
+  padding: 10rpx;
+}
 .rating_row {
   display: flex;
   height: 170rpx;
@@ -79,7 +105,7 @@ input::placeholder {
 .search_row {
   height: 74rpx;
   width: 100rpx;
-  margin-top: 64rpx;
+  padding-top: 64rpx;
 }
 .search_row .search_row_content_wrapper {
   margin-left: 172rpx;
@@ -97,14 +123,6 @@ input::placeholder {
   text-align: center;
   line-height: 74rpx;
   height: 74rpx;
-  font-family: Heiti SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 26rpx;
-  line-height: 26rpx;
-  align-items: center;
-
-  color: #953A3A;
 }
 .search_row .search_row_content_wrapper .search_bar .search_bar_input_placeholder {
   text-align: center;
@@ -131,8 +149,6 @@ input::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Heiti SC;
-  color: #953A3A;
 }
 .sort_row .sort_row_content_wrapper .right_picker_wrapper .right_picker .picker_picked {
   display: inline-flex;
@@ -143,7 +159,6 @@ input::placeholder {
   height: 36rpx;
   font-size: 18rpx;
   font-weight: 400;
-  color: #953A3A;
 }
 .professor_card_displayer_wrapper {
   width: 100%;

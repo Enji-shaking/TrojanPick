@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
     })
     return await p2
   }else if(target === "createReview"){
-    const { professorID, content, courseID, anonymous } = event
+    const { professorID, content, courseID, anonymous, forProf } = event
 
     //check for limit, no more than 2 reviews for the save course
     //no more than 4 reviews for the same professor
@@ -52,7 +52,7 @@ exports.main = async (event, context) => {
     const pastRating =( await db.collection("reviews")
             .where({openID: openID})
             .count()).total
-    if(pastRating > 50){
+    if(pastRating > 49){
       return {success: false, content: `50/50 limit reached for all reviews`}
     }
 
@@ -196,7 +196,8 @@ exports.main = async (event, context) => {
           down_vote_count: 0,
           favoriteCount: 0,
           openID: openID,
-          postedTime: currentTime
+          postedTime: currentTime,
+          forProf: forProf
       }
     })
   }else if(target === "createQuestion"){

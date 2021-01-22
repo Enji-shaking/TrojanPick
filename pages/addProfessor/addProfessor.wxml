@@ -1,24 +1,33 @@
 <Header></Header>
+<view class="TA-Mask" wx:if="{{!forProf}}"> </view>
 
-<view class="title_wrapper">
-    <view class="title_line_1">新建教授</view>
-    <view class="title_line_2">New Professor</view>
-</view>
+<!-- <view class="{{forProf?'prof':'ta'}}"> -->
+    
+    <view class="title_wrapper">
+        <view class="title_line_1">{{forProf?'新建教授':'新建TA'}}</view>
+        <view class="title_line_2">{{forProf?'New Professor': 'New TA'}}</view>
+    </view>
 
-<view class="content_wrapper">
+    <button bind:tap="tapSwitch" class="switchButton {{forProf?'ta':'prof'}}">{{forProf?"New TA":"New Prof"}}</button>
 
-    <view class="row">
-        <view class="text">
-            Professor Name
+    <view class="content_wrapper">
+
+        <view class="row">
+            <view class="text">
+                {{forProf?'Professor':'TA'}} Name
+            </view>
+            <view class="textInput">
+                <input class="text" type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
+            </view>
         </view>
-        <view class="textInput">
-            <input class="text" type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
+
+        <view class="confirmButtonWrapper">
+            <ConfirmButton title="Submit" bind:onConfirm="onConfirm"></ConfirmButton>
         </view>
     </view>
 
-    <view class="confirmButtonWrapper">
-        <ConfirmButton title="Submit" bind:onConfirm="onConfirm"></ConfirmButton>
-    </view>
-</view>
+<!-- </view> -->
+  
+
 
 <BottomNav></BottomNav>

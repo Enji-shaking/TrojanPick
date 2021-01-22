@@ -28,11 +28,12 @@ exports.main = async (event, context) => {
       }
     })
   }else if(target === "professor"){
-    const { professorName } = event
+    const { professorName, forProf } = event
     return await db.collection('professors').add({
       data:{ 
         professorName: professorName,
-        openID: OPENID
+        openID: OPENID,
+        forProf: forProf
       }
     })
   }

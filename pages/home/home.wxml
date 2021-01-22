@@ -1,4 +1,9 @@
 <Header></Header>
+
+<button wx:if="{{activeTab===1}}" bind:tap="tapSwitch" class="switchButton {{forProf?'prof':'ta'}}">{{forProf?"TA":"Prof"}}</button>
+
+<view class="TA-Mask" wx:if="{{!forProf && activeTab === 1}}"> </view>
+
 <view class="rating_row">
     <view class="left_rating {{activeTab===0?'active':''}}" bind:tap="onTabTapped" data-index="{{0}}">
         <image class="left_rating_img" mode="widthFix" src="/icon/ours/classRating.svg"> </image>
@@ -55,13 +60,13 @@
     <ClassCards course_cards_info="{{course_cards_info}}" ></ClassCards>
 </view>
 
-<view class="rate_by_prof_big_tab"
+<view class="rate_by_prof_big_tab {{forProf?'ta':'prof'}}"
     wx:else
 >
     <view class="search_row">
         <view class="search_row_content_wrapper">
             <view class="search_bar">
-                <input value="{{searchProfessorName}}" bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="搜索教授" placeholder-class="search_bar_input_placeholder" />
+                <input value="{{searchProfessorName}}" bind:input="onSearchProfessorInput" type="text" class="search_bar_input" placeholder="{{forProf? 'Search a Prof':'Search a TA'}}" placeholder-class="search_bar_input_placeholder" />
             </view>
             <view class="search_btn">
                 <image bind:tap="onTapSearchProfessor" src="/icon/others/search.svg" mode="widthFix" />

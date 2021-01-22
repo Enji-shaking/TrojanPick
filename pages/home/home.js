@@ -6,14 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker_arr:['alphanumeric','difficulty (asc)','entertainment (desc-)','workload (asc+)', 'enrichment (desc-)'],
+    picker_arr:['alphanumeric','difficulty (asc&#2197)','entertainment (desc-)','workload (asc+)', 'enrichment (desc-)'],
     picker_index: 0,
     course_cards_info:[],
     prof_cards_info:[],
     activeTab: 0,
     searchCourseCode: "",
     searchProfessorName: "",
-    hasPersonalInfo: false
+    hasPersonalInfo: false,
+    forProf: true
   },
   queryParamsCourses: { 
     currentPage: 1,
@@ -26,10 +27,20 @@ Page({
     currentPage: 1,
     target: "default_professors",
     professorName: "",
+    forProf: 1,
   },
   totalPageCourses: 99,
   totalPageProfessors: 99,
   maxAllowPage: 10,
+  tapSwitch(){
+    const forProf = !this.data.forProf
+    this.queryParamsProfessors.forProf = forProf
+    this.setData({
+      forProf,
+      prof_cards_info: []
+    })
+    this.searchProfessorCloud()
+  },
   onPickerChange(e){
     console.log(e);
     const {value} = e.detail
@@ -49,7 +60,7 @@ Page({
   
   performQuery(type){
     if(type === 0) console.log(this.queryParamsCourses)
-    if(type === 0) console.log(this.queryParamsProfessors)
+    if(type === 1) console.log(this.queryParamsProfessors)
     return wx.cloud.callFunction({
       name: "searchWithName",
       data: type===0?this.queryParamsCourses:this.queryParamsProfessors
@@ -73,11 +84,19 @@ Page({
         wx.hideLoading()
       })
       .catch((err)=>{
-        console.error(err) 
+        console.log(err);
         wx.hideLoading()
+        wx.showToast({
+          title: 'Error, try again later',
+          icon: 'none',
+          duration: 1500,
+          mask: true
+        });
+          
       })
   },
   searchProfessorCloud(){
+    //only set the prof_cards_info
     wx.showLoading({
       title: 'loading',
     })
@@ -90,12 +109,19 @@ Page({
         this.totalPageProfessors = totalPage
         const prof_cards_info = data.map(v=>{return {_id: v._id, professorName: v.professorName}})
         this.setData({prof_cards_info: [...this.data.prof_cards_info, ...prof_cards_info]})
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        wx.hideLoading()
       }
     })
-    .catch((err)=>console.error(err))
+    .catch((err)=>{
+      console.log(err);
+      wx.hideLoading()
+      wx.showToast({
+        title: 'Error, try again later',
+        icon: 'none',
+        duration: 1500,
+        mask: true
+      });
+    })
 
   },
   SearchCourseTimerID: -1,
@@ -203,6 +229,7 @@ Page({
       currentPage: 1,
       target: "default_professors",
       professorName: "",
+      forProf: true
     }
     this.searchProfessorCloud()
     this.searchCourseCloud()
