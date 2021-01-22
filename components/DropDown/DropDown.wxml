@@ -1,6 +1,6 @@
 <!--components/DropDown/DropDown.wxml-->
 <view class="dropdown">
-  <view class="text" wx:if="{{type==1 || type==3}}">View by Class</view>
+  <view class="text" wx:if="{{type==1 || type==3}}">View by Courses</view>
   <view class="box" wx:if="{{type==1 || type==3}}">
     <text style="padding: 15rpx;" class="text">{{courseName}}</text>
   </view>

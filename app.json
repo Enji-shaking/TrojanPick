@@ -23,7 +23,8 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFF",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Trojan Pick"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

@@ -11,7 +11,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tapped: true
+    tapped: true,
+    showModal: false
   },
 
   /**
@@ -19,8 +20,21 @@ Component({
    */
   methods: {
     iconTapped: function (e) {  
-      console.log(this.data.tapped);
-      this.setData({tapped: !this.data.tapped})
-    }
+      if(this.data.showModal){
+        this.setData({
+          showModal: false
+        })
+      }
+      else{
+        this.setData({
+          showModal: true
+        })
+      }
+    },
+    hideModal: function(e){
+      this.setData({
+        showModal: false
+      })
+    },
   }
 })

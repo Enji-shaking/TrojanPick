@@ -16,8 +16,8 @@
 <view class='dropbox-block'>
   <text class='lables'>Course</text>
   <view class='picker-box'>
-    <input style="color: {{text_color}}" placeholder="e.g ITP 115" bindinput="saveCourseCode" value="{{courseCode}}" bindblur="bindBlurCourse"/>
-    <view class='option_box' style='height:{{show_course?(225):0}}rpx; z-index: 1; position: absolute'>
+    <input style="color: {{text_color}}" placeholder="e.g ITP 115" bindinput="saveCourseCode" value="{{courseCode}}"/>
+    <view class='option_box' style='height:{{show_course?(225):0}}rpx; z-index: 1; position: absolute' catchtap="course_scroll">
       <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
     </view>
   </view>

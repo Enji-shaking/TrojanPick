@@ -59,12 +59,13 @@
   border-radius: 50%;
 }
 .box .content {
-  height: 210rpx;
+  height: auto;
   position: relative;
 }
 
 .box .content .text {
-  height: 210rpx;
+  /* height: 210rpx; */
+  min-height: 120rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
   margin-top: 30rpx;
@@ -72,15 +73,31 @@
   color: #6A6868;
   font-size: 26rpx;
   line-height: 150%;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
-  white-space: nowrap;   
-  text-overflow: ellipsis;
+  /* white-space: nowrap;    */
+  /* text-overflow: ellipsis; */
 }
+
+.box .content .text-complete {
+  height: auto;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  color: #6A6868;
+  font-size: 26rpx;
+  line-height: 150%;
+}
+
 .box .content .delete {
   position: absolute;
-  right: 24rpx;
-  bottom: 24rpx;
+  right: 10rpx;
+  bottom: -15rpx;
 }
+
 .box .content .invisible {
   display: none;
 }
@@ -114,6 +131,7 @@
 }
 .box .bottom view {
   position: relative;
+  padding: 4rpx;
 }
 .box .bottom view .commentInput {
   position: absolute;
@@ -243,6 +261,7 @@ input-holder {
   text-align: center;
 }
 .rating .singleRating .text{
+  height: auto;
   display: inline-block; 
   margin-left: 85rpx;
   margin-top: 12rpx;
@@ -255,7 +274,12 @@ input-holder {
 }
 
 .rating .singleRating .text-right{
-  margin-left: 110rpx;
+  float: right; 
+  margin-right: 85rpx;
+  margin-top: 12rpx;
+  width: 200rpx;
+  height: auto;
+  text-align: center;
 }
 
 .length-text{

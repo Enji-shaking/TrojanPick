@@ -84,18 +84,18 @@ Page({
 
   // course input失焦时下拉框消失
   bindBlurCourse(e){
-    this.setData({
-      show_course: false,
-      course_blurred: true
-    })
+      this.setData({
+        show_course: false,
+        course_blurred: true
+      })
   },
 
   // professor input失焦时下拉框消失
   bindBlurProf(e){
-    this.setData({
-      show_prof: false,
-      prof_blurred: true
-    })
+      this.setData({
+        show_prof: false,
+        prof_blurred: true
+      })
   },
 
   // user没有input或输入courseCode查找不到
@@ -171,7 +171,7 @@ Page({
                 correctCourse: true,
                 text_color: "#953A3A",
                 courseID: this.data.course_data[0]._id,
-                show_course: false
+                show_course: false,
               })
             }
           }
@@ -190,7 +190,7 @@ Page({
       courseID: this.data.course_data[e.currentTarget.dataset.index]._id,
       show_course: false,
       correctCourse: true,
-      text_color: "#953A3A"
+      text_color: "#953A3A",
     });
   },
 

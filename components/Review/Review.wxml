@@ -4,10 +4,10 @@
   <view class="top">
     <view class="left">
       <view class="left_avatar">
-        <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" />
+        <image src="{{!anonymous?avatarUrl:anonymousAvatarUrl}}" style="margin-top: 14rpx; margin-bottom: 14rpx;"/>
       </view>
       <view class="left_text">
-        <text class="left_nickName" selectable="false" space="false" decode="false">{{!anonymous?nickName:anonymousNickName}}
+        <text class="left_nickName" style="font-weight: bold"selectable="false" space="false" decode="false">{{!anonymous?nickName:anonymousNickName}}
         </text>
 
         <text class="left_postedDate" selectable="false" space="false" decode="false">{{postedTime}}</text>
@@ -31,12 +31,12 @@
       {{content}}
     </view>
 
-    <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
+    <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped"/>
     
   </navigator>
 
   <view class="content borderTop" wx:if="{{detail}}">
-    <view class="text">
+    <view class="text-complete">
       {{content}}
     </view>
     <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped" />
@@ -82,7 +82,7 @@
       <text style="margin-left: 6rpx">{{up_vote_count}}</text>
     </view>
     <view bind:tap="downVoteTapped">
-      <image src="{{voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}"></image>
+      <image src="{{voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}" style="margin-top: 10rpx;"></image>
       <text style="margin-left: 6rpx">{{down_vote_count}}</text>
     </view>
     <view bind:tap="showDialogBox">
@@ -92,7 +92,7 @@
     </view>
 
     <view bind:tap="saveTapped" wx:if="{{!deleted}}">
-      <image src="{{saved_by_me===true?'/icon/others/favorite.svg':'/icon/others/favorite_grey.svg'}}"></image>
+      <image src="{{saved_by_me===true?'/icon/others/favorite.svg':'/icon/others/favorite_grey.svg'}}" style="margin-top: -4rpx;"></image>
       <text style="margin-left: 6rpx">{{favoriteCount}}</text>
     </view>
 
@@ -114,7 +114,7 @@
     <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">取消</view>
-    <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">确定</view>
+    <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">Cancel</view>
+    <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">Submit</view>
   </view>
 </view>

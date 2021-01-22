@@ -160,7 +160,7 @@
   text-align: center;
 
   color: #A8A8A8;
-}
+}date-
 
 .question-text, .answer-text{
   margin-left: 14rpx;

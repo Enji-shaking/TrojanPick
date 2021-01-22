@@ -46,11 +46,13 @@
     <view class="sort_row">
         <view class="sort_row_content_wrapper">
             <view class="left_text">
-                排序方式
+                Sort By
             </view>
             <view class="right_picker_wrapper">
                 <picker class="right_picker" mode="selector" range="{{picker_arr}}" value="{{picker_index}}" bindchange="onPickerChange">
-                    <text class="picker_picked">{{picker_arr[picker_index]}}</text>
+                    <view class="picker_picked_wrapper">
+                        <text class="picker_picked">{{picker_arr[picker_index]}}</text>
+                    </view>
                 </picker>
                 
             </view>

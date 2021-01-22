@@ -21,22 +21,31 @@
 }
 .title {
   margin: auto;
-  width: 406rpx;
+  width: 450rpx;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 178rpx;
+  align-items: center;
 }
 .title .left {
   width: 60%;
   color: #953A3A;
+  font-size: 38rpx;
+  font-weight: bold;
+  font-family: Heiti SC;
+  font-style: normal;
+  margin-top: 50rpx;
+  text-align: right;
 }
 .title .middle {
-  width: 98px;
+  width: 98rpx;
   height: 0px;
-  border: 1px solid #F8C1B0;
+  border: 1rpx solid #F8C1B0;
   transform: rotate(90deg);
   margin-top: 50rpx;
+  display: flex;
 }
 .title .right {
   width: 40%;
@@ -45,28 +54,33 @@
   line-height: 80rpx;
   display: flex;
   align-items: center;
+  margin-top: 50rpx;
 }
 .courseInfo {
   background: #FFF7DB;
-  border: 1px solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width: 406rpx;
+  box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
+  width: 450rpx;
   margin: auto;
   margin-top: 44rpx;
   padding-bottom: 18rpx;
 }
 .courseInfo .info {
-  height: 68rpx;
+  height: auto;
   font-size: 26rpx;
   color: #953A3A;
   font-weight: bold;
-  border-bottom: 1px solid #F8C1B0;
+  padding-left: 38rpx;
+  padding-right: 38rpx;
+  padding-top: 16rpx;
 }
 .courseInfo .unit {
   color: #953A3A;
   font-size: 26rpx;
   margin-top: 22rpx;
+  padding-left: 38rpx;
+  padding-right: 38rpx;
 }
 .courseInfo .unit text {
   font-weight: bold;

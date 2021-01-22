@@ -112,7 +112,7 @@ Page({
         openID: this.data.openID,
         content: this.data.content,
         up_vote_count: 0,
-        down_vote_count: 0
+        down_vote_count: 0,
       },
       success: res=>{
         wx.showToast({
@@ -127,7 +127,10 @@ Page({
           content: this.data.content,
           up_vote_count: 0,
           down_vote_count: 0,
-          postedTime: this.getCurrentTime()
+          postedTime: this.getCurrentTime(),
+          posted_by_me: true,
+          voted_by_me: 0
+
         });
         this.data.own_answer.push(true)
         this.data.votes.push(0)
