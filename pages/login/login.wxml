@@ -2,8 +2,8 @@
 <view class="login_wrapper">
     <!-- we don't have any avatarUrl and nickName for the user yet -->
     <view class="mask"></view>
-    <view class="login_text">Welcome to</view>
+    <view class="login_text">Welcome To</view>
     <view class="login_line"></view>
     <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
-    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">One click login <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" style="color: #953A3A;">One Click Login <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
 </view>

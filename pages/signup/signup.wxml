@@ -4,5 +4,5 @@
     <input type="text" class="row big_input_field" placeholder="Email"/>
     <input type="text" class="row big_input_field" placeholder="Password"/>
     <input type="text" class="row big_input_field" placeholder="Repeat password"/>
-    <ConfirmButton title="注册"></ConfirmButton>
+    <ConfirmButton title="Sign Up"></ConfirmButton>
 </view>

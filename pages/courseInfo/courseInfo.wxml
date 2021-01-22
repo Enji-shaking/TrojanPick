@@ -16,10 +16,10 @@
   </view>
   <view class="courseInfo">
     <view class="info">
-      <view class="courseTitle">Course Description</view>
+      <view class="courseTitle">Course Description: </view>
       <view class="content">{{courseDescript}}</view>
     </view>
-    <view class="unit"> <view class="unit-text"><text style="font-weight: bold">Units</text> : {{courseUnit}} </view></view>
+    <view class="unit"> <view class="unit-text"><text style="font-weight: bold;">Units:</text> {{courseUnit}} </view></view>
   </view>
   <!-- selection tab and course ratings -->
  <NumericRating dropDownType="{{2}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" courseID="{{courseID}}" bindchoosePicker="handlePicker" id="myNumeric"></NumericRating>
@@ -30,7 +30,7 @@
   
   <YellowButton text="Write a Review" bind:tap="onTapCreateReview"></YellowButton>
   
-  <view class="questionTitle">Q&A</view>
+  <view class="questionTitle">Q & A</view>
   <view class="line"></view>
   <view class="q-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
   <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">

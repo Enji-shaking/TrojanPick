@@ -20,6 +20,7 @@
   font-size: 44rpx;
   line-height: 45rpx;
   text-align: center;
+  color: #953A3A;
 }
 .login_wrapper .login_line {
   width: 100%;
