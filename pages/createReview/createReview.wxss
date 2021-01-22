@@ -111,18 +111,6 @@
   color: #953A3A;
 }
 
-.add{
-  width: 42rpx;
-  height: 42rpx;
-  margin-left: 30rpx;
-}
-
-.imageadd{
-  width: 42rpx;
-  height: 42rpx;
-  margin-top: 17rpx;
-}
-
 .rate-block{
   height: 60rpx;
   margin-left: 100rpx;

@@ -45,6 +45,12 @@
   <view class="rating borderTop">
     <view class="singleRating" style="margin-top: 16rpx;">
       <view class="text">
+        Overall
+      </view>
+      <Stars Rating="{{overallRating}}"></Stars>
+    </view>
+    <view class="singleRating">
+      <view class="text">
         Difficulty
       </view>
       <Stars Rating="{{difficultyRating}}"></Stars>

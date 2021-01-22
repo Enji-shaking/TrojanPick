@@ -1,16 +1,16 @@
 <view class="wrapper">
     <view class="gradingInfo {{tapped?'invisible':''}}">
     </view>
-    <image src="/icon/others/info.png" catch:tap="iconTapped"></image>
+    <image src="/icon/others/info.png" catch:tap="iconTapped" style="height: 42rpx; width: 42rpx;"></image>
 </view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
   <view class="modal-title">Notice</view>
   <view class="modal-content">
-    Overall rating is calculated through integrating the four ratings: difficulty, workload, entertainment, and enrichment. 
-    
-    The Formula is: {(5-difficulty) + (5-workload) + entertainment + enrichment} / 4
+    <view style="font-weight: bold">If you cannot find your course or your professor: </view>
+    <view>1. Check whether you spell your course code or professor's name correctly.  </view>
+    <view>2. If your course or professor still haven't come up, contact developers and we will add it for you ASAP.</view>
   </view>
   <view class="modal-footer">
     <view class="btn-confirm" bindtap="hideModal">I Got It</view>

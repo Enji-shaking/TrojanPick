@@ -14,7 +14,7 @@ Component({
    */
   observers: {
     'item': function () {
-      const { anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted, grade, forProf } = this.properties.item
+      const { anonymous, anonymousAvatarUrl, anonymousNickName, overallRating, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, postedTime, deleted, grade, forProf } = this.properties.item
       
       let courseCode
       if(this.properties.item.courseInfo){
@@ -31,7 +31,7 @@ Component({
       }
 
       this.setData({
-        anonymous, anonymousAvatarUrl, anonymousNickName, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted, grade, forProf
+        anonymous, anonymousAvatarUrl, anonymousNickName, overallRating, difficultyRating, entertainmentRating, workloadRating, enrichmentRating, content, _id, courseID, down_vote_count, up_vote_count, commentCount, favoriteCount, voted_by_me, posted_by_me, saved_by_me, courseCode, professorName, nickName, avatarUrl, postedTime, deleted, grade, forProf
       })
     }
   },
@@ -65,6 +65,7 @@ Component({
   data: {
     openID: "",
     postedTime: "xxxx-xx-xx",
+    overallRating: 0,
     difficultyRating: 0,
     entertainmentRating: 0,
     workloadRating: 0,
