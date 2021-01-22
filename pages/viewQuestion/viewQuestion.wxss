@@ -92,7 +92,7 @@
 .answer-block{
   height: auto;
   margin-left: 54rpx;
-  margin-top: 50rpx;
+  /* margin-top: 50rpx; */
   margin-right: 54rpx;
   margin-bottom: 30rpx;
 }
@@ -109,4 +109,15 @@
   align-items: center;
 
   color: #953A3A
+}
+
+.date-text{
+  font-size: 18rpx;
+  line-height: 18rpx;
+  color: #A8A8A8;
+  margin-left: 54rpx;
+}
+.bottom {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
 }

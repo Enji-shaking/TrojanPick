@@ -9,14 +9,18 @@
     <navigator class="question-text" url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none" style="display: inline">{{item.content}}</navigator>
     <text wx:if="{{item.posted_by_me}}" data-index="{{index}}" class="delete-icon icon" bindtap="deleteQuestion"></text>
   </view>
-  <view class="good_question" style="margin-bottom: 10rpx; margin-top: 10rpx">
-    <view style="color: #6A6868;" wx:if="{{item.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
-      undo_good_question | {{item.favoredCount}}
-    </view>
-    <view style="color: #953A3A" wx:if="{{!item.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
-      good_question | {{item.favoredCount}}
-    </view>
+  <view class='bottom'>
+      <text class="date-text">{{item.postedTime}}</text>
+      <view class="good_question" style="margin-bottom: 10rpx; margin-top: 10rpx">
+        <view style="color: #6A6868;" wx:if="{{item.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
+          undo_good_question | {{item.favoredCount}}
+        </view>
+        <view style="color: #953A3A" wx:if="{{!item.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
+          good_question | {{item.favoredCount}}
+        </view>
+      </view>
   </view>
+ 
   <navigator class='answer-block' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
     <text class="answer-icon icon"></text>
     <text class="answer-text" wx:if="{{item.answers.length == 0}}">No Answers Yet. Answer If You Know!</text>
