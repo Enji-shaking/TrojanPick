@@ -152,44 +152,72 @@ Page({
     return (`${year}-${month}-${day}`);
   },
   deleteQuestion: function(){
-    wx.cloud.callFunction({
-      name: "deleteEntries",
-      data:{
-        target: "deleteQuestion",
-        questionID: this.data.questionID,
-        openID: this.data.openID,
-      },
-      success: res=>{
-        this.setData({
-          question: ""
-        })
-        this.setAnswersEmpty()
-        app.globalData.needRefresh = true
-        wx.navigateBack({
-          delta: 1,
-        })
+    wx.showModal({
+      title: 'Reminder',
+      content: 'Are your sure you want to delete this question?',
+      showCancel: true,
+      cancelText: 'Cancel',
+      cancelColor: '#000000',
+      confirmText: 'Confirm',
+      confirmColor: '#3CC51F',
+      success: (result) => {
+        if (result.confirm) {
+          wx.cloud.callFunction({
+            name: "deleteEntries",
+            data:{
+              target: "deleteQuestion",
+              questionID: this.data.questionID,
+              openID: this.data.openID,
+            },
+            success: res=>{
+              this.setData({
+                question: ""
+              })
+              this.setAnswersEmpty()
+              app.globalData.needRefresh = true
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+          })
+        }
       }
-    })
+    });
+   
   },
 
   deleteAnswerTapped: function(e){
-    wx.cloud.callFunction({
-      name: 'deleteEntries',
-      data:{
-        target: 'deleteAnswer',
-        answerID: this.data.answers[e.currentTarget.dataset.index]._id,
-      openID: this.data.openID,
-      },
-      success: res=>{
-        this.data.answers.splice(e.currentTarget.dataset.index, 1)
-        this.setData({
-          answers: this.data.answers,
-        })
-      },
-      fail: err=>{
-        console.log(err)
+    wx.showModal({
+      title: 'Reminder',
+      content: 'Are your sure you want to delete this answer?',
+      showCancel: true,
+      cancelText: 'Cancel',
+      cancelColor: '#000000',
+      confirmText: 'Confirm',
+      confirmColor: '#3CC51F',
+      success: (result) => {
+        if (result.confirm) {
+          wx.cloud.callFunction({
+            name: 'deleteEntries',
+            data:{
+              target: 'deleteAnswer',
+              answerID: this.data.answers[e.currentTarget.dataset.index]._id,
+            openID: this.data.openID,
+            },
+            success: res=>{
+              this.data.answers.splice(e.currentTarget.dataset.index, 1)
+              this.setData({
+                answers: this.data.answers,
+              })
+            },
+            fail: err=>{
+              console.log(err)
+            }
+          })
+        }
       }
-    })
+    });
+    
   },
   upVoteTapped: function (e) {
     console.log(this.data.answers[e.currentTarget.dataset.index]);
