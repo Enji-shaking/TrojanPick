@@ -4,7 +4,7 @@ let app =  getApp();
 Page({
   data: {
     questionID: "",
-    question: "",
+    question: [],
     answers: [],
     showModal: false,
     content: "",
@@ -291,5 +291,47 @@ Page({
         questionID: this.data.questionID
       },
     })
-  }
+  },
+
+  favored_cancel: function(e){
+    app.globalData.questionNeedRefresh = true
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "favored_question_cancel",
+        questionID: this.data.questionID,
+        openID: this.data.openID
+      },
+      success: res=>{
+        // this.data.favored[e.currentTarget.dataset.index] = false
+        this.data.question.favoredCount--
+        this.data.question.favored_by_me = false
+        this.setData({
+          // favored: this.data.favored,
+          question: this.data.question
+        })
+      }
+    })
+  },
+
+  favored_new: function(e){
+    app.globalData.questionNeedRefresh = true
+    console.log(this.data.question)
+    wx.cloud.callFunction({
+      name: "vote_save",
+      data:{
+        target: "favored_question_new",
+        questionID: this.data.questionID,
+        courseID: this.data.courseID,
+        openID: this.data.openID
+      },
+      success: res=>{
+        this.data.question.favoredCount++
+        this.data.question.favored_by_me = true
+        this.setData({
+          question: this.data.question
+        })
+      }
+    })
+  },
 })

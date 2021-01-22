@@ -11,6 +11,14 @@
     </view>
     <view class='bottom'>
       <text class="date-text">{{question.postedTime}}</text>
+      <view class="good_question" style="margin-bottom: 10rpx; margin-top: 10rpx">
+        <view style="color: #6A6868;" wx:if="{{question.favored_by_me}}" data-index="{{index}}" bindtap="favored_cancel" >
+          undo_good_question | {{question.favoredCount}}
+        </view>
+        <view style="color: #953A3A" wx:if="{{!question.favored_by_me}}" data-index="{{index}}" bindtap="favored_new">
+          good_question | {{question.favoredCount}}
+        </view>
+      </view>
     </view>
   </view>
 
@@ -31,7 +39,6 @@
         <image src="{{item.voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}"></image>
         <text>{{item.down_vote_count}}</text>
       </view>
-
     </view>
   </view>
 </view>

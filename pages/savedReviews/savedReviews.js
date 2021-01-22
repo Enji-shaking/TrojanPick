@@ -151,6 +151,7 @@ Page({
       }
     })
       .then(res => {
+        console.log(res);
         let cloud_result = res.result;
         let visitedProfessor = new Set();
         let visitedCourse = new Set();

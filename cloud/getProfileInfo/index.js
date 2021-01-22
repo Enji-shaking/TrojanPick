@@ -250,7 +250,7 @@ exports.main = async (event, context) => {
     
   }else if(target=="getAllPickerSavedReviews"){
     console.log(openID);
-    let data = db.collection('saved_reviews')
+    let data = await db.collection('saved_reviews')
     .aggregate()
     .match({
       openID:openID
@@ -261,7 +261,7 @@ exports.main = async (event, context) => {
         reviewID:'$reviewID'
       },
       pipeline:$.pipeline()
-        .match(condition)
+        // .match(condition)
         .match(_.expr($.and([
           $.eq(['$$reviewID','$_id']),
         ])))
@@ -271,7 +271,8 @@ exports.main = async (event, context) => {
     .end();
 
 
-    [data] = await Promise.all([data]);
+    // [data] = await Promise.all([data]);
+    console.log(data);
     for(let i=0;i<data.list.length;i++){
       if(data.list[i].reviews.length!=0){
         let temp = data.list[i].reviews[0]

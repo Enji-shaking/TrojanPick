@@ -88,19 +88,19 @@ exports.main = async (event, context) => {
     }
     
     // const my_favored_questions = new Set()
-    let my_favored_questions_raw = await db.collection("favored_questions").where({ 
+    let checkIfFavored = await db.collection("favored_questions").where({ 
       openID: openID,
       questionID: questionID
     }).get()
-    for (let i = 0; i < my_favored_questions_raw.data.length; i++) {
-      // my_favored_questions.add(my_favored_questions_raw.data[i].questionID)
-      if(my_favored_questions_raw.data[i].questionID === questionID){
-        data.list[0].posted_by_me = true
-      }
+    console.log(data);
+    console.log(checkIfFavored);
+    if(checkIfFavored.data.length > 0){
+      data.list[0].favored_by_me = true
+    }else{
+      data.list[0].favored_by_me = false
     }
-    if(data.list[0].posted_by_me === undefined){
-      data.list[0].posted_by_me = false
-    }
+    data.list[0].posted_by_me = data.list[0].openID === openID
+    console.log(data);
 
     data.list[0].answers.forEach(item=>{
       if(item.openID === openID){
