@@ -164,8 +164,10 @@ input::placeholder {
   width: 100%;
   margin-top: 55rpx;
   margin-bottom: 230rpx;
+  text-align: center;
 }
 .professor_card_displayer_wrapper .professor_card {
+  text-align: center;
   margin-left: 172rpx;
   margin-right: 172rpx;
   width: 406rpx;
