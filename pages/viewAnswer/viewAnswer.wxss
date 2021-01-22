@@ -158,11 +158,10 @@
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #A8A8A8;
-}date-
+}
 
-.question-text, .answer-text{
+.question-text{
   margin-left: 14rpx;
   margin-right: 14rpx;
   height: auto;
@@ -176,6 +175,15 @@
 }
 .answer-text{
   color:#6A6868;
+  margin-left: 14rpx;
+  margin-right: 14rpx;
+  height: auto;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  align-items: center;
 
 }
 button{
