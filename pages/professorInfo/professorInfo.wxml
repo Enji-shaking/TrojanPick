@@ -1,5 +1,6 @@
 <!--pages/professorInfo/professorInfo.wxml-->
 <GradingInfo></GradingInfo>
+<view class="TA-Mask" wx:if="{{!forProf}}"> </view>
 <view>
   <Header></Header>
   <view class="title">
