@@ -29,9 +29,9 @@
     </view>
     <view class='bottom'>
       <text class="date-text">{{item.postedTime}}</text>
-      <image src="/icon/others/delete_grey.svg" class="delete {{!item.posted_by_me?'invisible':''}}" bind:tap="deleteAnswerTapped" data-index="{{index}}" />
-
-      <view bind:tap="upVoteTapped" data-index="{{index}}">
+      <view class="right">
+        <image src="/icon/others/delete_grey.svg" class="delete {{!item.posted_by_me?'invisible':''}}" bind:tap="deleteAnswerTapped" data-index="{{index}}" />
+        <view bind:tap="upVoteTapped" data-index="{{index}}">
         <image src="{{item.voted_by_me===1?'/icon/others/like.svg': '/icon/others/like_grey.svg'}}"></image>
         <text>{{item.up_vote_count}}</text>
       </view>
@@ -39,6 +39,10 @@
         <image src="{{item.voted_by_me===-1?'/icon/others/downvote.svg':'/icon/others/downvote_grey.svg'}}"></image>
         <text>{{item.down_vote_count}}</text>
       </view>
+      </view>
+      
+
+      
     </view>
   </view>
 </view>
