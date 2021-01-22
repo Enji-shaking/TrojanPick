@@ -28,7 +28,6 @@
   width: 554rpx;
   height: auto;
   margin-left: 98rpx;
-
   background: #FFF7DB;
   border: 1rpx solid #F8C1B0;
   box-sizing: border-box;
@@ -38,14 +37,17 @@
   height: auto;
   margin-top: 32rpx;
 }
-
+.answer-box .top{
+  height: auto;
+  padding-top: 32rpx;
+}
 .answer-box{
   width: 554rpx;
   height: auto;
   margin-left: 98rpx;
-
   background: #FFF7DB;
-  border: 2rpx solid #F8C1B0;
+  border: 1rpx solid #F8C1B0;
+  border-top: none;
   box-sizing: border-box;
 }
 
@@ -58,6 +60,7 @@
  .answer-icon{
   background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M11.1289 1.25781H2.87109C1.28793 1.25781 0 2.54575 0 4.12891V8.56329C0 9.82655 0.829391 10.9268 2.03123 11.279L3.41786 12.6657C3.49487 12.7426 3.59912 12.7859 3.70796 12.7859C3.8167 12.7859 3.92105 12.7426 3.99796 12.6657L5.26997 11.3936H11.1289C12.7121 11.3936 14 10.1057 14 8.52249V4.12891C14 2.54575 12.7121 1.25781 11.1289 1.25781ZM3.98557 7.05063C3.98557 6.82408 4.16917 6.64047 4.39572 6.64047H9.60428C9.83083 6.64047 10.0144 6.82408 10.0144 7.05063C10.0144 7.27717 9.83083 7.46078 9.60428 7.46078H4.39572C4.16917 7.46078 3.98557 7.27717 3.98557 7.05063ZM9.60428 6.01092H4.39572C4.16917 6.01092 3.98557 5.82732 3.98557 5.60077C3.98557 5.37433 4.16917 5.19061 4.39572 5.19061H9.60428C9.83083 5.19061 10.0144 5.37433 10.0144 5.60077C10.0144 5.82732 9.83083 6.01092 9.60428 6.01092Z' fill='%23B92A33'/%3E %3C/svg%3E ");
   background-size: cover;
+  margin-left: 48rpx;
 }
 
 .delete-icon{
@@ -155,11 +158,10 @@
   color: #A8A8A8;
 }
 
-.question-text{
+.question-text, .answer-text{
   margin-left: 14rpx;
   margin-right: 14rpx;
   height: auto;
-  
   font-family: Heiti SC;
   font-style: normal;
   font-weight: bold;
@@ -168,7 +170,10 @@
   align-items: center;
   color: #953A3A;
 }
+.answer-text{
+  color:#6A6868;
 
+}
 button{
   width: 330rpx;
   height: 74rpx;

@@ -7,6 +7,18 @@
   right: 0;
   z-index: -1;
 }
+.TA-Mask2 {
+  background-color: #faf5ad;
+  position: fixed;
+  height: 800rpx;
+  bottom: 0rpx;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+.bigTAWrapper {
+  background-color: #faf5ad;
+}
 .title {
   margin: auto;
   width: 406rpx;

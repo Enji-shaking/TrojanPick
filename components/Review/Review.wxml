@@ -18,7 +18,7 @@
     </view>
     <view class="right">
       <view class="right_row {{!hideProfessor?'':'hidden'}} {{!hideCourse?'':'only'}}">
-        Prof: {{professorName}}
+        {{forProf?'Prof':'TA'}}: {{professorName}}
       </view>
       <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}" style="margin-top: 10rpx;">
         Course: {{courseCode}}

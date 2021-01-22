@@ -11,10 +11,10 @@ Page({
     score: 0,
     scores: [0, 0, 0, 0],
     gradeIndex: 0,
-    gradeArray: [' ', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'P', 'F', 'IP'],
+    gradeArray: ['N/A', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'P', 'F', 'IP'],
     showModal: false,
     forProf: true,
-    grade: "N/A",
+    // grade: "N/A",
     courseCode: "",
     courseID: "",
     classCode: "",
@@ -69,6 +69,9 @@ Page({
         correctProfessor: true,
         text_color_prof: "#953A3A"
       })
+    }
+    if(options.forProf != undefined){
+      this.setData({forProf: options.forProf==="true"})
     }
   },
 

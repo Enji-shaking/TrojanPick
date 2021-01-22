@@ -1,8 +1,9 @@
 <!--pages/professorInfo/professorInfo.wxml-->
 <GradingInfo></GradingInfo>
 <view class="TA-Mask" wx:if="{{!forProf}}"> </view>
-<view>
-  <Header></Header>
+<view class="TA-Mask2" wx:if="{{!forProf}}"> </view>
+<Header></Header>
+<view class="{{!forProf?'bigTAWrapper':''}}">
   <view class="title">
     <view class="left">
       {{professorName}}
@@ -19,7 +20,7 @@
   <!-- numeric Review with selection box and four ratings -->
   <NumericRating dropDownType="{{1}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" professorID="{{professorID}}" bindchoosePicker="handlePicker" id="myNumeric"></NumericRating>
   <!-- display user ratings  -->
-
+  
   <Review wx:for="{{reviews}}" item="{{item}}" wx:key="_id" hideProfessor="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Review>
   <YellowButton text="Write a review" bind:tap="onTapCreateReview"></YellowButton>
 
