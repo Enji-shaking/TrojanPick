@@ -40,15 +40,15 @@ exports.main = async (event, context) => {
     console.log(sort);
     console.log(condition);
     let data, count
-    if(sort === 0){
-      data = db.collection('courses')
-        .orderBy(...condition)
-        // .orderBy("courseUnit", "asc")
-        .skip(MAX_LIMIT * (currentPage-1))
-        .limit(MAX_LIMIT)
-        .get()
-        count = db.collection('courses').count();
-    }else{
+    // if(sort === 5){
+    //   data = db.collection('courses')
+    //     .orderBy(...condition)
+    //     // .orderBy("courseUnit", "asc")
+    //     .skip(MAX_LIMIT * (currentPage-1))
+    //     .limit(MAX_LIMIT)
+    //     .get()
+    //     count = db.collection('courses').count();
+    // }else{
       data = db.collection('courses')
         .where({
           numReviews: _.gt(0)
@@ -60,7 +60,7 @@ exports.main = async (event, context) => {
         count = db.collection('courses').where({
           numReviews: _.gt(0)
         }).count();
-    }
+    // }
     
     [data, count] = await Promise.all([data, count])
     count = count.total
@@ -93,7 +93,7 @@ exports.main = async (event, context) => {
     }
     let data =  db.collection('courses')
         .where({
-          numReviews: _.gt(0),
+          // numReviews: _.gt(0),
           courseCode: db.RegExp({
             regexp: courseCode,
             options: 'i'
@@ -105,7 +105,7 @@ exports.main = async (event, context) => {
         .get();
     let count =  db.collection('courses')
         .where({
-          numReviews: _.gt(0),
+          // numReviews: _.gt(0),
           courseCode: db.RegExp({
             regexp: courseCode,
             options: 'i'
