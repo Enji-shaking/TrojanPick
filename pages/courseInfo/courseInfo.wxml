@@ -33,7 +33,7 @@
   <view class="questionTitle">Q & A</view>
   <view class="line"></view>
   <view class="q-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
-  <navigator class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
+  <navigator wx:if="{{!questions.length == 0}}" class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index" class="q-ans-box">
       <image src="../../icon/others/question.svg" class="icon" ></image>
       <text style="margin-left: 16rpx;">{{item.content}} | </text>
