@@ -123,6 +123,7 @@ input::placeholder {
   text-align: center;
   line-height: 74rpx;
   height: 74rpx;
+  color: #953A3A;
 }
 .search_row .search_row_content_wrapper .search_bar .search_bar_input_placeholder {
   text-align: center;
@@ -149,6 +150,7 @@ input::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #953A3A;
 }
 
 .picker_picked_wrapper{
@@ -167,6 +169,7 @@ input::placeholder {
   height: 36rpx;
   font-size: 18rpx;
   font-weight: 400;
+  color: #953A3A;
 }
 .professor_card_displayer_wrapper {
   width: 100%;
