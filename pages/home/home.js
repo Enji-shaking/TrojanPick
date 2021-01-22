@@ -14,7 +14,9 @@ Page({
     searchCourseCode: "",
     searchProfessorName: "",
     hasPersonalInfo: false,
-    forProf: true
+    forProf: true,
+    normalTextForIcon: ['1. When you don\'t type anything in the search bar, only the ones currently with reviews will show up', '2. So try to type the name of the course and give your reviews!'],
+    boldTextForIcon: "If you cannot find your desired classes here: "
   },
   queryParamsCourses: { 
     currentPage: 1,

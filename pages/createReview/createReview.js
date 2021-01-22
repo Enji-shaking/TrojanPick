@@ -37,6 +37,8 @@ Page({
     text_color: "#953A3A", // 默认字的颜色
     text_color_prof: "#953A3A",
     openID: "",
+    normalTextForIcon: ['1. Check whether you spell your course code or professor\'s name correctly.', '2. If your course or professor still haven\'t come up, contact developers and we will add it for you ASAP.'],
+    boldTextForIcon: "If you cannot find your course or your professor: "
   },
 
   // input搜索节流var
