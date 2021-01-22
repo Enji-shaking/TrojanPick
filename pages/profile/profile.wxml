@@ -44,4 +44,6 @@
     </navigator>
 </view>
 
+<button open-type="contact" text="Contact Developers">Contact Developers</button>
+
 <BottomNav></BottomNav>

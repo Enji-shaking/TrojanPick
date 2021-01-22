@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "Header": "/components/Header/Header",
-    "BottomNav": "/components/BottomNav/BottomNav"
+    "BottomNav": "/components/BottomNav/BottomNav",
+    "yellowButton": "/components/yellowButton/yellowButton"
+
   }
 }
