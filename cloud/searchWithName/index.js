@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
     let condition = []
     if(sort === 0){
       condition.push("overallRating")
-      condition.push("asc")
+      condition.push("desc")
     }else if(sort === 1){
       condition.push("difficultyRating")
       condition.push("asc")
@@ -58,7 +58,7 @@ exports.main = async (event, context) => {
         .limit(MAX_LIMIT)
         .get()
         count = db.collection('courses').where({
-          numReviews: db.command.exists(true)
+          numReviews: _.gt(0)
         }).count();
     }
     
@@ -93,6 +93,7 @@ exports.main = async (event, context) => {
     }
     let data =  db.collection('courses')
         .where({
+          numReviews: _.gt(0),
           courseCode: db.RegExp({
             regexp: courseCode,
             options: 'i'
@@ -104,6 +105,7 @@ exports.main = async (event, context) => {
         .get();
     let count =  db.collection('courses')
         .where({
+          numReviews: _.gt(0),
           courseCode: db.RegExp({
             regexp: courseCode,
             options: 'i'
