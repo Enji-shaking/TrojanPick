@@ -40,7 +40,7 @@ exports.main = async (event, context) => {
         .match(
           _.expr($.eq(['$questionID', '$$questionID']))
         )
-        .sort({favoredCount: -1})
+        .sort({up_vote_count: -1})
         .limit(1)
         .done()
       ,
