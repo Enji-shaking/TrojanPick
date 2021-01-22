@@ -11,7 +11,7 @@
 }
 .favoriteRatings .line {
   width: 406rpx;
-  border: 1px solid #F8C1B0;
+  border: 1rpx solid #F8C1B0;
   margin: auto;
   margin-top: 18rpx;
 }

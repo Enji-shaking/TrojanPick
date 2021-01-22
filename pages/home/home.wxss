@@ -199,6 +199,8 @@ input::placeholder {
 .professor_card_displayer_wrapper .professor_card .professor_card_text .professor_card_text_line {
   font-size: 44rpx;
   line-height: 46rpx;
+  color: #953A3A;
+  text-align: center;
 }
 .active {
   background-color: #FFCC54 !important;

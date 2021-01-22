@@ -35,10 +35,12 @@
 .title_wrapper .title_line_1 {
   font-size: 44rpx;
   line-height: 46rpx;
+  color: #953A3A;
 }
 .title_wrapper .title_line_2 {
   font-size: 24rpx;
   line-height: 25rpx;
+  color: #953A3A;
 }
 .content_wrapper .row {
   display: flex;
@@ -49,6 +51,7 @@
 }
 .content_wrapper .row .text {
   flex: 1;
+  color: #953A3A;
 }
 .content_wrapper .row .textInput {
   flex: 2;
@@ -61,4 +64,10 @@
 }
 .content_wrapper .confirmButtonWrapper {
   margin-top: 90rpx;
+}
+input{
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  display: flex;
+  color: #953A3A;
 }

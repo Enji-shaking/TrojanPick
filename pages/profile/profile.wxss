@@ -20,7 +20,7 @@
 }
 .welcome_row .welcome_row_text_wrapper .welcome_text_line {
   width: 406rpx;
-  border: 1px solid #F8C1B0;
+  border: 1rpx solid #F8C1B0;
   margin-bottom: 12rpx;
   margin-top: 12rpx;
 }

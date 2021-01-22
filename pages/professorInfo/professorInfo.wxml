@@ -13,9 +13,15 @@
   </view>
   <view class="courseInfo">
     <view class="info">
-      <view class="courseTitle">Courses taught</view>
+      <view wx:if="{{courseTaught.length == 0}}" class="courseTitle">No Course is Recorded.</view>
+      <view wx:if="{{!courseTaught.length == 0}}" class="courseTitle" style="padding-bottom: 18rpx;">
+        Courses Taught
+      </view>
     </view>
-    <view class="unit" wx:for="{{courseTaught}}" wx:key="index" > <text>{{item.courseCode}}</text>: {{item.courseUnit}} units</view>
+    <view wx:if="{{!courseTaught.length == 0}}" style="border-bottom: 1rpx solid #F8C1B0;"></view>
+    <view wx:if="{{!courseTaught.length == 0}}" class="unit" wx:for="{{courseTaught}}" wx:key="index" > 
+      <text>{{item.courseCode}}</text>: {{item.courseUnit}} units
+    </view>
   </view>
   <!-- numeric Review with selection box and four ratings -->
   <NumericRating dropDownType="{{1}}" entertainmentRating="{{entertainmentRating}}" difficultyRating="{{difficultyRating}}" workloadRating="{{workloadRating}}" enrichmentRating="{{enrichmentRating}}" professorID="{{professorID}}" bindchoosePicker="handlePicker" id="myNumeric"></NumericRating>
