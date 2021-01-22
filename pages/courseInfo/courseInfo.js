@@ -370,7 +370,7 @@ Page({
     //   return;
     // }
     wx.navigateTo({
-      url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}`,
+      url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}&forProf=${true}`,
     });
   }
 })
