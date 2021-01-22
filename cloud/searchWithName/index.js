@@ -19,7 +19,7 @@ exports.main = async (event, context) => {
     const { sort } = event
     let condition = []
     if(sort === 0){
-      condition.push("courseCode")
+      condition.push("overallRating")
       condition.push("asc")
     }else if(sort === 1){
       condition.push("difficultyRating")
@@ -33,6 +33,9 @@ exports.main = async (event, context) => {
     }else if(sort === 4){
       condition.push("enrichmentRating")
       condition.push("desc")
+    }else if(sort === 5){
+      condition.push("courseCode")
+      condition.push("asc")
     }
     console.log(sort);
     console.log(condition);
@@ -70,8 +73,8 @@ exports.main = async (event, context) => {
     // const {  } = event
     let name, type
     if(sort === 0){
-      name = "courseCode"
-      type = "asc"
+      name = "overallRating"
+      type = "desc"
     }else if(sort === 1){
       name = "difficultyRating"
       type = "asc"
@@ -84,6 +87,9 @@ exports.main = async (event, context) => {
     }else if(sort === 4){
       name = "enrichmentRating"
       type = "desc"
+    }else if(sort === 5){
+      name = "courseCode"
+      type = "asc"
     }
     let data =  db.collection('courses')
         .where({

@@ -21,9 +21,9 @@
       <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
     </view>
   </view>
-  <navigator class="add" url="/pages/addClass/addClass" hover-class="none">
+  <!-- <navigator class="add" url="/pages/addClass/addClass" hover-class="none">
     <image class='imageadd' src="/icon/others/add.svg"></image>
-  </navigator>
+  </navigator> -->
 </view>
 
 <view class='dropbox-block'>
