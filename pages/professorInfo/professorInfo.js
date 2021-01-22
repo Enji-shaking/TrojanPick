@@ -25,6 +25,7 @@ Page({
     currentPageInReviews: 1,
     openID: "",
     isHot:true,
+    forProf: true,
   },
 
   getProfessorInfo(professorID, courseID) {
@@ -69,7 +70,8 @@ Page({
         }
         this.setData({
           professorName: professor.professorName,
-          courseTaught: res.result.courseCode
+          courseTaught: res.result.courseCode,
+          forProf: professor.forProf
         })
         this.counter--;
         if (this.counter === 0) {

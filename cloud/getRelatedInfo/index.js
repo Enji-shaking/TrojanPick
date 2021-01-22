@@ -23,14 +23,15 @@ exports.main = async (event, context) => {
   }
   else if(event.target === "professors"){
     return await db.collection('professors').limit(10)
-                                         .orderBy("professorName", "asc")
-                                         .where({
-                                          professorName: db.RegExp({
-                                            regexp: event.professorName, // 用用户输入的courseCode来进行查询
-                                            options: 'i' // 忽略大小写
-                                          })
-                                         })
-                                         .get();
+          .orderBy("professorName", "asc")
+          .where({
+            forProf: event.forProf,
+            professorName: db.RegExp({
+              regexp: event.professorName, // 用用户输入的professor name来进行查询
+              options: 'i' // 忽略大小写
+            })
+          })
+          .get();
   }
   return{
     event,

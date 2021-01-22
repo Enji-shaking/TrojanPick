@@ -1,10 +1,9 @@
 <Header></Header>
 
-<view class="switchMode">
-  <button class="switchButton {{inProf?'prof':'ta'}}">{{inProf?"Rate TA":"Rate Prof"}}</button>
-</view>
-  
-<view class="TA-Mask">
+
+<button bind:tap="tapSwitch" class="switchButton {{forProf?'prof':'ta'}}">{{forProf?"Rate TA":"Rate Prof"}}</button>
+
+<view class="TA-Mask" wx:if="{{!forProf}}">
   
 </view>
   
@@ -17,7 +16,7 @@
 <view class='dropbox-block'>
   <text class='lables'>Course</text>
   <view class='picker-box'>
-    <input style="color: {{text_color}}" placeholder="e.g ITP115" bindinput="saveCourseCode" value="{{courseCode}}" bindblur="bindBlurCourse"/>
+    <input style="color: {{text_color}}" placeholder="e.g ITP 115" bindinput="saveCourseCode" value="{{courseCode}}" bindblur="bindBlurCourse"/>
     <view class='option_box' style='height:{{show_course?(225):0}}rpx; z-index: 1; position: absolute'>
       <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
     </view>
@@ -28,7 +27,7 @@
 </view>
 
 <view class='dropbox-block'>
-  <text class='lables'>Professor</text>
+  <text class='lables'>{{forProf?"Professor":"TA"}}</text>
   <view class='picker-box'>
     <input style="color: {{text_color_prof}}" placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}" bindblur="bindBlurProf"/>
     <view class='option_box' style='height:{{show_prof?(225):0}}rpx;'>

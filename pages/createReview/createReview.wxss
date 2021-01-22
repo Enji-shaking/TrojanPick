@@ -7,17 +7,22 @@
   right: 0;
   z-index: -1;
 }
-
+.prof{
+  background-color: rgb(250, 245, 173);
+}
+.ta{
+  background-color: #fff;
+}
 .switchButton{
   position: absolute;
   top: 300rpx;
   right: 20rpx;
-  width: 100rpx !important;
-  background-color: #fff;
+  width: 140rpx !important;
+  /* background-color: #fff; */
   font-size: 24rpx;
   font-weight: 400;
   text-align: center;
-  padding: 0;
+  padding: 10rpx;
 }
 
 .new-review{

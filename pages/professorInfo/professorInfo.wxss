@@ -1,3 +1,12 @@
+.TA-Mask {
+  background-color: #faf5ad;
+  position: absolute;
+  top: 275rpx;
+  bottom: -250rpx;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
 .title {
   margin: auto;
   width: 406rpx;
