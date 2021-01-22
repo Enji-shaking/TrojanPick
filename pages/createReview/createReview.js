@@ -77,7 +77,9 @@ Page({
   tapSwitch(){
     const forProf = !this.data.forProf
     this.setData({
-      forProf
+      forProf,
+      professorID: "",
+      professorName: ""
     })
   },
 
