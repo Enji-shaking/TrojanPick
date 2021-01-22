@@ -1,4 +1,6 @@
 // pages/pastReviews/pastReviews.js
+let app =  getApp();
+
 Page({
 
   /**
@@ -31,6 +33,7 @@ Page({
   counter: 3,
   onLoad: function (options) {
     // options.openID="oH5r15EPI59JgaNhhebzuDsOpPEo";
+    app.globalData.onProfile = false
     wx.showLoading({
       title: "loading",
       mask: true,

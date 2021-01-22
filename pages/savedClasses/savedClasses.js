@@ -1,6 +1,4 @@
 const app =  getApp();
-
-  
 // pages/savedClasses/savedClasses.js
 Page({
 
@@ -30,6 +28,7 @@ Page({
     }  
   },
   onLoad: function (options) {
+    app.globalData.onProfile = false
     let self = this;
     wx.cloud.callFunction({
       name:'getProfileInfo',
