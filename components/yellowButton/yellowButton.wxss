@@ -10,5 +10,6 @@ button {
   margin: auto;
   margin-top: 40rpx;
   margin-bottom: 26rpx;
-  font-family: Heiti SC
+  font-family: Heiti SC;
+  padding: 5rpx;
 }

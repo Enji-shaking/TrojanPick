@@ -1,3 +1,25 @@
+.TA-Mask{
+  background-color: rgb(250, 245, 173);
+  position: absolute;
+  top: 275rpx;
+  bottom: -400rpx;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.switchButton{
+  position: absolute;
+  top: 300rpx;
+  right: 20rpx;
+  width: 100rpx !important;
+  background-color: #fff;
+  font-size: 24rpx;
+  font-weight: 400;
+  text-align: center;
+  padding: 0;
+}
+
 .new-review{
   width: 276rpx;
   height: 72rpx;
@@ -158,7 +180,7 @@ input{
   height: 52rpx; 
   margin-top: 44rpx;
   margin-left: 274rpx;
-  background: #FFFFFF;
+  /* background: #FFFFFF; */
   
   font-family: Heiti SC;
   font-style: normal;

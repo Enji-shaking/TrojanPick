@@ -1,4 +1,14 @@
 <Header></Header>
+
+<view class="switchMode">
+  <button class="switchButton {{inProf?'prof':'ta'}}">{{inProf?"Rate TA":"Rate Prof"}}</button>
+</view>
+  
+<view class="TA-Mask">
+  
+</view>
+  
+
 <view class='new-review'>
   <view class='chinese'>新建评价</view>
   <view class='english'>New Review</view>
@@ -79,7 +89,8 @@
 </view>
 
 <view class="label">
-  <label><switch type="checkbox" checked="{{anonymous}}" class="checkbox-size" bindchange="changeAnonymous"/>
+  <label>
+  <switch type="checkbox" checked="{{anonymous}}" class="checkbox-size" bindchange="changeAnonymous"/>
     Anonymous
   </label>
 </view>

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker_arr:['alphanumeric','difficulty (asc+)','entertainment (desc-)','workload (asc+)', 'enrichment (desc-)'],
+    picker_arr:['alphanumeric','difficulty (asc)','entertainment (desc-)','workload (asc+)', 'enrichment (desc-)'],
     picker_index: 0,
     course_cards_info:[],
     prof_cards_info:[],
@@ -37,6 +37,7 @@ Page({
       picker_index: value
     })
     this.queryParamsCourses.sort = parseInt(value)
+    console.log(this.queryParamsCourses);
     this.reloadCourses()
   },
   onTabTapped(e){
@@ -47,6 +48,8 @@ Page({
   },
   
   performQuery(type){
+    if(type === 0) console.log(this.queryParamsCourses)
+    if(type === 0) console.log(this.queryParamsProfessors)
     return wx.cloud.callFunction({
       name: "searchWithName",
       data: type===0?this.queryParamsCourses:this.queryParamsProfessors
@@ -69,7 +72,10 @@ Page({
         }
         wx.hideLoading()
       })
-      .catch((err)=>console.error(err))
+      .catch((err)=>{
+        console.error(err) 
+        wx.hideLoading()
+      })
   },
   searchProfessorCloud(){
     wx.showLoading({

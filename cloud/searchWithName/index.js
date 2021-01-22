@@ -4,50 +4,53 @@ const cloud = require('wx-server-sdk')
 cloud.init({
   env: "test-0gbtzjgqaae3f2b2"
 })
-const MAX_LIMIT = 3
+const MAX_LIMIT = 10
 
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { target, currentPage } = event
   // const wxContext = cloud.getWXContext()
   const db = cloud.database()
+  const _ = db.command
   // const { OPENID, APPID } = wxContext
 
   
   if(target === "recommended_courses" || (target === "search_courses" && event.courseCode==="")){
     const { sort } = event
-    let name, type
+    let condition = []
     if(sort === 0){
-      name = "courseCode"
-      type = "asc"
+      condition.push("courseCode")
+      condition.push("asc")
     }else if(sort === 1){
-      name = "difficultyRating"
-      type = "asc"
+      condition.push("difficultyRating")
+      condition.push("asc")
     }else if(sort === 2){
-      name = "entertainmentRating"
-      type = "desc"
+      condition.push("entertainmentRating")
+      condition.push("desc")
     }else if(sort === 3){
-      name = "workloadRating"
-      type = "asc"
+      condition.push("workloadRating")
+      condition.push("asc")
     }else if(sort === 4){
-      name = "enrichmentRating"
-      type = "desc"
+      condition.push("enrichmentRating")
+      condition.push("desc")
     }
-    console.log(name);
+    console.log(sort);
+    console.log(condition);
     let data, count
     if(sort === 0){
       data = db.collection('courses')
-        .orderBy(name, type)
+        .orderBy(...condition)
+        // .orderBy("courseUnit", "asc")
         .skip(MAX_LIMIT * (currentPage-1))
         .limit(MAX_LIMIT)
         .get()
         count = db.collection('courses').count();
     }else{
-      db.collection('courses')
+      data = db.collection('courses')
         .where({
-          numReviews: db.command.exists(true)
+          numReviews: _.gt(0)
         })
-        .orderBy(name, type)
+        .orderBy(...condition)
         .skip(MAX_LIMIT * (currentPage-1))
         .limit(MAX_LIMIT)
         .get()
