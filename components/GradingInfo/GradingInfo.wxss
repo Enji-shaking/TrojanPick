@@ -3,7 +3,7 @@
     visibility: hidden;
 }
 .wrapper{
-    width: 300rpx;
+    width: 100rpx;
     font-size: 15rpx;
     position: absolute;
     left: 635rpx;

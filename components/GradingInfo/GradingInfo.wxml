@@ -8,7 +8,9 @@
 <view class="modal-dialog" wx:if="{{showModal}}">
   <view class="modal-title">Notice</view>
   <view class="modal-content">
-    Overall rating is calculated through integrating the four ratings: difficulty, workload, entertainment, and enrichment.
+    Overall rating is calculated through integrating the four ratings: difficulty, workload, entertainment, and enrichment. 
+    
+    The Formula is: {(5-difficulty) + (5-workload) + entertainment + enrichment} / 4
   </view>
   <view class="modal-footer">
     <view class="btn-confirm" bindtap="hideModal">I Got It</view>

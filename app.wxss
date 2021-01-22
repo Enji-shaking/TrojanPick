@@ -7,11 +7,14 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-  overflow-x:hidden;
+  width: 750rpx;
+  overflow:hidden;
 } 
 page{
   box-sizing: border-box;
   padding-bottom: 200rpx;
+  width: 100%;
+  overflow-x:hidden;
 }
 
 .big_input_field{
