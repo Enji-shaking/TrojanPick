@@ -123,6 +123,7 @@ input::placeholder {
   text-align: center;
   line-height: 74rpx;
   height: 74rpx;
+  color: #953A3A;
 }
 .search_row .search_row_content_wrapper .search_bar .search_bar_input_placeholder {
   text-align: center;
@@ -149,16 +150,26 @@ input::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #953A3A;
+}
+
+.picker_picked_wrapper{
+  display: inline-flex;
+  border: 0.5rpx solid #F5C2BF;
+  width: auto;
+  margin-left: -20rpx;
 }
 .sort_row .sort_row_content_wrapper .right_picker_wrapper .right_picker .picker_picked {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: 0.5rpx solid #F5C2BF;
-  width: 172rpx;
+  width: auto;
   height: 36rpx;
   font-size: 18rpx;
   font-weight: 400;
+  color: #953A3A;
 }
 .professor_card_displayer_wrapper {
   width: 100%;

@@ -43,6 +43,7 @@
 }
 .comment .bottom view {
   position: relative;
+  padding: 4rpx;
 }
 .comment .bottom view .commentInput {
   position: absolute;

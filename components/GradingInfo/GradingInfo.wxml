@@ -1,6 +1,16 @@
 <view class="wrapper">
     <view class="gradingInfo {{tapped?'invisible':''}}">
-        Overall rating is calculated through integrating the four ratings: difficulty, workload, entertainment, and enrichment.
     </view>
     <image src="/icon/others/info.png" catch:tap="iconTapped"></image>
+</view>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">Notice</view>
+  <view class="modal-content">
+    Overall rating is calculated through integrating the four ratings: difficulty, workload, entertainment, and enrichment.
+  </view>
+  <view class="modal-footer">
+    <view class="btn-confirm" bindtap="hideModal">I Got It</view>
+  </view>
 </view>

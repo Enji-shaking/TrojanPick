@@ -11,5 +11,5 @@ button {
   margin-top: 40rpx;
   margin-bottom: 26rpx;
   font-family: Heiti SC;
-  padding: 5rpx;
+  padding: 15rpx;
 }
