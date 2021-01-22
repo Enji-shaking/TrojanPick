@@ -17,7 +17,6 @@ Page({
     // grade: "N/A",
     courseCode: "",
     courseID: "",
-    classCode: "",
     professorName: "",
     professorID: "",
     anonymous: false,

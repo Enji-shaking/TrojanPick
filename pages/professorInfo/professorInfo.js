@@ -225,7 +225,11 @@ Page({
     });
     const courseID = e.detail.id
     const courseCode = e.detail.value
-    this.setData({ currentPageInReviews: 1, courseID, courseCode })
+    if(e.detail.value === "course"){
+      this.setData({currentPageInReviews: 1, courseID: "", courseCode:"" })
+    }else{
+      this.setData({ currentPageInReviews: 1, courseID, courseCode })
+    }
     this.getProfessorInfo(this.data.professorID, this.data.courseID);
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)

@@ -127,7 +127,7 @@ Page({
   SearchCourseTimerID: -1,
   SearchProfessorTimerID: -1,
   onSearchProfessorInput(e){
-    clearTimeout(this.SearchCourseTimerID)
+    clearTimeout(this.SearchProfessorTimerID)
     const searchProfessorName = e.detail.value
     this.setData({searchProfessorName: searchProfessorName})
     this.queryParamsProfessors.professorName = searchProfessorName
