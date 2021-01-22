@@ -170,7 +170,10 @@
   align-items: center;
   color: #953A3A;
 }
+.answer-text{
+  color:#6A6868;
 
+}
 button{
   width: 330rpx;
   height: 74rpx;
