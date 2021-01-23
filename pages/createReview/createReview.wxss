@@ -79,7 +79,7 @@
 .lables{
   width: 162rpx;
   height: 100rpx;
-  margin-top: 17rpx;
+  /* margin-top: 17rpx; */
   font-family: Heiti SC;
   font-style: normal;
   font-weight: normal;
@@ -97,9 +97,9 @@
   border: 1px solid #F8C1B0;
   box-sizing: border-box;
 }
-#grade{
+/* #grade{
   height: 100rpx;
-}
+} */
 
 .drop-box-long{
   width: 314rpx;
@@ -175,7 +175,9 @@ input{
   font-size: 30rpx;
   color: #953A3A;
 }
-
+picker{
+  overflow: hidden;
+}
 .picker-box-short{
   width: 136rpx;
   height: 62rpx;
@@ -234,7 +236,6 @@ textarea{
 }
 .new-review, .dropbox-block, .rate-block,.label,.buttonsubmit, buttomnav{
   max-width: 100%;
-  overflow: hidden;
 }
 .modal-mask {
   width: 100%;
