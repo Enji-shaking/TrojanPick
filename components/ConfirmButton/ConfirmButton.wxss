@@ -1,3 +1,6 @@
+button{
+    overflow: hidden;
+}
 .confirmButton{
     width: 408rpx;
     height: 86rpx;

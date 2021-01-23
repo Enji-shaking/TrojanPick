@@ -78,7 +78,7 @@
   </view>
 </view>
 
-<view class='dropbox-block'>
+<view class='dropbox-block' id="grade">
   <text class='lables'>Grade
     (optional)</text>
   <view class='picker-box'>
