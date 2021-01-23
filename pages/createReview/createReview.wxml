@@ -16,7 +16,7 @@
 <view class='dropbox-block'>
   <text class='lables'>Course</text>
   <view class='picker-box'>
-    <input style="color: {{text_color}}" placeholder="e.g ITP 115" bindinput="saveCourseCode" value="{{courseCode}}"/>
+    <input style="color: {{text_color}}" placeholder="e.g ITP 115" bindinput="saveCourseCode" bindfocus="saveCourseCode" value="{{courseCode}}"/>
     <view class='option_box' style='height:{{show_course?(225):0}}rpx; z-index: 1; position: absolute' catchtap="course_scroll">
       <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
     </view>
@@ -27,7 +27,7 @@
 <view class='dropbox-block'>
   <text class='lables'>{{forProf?"Professor":"TA"}}</text>
   <view class='picker-box'>
-    <input style="color: {{text_color_prof}}" placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}" bindblur="bindBlurProf"/>
+    <input style="color: {{text_color_prof}}" placeholder="e.g Tommy Trojan" bindinput="saveProfName" value="{{professorName}}"/>
     <view class='option_box' style='height:{{show_prof?(225):0}}rpx;'>
       <view class='option' wx:for='{{professor_data}}' wx:key='this' data-index='{{index}}' catchtap='selectProfessor'>{{item.professorName}}</view>
     </view>

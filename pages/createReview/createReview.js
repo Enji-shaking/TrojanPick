@@ -104,7 +104,7 @@ Page({
       course_data: [],
       show_course: false,
       correctCourse: false,
-      text_color: "#6A6868"
+      text_color: "	#696969"
     })
   },
 
@@ -114,7 +114,7 @@ Page({
       professor_data: [],
       show_prof: false,
       correctProfessor: false,
-      text_color_prof: "#6A6868"
+      text_color_prof: "	#696969"
     })
   },
 
@@ -129,7 +129,7 @@ Page({
         courseCode: e.detail.value,
         course_blurred: false,
         correctCourse: false,
-        text_color: "#6A6868"
+        text_color: "	#696969"
       })
       // setTimeout不可以直接传参数
       this.course_timer = setTimeout(this.searchCourse,1000)
@@ -205,7 +205,7 @@ Page({
         professorName: e.detail.value,
         prof_blurred: false,
         correctProfessor: false,
-        text_color_prof: "#6A6868"
+        text_color_prof: "#708090"
       })
       // setTimeout不可以直接传参数
       this.prof_timer = setTimeout(this.searchProfessor,1000)
