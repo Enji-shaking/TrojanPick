@@ -21,7 +21,8 @@
       <view class='option' wx:for='{{course_data}}' wx:key='this' data-index='{{index}}' catchtap='selectCourse'>{{item.courseCode}}</view>
     </view>
   </view>
-  <GradingInfo style="margin-top: 17rpx;"></GradingInfo>
+  <!-- <GradingInfo style="margin-top: 17rpx;"></GradingInfo> -->
+  <GradingInfo style="margin-top: 17rpx;" boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}"></GradingInfo>
 </view>
 
 <view class='dropbox-block'>
@@ -32,7 +33,11 @@
       <view class='option' wx:for='{{professor_data}}' wx:key='this' data-index='{{index}}' catchtap='selectProfessor'>{{item.professorName}}</view>
     </view>
   </view>
-  <GradingInfo style="margin-top: 17rpx;"></GradingInfo>
+  <!-- <GradingInfo style="margin-top: 17rpx;"></GradingInfo> -->
+  <!-- <GradingInfo style="margin-top: 17rpx;" boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}"></GradingInfo> -->
+  <navigator class="add" url="/pages/addProfessor/addProfessor" hover-class="none">
+    <image class='imageadd' src="/icon/others/add.svg"></image>
+  </navigator>
 </view>
 
 <block wx:for='{{evaluateTitle}}' wx:key='idx' wx:for-index='idx'>

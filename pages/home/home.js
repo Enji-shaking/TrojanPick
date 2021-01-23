@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker_arr:['alphanumeric','difficulty(asc)','entertainment(desc)','workload(asc)', 'enrichment(desc)'],
+    picker_arr:['overall(desc)','difficulty(asc)','entertainment(desc)','workload(asc)', 'enrichment(desc)','alphanumeric'],
     picker_index: 0,
     course_cards_info:[],
     prof_cards_info:[],
@@ -14,7 +14,9 @@ Page({
     searchCourseCode: "",
     searchProfessorName: "",
     hasPersonalInfo: false,
-    forProf: true
+    forProf: true,
+    normalTextForIcon: ['1. When you don\'t type anything in the search bar, only the ones currently with reviews will show up', '2. So try to type the name of the course and give your reviews!'],
+    boldTextForIcon: "If you cannot find your desired classes here: "
   },
   queryParamsCourses: { 
     currentPage: 1,
@@ -127,7 +129,7 @@ Page({
   SearchCourseTimerID: -1,
   SearchProfessorTimerID: -1,
   onSearchProfessorInput(e){
-    clearTimeout(this.SearchCourseTimerID)
+    clearTimeout(this.SearchProfessorTimerID)
     const searchProfessorName = e.detail.value
     this.setData({searchProfessorName: searchProfessorName})
     this.queryParamsProfessors.professorName = searchProfessorName

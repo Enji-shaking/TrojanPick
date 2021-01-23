@@ -25,6 +25,7 @@ exports.main = async (event, context) => {
         difficultyRating: 0,
         entertainmentRating: 0,
         enrichmentRating: 0,
+        overallRating: 0
       }
     })
   }else if(target === "professor"){
@@ -33,7 +34,13 @@ exports.main = async (event, context) => {
       data:{ 
         professorName: professorName,
         openID: OPENID,
-        forProf: forProf
+        forProf: forProf,
+        numReviews: 0,
+        workloadRating: 0,
+        difficultyRating: 0,
+        entertainmentRating: 0,
+        enrichmentRating: 0,
+        overallRating: 0
       }
     })
   }

@@ -140,6 +140,7 @@ Page({
           votes: this.data.votes,
           content: ""
         })
+        app.globalData.questionNeedRefresh = true
       }
     })
   },

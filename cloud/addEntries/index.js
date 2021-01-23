@@ -63,6 +63,7 @@ exports.main = async (event, context) => {
     let difficultyRating
     let entertainmentRating
     let enrichmentRating
+    let overallRating
     // course_professor里面用courseID和professorID进行查找
     let course_professor_Rating = await db.collection('course_professor').where({
       courseID: courseID,
@@ -79,6 +80,7 @@ exports.main = async (event, context) => {
           entertainmentRating: event.entertainmentRating,
           workloadRating: event.workloadRating,
           enrichmentRating: event.enrichmentRating,
+          overallRating: event.overallRating,
           numReviews: 1
         }
       })
@@ -90,11 +92,13 @@ exports.main = async (event, context) => {
       difficultyRating = course_professor_Rating.data[0].difficultyRating
       entertainmentRating = course_professor_Rating.data[0].entertainmentRating
       enrichmentRating = course_professor_Rating.data[0].enrichmentRating
+      overallRating = course_professor_Rating.data[0].overallRating
       db.collection('course_professor').doc(course_professor_Rating.data[0]._id).update({
         data: {
           workloadRating: (event.workloadRating + workloadRating * numReviews) / (numReviews + 1),
           entertainmentRating: (event.entertainmentRating + entertainmentRating * numReviews) / (numReviews + 1),
           enrichmentRating: (event.enrichmentRating + enrichmentRating * numReviews) / (numReviews + 1),
+          overallRating: (event.overallRating + overallRating * numReviews) / (numReviews + 1),
           difficultyRating: (event.difficultyRating + difficultyRating * numReviews) / (numReviews + 1),
           numReviews: _.inc(1)
         },
@@ -118,11 +122,13 @@ exports.main = async (event, context) => {
       difficultyRating = 0
       entertainmentRating = 0
       enrichmentRating = 0
+      overallRating = 0
     }else{
       workloadRating = courseRatings.data[0].workloadRating
       difficultyRating = courseRatings.data[0].difficultyRating
       entertainmentRating = courseRatings.data[0].entertainmentRating
       enrichmentRating = courseRatings.data[0].enrichmentRating
+      overallRating = courseRatings.data[0].overallRating
     }
     console.log(courseRatings)
     db.collection('courses').doc(courseID).update({
@@ -130,6 +136,7 @@ exports.main = async (event, context) => {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
         entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
         enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
+        overallRating: (overallRating * numReviews + event.overallRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
         numReviews: numReviews+1,
       },
@@ -151,11 +158,13 @@ exports.main = async (event, context) => {
       difficultyRating = 0
       entertainmentRating = 0
       enrichmentRating = 0
+      overallRating = 0
     }else{
       workloadRating = courseRatings.data[0].workloadRating
       difficultyRating = courseRatings.data[0].difficultyRating
       entertainmentRating = courseRatings.data[0].entertainmentRating
       enrichmentRating = courseRatings.data[0].enrichmentRating
+      overallRating = courseRatings.data[0].overallRating
     }
 
     db.collection('professors').doc(professorID).update({
@@ -163,6 +172,7 @@ exports.main = async (event, context) => {
         workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
         entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
         enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
+        overallRating: (overallRating * numReviews + event.overallRating) / (numReviews + 1),
         difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
         numReviews: numReviews+1,
       },
@@ -187,6 +197,7 @@ exports.main = async (event, context) => {
           entertainmentRating: event.entertainmentRating,
           workloadRating: event.workloadRating,
           enrichmentRating: event.enrichmentRating,
+          overallRating: event.overallRating,
           grade: event.grade,
           anonymous: anonymous,
           anonymousAvatarUrl: anonymous?anonymousAvatarUrl:"N/A",

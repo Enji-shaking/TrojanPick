@@ -4,7 +4,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    boldText:{
+      type: String,
+      value: ""
+    },
+    normalText:{
+      type: Array,
+      value: [""]
+    }
   },
 
   /**

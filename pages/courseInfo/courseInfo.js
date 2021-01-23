@@ -81,9 +81,8 @@ Page({
           return
         }
         if(course.numReviews != undefined){
-          let overall = (parseFloat((5-course.difficultyRating) + course.enrichmentRating + (5-course.workloadRating) + course.entertainmentRating) / 4.0).toFixed(2)
           this.setData({
-            overallRating: overall,
+            overallRating: (course.overallRating).toFixed(2),
             difficultyRating: (course.difficultyRating).toFixed(2),
             entertainmentRating: (course.entertainmentRating).toFixed(2),
             enrichmentRating: (course.enrichmentRating).toFixed(2),
@@ -91,9 +90,8 @@ Page({
           })
           if (res.result.rating) {
             let rating = res.result.rating.data[0];
-            overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
             this.setData({
-              overallRating: (overall).toFixed(2),
+              overallRating: (rating.overallRating).toFixed(2),
               difficultyRating: (rating.difficultyRating).toFixed(2),
               entertainmentRating: (rating.entertainmentRating).toFixed(2),
               enrichmentRating: (rating.enrichmentRating).toFixed(2),
@@ -318,9 +316,15 @@ Page({
 
     const professorID = e.detail.id
     const professorName = e.detail.value
-    this.setData({ currentPageInReviews: 1, professorID, professorName })
+    // console.log(professorID, professorName);
+    if(e.detail.value === "professor"){
+      this.setData({currentPageInReviews: 1, professorID: "", professorName:"" })
+    }else{
+      this.setData({ currentPageInReviews: 1, professorID, professorName })
+    }
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, professorID)
+    // console.log(this.data);
   },
   getHotReviewsForCourseForProfessor(courseID,professorID){
     wx.cloud.callFunction({
@@ -369,6 +373,7 @@ Page({
     //   });
     //   return;
     // }
+    console.log(this.data);
     wx.navigateTo({
       url: `/pages/createReview/createReview?courseID=${this.data.courseID}&courseCode=${this.data.courseCode}&professorID=${this.data.professorID}&professorName=${this.data.professorName}&forProf=${true}`,
     });

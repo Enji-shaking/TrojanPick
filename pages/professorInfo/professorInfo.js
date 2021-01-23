@@ -48,9 +48,8 @@ Page({
           return;
         }
         if(professor.numReviews != undefined){
-          let overall = (parseFloat((5-professor.difficultyRating) + professor.enrichmentRating + (5-professor.workloadRating) + professor.entertainmentRating) / 4.0).toFixed(2);
           this.setData({
-            overallRating: overall,
+            overallRating: (professor.overallRating).toFixed(2),
             difficultyRating: (professor.difficultyRating).toFixed(2),
             entertainmentRating: (professor.entertainmentRating).toFixed(2),
             enrichmentRating: (professor.enrichmentRating).toFixed(2),
@@ -58,9 +57,8 @@ Page({
           })
           if (res.result.rating) {
             let rating = res.result.rating.data[0];
-            overall = parseFloat(rating.difficultyRating + rating.enrichmentRating + rating.workloadRating + rating.entertainmentRating) / 4.0;
             this.setData({
-              overallRating: (overall).toFixed(2),
+              overallRating: (rating.overallRating).toFixed(2),
               difficultyRating: (rating.difficultyRating).toFixed(2),
               entertainmentRating: (rating.entertainmentRating).toFixed(2),
               enrichmentRating: (rating.enrichmentRating).toFixed(2),
@@ -227,7 +225,11 @@ Page({
     });
     const courseID = e.detail.id
     const courseCode = e.detail.value
-    this.setData({ currentPageInReviews: 1, courseID, courseCode })
+    if(e.detail.value === "course"){
+      this.setData({currentPageInReviews: 1, courseID: "", courseCode:"" })
+    }else{
+      this.setData({ currentPageInReviews: 1, courseID, courseCode })
+    }
     this.getProfessorInfo(this.data.professorID, this.data.courseID);
     this.getTotalPageForReviewsForCourseForProfessor(this.data.courseID, this.data.professorID)
     this.getReviewsForCourseForProfessorForPage(1, this.data.courseID, this.data.professorID)

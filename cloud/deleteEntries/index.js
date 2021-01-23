@@ -39,6 +39,7 @@ exports.main = async (event, context) => {
     let difficultyRating = delete_review.list[0].difficultyRating;
     let entertainmentRating = delete_review.list[0].entertainmentRating;
     let enrichmentRating = delete_review.list[0].enrichmentRating;
+    let overallRating = delete_review.list[0].overallRating;
     let courseCode = delete_review.list[0].courseInfo[0].courseCode;
     let professorName = delete_review.list[0].professorInfo[0].professorName;
     let postedTime = delete_review.list[0].postedTime;
@@ -82,6 +83,7 @@ exports.main = async (event, context) => {
     let difficultyRating_orig = course_prof_data.data[0].difficultyRating;
     let entertainmentRating_orig = course_prof_data.data[0].entertainmentRating;
     let enrichmentRating_orig = course_prof_data.data[0].enrichmentRating;
+    let overallRating_orig = course_prof_data.data[0].overallRating;
 
     if (numReviews_orig === 1) {
       db.collection('course_professor')
@@ -95,6 +97,7 @@ exports.main = async (event, context) => {
             workloadRating: 0,
             entertainmentRating: 0,
             enrichmentRating: 0,
+            overallRating: 0,
             difficultyRating: 0,
             numReviews: 0
 
@@ -112,6 +115,7 @@ exports.main = async (event, context) => {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
             entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
             enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+            overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
 
@@ -129,6 +133,7 @@ exports.main = async (event, context) => {
     difficultyRating_orig = course_data.data[0].difficultyRating;
     entertainmentRating_orig = course_data.data[0].entertainmentRating;
     enrichmentRating_orig = course_data.data[0].enrichmentRating;
+    overallRating_orig = course_data.data[0].overallRating;
     if (numReviews_orig === 1) {
       db.collection('courses')
         // .doc(courseID)
@@ -140,6 +145,7 @@ exports.main = async (event, context) => {
             workloadRating: 0,
             entertainmentRating: 0,
             enrichmentRating: 0,
+            overallRating: 0,
             difficultyRating: 0,
             numReviews: 0
           }
@@ -155,6 +161,7 @@ exports.main = async (event, context) => {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
             entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
             enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+            overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }
@@ -171,6 +178,7 @@ exports.main = async (event, context) => {
     difficultyRating_orig = prof_data.data[0].difficultyRating;
     entertainmentRating_orig = prof_data.data[0].entertainmentRating;
     enrichmentRating_orig = prof_data.data[0].enrichmentRating;
+    overallRating_orig = course_data.data[0].overallRating;
 
     if (numReviews_orig === 1) {
       db.collection('professors')
@@ -180,6 +188,7 @@ exports.main = async (event, context) => {
             workloadRating: 0,
             entertainmentRating: 0,
             enrichmentRating: 0,
+            overallRating: 0,
             difficultyRating: 0,
             numReviews: 0
           }
@@ -195,6 +204,7 @@ exports.main = async (event, context) => {
             workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
             entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
             enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+            overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
           }

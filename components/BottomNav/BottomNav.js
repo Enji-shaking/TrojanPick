@@ -23,6 +23,10 @@ Component({
       type: String,
       value: ""
     },
+    forProf: {
+      type: Boolean,
+      value: true
+    },
   },
 
   /**
@@ -89,7 +93,7 @@ Component({
       console.log("create");
       if(!this.data.onCreate){
         wx.navigateTo({
-          url: `/pages/createReview/createReview?courseID=${this.properties.courseID}&courseCode=${this.properties.courseCode}&professorID=${this.properties.professorID}&professorName=${this.properties.professorName}`,
+          url: `/pages/createReview/createReview?courseID=${this.properties.courseID}&courseCode=${this.properties.courseCode}&professorID=${this.properties.professorID}&professorName=${this.properties.professorName}&forProf=${this.properties.forProf}`,
         });
         app.globalData.onHome = false;
         app.globalData.onProfile = false;
