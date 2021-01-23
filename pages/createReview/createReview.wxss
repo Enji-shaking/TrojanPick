@@ -13,6 +13,20 @@
 .ta{
   background-color: #fff;
 }
+
+.add{
+  width: 42rpx;
+  height: 42rpx;
+  margin-left: 30rpx;
+}
+
+.imageadd{
+  width: 42rpx;
+  height: 42rpx;
+  margin-top: 17rpx;
+}
+
+
 .switchButton{
   position: absolute;
   top: 300rpx;
