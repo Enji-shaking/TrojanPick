@@ -99,7 +99,6 @@
 }
 #grade{
   height: 100rpx;
-  margin-top: 32rpx;
 }
 
 .drop-box-long{
