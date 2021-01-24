@@ -38,10 +38,6 @@
       <image src="../../icon/others/question.svg" class="icon" ></image>
       <text style="margin-left: 16rpx;">{{item.content}} | </text>
       <text>{{item.favoredCount}}</text>
-      <view class="ans-placeholder" wx:if="{{item.answers.length == 0}}">
-        No Answer Yet. Answer If You Know!
-      </view>
-      <view class="ans-placeholder" wx:if="{{!item.answers.length == 0}}">{{item.answers[0].content}}</view>
     </view>
     <view style="margin-bottom: 22rpx;"></view>
   </navigator>

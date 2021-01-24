@@ -1,7 +1,7 @@
 <Header></Header>
 
 
-<button bind:tap="tapSwitch" class="switchButton {{forProf?'prof':'ta'}}">{{forProf?"Rate TA":"Rate Prof"}}</button>
+<button bind:tap="tapSwitch" class="switchButton {{forProf?'prof':'ta'}}"><text style="color: #953A3A;">{{forProf?"Rate TA":"Rate Prof"}}</text></button>
 
 <view class="TA-Mask" wx:if="{{!forProf}}">
   
@@ -22,7 +22,7 @@
     </view>
   </view>
   <!-- <GradingInfo style="margin-top: 17rpx;"></GradingInfo> -->
-  <GradingInfo style="margin-top: 17rpx;" boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}"></GradingInfo>
+  <GradingInfo style="margin-top: 17rpx; display: flex; padding-left: 32rpx;" wrapperStyle="height: 42rpx; width: 42rpx;" boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}"></GradingInfo>
 </view>
 
 <view class='dropbox-block'>

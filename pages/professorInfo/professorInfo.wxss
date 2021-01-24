@@ -1,5 +1,5 @@
 .TA-Mask {
-  background-color: #faf5ad;
+  background-color: #fff;
   position: absolute;
   top: 275rpx;
   bottom: -250rpx;
@@ -8,7 +8,7 @@
   z-index: -1;
 }
 .TA-Mask2 {
-  background-color: #faf5ad;
+  background-color: #fff;
   position: fixed;
   height: 800rpx;
   bottom: 0rpx;
@@ -17,7 +17,7 @@
   z-index: -1;
 }
 .bigTAWrapper {
-  background-color: #faf5ad;
+  background-color: #fff;
 }
 .title {
   margin: auto;
@@ -30,14 +30,14 @@
   align-items: center;
 }
 .title .left {
-  width: 60%;
+  width: 75%;
   color: #953A3A;
   font-size: 38rpx;
   font-weight: bold;
   font-family: Heiti SC;
   font-style: normal;
   margin-top: 50rpx;
-  text-align: right;
+  display: flex;
 }
 .title .middle {
   width: 98rpx;
@@ -48,7 +48,7 @@
   display: flex;
 }
 .title .right {
-  width: 40%;
+  width: 25%;
   color: #FDB713;
   font-size: 66rpx;
   line-height: 80rpx;

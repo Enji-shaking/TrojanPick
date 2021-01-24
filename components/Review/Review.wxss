@@ -29,6 +29,8 @@
 }
 .box .top .left {
   border-right: 2rpx solid #F8C1B0;
+  padding-top: 16rpx;
+  padding-bottom: 12rpx;
 }
 .box .top .left .left_text {
   padding-left: 16rpx;
@@ -42,6 +44,10 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding-left: 28rpx;
+  padding-right: 10rpx;
+  padding-top: 16rpx;
+  padding-bottom: 14rpx;
 }
 .box .top .right .right_row {
   padding-left: 16rpx;
@@ -123,6 +129,8 @@
 }
 .box .bottom {
   display: flex;
+  padding-left: 42rpx;
+  padding-right: 34rpx;
   height: 88rpx;
   flex-direction: row;
   justify-content: space-around;

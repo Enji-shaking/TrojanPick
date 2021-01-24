@@ -1,5 +1,5 @@
 <view class="header_wrapper">
-    <view class="content_wrapper">
+    <view class="content_wrapper" bindtap="onTapHome">
         <view class="left_image_wrapper">
             <image class="left_image" mode="widthFix" src="/icon/ours/logo.png"></image>
         </view>

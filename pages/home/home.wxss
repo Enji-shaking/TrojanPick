@@ -1,5 +1,5 @@
 .TA-Mask {
-  background-color: #faf5ad;
+  background-color: #F5C2BF;
   position: absolute;
   top: 275rpx;
   bottom: -600rpx;
@@ -8,21 +8,22 @@
   z-index: -1;
 }
 .prof {
-  background-color: #faf5ad;
+  background-color: #F5C2BF;
 }
 .ta {
   background-color: #fff;
 }
 .switchButton {
   position: absolute;
-  top: 500rpx;
-  right: 20rpx;
+  left: 630rpx;
+  top: 490rpx;
   width: 80rpx !important;
   /* background-color: #fff; */
   font-size: 24rpx;
   font-weight: 400;
   text-align: center;
   padding: 10rpx;
+  color: #953A3A;
 }
 .rating_row {
   display: flex;
@@ -109,7 +110,6 @@ input::placeholder {
 }
 .search_row .search_row_content_wrapper {
   margin-left: 172rpx;
-  margin-right: 148rpx;
   width: 430rpx;
   height: 100%;
   display: flex;
@@ -124,6 +124,8 @@ input::placeholder {
   line-height: 74rpx;
   height: 74rpx;
   color: #953A3A;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
 .search_row .search_row_content_wrapper .search_bar .search_bar_input_placeholder {
   text-align: center;

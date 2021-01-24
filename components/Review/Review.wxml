@@ -9,18 +9,14 @@
       <view class="left_text">
         <text class="left_nickName" style="font-weight: bold"selectable="false" space="false" decode="false">{{!anonymous?nickName:anonymousNickName}}
         </text>
-
-        <text class="left_postedDate" selectable="false" space="false" decode="false">{{postedTime}}</text>
-          
+        <text class="left_postedDate" selectable="false" space="false" decode="false">{{postedTime}}</text> 
       </view>
-        
-        
     </view>
     <view class="right">
       <view class="right_row {{!hideProfessor?'':'hidden'}} {{!hideCourse?'':'only'}}">
         {{forProf?'Prof':'TA'}}: {{professorName}}
       </view>
-      <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}" style="margin-top: 10rpx;">
+      <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}">
         Course: {{courseCode}}
       </view>
     </view>

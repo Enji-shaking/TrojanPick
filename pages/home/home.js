@@ -15,8 +15,10 @@ Page({
     searchProfessorName: "",
     hasPersonalInfo: false,
     forProf: true,
-    normalTextForIcon: ['1. When you don\'t type anything in the search bar, only the ones currently with reviews will show up', '2. So try to type the name of the course and give your reviews!'],
-    boldTextForIcon: "If you cannot find your desired classes here: "
+    normalTextForIcon: ['If you haven’t typed anything into the search bar, only the classes that currently have reviews will show up.'],
+    boldTextForIcon: "Can’t find a class?",
+    italicTextForIcon: "So try typing the name of your course and be the first one to give a review!",
+    wrapperStyleForIcon: "width: 22rpx; height: 22rpx;"
   },
   queryParamsCourses: { 
     currentPage: 1,

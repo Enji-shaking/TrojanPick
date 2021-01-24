@@ -33,18 +33,14 @@
     wx:if="{{activeTab===0}}"
 >
     <view class="search_row">
-        <view class="search_row_content_wrapper">
+        <view class="search_row_content_wrapper" style="width: 470rpx;">
             <view class="search_bar">
                 <input value="{{searchCourseCode}}" bind:input="onSearchCourseInput" type="text" class="search_bar_input" placeholder="Search a Course" placeholder-class="search_bar_input_placeholder" />
-                  
-
             </view>
             <view class="search_btn">
                 <image bind:tap="onTapSearchClass" src="/icon/others/search.svg" mode="widthFix" />
             </view>
-            <view style="padding-top: 20rpx;">
-                <GradingInfo   boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}"></GradingInfo>
-            </view>
+            <GradingInfo style="padding-top: 40rpx; display: flex; padding-left: 18rpx;" wrapperStyle= "{{wrapperStyleForIcon}}" boldText = "{{boldTextForIcon}}" normalText="{{normalTextForIcon}}" italicText="{{italicTextForIcon}}"></GradingInfo>
         </view>
     </view>
     

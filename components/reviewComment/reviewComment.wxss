@@ -34,7 +34,9 @@
   font-size: 18rpx;
 }
 .comment .bottom {
-  margin-top: 20rpx;
+  margin-top: 18rpx;
+  padding-left: 46rpx;
+  padding-right: 46rpx;
   display: flex;
   height: 60rpx;
   flex-direction: row;

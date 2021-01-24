@@ -24,7 +24,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFF",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Trojan Pick"
+    "navigationBarTitleText": "TrojanPick"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

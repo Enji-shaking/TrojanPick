@@ -1,5 +1,5 @@
 .TA-Mask{
-  background-color: rgb(250, 245, 173);
+  background-color: #fff;
   position: absolute;
   top: 275rpx;
   bottom: -400rpx;
@@ -8,7 +8,7 @@
   z-index: -1;
 }
 .prof{
-  background-color: rgb(250, 245, 173);
+  background-color: #F5C2BF;
 }
 .ta{
   background-color: #fff;
@@ -79,7 +79,7 @@
 .lables{
   width: 162rpx;
   height: 100rpx;
-  /* margin-top: 17rpx; */
+  margin-top: 17rpx;
   font-family: Heiti SC;
   font-style: normal;
   font-weight: normal;
@@ -94,7 +94,7 @@
   height: 70rpx;
   margin-left: 45rpx;
   background: #FFF7DB;
-  border: 1px solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
   box-sizing: border-box;
 }
 /* #grade{

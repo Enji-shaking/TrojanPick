@@ -11,6 +11,14 @@ Component({
     normalText:{
       type: Array,
       value: [""]
+    },
+    italicText:{
+      type: String,
+      value: ""
+    },
+    wrapperStyle: {
+      type: String,
+      value: ""
     }
   },
 

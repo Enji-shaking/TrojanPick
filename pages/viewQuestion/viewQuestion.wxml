@@ -1,5 +1,5 @@
 <Header></Header>
-<view class='question-title'>课程问答</view>
+<view class='question-title'>Q & A</view>
 <view class='line-1'></view>
 
 
@@ -28,6 +28,6 @@
   </navigator>
 </view>
 
-<YellowButton bind:tap="navigateToCreateQuestion" text="我要提问"></YellowButton>
+<YellowButton bind:tap="navigateToCreateQuestion" text="Ask a Question"></YellowButton>
 
 <BottomNav></BottomNav>

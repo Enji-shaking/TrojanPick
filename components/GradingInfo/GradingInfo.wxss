@@ -3,9 +3,6 @@
     visibility: hidden;
 }
 .wrapper{
-  width: 42rpx;
-  height: 42rpx;
-  margin-left: 30rpx;
 }
 
 .modal-mask {

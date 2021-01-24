@@ -1,5 +1,5 @@
 <Header></Header>
-<view class='question-title'>课程问答</view>
+<view class='question-title'>Q & A</view>
 <view class='line-1'></view>
 
 <view>
@@ -50,9 +50,8 @@
   </view>
 </view>
 
-<button bindtap="createAnswer">
-  <text>添加回答</text>
-</button>
+<YellowButton bind:tap="createAnswer" text="Answer a Question"></YellowButton>
+
 
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
