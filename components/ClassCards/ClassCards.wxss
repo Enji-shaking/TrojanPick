@@ -2,7 +2,7 @@
   width: 100%;
   margin-top: 55rpx;
   margin-bottom: 230rpx;
-  text-align: center;
+  text-align: left;
 }
 .class_card_displayer_wrapper .class_card {
   margin-left: 172rpx;
@@ -15,7 +15,7 @@
   background: #FFF7DB;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .class_card_displayer_wrapper .class_card .class_card_text {
   font-family: Heiti SC;

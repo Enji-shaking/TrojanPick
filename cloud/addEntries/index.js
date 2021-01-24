@@ -8,8 +8,12 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const {target, openID} = event
+  let {target, openID} = event
   let currentTime = getCurrentTime()
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   if(target === "makeComment"){
     const { content, reviewID } = event
     console.log(event)

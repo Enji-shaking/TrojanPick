@@ -10,7 +10,11 @@ exports.main = async (event, context) => {
   var db = cloud.database()
   var $ = db.command.aggregate
   const _ = db.command
-  const {target, openID, courseID} = event
+  let {target, openID, courseID} = event
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   if(target === "questionsAndAnswers"){
     const my_favored_questions_raw = await db.collection("favored_questions").where({ 
       openID: openID,

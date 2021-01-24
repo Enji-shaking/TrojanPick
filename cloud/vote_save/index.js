@@ -10,7 +10,11 @@ const _ = db.command;
 exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   // const openID = wxContext.OPENID
-  const { target, reviewID, openID,commentID, questionID} = event
+  let { target, reviewID, openID,commentID, questionID} = event
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   if(target === "vote_review_up_new"){
     const p1 = db.collection("reviews").where({_id: reviewID}).update({
       data:{

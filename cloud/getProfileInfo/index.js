@@ -11,8 +11,12 @@ exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   const $ = db.command.aggregate;
   const _ = db.command;
-  const {target, openID,courseID,professorID,currentPageInReviews} = event;
+  let {target, openID,courseID,professorID,currentPageInReviews} = event;
   const condition = {};
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   condition["openID"] = openID;
   if (courseID) condition["courseID"] = courseID;
   if (professorID) condition["professorID"] = professorID;

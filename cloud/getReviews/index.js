@@ -9,9 +9,13 @@ const MAX_LIMIT = 3
 // 云函数入口函数
 const db = cloud.database();
 exports.main = async (event, context) => {
-  const { target, openID } = event;
+  let { target, openID } = event;
   // const wxContext = cloud.getWXContext()
   // const openID = wxContext.OPENID
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   const $ = db.command.aggregate;
   const _ = db.command;
   if (target === "get_reviews_for_course_for_professor_for_page") {

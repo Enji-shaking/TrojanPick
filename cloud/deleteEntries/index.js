@@ -9,8 +9,11 @@ const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { target, reviewID, openID, questionID, answerID, commentID } = event
-
+  let { target, reviewID, openID, questionID, answerID, commentID } = event
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   if (target === "deleteReview") {
     // get delete_review's ratings
     let delete_review = await db.collection('reviews')

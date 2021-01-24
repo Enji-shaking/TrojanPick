@@ -8,6 +8,10 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   let {target, openID} = event
+  if(!openID){
+    const wxContext = cloud.getWXContext()
+    openID = wxContext.OPENID
+  }
   if(target === "checkUserInfo"){
     return await db.collection("users")
     .where({openID: openID})
