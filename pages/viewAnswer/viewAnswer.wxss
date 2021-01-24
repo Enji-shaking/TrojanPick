@@ -29,7 +29,7 @@
   height: auto;
   margin-left: 98rpx;
   background: #FFF7DB;
-  border: 1rpx solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
   box-sizing: border-box;
 }
 
@@ -46,7 +46,7 @@
   height: auto;
   margin-left: 98rpx;
   background: #FFF7DB;
-  border: 1rpx solid #F8C1B0;
+  border: 2rpx solid #F8C1B0;
   border-top: none;
   box-sizing: border-box;
 }
