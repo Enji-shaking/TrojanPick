@@ -13,7 +13,8 @@ Page({
     currentPageInReviews: 1,
     professorID: undefined,
     openID: "",
-    comments:[]
+    comments:[],
+    isChinese: true,
   },
   getCurrentTime(){
     const date = new Date()
@@ -60,6 +61,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      isChinese: true,
+    })
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = false;

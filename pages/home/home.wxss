@@ -18,6 +18,7 @@
   left: 630rpx;
   top: 490rpx;
   width: 80rpx !important;
+  height: 50rpx;
   /* background-color: #fff; */
   font-size: 24rpx;
   font-weight: 400;

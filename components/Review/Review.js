@@ -7,7 +7,7 @@
   // in the latter, it manipulate the array
   // in the saved reviews, it should manipulate the array
 //addNewComment: correspond to add a new comment in the page of reviewInfo, which would add comments below
-
+let app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -70,7 +70,8 @@ Component({
     entertainmentRating: 0,
     workloadRating: 0,
     enrichmentRating: 0,
-    _id:""
+    _id:"",
+    isChinese: true,
   },
 
   /**
@@ -339,7 +340,9 @@ Component({
       openID:openID,
       _id:_id
     })
-    
-  }
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
+  },
 
 })

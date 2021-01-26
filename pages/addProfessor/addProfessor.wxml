@@ -13,8 +13,11 @@
     <view class="content_wrapper">
 
         <view class="row">
-            <view class="text">
+            <view class="text" wx:if="{{!isChinese}}">
                 {{forProf?'Professor':'TA'}} Name
+            </view>
+            <view class="text" wx:if="{{isChinese}}">
+                {{forProf?'教授':'TA'}}姓名
             </view>
             <view class="textInput">
                 <input class="text" type="text" bind:input="onProfessorNameInput" placeholder="e.g. Tommy Trojan" />
@@ -22,7 +25,7 @@
         </view>
 
         <view class="confirmButtonWrapper">
-            <ConfirmButton title="Submit" bind:onConfirm="onConfirm"></ConfirmButton>
+            <ConfirmButton title="{{isChinese?'提交':'Submit'}}" bind:onConfirm="onConfirm"></ConfirmButton>
         </view>
     </view>
 

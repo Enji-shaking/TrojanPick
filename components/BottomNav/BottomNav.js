@@ -36,6 +36,7 @@ Component({
     onHome: false,
     onProfile: false,
     onCreate: false,
+    isChinese: true,
   },
 
   /**

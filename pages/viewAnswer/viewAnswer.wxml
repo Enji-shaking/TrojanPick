@@ -1,5 +1,5 @@
 <Header></Header>
-<view class='question-title'>Q & A</view>
+<view class='question-title'>{{isChinese?'问答详情':'Q & A'}}</view>
 <view class='line-1'></view>
 
 <view>
@@ -50,7 +50,7 @@
   </view>
 </view>
 
-<YellowButton bind:tap="createAnswer" text="Answer a Question"></YellowButton>
+<YellowButton bind:tap="createAnswer" text="{{isChinese?'我要回答':'Answer a Question'}}"></YellowButton>
 
 
 <!--弹窗-->
@@ -64,8 +64,8 @@
     <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onSave" data-status="cancel">保存</view>
-    <view class="btn-confirm" bindtap="onSubmit" data-status="confirm">提交</view>
+    <view class="btn-cancel" bindtap="onSave" data-status="cancel">{{isChinese?'保存':'Save'}}</view>
+    <view class="btn-confirm" bindtap="onSubmit" data-status="confirm">{{isChinese?'提交':'Submit'}}</view>
   </view>
 </view>
 

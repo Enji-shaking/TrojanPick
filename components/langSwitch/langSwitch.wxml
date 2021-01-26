@@ -1,0 +1,3 @@
+<button bindtap="switchLanguage">
+  中/en
+</button>

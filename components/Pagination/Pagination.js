@@ -1,4 +1,5 @@
 // components/Pagination/Pagination.js
+let app=getApp();
 Component({
   /**
    * 组件的属性列表
@@ -26,7 +27,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    isChinese: true
   },
 
   /**
@@ -41,5 +42,10 @@ Component({
   },
   attached:function(){
     console.log(this.properties.activePage);
+  },
+  ready: function(){
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
   }
 })

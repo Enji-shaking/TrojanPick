@@ -1,7 +1,7 @@
 <!--pages/ratingInfo/ratingInfo.wxml-->
 <view class="ratingInfo">
   <Header></Header>
-  <view class="title">Review Details</view>
+  <view class="title">{{isChinese?'评价详情':'Review Details'}}</view>
   <view class="line"></view>
  
   <Review item="{{review}}" bind:deleteTappedFromReview="onTapDeleteFromReviewInDetail" detail="{{true}}" bind:addNewComment="onAddNewComment" id="review" ></Review>

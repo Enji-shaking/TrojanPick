@@ -3,7 +3,8 @@ let app =  getApp();
   
 Page({
   data: {
-    evaluateTitle:['Overall','Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
+    evaluateTitle_ch:['总评分','课程难度', '内容趣味性', 'Workload', 'Enrichment'],
+    evaluateTitle_en:['Overall','Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
     // evaluateTitleTA:['Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
     stars:[0, 1, 2, 3, 4],
     unselectedSrc: "/icon/others/rate-star.svg",
@@ -38,7 +39,8 @@ Page({
     text_color_prof: "#953A3A",
     openID: "",
     normalTextForIcon: ['1. Check whether you spell correctly.', '2. If your professor doesn\'t show up, you could go ahead and create an entry. But please make sure you don\'t add repetitive ones.', '3. If you course isn\'t here, contact developers and we will add it for you ASAP.'],
-    boldTextForIcon: "Can't find your course or prof? "
+    boldTextForIcon: "Can't find your course or prof? ",
+    isChinese: true,
   },
 
   // input搜索节流var
@@ -46,6 +48,9 @@ Page({
   prof_timer: -1,
 
   onLoad: function (options) { 
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     app.globalData.onHome = false;
     app.globalData.onProfile = false;
     app.globalData.onCreate = true;

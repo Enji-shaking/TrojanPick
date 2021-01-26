@@ -8,7 +8,8 @@ Page({
   data: {
     favorite_classes_prefix:[],
     prefix_index: 0,
-    course_cards_info:[]
+    course_cards_info:[],
+    isChinese: true,
   },
   // onPickerChange(e){
   //   console.log(e);
@@ -28,6 +29,9 @@ Page({
     }  
   },
   onLoad: function (options) {
+    this.setData({
+      isChinese:app.globalData.isChinese
+    })
     app.globalData.onProfile = false
     let self = this;
     wx.cloud.callFunction({

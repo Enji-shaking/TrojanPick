@@ -13,14 +13,14 @@
   </view>
   <view class="courseInfo">
     <view class="info">
-      <view wx:if="{{courseTaught.length == 0}}" class="courseTitle">No Course is Recorded.</view>
+      <view wx:if="{{courseTaught.length == 0}}" class="courseTitle">{{isChinese?'无课程记录':'No Course is Recorded.'}}</view>
       <view wx:if="{{!courseTaught.length == 0}}" class="courseTitle" style="padding-bottom: 18rpx;">
         Courses Taught
       </view>
     </view>
     <view wx:if="{{!courseTaught.length == 0}}" style="border-bottom: 1rpx solid #F8C1B0;"></view>
     <view wx:if="{{!courseTaught.length == 0}}" class="unit" wx:for="{{courseTaught}}" wx:key="index" > 
-      <text>{{item.courseCode}}</text>: {{item.courseUnit}} units
+      <text>{{item.courseCode}}</text>: {{item.courseUnit}}
     </view>
   </view>
   <!-- numeric Review with selection box and four ratings -->
@@ -28,7 +28,7 @@
   <!-- display user ratings  -->
   
   <Review wx:for="{{reviews}}" item="{{item}}" wx:key="_id" hideProfessor="{{true}}" bind:deleteTappedFromReview="deleteTappedFromReview" data-index="{{index}}"></Review>
-  <YellowButton text="Write a review" bind:tap="onTapCreateReview"></YellowButton>
+  <YellowButton text="{{isChinese?'填写评价':'Write a Review'}}" bind:tap="onTapCreateReview"></YellowButton>
 
   <!-- <YellowButton text="更多评价" bindtap="moreRating"></YellowButton> -->
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>

@@ -1,4 +1,4 @@
-<view wx:if="{{showHot}}" bindtap="buttonTapped" data-page="{{0}}" class="{{isHot?'hot active':'hot'}}">Top</view>
+<view wx:if="{{showHot}}" bindtap="buttonTapped" data-page="{{0}}" class="{{isHot?'hot active':'hot'}}">{{isChinese?'首页':'top'}}</view>
 <view class="container">
     <view bindtap="buttonTapped" data-page="{{1}}">...</view>
     <view wx:if="{{activePage-2>0}}" data-page="{{activePage-2}}" bindtap="buttonTapped" class="">{{activePage-2}}</view>

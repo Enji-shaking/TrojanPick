@@ -5,11 +5,11 @@
 </view>
 
 <view class="enterbox">
-  <textarea placeholder="e.g. Is Textbook Needed?" bindinput="saveQuestion" fixed="true"></textarea>
+  <textarea placeholder="{{isChinese?'e.g. 这节课需要课本吗？':'e.g. Is Textbook Needed?'}}" bindinput="saveQuestion" fixed="true"></textarea>
 </view>
 
 <button bindtap="submitQuestion">
-  <text class="buttonname">Submit</text>
+  <text class="buttonname">{{isChinese?'提交':'Submit'}}</text>
 </button>
 
 <BottomNav></BottomNav>

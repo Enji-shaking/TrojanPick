@@ -1,4 +1,5 @@
 // components/numericRating/numericRating.js
+let app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -43,7 +44,8 @@ Component({
       item_value:""
     }],
     professorName:"professor",
-    courseName:"course"
+    courseName:"course",
+    isChinese: true
   },
 
   /**
@@ -126,6 +128,9 @@ Component({
     
   },
   ready: function(){
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     if(this.properties.dropDownType==1){
       wx.cloud.callFunction({
         name:'getInfoById',

@@ -26,6 +26,7 @@ Page({
     openID: "",
     isHot:true,
     forProf: true,
+    isChinese: true,
   },
 
   getProfessorInfo(professorID, courseID) {
@@ -154,6 +155,9 @@ Page({
     })
   },
   onLoad: function (options) {
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     //This line could be considered to remove. This is to reset the info under the professor list in the numericRating component
     this.myNumeric = this.selectComponent("#myNumeric")
     //load the data from database, calculate the average of ratings and overall ratings

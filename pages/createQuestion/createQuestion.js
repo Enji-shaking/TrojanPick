@@ -10,6 +10,9 @@ Page({
   newQuestion: '',
   courseID: '',
   openID: '',
+  data:{
+    isChinese: true,
+  },
 
   saveQuestion(e){
       this.newQuestion = e.detail.value;
@@ -81,6 +84,9 @@ Page({
     this.courseID = options.courseID
     this.openID = wx.getStorageSync('openID');
     console.log(this.openID);
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
   },
 
 })

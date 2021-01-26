@@ -2,7 +2,7 @@
 <view class="numericRating">
   <!-- title -->
   <view class="title">
-    Class Reviews
+    {{isChinese?'课程评价':'Class Reviews'}}
   </view>
   <view class="line"></view>
   <!-- selector holder -->
@@ -11,8 +11,8 @@
   </picker>
   <!-- four ratings values -->
   <view class="ratings">
-    <SingleNumericRating class="single" value="{{difficultyRating}}" name="Difficulty"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="Entertainment"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{difficultyRating}}" name="{{isChinese?'课程难度': 'Difficulty'}}"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="{{isChinese?'内容趣味性': 'Entertainment'}}"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{workloadRating}}" name="Workload"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{enrichmentRating}}" name="Enrichment"></SingleNumericRating>
   </view>

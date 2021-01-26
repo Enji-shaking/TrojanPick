@@ -12,7 +12,15 @@
         <text class="left_postedDate" selectable="false" space="false" decode="false">{{postedTime}}</text> 
       </view>
     </view>
-    <view class="right">
+    <view class="right" wx:if="{{isChinese}}">
+      <view class="right_row {{!hideProfessor?'':'hidden'}} {{!hideCourse?'':'only'}}">
+        {{forProf?'教授':'TA'}}: {{professorName}}
+      </view>
+      <view class="right_row {{!hideCourse?'':'hidden'}} {{!hideProfessor?'':'only'}}">
+        课程: {{courseCode}}
+      </view>
+    </view>
+    <view class="right" wx:if="{{!isChinese}}">
       <view class="right_row {{!hideProfessor?'':'hidden'}} {{!hideCourse?'':'only'}}">
         {{forProf?'Prof':'TA'}}: {{professorName}}
       </view>
@@ -41,19 +49,19 @@
   <view class="rating borderTop">
     <view class="singleRating" style="margin-top: 16rpx;">
       <view class="text">
-        Overall
+        {{isChinese?'总评分':'Overall'}}
       </view>
       <Stars Rating="{{overallRating}}"></Stars>
     </view>
     <view class="singleRating">
       <view class="text">
-        Difficulty
+        {{isChinese?'课程难度':'Difficulty'}}
       </view>
       <Stars Rating="{{difficultyRating}}"></Stars>
     </view> 
     <view class="singleRating">
       <view class="text">
-        Entertainment
+        {{isChinese?'内容趣味性':'Entertainment'}}
       </view>
       <Stars Rating="{{entertainmentRating}}"></Stars>
     </view> 
@@ -71,7 +79,7 @@
     </view> 
     <view class="singleRating" style="margin-bottom: 16rpx;">
       <view class="text">
-        Grade
+        {{isChinese?'成绩':'Grade'}}
       </view>
       <text class="text-right">{{grade}}</text>
     </view>
@@ -108,15 +116,15 @@
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">Reply</view>
+  <view class="modal-title">{{isChinese?'回复':'Reply'}}</view>
   <view class="modal-content">
     <view class="modal-input">
-      <textarea placeholder="What Do You Think?" auto-focus="{{true}}" bindinput="onInputContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
+      <textarea placeholder="{{isChinese?'你的意见呢?':'What Do You Think?'}}" auto-focus="{{true}}" bindinput="onInputContent" value="{{inputCommentContent}}" auto-height="true" class="input" maxlength="200"></textarea>
     </view>
     <view class="length-text">{{content_len}}/200</view>
   </view>
   <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">Cancel</view>
-    <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">Submit</view>
+    <view class="btn-cancel" bindtap="onCancelSendMessage" data-status="cancel">{{isChinese?'取消':'Cancel'}}</view>
+    <view class="btn-confirm" bindtap="onConfirmSendMessage" data-status="confirm">{{isChinese?'提交':'Submit'}}</view>
   </view>
 </view>

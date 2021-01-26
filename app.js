@@ -50,6 +50,7 @@ App({
     onCreate: false,
     needRefresh: false,
     questionNeedRefresh: false,
+    isChinese: true,
     // couldMakeReview: false,
   }
 })

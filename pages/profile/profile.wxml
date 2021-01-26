@@ -9,7 +9,7 @@
     <view class="welcome_row_text_wrapper">
         <view class="welcome_text_line_1">Welcome, {{nickName}}!</view>
         <view class="welcome_text_line"></view>
-        <view class="welcome_text_line_2" style="display: inline-block" bind:tap="onTapUpdateInfo">Your WeChat NickName and Avatar Changed? <text class="bindUSC" url="/pages/bindUSC/bindUSC">Click Here to Update</text> </view>
+        <view class="welcome_text_line_2" style="display: inline-block" bind:tap="onTapUpdateInfo">{{isChinese?'不是你当前的头像昵称?':'Your WeChat NickName and Avatar Changed?'}} <text class="bindUSC" url="/pages/bindUSC/bindUSC">{{isChinese?'点击更新':'Click Here to Update'}}</text> </view>
         <!-- <view class="welcome_text_line_2">Haven't bind USC email? <navigator class="bindUSC" url="/pages/bindUSC/bindUSC">Click here to bind</navigator> </view> -->
     </view>
 </view>
@@ -44,6 +44,6 @@
     </navigator>
 </view>
 
-<button open-type="contact" text="Contact Developers">Contact Developers</button>
+<button open-type="contact" text="">{{isChinese?'联系客服':'Contact Developers'}}</button>
 
 <BottomNav></BottomNav>

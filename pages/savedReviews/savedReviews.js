@@ -33,6 +33,7 @@ Page({
     },
     totalPage: 0,
     currentPageInReviews: 1,
+    isChinese: true
   },
 
   /**
@@ -41,6 +42,9 @@ Page({
   counter: 3,
   onLoad: function (options) {
     // options.openID = "oH5r15EPI59JgaNhhebzuDsOpPEo";
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     app.globalData.onProfile = false
     wx.showLoading({
       title: "loading",

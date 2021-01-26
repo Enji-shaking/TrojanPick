@@ -2,10 +2,10 @@
   background-color: #fff;
 }
 .ta {
-  background-color: #faf5ad;
+  background-color: #F8C1B0;
 }
 .TA-Mask {
-  background-color: #faf5ad;
+  background-color: #fff;
   position: absolute;
   top: 275rpx;
   bottom: -400rpx;
@@ -23,6 +23,7 @@
   font-weight: 400;
   text-align: center;
   padding: 10rpx;
+  color:#953A3A;
 }
 .title_wrapper {
   width: 276rpx;

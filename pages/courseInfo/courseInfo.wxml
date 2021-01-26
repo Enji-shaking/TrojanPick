@@ -16,7 +16,7 @@
   </view>
   <view class="courseInfo">
     <view class="info">
-      <view class="courseTitle">Course Description: </view>
+      <view class="courseTitle">{{isChinese?'课程简介: ': 'Course Description: '}} </view>
       <view class="content">{{courseDescript}}</view>
     </view>
     <view class="unit"> <view class="unit-text"><text style="font-weight: bold;">Units:</text> {{courseUnit}} </view></view>
@@ -28,11 +28,11 @@
 
   <Pagination pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" isHot="{{isHot}}"></Pagination>
   
-  <YellowButton text="Write a Review" bind:tap="onTapCreateReview"></YellowButton>
+  <YellowButton text="{{isChinese?'填写评价':'Write a Review'}}" bind:tap="onTapCreateReview"></YellowButton>
   
-  <view class="questionTitle">Q & A</view>
+  <view class="questionTitle">{{isChinese?'课程问答': 'Q & A'}}</view>
   <view class="line"></view>
-  <view class="q-placeholder" wx:if="{{questions.length == 0}}">No Question Yet. Go Ask One!</view>
+  <view class="q-placeholder" wx:if="{{questions.length == 0}}">{{isChinese?'暂时没有问题。快去提问吧！': 'No Question Yet. Go Ask One!'}}</view>
   <navigator wx:if="{{!questions.length == 0}}" class="questions" url="/pages/viewQuestion/viewQuestion?courseID={{courseID}}">
     <view wx:for="{{questions}}" wx:key="index" class="q-ans-box">
       <image src="../../icon/others/question.svg" class="icon" ></image>
@@ -42,6 +42,6 @@
     <view style="margin-bottom: 22rpx;"></view>
   </navigator>
 
-  <YellowButton bind:tap="onTapCreateQuestion" text="Ask a question"></YellowButton>
+  <YellowButton bind:tap="onTapCreateQuestion" text="{{isChinese?'我要提问':'Ask a Question'}}"></YellowButton>
   <BottomNav courseID="{{courseID}}" courseCode="{{courseCode}}" professorID="{{professorID}}" professorName="{{professorName}}"></BottomNav>
 </view>

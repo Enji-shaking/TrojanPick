@@ -6,7 +6,8 @@ Page({
     courseID: "",
     own_questions: [],
     openID: "",
-    // favored: []
+    // favored: [],
+    isChinese: true,
   },
 
   loadEmptyQuestions: function(){
@@ -113,6 +114,9 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     const openID = wx.getStorageSync("openID");
     this.setData({openID})
     this.setData({

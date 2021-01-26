@@ -3,7 +3,8 @@
     "Header": "/components/Header/Header",
     "GradingInfo": "/components/GradingInfo/GradingInfo",
     "BottomNav": "/components/BottomNav/BottomNav",
-    "ClassCards": "/components/ClassCards/ClassCards"
+    "ClassCards": "/components/ClassCards/ClassCards",
+    "langSwitch": "/components/langSwitch/langSwitch"
   },
   "enablePullDownRefresh": true
 }

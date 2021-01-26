@@ -25,7 +25,8 @@ Page({
     professorName: "",
     openID: "",
     dummy: 1,
-    isHot:true
+    isHot:true,
+    isChinese: true
   },
 
   getQuestions: function(){
@@ -212,6 +213,9 @@ Page({
     this.setData({
       courseID: courseID,
       openID: openID
+    })
+    this.setData({
+      isChinese: app.globalData.isChinese
     })
     this.getQuestions()
     this.getCourseInfo(this.data.courseID, undefined)

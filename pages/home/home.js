@@ -18,7 +18,20 @@ Page({
     normalTextForIcon: ['If you haven’t typed anything into the search bar, only the classes that currently have reviews will show up.'],
     boldTextForIcon: "Can’t find a class?",
     italicTextForIcon: "So try typing the name of your course and be the first one to give a review!",
-    wrapperStyleForIcon: "width: 22rpx; height: 22rpx;"
+    wrapperStyleForIcon: "width: 22rpx; height: 22rpx;",
+    isChinese: true,
+  },
+  changeLang: function(){
+    if(this.data.isChinese){
+      this.setData({
+        isChinese: false
+      })
+    }
+    else{
+      this.setData({
+        isChinese: true
+      })
+    }
   },
   queryParamsCourses: { 
     currentPage: 1,
@@ -205,6 +218,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
     if(!app.globalData.hasPersonalInfo){
       wx.redirectTo({
         url: '/pages/login/login',

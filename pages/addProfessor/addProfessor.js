@@ -1,11 +1,13 @@
 // pages/addProfessor/addProfessor.js
+let app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    forProf: true
+    forProf: true,
+    isChinese: true,
   },
   professorName: '',
   onProfessorNameInput(e){
@@ -52,4 +54,9 @@ Page({
       }
     })
   },
+  onLoad: function(){
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
+  }
 })

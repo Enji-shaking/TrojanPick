@@ -1,0 +1,9 @@
+/* components/langSwitch/langSwitch.wxss */
+button{
+  position: absolute;
+  width: 10rpx;
+  bottom: 40rpx;
+  left: 20rpx;
+  color: #953A3A;
+  background: #F8C1B0;
+}

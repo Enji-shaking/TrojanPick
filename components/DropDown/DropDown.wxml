@@ -1,10 +1,10 @@
 <!--components/DropDown/DropDown.wxml-->
 <view class="dropdown">
-  <view class="text" wx:if="{{type==1 || type==3}}">View by Courses</view>
+  <view class="text" wx:if="{{type==1 || type==3}}">{{isChinese?'按课程查看': 'View by Courses'}}</view>
   <view class="box" wx:if="{{type==1 || type==3}}">
     <text style="padding: 15rpx;" class="text">{{courseName}}</text>
   </view>
-  <view class="text" wx:if="{{type==2 || type==3}}">View by Professor/TA</view>
+  <view class="text" wx:if="{{type==2 || type==3}}">{{isChinese?'按教授/TA查看': 'View by Professor/TA'}}</view>
   <view class="box" wx:if="{{type==2 || type==3}}">
     <text style="padding: 15rpx" class="text">{{professorName}}</text>
   </view>

@@ -2,6 +2,9 @@
 let app =  getApp();
 
 Page({
+  data:{
+    isChinese: true
+  },
   onGetUserInfo(e){
     console.log(e);
     if(e.detail.userInfo){
@@ -35,4 +38,9 @@ Page({
       }
     })
   },
+  onLoad: function(){
+    this.setData({
+      isChinese: app.globalData.isChinese
+    })
+  }
 })

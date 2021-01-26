@@ -1,5 +1,5 @@
 <Header></Header>
-<view class='question-title'>Q & A</view>
+<view class='question-title'>{{isChinese?'问答详情':'Q & A'}}</view>
 <view class='line-1'></view>
 
 
@@ -23,11 +23,11 @@
  
   <navigator class='answer-block' url="../viewAnswer/viewAnswer?questionID={{item._id}}" hover-class="none">
     <text class="answer-icon icon"></text>
-    <text class="answer-text" wx:if="{{item.answers.length == 0}}">No Answers Yet. Answer If You Know!</text>
+    <text class="answer-text" wx:if="{{item.answers.length == 0}}">{{isChinese?'暂时没有回答。快去提问吧！':'No Answers Yet. Answer If You Know!'}}</text>
     <text class="answer-text" wx:if="{{!item.answers.length == 0}}">{{item.answers[0].content}}</text>
   </navigator>
 </view>
 
-<YellowButton bind:tap="navigateToCreateQuestion" text="Ask a Question"></YellowButton>
+<YellowButton bind:tap="navigateToCreateQuestion" text="{{isChinese?'我要提问':'Ask a Question'}}"></YellowButton>
 
 <BottomNav></BottomNav>

@@ -1,7 +1,7 @@
 <!--pages/favoriteRatings/favoriteRatings.wxml-->
 <view class="favoriteRatings">
   <Header></Header>
-  <view class="title">Saved Reviews</view>
+  <view class="title">{{isChinese?'收藏评价':'Saved Reviews'}}</view>
   <view class="line"></view>
   <picker mode="selector" value="{{list_id}}" range="{{course_list}}" range-key="{{'list_value'}}" bindchange="chooseCoursePicker">
     <DropDown professorName="{{professorName}}" courseName="{{courseName}}" type="{{1}}"></DropDown>
@@ -11,7 +11,7 @@
   </picker>
   <BottomNav></BottomNav>
   <Review wx:for="{{reviews}}" wx:key="_id" data-index="{{index}}" item="{{item}}" bind:unsaveADeletedReview="unsaveADeletedReview" bind:deleteTappedFromReview="deleteTappedFromReview" ></Review>
-  <View wx:if="{{totalPage==0}}" class="placeholder">There is No Content Yet</View>
+  <View wx:if="{{totalPage==0}}" class="placeholder">{{isChinese?'还没有收藏评价':'There is No Content Yet'}}</View>
   <Pagination wx:if="{{totalPage!=0}}" pages="{{totalPage}}" bind:onClickItem="handlePagination" activePage="{{currentPageInReviews}}" showHot="{{false}}" isHot="{{false}}"></Pagination>
 
 </view>
