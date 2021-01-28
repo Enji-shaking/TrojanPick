@@ -214,7 +214,7 @@ exports.main = async (event, context) => {
       .end();
       const reviewInfo = data.list[0]
       console.log(reviewInfo);
-      reviewInfo.posted_by_me = reviewInfo.openID === reviewInfo.userInfo[0].openID
+      reviewInfo.posted_by_me = openID === reviewInfo.userInfo[0].openID
       const checkSave = await db.collection("saved_reviews")
                           .where({openID: openID, reviewID: reviewID})
                           .get()
