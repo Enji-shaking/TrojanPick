@@ -7,6 +7,7 @@
   background-color: #FFF7DB;
   margin: auto;
   box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .comment .top{
   display: flex;
@@ -34,18 +35,24 @@
   font-size: 18rpx;
 }
 .comment .bottom {
-  margin-top: 18rpx;
-  padding-left: 46rpx;
-  padding-right: 46rpx;
-  display: flex;
   height: 60rpx;
-  flex-direction: row;
+  display: inline !important;
   justify-content: space-around;
   align-items: center;
 }
-.comment .bottom view {
+.comment .bottom .left{
+  display: inline-flex!important;
   position: relative;
-  padding: 4rpx;
+  margin-left: 34rpx;
+}
+.comment .bottom view {
+  padding: 6rpx;
+}
+.comment .bottom .right{
+  display: inline !important;
+  float: right;
+  margin-right: 4rpx;
+  margin-top: 14rpx;
 }
 .comment .bottom view .commentInput {
   position: absolute;

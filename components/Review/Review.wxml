@@ -34,7 +34,6 @@
     <view class="text">
       {{content}}
     </view>
-
     <image src="/icon/others/delete.svg" class="delete {{!posted_by_me?'invisible':''}}" catch:tap="deleteTapped"/>
     
   </navigator>

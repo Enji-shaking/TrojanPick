@@ -11,7 +11,7 @@
   background-color: #F5C2BF;
 }
 .ta {
-  background-color: #fff;
+  background-color: #FFF7DB;
 }
 .switchButton {
   position: absolute;
@@ -139,8 +139,8 @@ input::placeholder {
   height: 74rpx;
 }
 .sort_row .sort_row_content_wrapper {
-  margin-left: 262rpx;
-  margin-right: 172rpx;
+  margin-left: 320rpx;
+  margin-right: 148rpx;
   margin-top: 38rpx;
   display: flex;
 }

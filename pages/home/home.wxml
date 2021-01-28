@@ -23,7 +23,7 @@
                 教授评价
             </view>
             <view class="right_rating_text_line_2">
-                View by Profs
+                View by Profs/TA
             </view>
         </view>
     </view>  
@@ -62,7 +62,7 @@
     
     <ClassCards course_cards_info="{{course_cards_info}}" ></ClassCards>
 </view>
-<view class="rate_by_prof_big_tab {{forProf?'ta':'prof'}}"
+<view class="rate_by_prof_big_tab"
     wx:else
 >
     <view class="search_row">

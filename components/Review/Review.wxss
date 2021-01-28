@@ -67,6 +67,7 @@
 .box .content {
   height: auto;
   position: relative;
+  padding: 4rpx;
 }
 
 .box .content .text {
@@ -100,8 +101,8 @@
 
 .box .content .delete {
   position: absolute;
-  right: 10rpx;
-  bottom: -15rpx;
+  right: 16rpx;
+  bottom: 14rpx;
 }
 
 .box .content .invisible {

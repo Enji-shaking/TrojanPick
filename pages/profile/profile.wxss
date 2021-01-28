@@ -27,6 +27,7 @@
 .welcome_row .welcome_row_text_wrapper .welcome_text_line_2 {
   font-size: 22rpx;
   line-height: 26rpx;
+  margin-left: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,3 +1,6 @@
-<button bindtap="switchLanguage">
-  中/en
+<button wx:if="{{isChinese}}" bindtap="switchLanguage" style="background: #F8C1B0;">
+  EN
+</button>
+<button wx:if="{{!isChinese}}" bindtap="switchLanguage" style="background: #FFF7DB;">
+  中
 </button>

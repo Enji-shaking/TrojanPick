@@ -25,6 +25,8 @@ Component({
           url: '/pages/home/home',
         });
         app.globalData.onHome = true;
+        app.globalData.onProfile = false;
+        app.globalData.onCreate = false;
       }else{
         wx.showToast({
           title: 'At Home Page',
