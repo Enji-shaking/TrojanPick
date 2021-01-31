@@ -60,7 +60,7 @@
     </view> 
     <view class="singleRating">
       <view class="text">
-        {{isChinese?'内容趣味性':'Entertainment'}}
+        {{isChinese?'内容趣味性':'Enjoyment'}}
       </view>
       <Stars Rating="{{entertainmentRating}}"></Stars>
     </view> 

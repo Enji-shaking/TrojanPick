@@ -4,7 +4,7 @@ let app =  getApp();
 Page({
   data: {
     evaluateTitle_ch:['总评分','课程难度', '内容趣味性', 'Workload', 'Enrichment'],
-    evaluateTitle_en:['Overall','Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
+    evaluateTitle_en:['Overall','Difficulty', 'Enjoyment', 'Workload', 'Enrichment'],
     // evaluateTitleTA:['Difficulty', 'Entertainmaint', 'Workload', 'Enrichment'],
     stars:[0, 1, 2, 3, 4],
     unselectedSrc: "/icon/others/rate-star.svg",

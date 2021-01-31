@@ -3,7 +3,18 @@ let app =  getApp();
 
 Page({
   data:{
-    isChinese: true
+    isChinese: true,
+    showModal: false
+  },
+  hideModal: function(){
+    this.setData({
+      showModal: false
+    })
+  },
+  displayModal: function(){
+    this.setData({
+      showModal: true
+    })
   },
   onGetUserInfo(e){
     console.log(e);
