@@ -48,3 +48,12 @@
   width: 36rpx;
   height: 36rpx;
 }
+.intro{
+  font-size: 20rpx;
+  color:#6A6868;
+}
+.intro navigator{
+  display: inline;
+  text-decoration:underline;
+  color:#953A3A;
+}

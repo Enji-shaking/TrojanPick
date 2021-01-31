@@ -5,5 +5,8 @@
     <view class="login_text">{{isChinese?'欢迎使用':'Welcome To'}}</view>
     <view class="login_line"></view>
     <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
+    <view class="intro">
+        小程序功能介绍 <navigator>点此查看</navigator>
+    </view>
     <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" style="color: #953A3A;">{{isChinese?'微信一键登录':'One Click Login'}} <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
 </view>
