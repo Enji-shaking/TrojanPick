@@ -80,7 +80,6 @@
 }
 .rating_row .right_rating .right_rating_text {
   position: absolute;
-  width: 180rpx;
   height: 74rpx;
   left: 172rpx;
   top: 50rpx;
