@@ -12,7 +12,7 @@
   <!-- four ratings values -->
   <view class="ratings">
     <SingleNumericRating class="single" value="{{difficultyRating}}" name="{{isChinese?'课程难度': 'Difficulty'}}"></SingleNumericRating>
-    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="{{isChinese?'内容趣味性': 'Entertainment'}}"></SingleNumericRating>
+    <SingleNumericRating class="single" value="{{entertainmentRating}}" name="{{isChinese?'内容趣味性': 'Enjoyment'}}"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{workloadRating}}" name="Workload"></SingleNumericRating>
     <SingleNumericRating class="single" value="{{enrichmentRating}}" name="Enrichment"></SingleNumericRating>
   </view>

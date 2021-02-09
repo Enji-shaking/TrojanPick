@@ -6,7 +6,22 @@
     <view class="login_line"></view>
     <image mode="widthFix" src="/icon/ours/profileLogo.png"> </image>
     <view class="intro">
-        小程序功能介绍 <navigator>点此查看</navigator>
+        小程序功能介绍 <view bindtap="displayModal" style="color: #953A3A;">点此查看</view>
     </view>
     <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" style="color: #953A3A;">{{isChinese?'微信一键登录':'One Click Login'}} <image mode="widthFix" src="/icon/others/wechat-logo.svg" /> </button>
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="{{true}}" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+        <view class="modal-title">注意</view>
+            <view class="modal-content">
+                <view>登录微信即可</view>
+                <view>* 实时查看课程/教授/TA评价</view>
+                <view>* 最细致多角度创建评价</view>
+                <view>* 收藏优秀课程/评价</view>
+                <view>* 获取热度最高最简单课程</view>
+            </view>
+        <view class="modal-footer">
+        <view class="btn-confirm" bindtap="hideModal">Got It!</view>
+    </view>
+</view>
 </view>
