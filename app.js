@@ -32,6 +32,7 @@ App({
       }
     })
   },
+  /*
   onShareAppMessage(){
     wx.onAppRoute(function (res) {
       console.log('当前页面路由发生变化 触发该事件onShareAppMessage')
@@ -39,6 +40,10 @@ App({
       const view = pages[pages.length - 1] //获取当前页面的对象
       if(!view)  return false
       view.onShareAppMessage = () => { //重写分享配置
+        wx.showShareMenu({
+          // 要求小程序返回分享目标信息
+          withShareTicket: true
+        }); 
         return {
           title: 'TrojanPick',
           path: '/pages/home/home'
@@ -46,8 +51,9 @@ App({
       }
     })
   },
+  */
   onLaunch: function () {
-    this.onShareAppMessage();
+    // this.onShareAppMessage();
     console.log("launched");
     wx.cloud.init({
       env: "test-0gbtzjgqaae3f2b2"

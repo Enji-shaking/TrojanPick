@@ -194,6 +194,10 @@ Page({
   },
   counter: 0,
   onLoad: function (options) {
+    wx.showShareMenu({
+      // 要求小程序返回分享目标信息
+      withShareTicket: true
+    }); 
     //This line could be considered to remove. This is to reset the info under the professor list in the numericRating component
     this.myNumeric = this.selectComponent("#myNumeric")
     this.counter = 4

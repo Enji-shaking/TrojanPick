@@ -114,6 +114,10 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.showShareMenu({
+      // 要求小程序返回分享目标信息
+      withShareTicket: true
+    }); 
     this.setData({
       isChinese: app.globalData.isChinese
     })
