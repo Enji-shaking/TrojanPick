@@ -1,11 +1,10 @@
 //app.js
 App({
   originalOnLoadFunction(){
- // 展示本地存储能力
+    // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -33,7 +32,22 @@ App({
       }
     })
   },
+  onShareAppMessage(){
+    wx.onAppRoute(function (res) {
+      console.log('当前页面路由发生变化 触发该事件onShareAppMessage')
+      const pages = getCurrentPages() //获取加载的页面
+      const view = pages[pages.length - 1] //获取当前页面的对象
+      if(!view)  return false
+      view.onShareAppMessage = () => { //重写分享配置
+        return {
+          title: 'TrojanPick',
+          path: '/pages/home/home'
+        };
+      }
+    })
+  },
   onLaunch: function () {
+    this.onShareAppMessage();
     console.log("launched");
     wx.cloud.init({
       env: "test-0gbtzjgqaae3f2b2"

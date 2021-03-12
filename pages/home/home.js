@@ -218,6 +218,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showShareMenu({
+      // 要求小程序返回分享目标信息
+      withShareTicket: true
+    }); 
     this.setData({
       isChinese: app.globalData.isChinese
     })
@@ -259,7 +263,5 @@ Page({
    */
   onPullDownRefresh: function () {
     this.loadInitialInfo()
-  },
-
-
+  }
 })
