@@ -53,7 +53,6 @@ App({
   },
   */
   onLaunch: function () {
-    // this.onShareAppMessage();
     console.log("launched");
     wx.cloud.init({
       env: "test-0gbtzjgqaae3f2b2"
@@ -61,6 +60,15 @@ App({
     const userInfo = wx.getStorageSync("userInfo");
     if(userInfo){
       this.globalData.hasPersonalInfo = true
+    }
+  },
+  onShow: function (options) {
+    if (options.scene == 1007 || options.scene == 1008 || options.scene == 1011 || options.scene == 1012 || options.scene == 1058) {
+      if(!this.globalData.hasPersonalInfo){
+        wx.navigateTo({
+          url: 'pages/login/login',
+        })
+      }
     }
   },
   globalData: {

@@ -36,10 +36,14 @@
 .question-box .top{
   height: auto;
   margin-top: 32rpx;
+  margin-left: 48rpx;
+  margin-right: 48rpx;
 }
 .answer-box .top{
   height: auto;
   padding-top: 32rpx;
+  margin-left: 48rpx;
+  margin-right: 48rpx;
 }
 .answer-box{
   width: 554rpx;
@@ -58,13 +62,10 @@
  .question-icon{
   background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 7A7 7 0 110 7a7 7 0 0114 0z' fill='%23B92A33'/%3E%3Cpath d='M7 12.469A5.475 5.475 0 011.531 7 5.475 5.475 0 017 1.531 5.475 5.475 0 0112.469 7 5.475 5.475 0 017 12.469zM7 2.352A4.654 4.654 0 002.352 7 4.654 4.654 0 007 11.648 4.654 4.654 0 0011.648 7 4.654 4.654 0 007 2.352z' fill='%23fff'/%3E%3Cpath d='M7 8.75a.41.41 0 01-.41-.41V7.268a.41.41 0 01.41-.41.877.877 0 000-1.752.877.877 0 00-.876.876.41.41 0 11-.82 0c0-.935.76-1.696 1.696-1.696.935 0 1.696.76 1.696 1.696A1.7 1.7 0 017.41 7.628v.712a.41.41 0 01-.41.41zM7.536 9.626a.536.536 0 11-1.072 0 .536.536 0 011.072 0z' fill='%23fff'/%3E%3C/svg%3E");
   background-size: cover;
-  margin-left: 48rpx;
 }
-
  .answer-icon{
   background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M11.1289 1.25781H2.87109C1.28793 1.25781 0 2.54575 0 4.12891V8.56329C0 9.82655 0.829391 10.9268 2.03123 11.279L3.41786 12.6657C3.49487 12.7426 3.59912 12.7859 3.70796 12.7859C3.8167 12.7859 3.92105 12.7426 3.99796 12.6657L5.26997 11.3936H11.1289C12.7121 11.3936 14 10.1057 14 8.52249V4.12891C14 2.54575 12.7121 1.25781 11.1289 1.25781ZM3.98557 7.05063C3.98557 6.82408 4.16917 6.64047 4.39572 6.64047H9.60428C9.83083 6.64047 10.0144 6.82408 10.0144 7.05063C10.0144 7.27717 9.83083 7.46078 9.60428 7.46078H4.39572C4.16917 7.46078 3.98557 7.27717 3.98557 7.05063ZM9.60428 6.01092H4.39572C4.16917 6.01092 3.98557 5.82732 3.98557 5.60077C3.98557 5.37433 4.16917 5.19061 4.39572 5.19061H9.60428C9.83083 5.19061 10.0144 5.37433 10.0144 5.60077C10.0144 5.82732 9.83083 6.01092 9.60428 6.01092Z' fill='%23B92A33'/%3E %3C/svg%3E ");
   background-size: cover;
-  margin-left: 48rpx;
 }
 
 .delete-icon{
@@ -290,7 +291,6 @@ textarea{
   line-height: 28rpx;
   padding: 0 20rpx;
   box-sizing: border-box;
-  color: #333;
 }
 
 input-holder {
@@ -318,4 +318,124 @@ input-holder {
   width: 50%;
   color: #953A3A;
   text-align: center;
+}
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  margin-left: 75rpx;
+  margin-right: 112rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  border-radius: 36rpx;
+  border: 2rpx solid #F8C1B0;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-title {
+  padding-top: 50rpx;
+
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34rpx;
+  line-height: 36rpx;
+  align-items: center;
+  text-align: center;
+
+  color: #953A3A;
+}
+
+.modal-content {
+  padding: 50rpx 32rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #FFF7DB;
+  border: 2rpx solid #F8C1B0;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.input {
+  width: 100%;
+  height: 82rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+input-holder {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 2rpx solid #F8C1B0;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #A8A8A8;
+  text-align: center;
+  border-right: 2rpx solid #F8C1B0;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #953A3A;
+  text-align: center;
+}
+
+textarea{
+  width: 278rpx;
+  margin-left: 18rpx;
+  margin-right: 18rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+  font-family: Heiti SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+  align-items: center;
+  color: #6A6868;
+
+  overflow: auto;
+  word-wrap: normal
+}
+.length-text{
+  margin-top: 20rpx;
+  font-family: Heiti SC;
+  font-style: normal;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  text-align: right;
+  color: #A8A8A8;
 }
