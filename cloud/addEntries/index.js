@@ -108,9 +108,32 @@ exports.main = async (event, context) => {
         },
         success(res) {
           console.log(res.data)
+          console.log("add this review successfully")
         },
         fail(res){
           console.log(res)
+          console.log("fail to add this review, doing it again")
+          numReviews = course_professor_Rating.data[0].numReviews
+          workloadRating =course_professor_Rating.data[0].workloadRating
+          difficultyRating = course_professor_Rating.data[0].difficultyRating
+          entertainmentRating = course_professor_Rating.data[0].entertainmentRating
+          enrichmentRating = course_professor_Rating.data[0].enrichmentRating
+          overallRating = course_professor_Rating.data[0].overallRating
+          db.collection('course_professor').doc(course_professor_Rating.data[0]._id).update({
+            data: {
+              workloadRating: (event.workloadRating + workloadRating * numReviews) / (numReviews + 1),
+              entertainmentRating: (event.entertainmentRating + entertainmentRating * numReviews) / (numReviews + 1),
+              enrichmentRating: (event.enrichmentRating + enrichmentRating * numReviews) / (numReviews + 1),
+              overallRating: (event.overallRating + overallRating * numReviews) / (numReviews + 1),
+              difficultyRating: (event.difficultyRating + difficultyRating * numReviews) / (numReviews + 1),
+              numReviews: _.inc(1)
+            },
+            success(res) {
+              console.log(res.data)
+            },
+            fail(res){
+            }
+          })
         }
       })
     }
@@ -120,7 +143,7 @@ exports.main = async (event, context) => {
       _id: courseID
     }).get()
     numReviews = courseRatings.data[0].numReviews
-    if(!numReviews) {
+    if(numReviews <= 0) {
       numReviews = 0
       workloadRating = 0
       difficultyRating = 0
@@ -146,9 +169,27 @@ exports.main = async (event, context) => {
       },
       success(res) {  
         console.log(res.data)
+        console.log("add this review successfully")
       },
       fail(res){
         console.log(res)
+        console.log("fail to add this review, doing it again")
+        db.collection('courses').doc(courseID).update({
+          data: {
+            workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
+            entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
+            enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
+            overallRating: (overallRating * numReviews + event.overallRating) / (numReviews + 1),
+            difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
+            numReviews: numReviews+1,
+          },
+          success(res) {  
+            console.log(res.data)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
       }
     })
     // 改professor里面的avg
@@ -156,7 +197,7 @@ exports.main = async (event, context) => {
       _id: professorID
     }).get()
     numReviews = professorRatings.data[0].numReviews
-    if(!numReviews) {
+    if(numReviews <= 0) {
       numReviews = 0
       workloadRating = 0
       difficultyRating = 0
@@ -182,9 +223,26 @@ exports.main = async (event, context) => {
       },
       success(res) {
         console.log(res.data)
+        console.log("add this review successfully")
       },
       fail(res){
-        console.log(res)
+        console.log("fail to add this review, doing it again")
+        db.collection('professors').doc(professorID).update({
+          data: {
+            workloadRating: (workloadRating * numReviews + event.workloadRating) / (numReviews + 1),
+            entertainmentRating: (entertainmentRating * numReviews + event.entertainmentRating) / (numReviews + 1),
+            enrichmentRating: (enrichmentRating * numReviews + event.enrichmentRating) / (numReviews + 1),
+            overallRating: (overallRating * numReviews + event.overallRating) / (numReviews + 1),
+            difficultyRating: (difficultyRating * numReviews + event.difficultyRating) / (numReviews + 1),
+            numReviews: numReviews+1,
+          },
+          success(res) {
+            console.log(res.data)
+          },
+          fail(res){
+            console.log(res)
+          }
+        })
       }
     })
 

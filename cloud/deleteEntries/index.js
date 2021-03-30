@@ -88,7 +88,7 @@ exports.main = async (event, context) => {
     let enrichmentRating_orig = course_prof_data.data[0].enrichmentRating;
     let overallRating_orig = course_prof_data.data[0].overallRating;
 
-    if (numReviews_orig === 1) {
+    if (numReviews_orig <= 1) {
       db.collection('course_professor')
         // .doc(course_prof_data.data[0]._id)
         .where({
@@ -103,7 +103,6 @@ exports.main = async (event, context) => {
             overallRating: 0,
             difficultyRating: 0,
             numReviews: 0
-
           }
         })
     } else {
@@ -121,7 +120,27 @@ exports.main = async (event, context) => {
             overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
-
+          },
+          success(res) {
+            console.log(res.data)
+          },
+          fail(res){
+            // call again
+            db.collection('course_professor')
+            .where({
+              courseID: courseID,
+              professorID: professorID
+            })
+            .update({
+              data: {
+                workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
+                entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+                enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+                overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
+                difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
+                numReviews: numReviews_orig - 1
+              }
+            })
           }
         })
     }
@@ -137,7 +156,7 @@ exports.main = async (event, context) => {
     entertainmentRating_orig = course_data.data[0].entertainmentRating;
     enrichmentRating_orig = course_data.data[0].enrichmentRating;
     overallRating_orig = course_data.data[0].overallRating;
-    if (numReviews_orig === 1) {
+    if (numReviews_orig <= 1) {
       db.collection('courses')
         // .doc(courseID)
         .where({
@@ -167,6 +186,25 @@ exports.main = async (event, context) => {
             overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
+          },
+          success(res){
+          },
+          fail(res){
+            db.collection('courses')
+            // .doc(courseID)
+            .where({
+              _id: courseID
+            })
+            .update({
+              data: {
+                workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
+                entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+                enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+                overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
+                difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
+                numReviews: numReviews_orig - 1
+              }
+            })
           }
         })
     }
@@ -183,7 +221,7 @@ exports.main = async (event, context) => {
     enrichmentRating_orig = prof_data.data[0].enrichmentRating;
     overallRating_orig = course_data.data[0].overallRating;
 
-    if (numReviews_orig === 1) {
+    if (numReviews_orig <= 1) {
       db.collection('professors')
         .doc(professorID)
         .update({
@@ -210,6 +248,25 @@ exports.main = async (event, context) => {
             overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
             difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
             numReviews: numReviews_orig - 1
+          },
+          success(res){
+          },
+          fail(res){
+            db.collection('professors')
+            // .doc(professorID)
+            .where({
+              _id: professorID
+            })
+            .update({
+              data: {
+                workloadRating: (workloadRating_orig * numReviews_orig - workloadRating) / (numReviews_orig - 1),
+                entertainmentRating: (entertainmentRating_orig * numReviews_orig - entertainmentRating) / (numReviews_orig - 1),
+                enrichmentRating: (enrichmentRating_orig * numReviews_orig - enrichmentRating) / (numReviews_orig - 1),
+                overallRating: (overallRating_orig * numReviews_orig - overallRating) / (numReviews_orig - 1),
+                difficultyRating: (difficultyRating_orig * numReviews_orig - difficultyRating) / (numReviews_orig - 1),
+                numReviews: numReviews_orig - 1
+              }
+            })
           }
         })
     }
