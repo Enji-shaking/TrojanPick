@@ -63,7 +63,7 @@ App({
     }
   },
   onShow: function (options) {
-    if (options.scene == 1007 || options.scene == 1008 || options.scene == 1011 || options.scene == 1012 || options.scene == 1058) {
+    if (options.scene == 1007 || options.scene == 1008 || options.scene == 1011 || options.scene == 1012 || options.scene == 1058 || options.scene == 1047 || options.scene == 1048 || options.scene == 1049) {
       if(!this.globalData.hasPersonalInfo){
         wx.navigateTo({
           url: 'pages/login/login',
